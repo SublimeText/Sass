@@ -1,8 +1,0 @@
-Thank you for installing this Sass syntax highlighting package.
-
-For more information about this package please see:
-
-https://github.com/P233/Syntax-highlighting-for-Sass
-
-Cheers,
-Peiwen Lu
