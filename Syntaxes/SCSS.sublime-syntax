@@ -216,7 +216,8 @@ contexts:
 
   properties:
     - include: comment-block
-    - include: vendor-prefix
+    - match: "-(?:webkit|moz|ms|o)-"
+      scope: meta.property-name.css support.type.vendor-prefix.css
     - include: custom-property-name
     - match: '\b(var-)({{ident}})(?=\s)'
       scope: meta.property-name.css invalid.deprecated.custom-property.css
@@ -373,7 +374,8 @@ contexts:
         1: punctuation.definition.keyword.css
     - match: \!\s*(default|global|optional)
       scope: keyword.other.scss
-    - include: vendor-prefix
+    - match: "-(?:webkit|moz|ms|o)-"
+      scope: support.type.vendor-prefix.css
     - include: comment-block
     - include: builtin-functions
     - include: unicode-range
@@ -873,10 +875,6 @@ contexts:
         1: punctuation.definition.custom-property.css
         2: support.type.custom-property.name.css
 
-  vendor-prefix:
-    - match: "-(?:webkit|moz|ms|o)-"
-      scope: support.type.vendor-prefix.css
-
 
 
   pseudo-elements:
@@ -1343,10 +1341,11 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
+          - match: "-(?:webkit|moz|ms|o)-"
+            scope: support.type.vendor-prefix.css
           - include: comma-delimiter
           - include: scss-variables
           - include: scss-functions
-          - include: vendor-prefix
           - include: property-value-constants
           - include: numeric-values
           - include: color-values
