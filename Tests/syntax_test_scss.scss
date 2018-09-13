@@ -484,7 +484,7 @@ p {
 }
 
     @supports not ( and ( top: 2px ) ) { }
-//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.supports.css
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.supports.css
 //  ^          punctuation.definition.keyword.css
 //   ^^^^^^^^ keyword.control.at-rule.supports.css
 //            ^^^ keyword.operator.logic.css
@@ -496,9 +496,8 @@ p {
 //                              ^^ constant.numeric.css keyword.other.unit.css
 //                                 ^ meta.group.css punctuation.definition.group.end.css
 //                                   ^ meta.group.css punctuation.definition.group.end.css
-//                                     ^^^ meta.block.css
-//                                     ^ punctuation.definition.block.begin.css
-//                                       ^ punctuation.definition.block.end.css
+//                                     ^ punctuation
+//                                       ^ punctuation
 
 @supports (--foo: green) {
 //         ^^^^^ support.type.custom-property.css
