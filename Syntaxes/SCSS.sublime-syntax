@@ -882,6 +882,7 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
+          - include: pseudo-classes
           - include: selector
 
     - match: '(:)(drop)(?=\()'

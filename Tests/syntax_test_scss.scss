@@ -50,6 +50,15 @@
 //^^^^^^^^ meta.selector.css
 //^ keyword.operator.ampersand.scss
 // ^ entity.other.pseudo-class.css punctuation.definition.entity.css
+  &:not(:first-child, :last-child) { text-decoration: underline; }
+//      ^^^^^^^^^^^^ entity.other.pseudo-class.css
+//      ^ punctuation.definition.entity.css
+//                  ^ punctuation.separator.css
+//                    ^^^^^^^^^^^ entity.other.pseudo-class.css
+//                    ^ punctuation.definition.entity.css
+  strong:not(:not(.strong)) {}
+//           ^^^^ entity.other.pseudo-class.css
+//                ^^^^^^^ entity.other.attribute-name.class.css
   body.firefox ~ & { font-weight: normal; }
 //^^^^^^^^^^^^^^^^^ meta.selector
 //             ^ punctuation.separator.combinator.css
