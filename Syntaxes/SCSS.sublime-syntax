@@ -1470,12 +1470,12 @@ contexts:
     - meta_scope: meta.group.css
     - match: '(?=\))'
       set: function-notation-terminator
-    - include: scss-variables
-    - include: scss-functions
     - include: calc-function
     - include: var-function
     - include: numeric-values
     - include: attr-function
+    - include: scss-variables
+    - include: scss-functions
     - match: "[-/*+]"
       scope: keyword.operator.css
     - match: '\('
