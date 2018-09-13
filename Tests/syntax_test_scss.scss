@@ -502,9 +502,9 @@ p {
 @supports (--foo: green) {
 //         ^^^^^ support.type.custom-property.css
     .class {
-//  ^^^^^^ meta.at-rule.supports.css entity.other.attribute-name.class.css
+//  ^^^^^^ entity.other.attribute-name.class.css
         display: none;
-//      ^^^^^^^ meta.at-rule.supports.css meta.property-name.css
+//      ^^^^^^^ meta.property-name.css
     }
 }
 
@@ -523,9 +523,9 @@ p {
 //  ^^^^^^^^^^^^^^ keyword.control.at-rule.counter-style.css
 //                 ^^^^ entity.other.counter-style-name.css
     symbols: "‣";
-//  ^^^^^^^ meta.at-rule.counter-style.css support.type.property-name.css
+//  ^^^^^^^ support.type.property-name.css
     suffix: " ";
-//  ^^^^^^ meta.at-rule.counter-style.css support.type.property-name.css
+//  ^^^^^^ support.type.property-name.css
 //          ^^^ string.quoted.double.css
 }
 
