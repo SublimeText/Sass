@@ -67,6 +67,15 @@
 //^ keyword.operator.ampersand.scss
 // ^^^^^^^ entity.other.attribute-name.css
 // ^^^^^^^^ meta.selector.css
+  [data-type="text"]:hover,
+//^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector
+//                  ^^^^^^ entity.other.pseudo-class.css
+//                  ^ punctuation.definition.entity.css
+//                        ^ punctuation.separator.css
+  [data-type="text"]:active {}
+//^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector
+//                  ^^^^^^^ entity.other.pseudo-class.css
+//                  ^ punctuation.definition.entity.css
 }
 // <- punctuation.section.property-list.end.css
 
