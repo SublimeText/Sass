@@ -78,9 +78,7 @@ contexts:
       scope: punctuation.definition.comment.css
       push:
         - meta_scope: comment.line.double-slash.scss
-        - match: (?=^\s*\n)
-          pop: true
-        - match: (?=^\S)
+        - match: \n
           pop: true
 
   at-rules:

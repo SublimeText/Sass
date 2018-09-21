@@ -2089,7 +2089,6 @@ contexts:
       scope: punctuation.definition.comment.css
       push:
         - meta_scope: comment.line.double-slash.scss
-        - match: $\n?
-          scope: punctuation.definition.comment.css
+        - match: \n
           pop: true
 
