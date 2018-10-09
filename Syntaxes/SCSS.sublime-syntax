@@ -389,7 +389,6 @@ contexts:
       scope: support.type.vendor-prefix.css
     - include: comment-block
     - include: builtin-functions
-    - include: custom-functions
     - include: unicode-range
     - include: numeric-values
     - include: color-values
