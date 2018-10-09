@@ -9,6 +9,11 @@
   The position immediately after a selector need to be scoped meta.selector too.
   This prevents triggering the :; snippet for CSS.
 */
+*,
+:root,
+// <- entity.other.pseudo-class.css punctuation.definition.entity.css
+// ^^ entity.other.pseudo-class.css
+::before, :hover,
 #main h1+.sub:not(.class) {
 //    ^^^^^^^^^^^^^^^^^^^^ meta.selector.css
 //    ^^ entity.name.tag.css
@@ -19,10 +24,6 @@
 //                        ^ punctuation.section.property-list.begin
   color: #00ff00;
   height: 97%;
-  animation: progress-fade-in-animation .15s ease-in;
-//            ^ - meta.selector
-//                   ^ - keyword.operator
-//                         ^ - keyword.operator
   object-fit: scale-down;
 // ^ support.type.property-name.css
 // ^ - meta.selector
@@ -39,10 +40,14 @@
 //       ^^^^^^ variable.other.scss
 //       ^ punctuation.definition.variable.scss
 //             ^ punctuation.terminator.rule.css
-
+  :root,
+//^ entity.other.pseudo-class.css punctuation.definition.entity.css
+// ^^ entity.other.pseudo-class.css
+  ::before, :hover,
   .redbox:hover {
     background-color: #ff0000;
-    color: #000000;
+    color: #000000
+//         ^^^^^^^ meta.property-value.css constant.other.color.rgb-value.css
   }
   & {}
 //^^ meta.selector.css
@@ -215,6 +220,10 @@ $gutter-width: 10px;
 //                             ^ - string
     @include breathe(border-bottom-color);
 //                   ^ string.unquoted.scss
+    animation: progress-fade-in-animation .15s ease-in;
+//              ^ - meta.selector
+//                     ^ - keyword.operator
+//                           ^ - keyword.operator
   }
 }
 
