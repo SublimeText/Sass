@@ -414,6 +414,20 @@ contexts:
       scope: keyword.control.flow.conditional.scss
       captures:
         1: punctuation.definition.keyword.scss
+      push:
+        - match: '(?={)'
+          pop: true
+        - include: scss-functions
+        - include: comment-block
+        - include: comma-delimiter
+        - include: color-values
+        - include: numeric-values
+        - include: scss-variables
+        - include: scss-functions
+        - include: scss-operators
+        - include: scss-interpolation
+        - include: literal-string
+        - include: unquoted-string
     - match: (@)(mixin|function|include)\s+([\w-]+)
       captures:
         1: punctuation.definition.keyword.scss

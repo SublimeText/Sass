@@ -300,6 +300,34 @@ p {
 }
 
 
+/*
+  More @ features
+  https://sass-lang.com/documentation/file.SASS_REFERENCE.html#if
+  https://sass-lang.com/documentation/file.SASS_REFERENCE.html#debug
+*/
+@if 1 + 1 == 2 { border: 1px solid; }
+//^ keyword.control.flow.conditional.scss
+//  ^ constant.numeric.css
+//    ^ keyword.operator.scss
+//      ^ constant.numeric.css
+//             ^ punctuation.section.property-list.begin.css
+@mixin adjust-location($x, $y) {
+  @if unitless($x) {
+//    ^^^^^^^^^^^^ meta.function-call.scss
+//    ^^^^^^^^ support.function.scss
+//              ^ meta.group.scss meta.function.parameters.scss variable.other.scss
+    @warn "Assuming #{$x} to be in pixels";
+    $x: 1px * $x;
+  }
+  @if unitless($y) {
+    @warn "Assuming #{$y} to be in pixels";
+    $y: 1px * $y;
+  }
+  position: relative; left: $x; top: $y;
+}
+
+
+
 // ------------ A selection of tests from the default CSS package: -------------
 
 
