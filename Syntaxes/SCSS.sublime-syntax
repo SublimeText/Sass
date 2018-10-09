@@ -417,17 +417,16 @@ contexts:
       push:
         - match: '(?={)'
           pop: true
-        - include: scss-functions
-        - include: comment-block
-        - include: comma-delimiter
-        - include: color-values
-        - include: numeric-values
-        - include: scss-variables
-        - include: scss-functions
-        - include: scss-operators
-        - include: scss-interpolation
-        - include: literal-string
-        - include: unquoted-string
+        - include: sass-script-expression
+    - match: (@)(debug|warn|error)\b
+      scope: keyword.control.flow.conditional.scss
+      captures:
+        1: punctuation.definition.keyword.scss
+      push:
+        - match: '(;)'
+          scope: punctuation.terminator.rule.scss
+          pop: true
+        - include: sass-script-expression
     - match: (@)(mixin|function|include)\s+([\w-]+)
       captures:
         1: punctuation.definition.keyword.scss
@@ -662,6 +661,17 @@ contexts:
         - include: numeric-values
 
 
+  sass-script-expression:
+    - include: comment-block
+    - include: comma-delimiter
+    - include: color-values
+    - include: numeric-values
+    - include: scss-variables
+    - include: scss-functions
+    - include: scss-operators
+    - include: scss-interpolation
+    - include: literal-string
+    - include: unquoted-string
 
   scss-variable-declaration:
     - match: '(\$)([a-zA-Z0-9_-][\w-]*)'
@@ -689,16 +699,7 @@ contexts:
           pop: true
         - match: ':'
           scope: punctuation.separator.key-value.css
-        - include: comment-block
-        - include: comma-delimiter
-        - include: color-values
-        - include: numeric-values
-        - include: scss-variables
-        - include: scss-functions
-        - include: scss-operators
-        - include: scss-interpolation
-        - include: literal-string
-        - include: unquoted-string
+        - include: sass-script-expression
 
   scss-interpolation:
     - match: '(#)({)'

@@ -316,7 +316,16 @@ p {
 //    ^^^^^^^^^^^^ meta.function-call.scss
 //    ^^^^^^^^ support.function.scss
 //              ^ meta.group.scss meta.function.parameters.scss variable.other.scss
+    @debug 10em + 12em;
+//         ^^^^ constant.numeric.css
+//           ^ keyword.other.unit.css
+//              ^ keyword.operator.scss
+//                ^^^^ constant.numeric.css
+//                    ^ punctuation.terminator.rule.scss
     @warn "Assuming #{$x} to be in pixels";
+//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double.css
+//                  ^^^^^ meta.group.interpolation.scss
+//                  ^ punctuation.definition.variable.scss
     $x: 1px * $x;
   }
   @if unitless($y) {
