@@ -389,6 +389,7 @@ contexts:
       scope: support.type.vendor-prefix.css
     - include: comment-block
     - include: builtin-functions
+    - include: custom-functions
     - include: unicode-range
     - include: numeric-values
     - include: color-values
@@ -419,6 +420,18 @@ contexts:
         - match: '\s*(?=[\{;])'
           pop: true
         - include: scss-mixin
+    - match: (@)(return)\b
+      captures:
+        1: punctuation.definition.keyword.scss
+        2: keyword.control.at-rule.return.scss
+        3: entity.name.function.scss
+      push:
+        - meta_scope: meta.at-rule.scss
+        - match: '\s*(;)'
+          captures:
+            1: punctuation.terminator.rule.css
+          pop: true
+        - include: property-values
     - match: ((@)(?:-(?:webkit|moz|o)-)?(charset|namespace|font-face)\b)
       captures:
         1: keyword.control.at-rule.css
@@ -1914,6 +1927,25 @@ contexts:
     - match: '\)'
       scope: meta.group.css punctuation.definition.group.end.css
       pop: true
+
+
+  custom-functions:
+    - match: '\b([a-z_-]+)(?=\()'
+      scope: support.function.custom.scss
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: comma-delimiter
+          - include: property-values
+          - include: scss-variables
+          - include: scss-functions
+
 
   comma-delimiter:
     - match: '\s*(,)\s*'

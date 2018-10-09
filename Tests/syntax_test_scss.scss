@@ -107,6 +107,29 @@
 
 
 /*
+  Function directives
+  https://sass-lang.com/documentation/file.SASS_REFERENCE.html#function_directives
+*/
+$grid-width: 40px;
+$gutter-width: 10px;
+@function grid-width($n) {
+//        ^^^^^^^^^^ entity.name.function.scss
+//                  ^ meta.function.parameters.scss punctuation.definition.group.begin.css
+  @return $n * $grid-width + ($n - 1) * $gutter-width;
+//        ^^ variable.other.scss
+//             ^^^^^^^^^^^ variable.other.scss
+//                            ^^ variable.other.scss
+//           ^ keyword.operator.scss
+//                         ^ keyword.operator.scss
+//                               ^ keyword.operator.scss
+//                                    ^ keyword.operator.scss
+}
+#sidebar { width: grid-width(5); }
+//                ^^^^^^^^^^^^^ meta.property-value.css meta.function-call.css
+//                ^^^^^^^^^^ support.function.custom.scss
+
+
+/*
   Comments
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#comments
   block comment contains #{ $variable }
