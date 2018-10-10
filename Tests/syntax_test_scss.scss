@@ -290,6 +290,8 @@ $gutter-width: 10px;
 //        ^^^^^^^^^^ entity.name.function.scss
 //                  ^ meta.function.parameters.scss punctuation.definition.group.begin.css
   @return $n * $grid-width + ($n - 1) * $gutter-width;
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.scss
+// ^^^^^^ keyword.control.at-rule.return.scss
 //        ^^ variable.other.scss
 //             ^^^^^^^^^^^ variable.other.scss
 //                            ^^ variable.other.scss
@@ -297,6 +299,13 @@ $gutter-width: 10px;
 //                         ^ keyword.operator.scss
 //                               ^ keyword.operator.scss
 //                                    ^ keyword.operator.scss
+  @return url("/images/#{$animal}.png");
+//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.css
+//            ^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double.css
+//        ^^^ support.function.url.css
+//                     ^ punctuation.definition.variable.scss
+//                      ^^^^^^^^^ meta.group.interpolation.scss
+//                       ^^^^^^^ variable.other.scss
 }
 #sidebar { width: grid-width(5); }
 //                ^^^^^^^^^^^^^ meta.property-value.css meta.function-call.css
