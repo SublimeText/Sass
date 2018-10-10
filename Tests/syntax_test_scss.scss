@@ -376,7 +376,19 @@ $gutter-width: 10px;
   .item-#{$i} { width: 2em * $i; }
 }
 @each $animal in puma, sea-slug, egret, salamander {}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.each.scss
+//                                                 ^ - meta.at-rule.each.scss
+//                                                 ^ punctuation.section.property-list.begin.css
+//    ^^^^^^^ variable.other.scss
+//            ^^ keyword.control
+//               ^^^^ string.unquoted
+//                     ^^^^^^ string.unquoted
+//                   ^ punctuation.separator
 @each $header, $size in (h1: 2em, h2: 1.5em, h3: 1.2em) {
+//    ^^^^^^^ variable.other.scss
+//           ^ punctuation.separator
+//             ^^^^^ variable.other.scss
+//                   ^^ keyword.control
   #{$header} {
     font-size: $size;
   }
