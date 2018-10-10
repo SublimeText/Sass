@@ -391,6 +391,7 @@ contexts:
       scope: keyword.other.scss
     - match: "-(?:webkit|moz|ms|o)-"
       scope: support.type.vendor-prefix.css
+    - include: comment-line
     - include: comment-block
     - include: builtin-functions
     - include: unicode-range
