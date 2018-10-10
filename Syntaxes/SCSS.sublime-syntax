@@ -415,33 +415,38 @@ contexts:
       captures:
         1: punctuation.definition.keyword.scss
       push:
+        - meta_scope: meta.at-rule.scss
         - match: '(?={)'
           pop: true
         - include: sass-script-expression
     - match: (@)(debug|warn|error)\b
-      scope: keyword.control.flow.conditional.scss
+      scope: keyword.control.at-rule.scss
       captures:
         1: punctuation.definition.keyword.scss
       push:
+        - meta_scope: meta.at-rule.scss
         - match: '(;)'
           scope: punctuation.terminator.rule.scss
           pop: true
         - include: sass-script-expression
-    - match: (@)(mixin|function|include)\s+([\w-]+)
+    - match: (@)(extend)\b
+      scope: keyword.control.at-rule.scss
       captures:
         1: punctuation.definition.keyword.scss
-        2: keyword.control.at-rule.scss
-        3: entity.name.function.scss
+    - match: ((@)(mixin|function|include))\s+([\w-]+)
+      captures:
+        1: keyword.control.at-rule.scss
+        2: punctuation.definition.keyword.scss
+        4: entity.name.function.scss
       push:
         - meta_scope: meta.at-rule.scss
         - match: '\s*(?=[\{;])'
           pop: true
         - include: scss-mixin
     - match: (@)(return)\b
+      scope: keyword.control.at-rule.return.scss
       captures:
         1: punctuation.definition.keyword.scss
-        2: keyword.control.at-rule.return.scss
-        3: entity.name.function.scss
       push:
         - meta_scope: meta.at-rule.scss
         - match: '\s*(;)'

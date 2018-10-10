@@ -118,6 +118,9 @@
 $grid-width: 40px;
 $gutter-width: 10px;
 @function grid-width($n) {
+//<- meta.at-rule.scss keyword.control.at-rule.scss
+// ^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.scss
+// ^^^^^^keyword.control.at-rule.scss
 //        ^^^^^^^^^^ entity.name.function.scss
 //                  ^ meta.function.parameters.scss punctuation.definition.group.begin.css
   @return $n * $grid-width + ($n - 1) * $gutter-width;
@@ -307,7 +310,7 @@ p {
 */
 @if 1 + 1 == 2 { border: 1px solid; }
 //^ keyword.control.flow.conditional.scss
-//  ^ constant.numeric.css
+//  ^ meta.at-rule constant.numeric.css
 //    ^ keyword.operator.scss
 //      ^ constant.numeric.css
 //             ^ punctuation.section.property-list.begin.css
@@ -318,7 +321,7 @@ p {
 //              ^ meta.group.scss meta.function.parameters.scss variable.other.scss
     @debug 10em + 12em;
 //         ^^^^ constant.numeric.css
-//           ^ keyword.other.unit.css
+//           ^ meta.at-rule keyword.other.unit.css
 //              ^ keyword.operator.scss
 //                ^^^^ constant.numeric.css
 //                    ^ punctuation.terminator.rule.scss
@@ -333,6 +336,9 @@ p {
     $y: 1px * $y;
   }
   position: relative; left: $x; top: $y;
+}
+.seriousError {
+  @extend .error;
 }
 
 
