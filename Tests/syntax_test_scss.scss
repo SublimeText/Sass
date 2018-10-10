@@ -375,6 +375,7 @@ $gutter-width: 10px;
 @for $i from 1 through 3 {
   .item-#{$i} { width: 2em * $i; }
 }
+@each $animal in puma, sea-slug, egret, salamander {}
 @each $header, $size in (h1: 2em, h2: 1.5em, h3: 1.2em) {
   #{$header} {
     font-size: $size;
