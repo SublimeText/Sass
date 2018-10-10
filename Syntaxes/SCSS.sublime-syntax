@@ -1798,9 +1798,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: scss-variables
-          - include: percentage-type
-          - include: number-type
+          - include: sass-script-expression
 
     - match: '\b(hsla?|hwb)(?=\()'
       scope: support.function.color.css
@@ -1814,10 +1812,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: scss-variables
-          - include: angle-type
-          - include: percentage-type
-          - include: number-type
+          - include: sass-script-expression
 
     - match: '\b(gray)(?=\()'
       scope: support.function.color.css

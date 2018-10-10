@@ -265,15 +265,29 @@ p {
   Color Operations
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#color_operations
 */
-$translucent-red: rgba(255, 0, 0, 0.5);
+$translucent-red: rgba(255, 0, 0%, 0.5);
 //                ^^^^ support.function.color.css
+//                        ^ punctuation.separator.css
+$translucent-red: rgba(#E82C0C, 0.5);
+//                ^^^^ support.function.color.css
+//                     ^^^ constant.other.color.rgb-value.css
+//                            ^ punctuation.separator.css
+$translucent-red: hsla(red, 0.5);
+//                ^^^^ support.function.color.css
+//                     ^^^ support.constant.color.w3c-standard-color-name.css
+//                        ^ punctuation.separator.css
+$translucent-red: hsla(240deg 100% 50% / 5%);
+//                ^^^^ support.function.color.css
+//                        ^^^ constant.numeric.css keyword.other.unit.css
 p {
   color: opacify($translucent-red, 0.3);
 //       ^^^^^^^ support.function.scss
 //              ^ punctuation.definition.group.begin.scss
+//                               ^ punctuation.separator.css
 //                                    ^ punctuation.definition.group.end.scss
-  background-color: transparentize($translucent-red, 0.25);
+  background-color: transparentize(#E82C0C, 0.25);
 //                  ^^^^^^^ support.function.scss
+//                                 ^^^ constant.other.color.rgb-value.css
 }
 
 
@@ -305,7 +319,7 @@ $gutter-width: 10px;
 //        ^^^ support.function.url.css
 //                     ^ punctuation.definition.variable.scss
 //                      ^^^^^^^^^ meta.group.interpolation.scss
-//                       ^^^^^^^ variable.other.scss
+//                       ^^^^^^^ meta.group.interpolation.scss variable.other.scss
 }
 #sidebar { width: grid-width(5); }
 //                ^^^^^^^^^^^^^ meta.property-value.css meta.function-call.css
