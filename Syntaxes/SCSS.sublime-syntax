@@ -385,10 +385,12 @@ contexts:
     - include: property-value-constants
     - include: literal-string
     - include: unquoted-concatenated-string
-    - include: scss-operators
     - include: scss-variables
     - include: scss-functions
     - include: custom-functions
+    - match: '{{ident}}' # e.g. animation-name
+      scope: string.unquoted.css
+    - include: scss-operators
 
 
   at-rules:
