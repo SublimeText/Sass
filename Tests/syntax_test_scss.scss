@@ -1394,15 +1394,12 @@ $gutter-width: 10px;
 
 .test-meta-scopes-for-completions {
     top: 5px;
-//^^^^^^^^^^^ meta.property-list
 //  ^^^ meta.property-name
 //      ^^^^ meta.property-value
     top: ;
-//^^^^^^^^^^^ meta.property-list
 //  ^^^ meta.property-name
 //      ^ meta.property-value
     top:
-//^^^^^^^ meta.property-list
 //  ^^^ meta.property-name
 }/*     ^ meta.property-value */
 
