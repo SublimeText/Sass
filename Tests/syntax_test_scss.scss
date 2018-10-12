@@ -1416,7 +1416,7 @@ $gutter-width: 10px;
 //               ^^^^^^^ support.constant.font-name
 }
 .generic-font-family4 {
-    font-family: droid serif;
+    font-family: droid serif; // we can't pass this test without being more specific about this being a font-name property
 //               ^^^^^^^^^^^ string.unquoted
 }
 
