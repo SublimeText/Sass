@@ -224,6 +224,8 @@ contexts:
       - include: pseudo-elements
       - include: pseudo-classes
       - include: selector
+    - match: \!\s*(default|global|optional)
+      scope: keyword.other.scss
     - include: scss-operators
     - include: pseudo-classes
     - include: pseudo-elements

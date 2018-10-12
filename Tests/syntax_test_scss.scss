@@ -363,7 +363,12 @@ $gutter-width: 10px;
   @at-root (without: media) {
     color: red;
   }
+
+/*
+  https://sass-lang.com/documentation/file.SASS_REFERENCE.html#the_optional_flag
+*/
   @extend .error !optional;
+//               ^^^^^^^^^ keyword.other.scss
   @extend %extreme;
 }
 /*
