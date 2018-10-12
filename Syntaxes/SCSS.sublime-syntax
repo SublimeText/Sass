@@ -67,14 +67,13 @@ contexts:
   main:
     - include: comment-block
     - include: comment-line
-    - include: keyframe-operators
     - include: pseudo-elements
     - include: pseudo-classes
     - include: properties
+    - include: scss-variable-declaration
+    - include: keyframe-operators
     - include: selector
     - include: at-rules
-    - include: scss-variable-declaration
-    - include: numeric-values
     - include: comma-delimiter
     - match: '\{'
       scope: punctuation.section.property-list.begin.css
