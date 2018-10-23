@@ -693,7 +693,7 @@ contexts:
         - match: '{{ident}}'
           scope: string.unquoted.scss
         - include: comment-line
-        - include: commas
+        - include: comma-delimiter
         - include: property-values
 
   scss-variable-declaration:
