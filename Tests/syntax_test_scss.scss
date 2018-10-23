@@ -49,6 +49,10 @@
     color: #000000
 //         ^^^^^^^ meta.property-value.css constant.other.color.rgb-value.css
   }
+  span:hover { }
+// ^^^ entity.name.tag.css
+
+
   & {}
 //^^ meta.selector.css
   &:hover { text-decoration: underline; }
