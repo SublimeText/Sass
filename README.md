@@ -7,6 +7,12 @@ Highlights code using up to date specifications for properties and values to hel
 
 Syntax highlighting should be very similar to CSS and LESS (which is maintained in parallel).
 
+
 ## Installation
 
 This package is available through [Package Control](https://packagecontrol.io)
+
+
+## 2.0
+
+Version 2.0 introduces new highlighting and completion features. This is a pretty big change, so for those who want it the previous version is still available as well as a different package: [Syntax Highlighting for Sass](https://github.com/P233/Syntax-highlighting-for-Sass).

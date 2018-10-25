@@ -1,0 +1,15 @@
+Sass 2.0
+======================
+
+Thank you for installing Sass for Sublime Text.
+
+2.0 supports things like flex-box syntax, custom properties, function snippets
+and more for both Sass and SCSS.
+It is now also in line with the scope naming guidelines for Sublime Text 3.0,
+highlighting should be very similar to CSS and LESS.
+
+If something doesn't work for you let us know at:
+https://github.com/braver/SublimeSass
+
+1.x is still available as a different package: "Syntax Highlighting for Sass":
+https://github.com/P233/Syntax-highlighting-for-Sass
