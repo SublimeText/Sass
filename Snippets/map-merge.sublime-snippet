@@ -4,5 +4,5 @@ map-merge(${1:map}, ${2:map})
 ]]></content>
 <tabTrigger>map-merge</tabTrigger>
 <description>sass map</description>
-<scope>source.css.scss</scope>
+<scope>source.css.scss, source.sass</scope>
 </snippet>

@@ -4,5 +4,5 @@ min(${1:numbers…})
 ]]></content>
 <tabTrigger>min</tabTrigger>
 <description>sass number</description>
-<scope>source.css.scss</scope>
+<scope>source.css.scss, source.sass</scope>
 </snippet>

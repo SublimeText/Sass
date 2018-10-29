@@ -4,5 +4,5 @@ selector-parse(${1:selector})
 ]]></content>
 <tabTrigger>selector-parse</tabTrigger>
 <description>sass selector</description>
-<scope>source.css.scss</scope>
+<scope>source.css.scss, source.sass</scope>
 </snippet>

@@ -4,5 +4,5 @@ opacify(${1:color}, ${1:amount})
 ]]></content>
 <tabTrigger>opacify</tabTrigger>
 <description>sass color</description>
-<scope>source.css.scss</scope>
+<scope>source.css.scss, source.sass</scope>
 </snippet>

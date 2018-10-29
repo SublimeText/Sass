@@ -4,5 +4,5 @@ abs(${1:number})
 ]]></content>
 <tabTrigger>abs</tabTrigger>
 <description>sass number</description>
-<scope>source.css.scss</scope>
+<scope>source.css.scss, source.sass</scope>
 </snippet>

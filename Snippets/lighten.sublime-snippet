@@ -4,5 +4,5 @@ lighten(${1:color}, ${2:amount})
 ]]></content>
 <tabTrigger>lighten</tabTrigger>
 <description>sass color</description>
-<scope>source.css.scss</scope>
+<scope>source.css.scss, source.sass</scope>
 </snippet>

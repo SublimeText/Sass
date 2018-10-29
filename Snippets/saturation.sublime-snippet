@@ -4,5 +4,5 @@ saturation(${1:color})
 ]]></content>
 <tabTrigger>saturation</tabTrigger>
 <description>sass color</description>
-<scope>source.css.scss</scope>
+<scope>source.css.scss, source.sass</scope>
 </snippet>

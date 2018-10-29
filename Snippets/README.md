@@ -22,7 +22,7 @@ template = """<snippet>
 ]]></content>
 <tabTrigger>{trigger}</tabTrigger>
 <description>{category}</description>
-<scope>source.css.scss</scope>
+<scope>source.css.scss, source.sass</scope>
 </snippet>
 """
 

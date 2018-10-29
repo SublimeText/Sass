@@ -4,5 +4,5 @@ alpha(${1:color}) / opacity(${2:color})
 ]]></content>
 <tabTrigger>alpha</tabTrigger>
 <description>sass color</description>
-<scope>source.css.scss</scope>
+<scope>source.css.scss, source.sass</scope>
 </snippet>

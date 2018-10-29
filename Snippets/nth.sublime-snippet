@@ -4,5 +4,5 @@ nth(${1:list}, ${2:n})
 ]]></content>
 <tabTrigger>nth</tabTrigger>
 <description>sass list</description>
-<scope>source.css.scss</scope>
+<scope>source.css.scss, source.sass</scope>
 </snippet>

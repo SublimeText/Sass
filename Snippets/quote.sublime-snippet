@@ -4,5 +4,5 @@ quote(${1:string})
 ]]></content>
 <tabTrigger>quote</tabTrigger>
 <description>sass string</description>
-<scope>source.css.scss</scope>
+<scope>source.css.scss, source.sass</scope>
 </snippet>
