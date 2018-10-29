@@ -9,6 +9,7 @@
   Property syntax with the colon before the property name
 */
 #main
+  :font-family sans
   :color blue
   :font-size 0.3em
   // ^ support.type.property-name.css
@@ -21,7 +22,7 @@
   Variables and !global etc
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#variables_
 */
-:root
+:root:hover
 // <- entity.other.pseudo-class.css punctuation.definition.entity.css
 // ^^ entity.other.pseudo-class.css
 #main h1+.sub:not(.class)
@@ -47,17 +48,17 @@
 //      ^ - keyword.operator
 
   $width: 5em !global
-//^^^^^^ variable.declaration.scss
-//^ punctuation.definition.variable.scss
-//            ^^^^^^^ keyword.other.scss
+//^^^^^^ variable.declaration.sass
+//^ punctuation.definition.variable.sass
+//            ^^^^^^^ keyword.other.sass
 
   width: $width
 //^^^^^ meta.property-name.css
 // ^ support.type.property-name.css
 //     ^ punctuation.separator.key-value.css
 //       ^^^^^^ meta.property-value.css
-//       ^^^^^^ variable.other.scss
-//       ^ punctuation.definition.variable.scss
+//       ^^^^^^ variable.other.sass
+//       ^ punctuation.definition.variable.sass
 
   .redbox:hover
     background-color: #ff0000
@@ -68,16 +69,16 @@
 
   &:hover text-decoration: underline
 //^^^^^^^^ meta.selector.css
-//^ keyword.operator.ampersand.scss
+//^ keyword.operator.ampersand.sass
 // ^ entity.other.pseudo-class.css punctuation.definition.entity.css
 
   body.firefox ~ & font-weight: normal
 //^^^^^^^^^^^^^^^^^ meta.selector
 //             ^ punctuation.separator.combinator.css
-//               ^ keyword.operator.ampersand.scss
+//               ^ keyword.operator.ampersand.sass
 
   &-bemish
-//^ keyword.operator.ampersand.scss
+//^ keyword.operator.ampersand.sass
 // ^^^^^^^ entity.other.attribute-name.css
 // ^^^^^^^^ meta.selector.css
 
@@ -124,7 +125,7 @@
 // line comment
 // line comment contains #{ $variable
 // line comment contains #{ function($variable) + "escap\e" + -.5em
-// <- comment.line.double-slash.scss punctuation.definition.comment.css
+// <- comment.line.double-slash.sass punctuation.definition.comment.css
 
 
 /*
@@ -136,22 +137,22 @@
 */
 
 @mixin firefox-message($selector)
-// <- meta.at-rule.scss punctuation.definition.keyword.scss
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.scss
-// ^ keyword.control.at-rule.scss
-//     ^^^^^^^^^^^^^^^ entity.name.function.scss
-//                    ^ meta.group.scss meta.function.parameters.scss punctuation.definition.group.begin.scss
-//                              ^ meta.group.scss meta.function.parameters.scss punctuation.definition.group.end.scss
-//                     ^^ meta.function.parameters.scss variable.other.scss
-//                     ^ punctuation.definition.variable.scss
+// <- meta.at-rule.sass punctuation.definition.keyword.sass
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.sass
+// ^ keyword.control.at-rule.sass
+//     ^^^^^^^^^^^^^^^ entity.name.function.sass
+//                    ^ meta.at-rule.sass meta.function.parameters.sass punctuation.definition.group.begin.sass
+//                              ^ meta.at-rule.sass meta.function.parameters.sass punctuation.definition.group.end.sass
+//                     ^^ meta.function.parameters.sass variable.other.sass
+//                     ^ punctuation.definition.variable.sass
 
   body.firefox #{$selector}:before
-//             ^^^^^^^^^^^^ meta.group.interpolation.scss
-//             ^ punctuation.definition.variable.scss
-//              ^ punctuation.definition.group.begin.scss
-//               ^^^^^^^^^ variable.other.scss
-//               ^ punctuation.definition.variable.scss
-//                        ^ punctuation.definition.group.end.scss
+//             ^^^^^^^^^^^^ meta.group.interpolation.sass
+//             ^ punctuation.definition.variable.sass
+//              ^ punctuation.definition.group.begin.sass
+//               ^^^^^^^^^ variable.other.sass
+//               ^ punctuation.definition.variable.sass
+//                        ^ punctuation.definition.group.end.sass
 //                         ^ punctuation.definition.entity.css
 //                          ^ entity.other.pseudo-element.css
 
@@ -168,14 +169,10 @@
     background: url(data:image/gifbase64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7)
 //                  ^^^^^ string.unquoted.css
 
-  p::before
-    background-image: some bullshit string
-//                    ^^^^^^^^^^^^^^^^^^^^ - string
-
     cursor: e + -resize
 //          ^ string.unquoted
 //           ^ - string
-//            ^ keyword.operator.scss
+//            ^ keyword.operator.sass
 //             ^ - string
 //              ^^^^^ string.unquoted
 
@@ -183,40 +180,40 @@
 //               ^ string.quoted.double
 //                    ^ string.unquoted
 //                       ^ - string
-//                  ^ keyword.operator.scss
+//                  ^ keyword.operator.sass
 
     font-family: sans- + "serif"
 //               ^^^^^ string.unquoted
 //                              ^ - string
-//                     ^ keyword.operator.scss
+//                     ^ keyword.operator.sass
 
     content: "I ate #{5 + 10} pies!"
 //           ^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
-//                  ^^^^^^^^^ meta.group.interpolation.scss
-//                  ^ punctuation.definition.variable.scss
-//                   ^ punctuation.definition.group.begin.scss
+//                  ^^^^^^^^^ meta.group.interpolation.sass
+//                  ^ punctuation.definition.variable.sass
+//                   ^ punctuation.definition.group.begin.sass
 //                    ^ constant.numeric.css
-//                      ^ keyword.operator.scss
+//                      ^ keyword.operator.sass
 //                        ^ constant.numeric.css
-//                          ^ punctuation.definition.group.end.scss
+//                          ^ punctuation.definition.group.end.sass
 
     content: "I ate #{$value} pies!"
-//                    ^^^^^^ variable.other.scss
-//                    ^ punctuation.definition.variable.scss
+//                    ^^^^^^ variable.other.sass
+//                    ^ punctuation.definition.variable.sass
 
     @include breathe(somestring)
-//                   ^ string.unquoted.css
+//                   ^ string.unquoted
 //                             ^ - string
 
     @include breathe(border-bottom-color)
-//                   ^^^^^^^^^^^^^^^^^^^ support.type.property-name.css
+//                   ^^^^^^^^^^^^^^^^^^^ string.unquoted
 
 
 
 @include firefox-message(".header" + test)
-//                       ^^^^^^^^^ meta.group.scss meta.function.parameters.scss string.quoted.double.css
-//                                 ^ keyword.operator.scss
-//                                   ^ string.unquoted.css
+//                       ^^^^^^^^^ meta.at-rule.sass meta.function.parameters.sass string.quoted.double.css
+//                                 ^ keyword.operator.sass
+//                                   ^ string.unquoted
 //                                       ^ - string
 
 
@@ -241,14 +238,14 @@ $map: (
 
 .selector
   color: nth(map-merge($map, $map2), 3)
-//       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css meta.function-call.scss
-//       ^^^ support.function.scss
-//          ^ punctuation.definition.group.begin.scss
-//           ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.parameters.scss
-//           ^^^^^^^^^ support.function.scss
-//                    ^ punctuation.definition.group.begin.scss
+//       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css meta.function-call.sass
+//       ^^^ support.function.sass
+//          ^ punctuation.definition.group.begin.sass
+//           ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.parameters.sass
+//           ^^^^^^^^^ support.function.sass
+//                    ^ punctuation.definition.group.begin.sass
 //                         ^ punctuation.separator.css
-//                                ^ punctuation.definition.group.end.scss
+//                                ^ punctuation.definition.group.end.sass
 
 
 
@@ -261,12 +258,12 @@ p
   width: $base-width + 2 * -5rem / -$var
 //                    ^^^^^^^^^^^^^^^^^^ - string
 //                     ^ constant.numeric
-//                       ^ keyword.operator.scss
+//                       ^ keyword.operator.sass
 //                         ^^^^ constant.numeric
 //                           ^^ keyword.other.unit.css
-//                               ^ keyword.operator.scss
-//                                 ^ keyword.operator.scss
-//                                  ^^^^ variable.other.scss
+//                               ^ keyword.operator.sass
+//                                 ^ keyword.operator.sass
+//                                  ^^^^ variable.other.sass
 
 
 
@@ -275,13 +272,95 @@ p
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#color_operations
 */
 $translucent-red: rgba(255, 0, 0, 0.5)
-//                ^^^^ support.function.misc.css
+//                ^^^^ support.function.color.css
 p
   color: opacify($translucent-red, 0.3)
-//       ^^^^^^^ support.function.scss
-//              ^ punctuation.definition.group.begin.scss
-//                                    ^ punctuation.definition.group.end.scss
+//       ^^^^^^^ support.function.sass
+//              ^ punctuation.definition.group.begin.sass
+//                                    ^ punctuation.definition.group.end.sass
 
   background-color: transparentize($translucent-red, 0.25)
-//                  ^^^^^^^ support.function.scss
+//                  ^^^^^^^ support.function.sass
+  top: rgb(1, 4.5%)
+//     ^^^         support.function.color.css
+//         ^       constant.numeric.css
+//          ^      punctuation.separator.css
+//            ^^^^ constant.numeric.css
+
+  top: rgba()
+//     ^^^^ support.function.color.css
+
+  top: hsl(1deg, 4.5%)
+//     ^^^            support.function.color.css
+//         ^^^^       constant.numeric.css
+//             ^      punctuation.separator.css
+//               ^^^^ constant.numeric.css
+
+  top: hsla()
+//     ^^^^ support.function.color.css
+
+  top: hwb()
+//     ^^^ support.function.color.css
+
+
+  top: gray(1, 4.5%)
+//     ^^^^         support.function.color.css
+//          ^       constant.numeric.css
+//           ^      punctuation.separator.css
+//             ^^^^ constant.numeric.css
+
+  top: device-cmyk(0.5, 1%, red())
+//     ^^^^^^^^^^^              support.function.color.css
+//                 ^^^          constant.numeric.css
+//                    ^         punctuation.separator.css
+//                      ^^      constant.numeric.css
+//                          ^^^ support.function.color.css
+
+  top: color(w() s())
+//     ^^^^^       support.function.color.css
+//           ^     support.function.color.css
+//               ^ support.function.color.css
+
+  top: alpha(- 1.5%)
+//     ^^^^^        support.function.color.css
+//           ^      keyword.operator.css
+//             ^^^^ constant.numeric.css
+
+  top: h(+ 1.5deg)
+//     ^          support.function.color.css
+//       ^        keyword.operator.css
+//         ^^^^^^ constant.numeric.css
+
+  top: w(* 1.5%)
+//     ^        support.function.color.css
+//       ^      keyword.operator.css
+//         ^^^^ constant.numeric.css
+
+  top: shade(1.5%)
+//     ^^^^^      support.function.color.css
+//           ^^^^ constant.numeric.css
+
+  top: blenda(red 50% hsl)
+//     ^^^^^^             support.function.color.css
+//            ^^^         support.constant.color.w3c-standard-color-name.css
+//                ^^^     constant.numeric.css
+//                    ^^^ keyword.other.color-space.css
+
+  background-color: color(var(--background) blend(var(--foreground) 80%))
+//^^^^^^^^^^^^^^^^ support.type.property-name.css
+//                ^ punctuation.separator.key-value.css
+//                  ^^^^^ support.function.color.css
+//                       ^ punctuation.definition.group.begin.css
+//                        ^^^ support.function.var.css
+//                           ^ punctuation.definition.group.begin.css
+//                            ^^^^^^^^^^^^ support.type.custom-property
+//                                        ^ punctuation.definition.group.end.css
+//                                          ^^^^^ support.function.color.css
+//                                               ^ punctuation.definition.group.begin.css
+//                                                ^^^ support.function.var.css
+//                                                   ^ punctuation.definition.group.begin.css
+//                                                    ^^^^^^^^^^^^ support.type.custom-property.css
+//                                                                ^ punctuation.definition.group.end.css
+//                                                                  ^^^ constant.numeric.css
+//                                                                     ^^ punctuation.definition.group.end.css
 
