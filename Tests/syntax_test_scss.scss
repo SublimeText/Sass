@@ -141,8 +141,8 @@
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.scss
 // ^ keyword.control.at-rule.scss
 //     ^^^^^^^^^^^^^^^ entity.name.function.scss
-//                    ^ meta.function.parameters.scss punctuation.definition.group.begin.css
-//                              ^ meta.function.parameters.scss punctuation.definition.group.end.css
+//                    ^ meta.function.parameters.scss punctuation.definition.group.begin.scss
+//                              ^ meta.function.parameters.scss punctuation.definition.group.end.scss
 //                     ^^ meta.function.parameters.scss variable.other.scss
 //                     ^ punctuation.definition.variable.scss
   body.firefox #{$selector}:before {
@@ -305,7 +305,7 @@ $gutter-width: 10px;
 // ^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.scss
 // ^^^^^^keyword.control.at-rule.scss
 //        ^^^^^^^^^^ entity.name.function.scss
-//                  ^ meta.function.parameters.scss punctuation.definition.group.begin.css
+//                  ^ meta.function.parameters.scss punctuation.definition.group.begin.scss
   @return $n * $grid-width + ($n - 1) * $gutter-width;
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.scss
 // ^^^^^^ keyword.control.at-rule.return.scss

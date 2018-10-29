@@ -747,7 +747,7 @@ contexts:
 
   scss-mixin:
     - match: '\('
-      scope: punctuation.definition.group.begin.css
+      scope: punctuation.definition.group.begin.scss
       push:
         - meta_scope: meta.function.parameters.scss
         - include: scss-variables
@@ -758,14 +758,14 @@ contexts:
           scope: string.unquoted.scss
         - include: selector
         - match: '\{'
-          scope: punctuation.section.property-list.begin.css
+          scope: punctuation.section.property-list.begin.scss
           push:
           - match: '\}'
-            scope: punctuation.section.property-list.end.css
+            scope: punctuation.section.property-list.end.scss
             pop: true
           - include: main
         - match: '\)'
-          scope: punctuation.definition.group.end.css
+          scope: punctuation.definition.group.end.scss
           pop: true
 
 
