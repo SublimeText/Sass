@@ -5,12 +5,12 @@
 
 Highlights code using up to date specifications for properties and values to help you catch typos.
 
-Syntax highlighting should be very similar to CSS and LESS (which is maintained in parallel).
+Syntax highlighting should be very similar to [CSS](https://github.com/sublimehq/Packages/tree/master/CSS) and [LESS](https://github.com/danro/LESS-sublime) (which is maintained in parallel).
 
 
 ## Installation
 
-This package is available through [Package Control](https://packagecontrol.io)
+This package is available through [Package Control](https://packagecontrol.io).
 
 
 ## 2.0
