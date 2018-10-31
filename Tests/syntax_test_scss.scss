@@ -198,7 +198,7 @@
 //                   ^ string.unquoted
 //                             ^ - string
     @include breathe(border-bottom-color);
-//                   ^ string.unquoted.scss
+//                   ^ support.constant.property-value
     animation: progress-fade-in-animation .15s ease-in;
 //              ^ - meta.selector
 //                     ^ - keyword.operator
