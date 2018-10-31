@@ -303,6 +303,23 @@ $map: (
 
 
 /*
+  If statements
+  http://sass-lang.com/documentation/file.SASS_REFERENCE.html#if
+*/
+
++cm('png icons')
++ic
+@if (global-variable-exists(spritesheet-sprites))
+  @each $sprite in $spritesheet-sprites
+    .ic--#{nth($sprite, 10)}
+      &:before
+        +bs($sprite)
+.svg--like
+  fill: transparent
+
+
+
+/*
   Operators
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#operations
 */

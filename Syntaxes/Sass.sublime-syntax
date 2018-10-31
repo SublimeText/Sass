@@ -395,12 +395,12 @@ contexts:
         - meta_scope: meta.at-rule.each.sass
         - include: scss-variables
         - include: comma-delimiter
-        - match: '(?={)'
+        - match: '(?=$)'
           pop: true
         - match: \b(in)\b
           scope: keyword.control.in.sass
           push:
-            - match: '(?={)'
+            - match: '(?=$)'
               pop: true
             - include: comment-block
             - include: comment-line
@@ -413,7 +413,7 @@ contexts:
         1: punctuation.definition.keyword.sass
       push:
         - meta_scope: meta.at-rule.sass
-        - match: '(?={)'
+        - match: '(?=$)'
           pop: true
         - include: sass-script-expression
     - match: (@)(if|else if|else)\b
@@ -422,7 +422,7 @@ contexts:
         1: punctuation.definition.keyword.sass
       push:
         - meta_scope: meta.at-rule.sass
-        - match: '(?={)'
+        - match: '(?=$)'
           pop: true
         - include: sass-script-expression
     - match: (@)(debug|warn|error)\b
