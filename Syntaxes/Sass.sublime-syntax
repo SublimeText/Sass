@@ -775,17 +775,17 @@ contexts:
 
   sass-mixin-def:
     - match: '\('
-      scope: punctuation.definition.group.begin.scss
+      scope: punctuation.definition.group.begin.sass
       push:
-        - meta_scope: meta.function.parameters.scss
+        - meta_scope: meta.function.parameters.sass
         - match: '\)'
-          scope: punctuation.definition.group.end.scss
+          scope: punctuation.definition.group.end.sass
           pop: true
         - include: comma-delimiter
         - match: '(\$)([a-zA-Z0-9_-][\w-]*)'
-          scope: variable.parameter.scss
+          scope: variable.parameter.sass
           captures:
-            1: punctuation.definition.variable.scss
+            1: punctuation.definition.variable.sass
           push:
             - match: '(?=[,\)])'
               pop: true

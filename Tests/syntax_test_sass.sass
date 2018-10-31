@@ -143,7 +143,7 @@
 //     ^^^^^^^^^^^^^^^ entity.name.function.sass
 //                    ^ meta.function.parameters.sass punctuation.definition.group.begin.sass
 //                              ^ meta.function.parameters.sass punctuation.definition.group.end.sass
-//                     ^^ meta.function.parameters.sass variable.other.sass
+//                     ^^ meta.function.parameters.sass variable.parameter.sass
 //                     ^ punctuation.definition.variable.sass
 
   body.firefox #{$selector}:before
@@ -206,7 +206,7 @@
 //                             ^ - string
 
     @include breathe(border-bottom-color)
-//                   ^^^^^^^^^^^^^^^^^^^ string.unquoted
+//                   ^^^^^^^^^^^^^^^^^^^ support.constant.property-value.css
 
 
 
@@ -236,6 +236,9 @@
 
 =large-text
 // ^^^^^^^^ entity.name.function.sass
+  @content
+//^^^^^^^^ keyword.control.at-rule.content
+//^ punctuation.definition.keyword
   font:
     family: Arial
     size: 20px
