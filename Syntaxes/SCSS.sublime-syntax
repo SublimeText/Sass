@@ -130,7 +130,6 @@ contexts:
         - include: scss-interpolation
         - include: pseudo-elements
         - include: pseudo-classes
-        - include: scss-mixin
         - include: selector
     - match: '(\#){{ident}}*'
       captures:
@@ -147,7 +146,6 @@ contexts:
         - include: scss-interpolation
         - include: pseudo-elements
         - include: pseudo-classes
-        - include: scss-mixin
         - include: selector
     - match: '(%){{ident}}*'
       captures:
@@ -164,7 +162,6 @@ contexts:
         - include: scss-interpolation
         - include: pseudo-elements
         - include: pseudo-classes
-        - include: scss-mixin
         - include: selector
     - match: '\b([a-z](?:{{custom_element_chars}})*-(?:{{custom_element_chars}})*)\b'
       captures:
