@@ -465,7 +465,7 @@ contexts:
         1: punctuation.definition.keyword.sass
       push:
         - meta_scope: meta.at-rule.sass
-        - match: '\s*(;)'
+        - match: '(?=$)'
           captures:
             1: punctuation.terminator.rule.css
           pop: true
