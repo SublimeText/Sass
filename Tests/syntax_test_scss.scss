@@ -195,7 +195,7 @@
 //                    ^^^^^^ variable.other.scss
 //                    ^ punctuation.definition.variable.scss
     @include breathe(somestring);
-//                   ^ string.unquoted.scss
+//                   ^ string.unquoted
 //                             ^ - string
     @include breathe(border-bottom-color);
 //                   ^ string.unquoted.scss
@@ -209,7 +209,7 @@
 @include firefox-message(".header" + test);
 //                       ^^^^^^^^^ meta.function.parameters.scss string.quoted.double.css
 //                                 ^ keyword.operator.scss
-//                                   ^ string.unquoted.scss
+//                                   ^ string.unquoted
 //                                       ^ - string
 
 
