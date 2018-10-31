@@ -137,12 +137,12 @@
 */
 
 @mixin firefox-message($selector)
-// <- meta.at-rule.sass punctuation.definition.keyword.sass
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.sass
+// <- punctuation.definition.keyword.sass
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.declaration.sass
 // ^ keyword.control.at-rule.sass
 //     ^^^^^^^^^^^^^^^ entity.name.function.sass
-//                    ^ meta.at-rule.sass meta.function.parameters.sass punctuation.definition.group.begin.sass
-//                              ^ meta.at-rule.sass meta.function.parameters.sass punctuation.definition.group.end.sass
+//                    ^ meta.function.parameters.sass punctuation.definition.group.begin.sass
+//                              ^ meta.function.parameters.sass punctuation.definition.group.end.sass
 //                     ^^ meta.function.parameters.sass variable.other.sass
 //                     ^ punctuation.definition.variable.sass
 
@@ -211,11 +211,36 @@
 
 
 @include firefox-message(".header" + test)
-//                       ^^^^^^^^^ meta.at-rule.sass meta.function.parameters.sass string.quoted.double.css
+//                       ^^^^^^^^^ meta.function-call.sass meta.function.parameters.sass string.quoted.double.css
 //                                 ^ keyword.operator.sass
 //                                   ^ string.unquoted
 //                                       ^ - string
 
+
+/*
+  Mixin Directives
+  http://sass-lang.com/documentation/file.INDENTED_SYNTAX.html#Mixin_Directives
+*/
+
++firefox-message(".header" + test)
+// <- punctuation.definition.keyword.sass
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.sass
+// ^^^^^^^^^^^^^ variable.function.sass
+//               ^^^^^^^^^ string.quoted.double.css
+//                         ^ keyword.operator.sass
+//                           ^ string.unquoted
+//                               ^ - string
+
++firefox-message($foo)
+//               ^^^^ variable.parameter
+
+=large-text
+// ^^^^^^^^ entity.name.function.sass
+  font:
+    family: Arial
+    size: 20px
+    weight: bold
+  color: #ff0000
 
 /*
   Lists, Maps

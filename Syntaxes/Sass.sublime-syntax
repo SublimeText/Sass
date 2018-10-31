@@ -149,6 +149,7 @@ contexts:
     - include: pseudo-classes
     - include: scss-variable-declaration
     - include: keyframe-operators
+    - include: mixin-directives
     - include: selector
     - include: at-rules
     - include: comma-delimiter
@@ -364,6 +365,27 @@ contexts:
     - include: scss-operators
 
 
+  mixin-directives:
+    - match: (\=)([\w-]+)
+      captures:
+        0: entity.name.function.sass
+        1: punctuation.definition.keyword.sass
+      push:
+        - meta_scope: meta.function.declaration.sass
+        - match: '(?=$)'
+          pop: true
+        - include: scss-mixin
+    - match: (\+)([\w-]+)
+      captures:
+        0: variable.function.sass
+        1: punctuation.definition.keyword.sass
+      push:
+        - meta_scope: meta.function-call.sass
+        - match: '(?=$)'
+          pop: true
+        - include: scss-mixin
+
+
   at-rules:
     - match: (@)(each)\b
       scope: keyword.control.flow.sass
@@ -417,13 +439,23 @@ contexts:
       scope: keyword.control.at-rule.sass
       captures:
         1: punctuation.definition.keyword.sass
-    - match: ((@)(mixin|function|include))\s+([\w-]+)
+    - match: ((@)(mixin|function))\s+([\w-]+)
       captures:
+        0: entity.name.function.sass
         1: keyword.control.at-rule.sass
         2: punctuation.definition.keyword.sass
-        4: entity.name.function.sass
       push:
-        - meta_scope: meta.at-rule.sass
+        - meta_scope: meta.function.declaration.sass
+        - match: '(?=$)'
+          pop: true
+        - include: scss-mixin
+    - match: ((@)(include))\s+([\w-]+)
+      captures:
+        0: variable.function.sass
+        1: keyword.control.at-rule.sass
+        2: punctuation.definition.keyword.sass
+      push:
+        - meta_scope: meta.function-call.sass
         - match: '(?=$)'
           pop: true
         - include: scss-mixin
