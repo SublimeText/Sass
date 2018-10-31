@@ -605,6 +605,10 @@ contexts:
           pop: true
         - include: at-supports-operators
         - include: at-supports-parens
+    - match: '((@)content)(?=\s*$)'
+      captures:
+        1: keyword.control.at-rule.content.sass
+        2: punctuation.definition.keyword.sass
 
   at-supports-operators:
     - match: '\b(?i:and|or|not)\b'

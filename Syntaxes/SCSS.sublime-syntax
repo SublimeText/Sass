@@ -632,6 +632,16 @@ contexts:
           pop: true
         - include: at-supports-operators
         - include: at-supports-parens
+    - match: '((@)content)'
+      captures:
+        1: keyword.control.at-rule.content.scss
+        2: punctuation.definition.keyword.scss
+      push:
+        - match: '(;)'
+          scope: punctuation.terminator.rule.scss
+          pop: true
+        - match: '(?=$)'
+          pop: true
 
   at-supports-operators:
     - match: '\b(?i:and|or|not)\b'

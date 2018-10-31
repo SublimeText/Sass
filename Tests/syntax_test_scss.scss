@@ -229,6 +229,10 @@
 //                               ^ punctuation.separator.key-value
 //                                 ^^^ constant.numeric
 //                                  ^^ keyword.other.unit
+    @content;
+//  ^^^^^^^^ keyword.control.at-rule.content
+//  ^ punctuation.definition.keyword
+
   border: {
     color: $color;
     width: $width;
