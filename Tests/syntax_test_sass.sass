@@ -232,7 +232,7 @@
 //                               ^ - string
 
 +firefox-message($foo)
-//               ^^^^ variable.parameter
+//               ^^^^ variable.other
 
 =large-text
 // ^^^^^^^^ entity.name.function.sass
@@ -241,6 +241,34 @@
     size: 20px
     weight: bold
   color: #ff0000
+
+=sexy-border($color, $width: 1in)
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.declaration
+//     ^^^^^ entity.name.function
+//           ^^^^^^^^^^^^^^^^^^^ meta.function.parameters
+//           ^^^^^^ variable.parameter
+//           ^ punctuation.definition.variable
+//                 ^ punctuation.separator
+//                         ^ punctuation.separator.key-value
+//                           ^^^ constant.numeric
+//                            ^^ keyword.other.unit
+
+  border: $color
+
+p
+  @include sexy-border($blue)
+//                     ^^^^ variable.other
+h1
+  @include sexy-border(blue, 2in)
+//                           ^^^ constant.numeric
+//                            ^^ keyword.other.unit
+
+
+@function grid-width($n)
+  @return $n * $grid-width + ($n - 1) * $gutter-width
+
+#sidebar
+  width: grid-width(5)
 
 /*
   Lists, Maps

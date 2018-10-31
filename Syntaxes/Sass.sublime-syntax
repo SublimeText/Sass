@@ -374,7 +374,7 @@ contexts:
         - meta_scope: meta.function.declaration.sass
         - match: '(?=$)'
           pop: true
-        - include: scss-mixin
+        - include: sass-mixin-def
     - match: (\+)([\w-]+)
       captures:
         0: variable.function.sass
@@ -383,7 +383,7 @@ contexts:
         - meta_scope: meta.function-call.sass
         - match: '(?=$)'
           pop: true
-        - include: scss-mixin
+        - include: sass-mixin-call
 
 
   at-rules:
@@ -448,7 +448,7 @@ contexts:
         - meta_scope: meta.function.declaration.sass
         - match: '(?=$)'
           pop: true
-        - include: scss-mixin
+        - include: sass-mixin-def
     - match: ((@)(include))\s+([\w-]+)
       captures:
         0: variable.function.sass
@@ -458,7 +458,7 @@ contexts:
         - meta_scope: meta.function-call.sass
         - match: '(?=$)'
           pop: true
-        - include: scss-mixin
+        - include: sass-mixin-call
     - match: (@)(return)\b
       scope: keyword.control.at-rule.return.sass
       captures:
@@ -771,7 +771,29 @@ contexts:
       captures:
         1: keyword.operator.sass
 
-  scss-mixin:
+
+
+  sass-mixin-def:
+    - match: '\('
+      scope: punctuation.definition.group.begin.scss
+      push:
+        - meta_scope: meta.function.parameters.scss
+        - match: '\)'
+          scope: punctuation.definition.group.end.scss
+          pop: true
+        - include: comma-delimiter
+        - match: '(\$)([a-zA-Z0-9_-][\w-]*)'
+          scope: variable.parameter.scss
+          captures:
+            1: punctuation.definition.variable.scss
+          push:
+            - match: '(?=[,\)])'
+              pop: true
+            - match: ':'
+              scope: punctuation.separator.key-value.css
+            - include: property-values
+
+  sass-mixin-call:
     - match: '\('
       scope: punctuation.definition.group.begin.sass
       push:
@@ -779,6 +801,8 @@ contexts:
         - include: scss-variables
         - include: scss-functions
         - include: scss-operators
+        - include: comma-delimiter
+        - include: property-values
         - include: literal-string
         - match: '{{ident}}'
           scope: string.unquoted.sass

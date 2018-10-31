@@ -427,16 +427,65 @@ contexts:
       scope: keyword.control.at-rule.scss
       captures:
         1: punctuation.definition.keyword.scss
-    - match: ((@)(mixin|function|include))\s+([\w-]+)
+    - match: ((@)(mixin|function))\s+([\w-]+)
       captures:
+        0: entity.name.function.scss
         1: keyword.control.at-rule.scss
         2: punctuation.definition.keyword.scss
-        4: entity.name.function.scss
       push:
-        - meta_scope: meta.at-rule.scss
+        - meta_scope: meta.function.declaration.scss
         - match: '\s*(?=[\{;])'
           pop: true
-        - include: scss-mixin
+        - match: '\('
+          scope: punctuation.definition.group.begin.scss
+          push:
+            - meta_scope: meta.function.parameters.scss
+            - match: '\)'
+              scope: punctuation.definition.group.end.scss
+              pop: true
+            - include: comma-delimiter
+            - match: '(\$)([a-zA-Z0-9_-][\w-]*)'
+              scope: variable.parameter.scss
+              captures:
+                1: punctuation.definition.variable.scss
+              push:
+                - match: '(?=[,\)])'
+                  pop: true
+                - match: ':'
+                  scope: punctuation.separator.key-value.css
+                - include: property-values
+            - match: '\{'
+              scope: punctuation.section.property-list.begin.scss
+              push:
+              - match: '\}'
+                scope: punctuation.section.property-list.end.scss
+                pop: true
+              - include: main
+    - match: ((@)(include))\s+([\w-]+)
+      captures:
+        0: variable.function.scss
+        1: keyword.control.at-rule.scss
+        2: punctuation.definition.keyword.scss
+      push:
+        - meta_scope: meta.function-call.scss
+        - match: '\s*(?=[\{;])'
+          pop: true
+        - match: '\('
+          scope: punctuation.definition.group.begin.scss
+          push:
+            - meta_scope: meta.function.parameters.scss
+            - include: scss-variables
+            - include: scss-functions
+            - include: scss-operators
+            - include: comma-delimiter
+            - include: property-values
+            - include: literal-string
+            - match: '{{ident}}'
+              scope: string.unquoted.scss
+            - include: selector
+            - match: '\)'
+              scope: punctuation.definition.group.end.scss
+              pop: true
     - match: (@)(return)\b
       scope: keyword.control.at-rule.return.scss
       captures:
@@ -741,30 +790,6 @@ contexts:
     - match: (?:\s*)\b(not|or|and|when|from|to|through|in)(?=\s)
       captures:
         1: keyword.operator.scss
-
-  scss-mixin:
-    - match: '\('
-      scope: punctuation.definition.group.begin.scss
-      push:
-        - meta_scope: meta.function.parameters.scss
-        - include: scss-variables
-        - include: scss-functions
-        - include: scss-operators
-        - include: literal-string
-        - match: '{{ident}}'
-          scope: string.unquoted.scss
-        - include: selector
-        - match: '\{'
-          scope: punctuation.section.property-list.begin.scss
-          push:
-          - match: '\}'
-            scope: punctuation.section.property-list.end.scss
-            pop: true
-          - include: main
-        - match: '\)'
-          scope: punctuation.definition.group.end.scss
-          pop: true
-
 
 
   property-value-constants:
