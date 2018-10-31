@@ -488,7 +488,7 @@ $gutter-width: 10px;
 //  ^^^^^^^^^^^^^^^^ meta.at-rule
 //  ^        punctuation.definition.keyword.css
 //   ^^^^^^^ keyword.control.at-rule
-
+//                  ^ punctuation.terminator.rule
     @import "x" print;
 //  ^^^^^^^^^^^^^^^^^ meta.at-rule
 //  ^                 punctuation.definition.keyword.css
