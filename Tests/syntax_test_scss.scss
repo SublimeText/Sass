@@ -232,11 +232,13 @@
     @content;
 //  ^^^^^^^^ keyword.control.at-rule.content
 //  ^ punctuation.definition.keyword
+//          ^ punctuation.terminator.rule
 
   border: {
     color: $color;
     width: $width;
     style: dashed;
+//               ^ punctuation.terminator.rule
   }
 }
 

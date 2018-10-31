@@ -468,6 +468,10 @@ contexts:
         2: punctuation.definition.keyword.scss
       push:
         - meta_scope: meta.function-call.scss
+        - match: '\s*(;)'
+          captures:
+            1: punctuation.terminator.rule.scss
+          pop: true
         - match: '\s*(?=[\{;])'
           pop: true
         - match: '\('
@@ -503,6 +507,10 @@ contexts:
         2: punctuation.definition.keyword.css
       push:
         - meta_scope: meta.at-rule.css
+        - match: '\s*(;)'
+          captures:
+            1: punctuation.terminator.rule.scss
+          pop: true
         - match: '\s*(?=[\{;])'
           pop: true
         - match: (url)(\()
