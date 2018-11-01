@@ -251,7 +251,9 @@ contexts:
     - match: '(?=\[)'
       push:
       - meta_scope: meta.selector.css
-      - match: '\s*(?=$)'
+      - match: \s*(?=$)
+        pop: true
+      - match: '(?=[)])'
         pop: true
       - match: '\['
         scope: punctuation.definition.entity.css
