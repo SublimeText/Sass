@@ -222,6 +222,8 @@ contexts:
         - meta_scope: meta.selector.css
         - match: '\s*(?=$)'
           pop: true
+        - match: '(?=\))'
+          pop: true
         - match: '(-+|_+)[a-zA-Z_][a-zA-Z0-9_-]*'
           scope: entity.other.attribute-name.id.css
         - include: scss-interpolation
@@ -235,6 +237,8 @@ contexts:
         - meta_scope: meta.selector.css
         - match: '\s*(?=$)'
           pop: true
+        - match: '(?=\))'
+          pop: true
         - include: scss-interpolation
         - include: pseudo-elements
         - include: pseudo-classes
@@ -245,6 +249,8 @@ contexts:
         - meta_scope: meta.selector.css
         - match: '\s*(?=$)'
           pop: true
+        - match: '(?=\))'
+          pop: true
         - include: pseudo-elements
         - include: pseudo-classes
         - include: selector
@@ -253,7 +259,7 @@ contexts:
       - meta_scope: meta.selector.css
       - match: \s*(?=$)
         pop: true
-      - match: '(?=[)])'
+      - match: '(?=\))'
         pop: true
       - match: '\['
         scope: punctuation.definition.entity.css
