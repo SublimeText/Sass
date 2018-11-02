@@ -4,7 +4,7 @@
 name: SCSS
 file_extensions:
   - scss
-scope: source.css.scss
+scope: source.scss
 
 variables:
   unicode: '\\\h{1,6}[ \t\n\f]?'

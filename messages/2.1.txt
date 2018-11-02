@@ -1,0 +1,8 @@
+Sass 2.1
+======================
+
+In 2.1 this package switches back to the source.scss scope.
+This should improve compatibility with other packages like
+the Vue syntax. In addition it paves the way for better
+integration of Sass functions and enable (in the future) CSS
+completions in the Sass syntax.
