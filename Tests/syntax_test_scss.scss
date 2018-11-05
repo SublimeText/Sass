@@ -128,6 +128,36 @@
 // line comment contains #{ function($variable) + "escap\e" + -.5em }
 // <- comment.line.double-slash.scss punctuation.definition.comment.css
 
+@import "imports/somefile.scss"; // this should be a comment
+//                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.double-slash
+//                               ^^ punctuation.definition.comment
+
+main {
+  -ms-text-size-adjust: 100%;
+}
+
+/*
+  Import Statements
+  http://sass-lang.com/documentation/file.SASS_REFERENCE.html#import
+*/
+@import "foo.css";
+@import "foo" screen;
+//            ^ support.constant.media
+@import "http://foo.com/bar";
+@import url(foo);
+@import "rounded-corners", "text-shadow";
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.import
+//                       ^ punctuation.definition.arbitrary-repetition
+//                                      ^ punctuation.terminator.rule
+@import "rounded-corners", // this is a line comment
+//                       ^ punctuation.definition.arbitrary-repetition
+//                         ^^ comment.line
+        "functions/filter";
+//      ^ meta.at-rule.import
+#main {
+  @import "example";
+}
+
 
 /*
   Strings, (un)quoted, operations and interpolation

@@ -552,7 +552,10 @@ contexts:
             1: punctuation.definition.group.begin.sass
             2: constant.other.sass
             3: punctuation.definition.group.end.sass
-        - include: at-rule-punctuation
+        - match: '(?=$)'
+          pop: true
+        - include: comment-block
+        - include: comment-line
         - include: literal-string
         - include: url-function
         - include: media-query

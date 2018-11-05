@@ -573,13 +573,17 @@ contexts:
         2: punctuation.definition.keyword.css
       push:
         - meta_scope: meta.at-rule.import.css
+        - match: ';'
+          scope: punctuation.terminator.rule.scss
+          pop: true
         - match: '(\()(reference|inline|less|css|once|multiple|optional)(\))'
           captures:
             0: meta.function.parameters.scss
             1: punctuation.definition.group.begin.scss
             2: constant.other.scss
             3: punctuation.definition.group.end.scss
-        - include: at-rule-punctuation
+        - include: comment-block
+        - include: comment-line
         - include: literal-string
         - include: url-function
         - include: media-query
@@ -645,7 +649,7 @@ contexts:
         1: keyword.control.at-rule.content.scss
         2: punctuation.definition.keyword.scss
       push:
-        - match: '(;)'
+        - match: ';'
           scope: punctuation.terminator.rule.scss
           pop: true
         - match: '(?=$)'
