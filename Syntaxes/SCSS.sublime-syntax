@@ -481,6 +481,8 @@ contexts:
           scope: punctuation.definition.group.begin.scss
           push:
             - meta_scope: meta.function.parameters.scss
+            - include: comment-block
+            - include: comment-line
             - include: scss-variables
             - include: scss-functions
             - include: scss-operators
