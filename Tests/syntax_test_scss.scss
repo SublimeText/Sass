@@ -168,6 +168,16 @@ selector-ish::before[data-type="text"]:not(:first-child),
 
 
 /*
+Support property values after a line break?
+*/
+.grid {
+  grid-template-areas:
+    "header header"
+    "aside main";
+}
+
+
+/*
   Comments
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#comments
   block comment contains #{ $variable }
@@ -341,7 +351,10 @@ h1 { @include sexy-border(blue, 2in); }
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#maps
 */
 $map: (
+//    ^ punctuation.definition.group.begin.scss
   $key-1: #000,
+//      ^ punctuation.separator
+//            ^ punctuation.separator
   key-2: (
     key-3: 123px
   )

@@ -389,8 +389,6 @@ contexts:
       pop: true
     - match: '(?=\))' # if passed as a parameter
       pop: true
-    # - match: '(?=;)' # if passed as a parameter default value
-    #   pop: true
     - include: comment-block
     - include: pseudo-elements
     - include: pseudo-classes
@@ -658,7 +656,7 @@ contexts:
     - include: property-value-constants
     - include: literal-string
     - include: unquoted-concatenated-string
-    # - include: scss-maps
+    - include: scss-maps
     - include: scss-variables
     - include: scss-functions
     - match: '\b([a-z_-]+)(?=\()' # custom functions?
@@ -1079,6 +1077,11 @@ contexts:
           captures:
             0: punctuation.definition.group.end.scss
           pop: true
+        - match: '(\$)([a-zA-Z0-9_-][\w-]*)\s*(:)'
+          captures:
+            0: variable.other.scss
+            1: punctuation.definition.variable.scss
+            3: punctuation.separator.key-value.css
         - match: '({{ident}})\s*(:)'
           captures:
             1: variable.parameter.scss
