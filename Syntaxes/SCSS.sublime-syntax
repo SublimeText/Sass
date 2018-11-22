@@ -635,7 +635,7 @@ contexts:
       scope: punctuation.separator.key-value.css
       push:
         - meta_content_scope: meta.property-value.css
-        - match: '(?=\s*([;})]))'
+        - match: '(?=\s*[;})])'
           pop: true
         - include: property-values
         - match: '(?={)'
