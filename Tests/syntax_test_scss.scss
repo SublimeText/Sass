@@ -1,5 +1,49 @@
 // SYNTAX TEST "Packages/Sass/Syntaxes/SCSS.sublime-syntax"
 
+
+/*
+Correctly differentiate between properties and selectors,
+especially with pseudo-stuff because of the :
+*/
+
+*,
+& + h1,
+&:active #unit h1 + div,
+&-element + h1,
+[data-type="text"],
+span::before[data-type="text"],
+selector-ish::before[data-type="text"]:not(:first-child),
+.selector:hover selector-ish.selector::before {
+  *,
+  & + h1,
+  &:active + h1,
+  &-element + h1,
+  [data-type="text"],
+  span::before[data-type="text"],
+  filter::before[data-type="text"],
+  selector-ish::before[data-type="text"]:not(:first-child),
+  #selec-tor:hover, selector-ish::before {
+    color: rgba(100, 120, 12, 95%);
+    background-color: blue;
+    line-height: 1rem;
+    span:hover {}
+    filter:not(.empty) {}
+    filter:drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
+    filter:blue;
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3))
+    [type="button"]::-moz-ring,
+    [type="button"]::-moz-focus-inner {
+
+    }
+  }
+  color: rgba(100, 120, 12, 95%);
+  background-color: blue;
+  testbackground-color: blue;
+}
+
+
+
+
 /*
   Nested selectors and &
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#nested_rules
@@ -46,6 +90,8 @@
   ::before, :hover,
   .redbox:hover {
     background-color: #ff0000;
+    background: url(data:@{image}/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7);
+//  ^ support.type.property-name.css
     color: #000000
 //         ^^^^^^^ meta.property-value.css constant.other.color.rgb-value.css
   }
@@ -452,6 +498,7 @@ $gutter-width: 10px;
   @extend .error !optional;
 //               ^^^^^^^^^ keyword.other.scss
   @extend %extreme;
+//        ^^^^^^^^ entity.other.attribute-name.placeholder.scss
 }
 /*
   For/Each/While etc
@@ -773,10 +820,6 @@ $gutter-width: 10px;
 //          ^^^^^^^^^^ support.type.custom-property.css
 //          ^^         punctuation.definition.custom-property
 //            ^^^^^^^^ support.type.custom-property.name.css
-
-.test-deprecated-var { var-deprecated- }
-//                     ^^^^^^^^^^^^^^^ invalid.deprecated.custom-property.css
-//                     ^^^^ keyword.other.custom-property.prefix.css
 
 .test-types {
     top: 20;
