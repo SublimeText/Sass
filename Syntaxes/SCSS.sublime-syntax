@@ -482,27 +482,42 @@ contexts:
 
 
   properties:
+    - include: comment-line
     - include: comment-block
     - match: '\b(font-family|font|family)\b(?=\s*:)'
       scope: meta.property-name.css support.type.property-name.css
       push:
+        - match: '(\s*)(;)'
+          pop: true
+          captures:
+            1: meta.property-value.css
+            2: punctuation.terminator.rule.css
+        - match: '(?=\s*[;})])'
+          pop: true
         - match: ':'
           scope: punctuation.separator.key-value.css
           push:
             - meta_content_scope: meta.property-value.css
-            - match: '\s*(;)|(?=[})])'
-              captures:
-                1: punctuation.terminator.rule.css
+            - match: '(?=\s*([;})]))'
               pop: true
-            - include: property-values
-            - match: '\b(weight|variant-position|variant-numeric|variant-ligatures|variant-east-asian|variant-caps|variant-alternates|variant|synthesis|style|stretch|smoothing|size-adjust|size|position|numeric|ligatures|language-override|kerning|feature-settings|family|east-asian|display|caps|alternates)\b'
-              scope: meta.property-name.css support.type.property-name.css
-              push:
-                - include: property-value-wrapper
+            - include: comment-line
+            - include: comment-block
+            - include: numeric-values
+            - include: property-value-constants
+            - include: literal-string
+            - include: unquoted-concatenated-string
+            - include: scss-maps
+            - include: scss-variables
+            - include: scss-functions
+            - include: custom-functions
             - match: '{{ident}}(\s+{{ident}})*\b(?!:)'
-              scope: region.greenish string.unquoted.css
-            - match: ','
-              scope: punctuation.separator.css
+              scope: string.unquoted.css
+            - include: scss-operators
+            - match: '\s*(,)\s*'
+              captures:
+                1: punctuation.separator.css
+            - match: '(?={)'
+              pop: true
         - match: ''
           pop: true
     - match: |-
@@ -614,29 +629,19 @@ contexts:
       captures:
         1: meta.property-value.css
         2: punctuation.terminator.rule.css
-    - match: '(?=\s*($|[;})]))'
+    - match: '(?=\s*[;})])'
       pop: true
-    - match: '(:)\s*({)'
-      captures:
-        1: punctuation.separator.key-value.css
-        2: punctuation.section.property-list.begin.css
-      push:
-        - meta_content_scope: meta.nested-properties.scss
-        - match: '\}'
-          scope: punctuation.section.property-list.end.css
-          pop: true
-        - include: comment-block
-        - include: comment-line
-        - include: properties
     - match: ':'
       scope: punctuation.separator.key-value.css
       push:
         - meta_content_scope: meta.property-value.css
-        - match: '(?=\s*($|[;})]))'
+        - match: '(?=\s*([;})]))'
           pop: true
         - include: property-values
-        - match: '{{ident}}' # e.g. animation-name
-          scope: string.unquoted.css
+        - match: '(?={)'
+          pop: true
+    - match: ''
+      pop: true
 
   property-values:
     - match: \!\s*important
@@ -659,27 +664,13 @@ contexts:
     - include: scss-maps
     - include: scss-variables
     - include: scss-functions
-    - match: '\b([a-z_-]+)(?=\()' # custom functions?
-      scope: support.function.custom.scss
-      push:
-        - meta_scope: meta.function-call.css
-        - include: function-notation-terminator
-        - match: '\('
-          scope: punctuation.definition.group.begin.css
-          push:
-          - meta_scope: meta.group.css
-          - match: '(?=\))'
-            pop: true
-          - include: comma-delimiter
-          - include: property-values
-          - include: scss-variables
-          - include: scss-functions
-    # - match: '{{ident}}' # e.g. animation-name
-    #   scope: string.unquoted.css
+    - include: custom-functions
     - include: scss-operators
     - match: '\s*(,)\s*'
       captures:
         1: punctuation.separator.css
+    - match: '{{ident}}' # e.g. animation-name
+      scope: string.unquoted.css
 
   at-rules:
     - match: '(@)(each)\b'
@@ -1000,9 +991,9 @@ contexts:
       scope: keyword.keyframe-selector.css
 
   at-rule-punctuation:
-    - match: \;
+    - match: ';'
       scope: punctuation.terminator.rule.css
-    - match: (?=;|$)
+    - match: '(?=;|$)'
       pop: true
 
   media-query:
@@ -1053,6 +1044,22 @@ contexts:
         - include: numeric-values
 
 
+  custom-functions:
+    - match: '\b([a-z_-]+)(?=\()'
+      scope: support.function.custom.scss
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: comma-delimiter
+          - include: property-values
+          - include: scss-variables
+          - include: scss-functions
 
   sass-script-expression:
     - include: comment-block
