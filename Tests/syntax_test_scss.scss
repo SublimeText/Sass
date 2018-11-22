@@ -159,8 +159,9 @@ selector-ish::before[data-type="text"]:not(:first-child),
   font: 20px/24px fantasy {
 //                ^ meta.property-value.css support.constant.font-name.css
 //  ^ meta.property-name.css support.type.property-name.css
-    weight: bold;
+    weight : bold;
 //  ^ meta.property-name.css support.type.property-name.css
+//            ^ support.constant.property-value.css
     width: calc((100px - 20px) / 2);
 //  ^ meta.property-name.css support.type.property-name.css
 //              ^ punctuation.definition.group - string
