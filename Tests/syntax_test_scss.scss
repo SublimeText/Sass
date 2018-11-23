@@ -377,6 +377,10 @@ $map: (
 //             ^^^^^^^^^ variable
     %icon-#{$icon}--primary {
 //                ^^^^^^^^^ meta.selector
+        background-image: svg('icon__#{$icon}-16', '[fill]: #{theme-color("primary")}');
+//                                                                 ^ - keyword.operator
+    }
+}
 .selector {
   color: nth(map-merge($map, $map2), 3);
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css meta.function-call.scss

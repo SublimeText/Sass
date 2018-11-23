@@ -1135,9 +1135,11 @@ contexts:
         - match: '(})'
           scope: punctuation.definition.group.end.scss
           pop: true
-        - include: numeric-values
+        - include: custom-functions
+        - include: scss-functions
         - include: scss-variables
         - include: scss-operators
+        - include: numeric-values
 
   scss-operators:
     - match: /|$|%|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|%=|\+=|\-=|&=|\bnot\b|\bor\b|\band\b|\bwhen\b
