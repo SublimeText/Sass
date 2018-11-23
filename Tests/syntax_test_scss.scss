@@ -371,6 +371,10 @@ $map: (
     cursor: $cursor;
   }
 }
+@each $icon in $icons-16 {
+//    ^^^^^ variable
+//          ^^ keyword.control
+//             ^^^^^^^^^ variable
 .selector {
   color: nth(map-merge($map, $map2), 3);
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css meta.function-call.scss

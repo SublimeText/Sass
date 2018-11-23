@@ -692,6 +692,7 @@ contexts:
             - include: comment-block
             - include: comment-line
             - include: comma-delimiter
+            - include: scss-variables
             - include: scss-maps
             - include: unquoted-string
     - match: '(@)(for|while)\b'
