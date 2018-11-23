@@ -362,7 +362,9 @@ $map: (
 //      ^ punctuation.separator
 //            ^ punctuation.separator
   key-2: (
-    key-3: 123px
+    key-3: 123px,
+    large: em(12px)
+//         ^^^^^^^^ meta.function-call
   )
 );
 @each $animal, $color, $cursor in (puma, black, default),

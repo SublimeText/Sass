@@ -1097,10 +1097,6 @@ contexts:
           captures:
             1: variable.parameter.scss
             2: punctuation.separator.key-value.css
-        - match: '{{ident}}'
-          scope: string.unquoted.scss
-        - include: comment-line
-        - include: comma-delimiter
         - include: property-values
 
   scss-variables:
