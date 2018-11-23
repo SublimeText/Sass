@@ -492,6 +492,8 @@ $gutter-width: 10px;
 //    ^ keyword.operator.scss
 //      ^ constant.numeric.css
 //             ^ punctuation.section.property-list.begin.css
+@if $scope == ie9 { border: 1px solid; }
+//              ^ - constant.numeric
 @mixin adjust-location($x, $y) {
   @if unitless($x) {
 //    ^^^^^^^^^^^^ meta.function-call.scss

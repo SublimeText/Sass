@@ -15,7 +15,7 @@ variables:
   ident: '(?:--{{nmchar}}+|-?{{nmstart}}{{nmchar}}*)'
 
   integer: '(?:[-+]?\d+)'
-  number: '[-+]?(?:(?:\d*\.\d+(?:[eE]{{integer}})*)|{{integer}})'
+  number: '[-+]?(?:(?:\d*\.\d+(?:[eE]{{integer}})*)|\b{{integer}})'
 
   font_relative_lengths: '(?i:em|ex|ch|rem)'
   viewport_percentage_lengths: '(?i:vw|vh|vmin|vmax)'
