@@ -2373,7 +2373,7 @@ contexts:
     # unquoted string +
     # + unquoted string
     # unquoted string + unquoted string
-    - match: '([a-zA-Z_-]+)\s+(\+)\s+([a-zA-Z_-]+)|(\+)\s+([a-zA-Z_-]+)|([a-zA-Z_-]+)\s+(\+)'
+    - match: '([a-zA-Z_-]+)\s+(\+)\s+([a-zA-Z_-]+(?=\s|$|;))|(\+)\s+([a-zA-Z_-]+(?=\s|$|;))|([a-zA-Z_-]+)\s+(\+)'
       captures:
         1: string.unquoted.css
         2: keyword.operator.scss

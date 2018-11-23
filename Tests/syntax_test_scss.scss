@@ -33,6 +33,10 @@ selector-ish::before[data-type="text"]:not(:first-child),
     [type="button"]::-moz-ring,
     [type="button"]::-moz-focus-inner {
       grid-template-columns: minmax(auto, max-content);
+      width: fit-content;
+      color: color(darker);
+      font-size: font-size(tiny);
+      padding-top: rem(14px) * $some-var + rem(1px);
       filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3))
     }
   }
