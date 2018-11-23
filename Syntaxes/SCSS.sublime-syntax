@@ -236,6 +236,8 @@ contexts:
         1: punctuation.definition.entity.scss
       push:
         - meta_scope: meta.selector.css
+        - match: '{{ident}}'
+          scope: entity.other.attribute-name.placeholder.css
         - include: scss-interpolation
         - include: selector-parts
     # attributes
