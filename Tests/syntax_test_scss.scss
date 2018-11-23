@@ -30,10 +30,10 @@ selector-ish::before[data-type="text"]:not(:first-child),
     filter:not(.empty) {}
     filter:drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
     filter:blue;
-    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3))
     [type="button"]::-moz-ring,
     [type="button"]::-moz-focus-inner {
-
+      grid-template-columns: minmax(auto, max-content);
+      filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3))
     }
   }
   color: rgba(100, 120, 12, 95%);
