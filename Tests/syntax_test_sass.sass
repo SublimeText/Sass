@@ -94,6 +94,14 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
 // ^^^^^^^^ meta.selector.css
 
 
+@media(max-width: $break-parent)
+// <- meta.at-rule.media.css keyword.control.at-rule.media.css punctuation.definition.keyword.css
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.media.css
+//    ^ punctuation.definition.group.begin.css
+//     ^ support.type.property-name.media.css
+//              ^ punctuation.separator.key-value.css
+  will-change: transform, scroll-position
+//             ^ support.constant.property-value
 /*
   Nested properties
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#nested_properties
