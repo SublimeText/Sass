@@ -646,14 +646,14 @@ $gutter-width: 10px;
 //         ^^^^        keyword.operator.logic.media.css
 //              ^^^^^^ support.constant.media.css
 
-    @media (min-width: 700px) {}
-//  ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.media.css
+    @media(min-width: 700px) {}
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.media.css
 //  ^                  punctuation.definition.keyword.css
 //   ^^^^^             keyword.control.at-rule.media.css
-//         ^ punctuation.definition.group.begin.css
-//          ^^^^^^^^^ support.type.property-name.media.css
-//                     ^^^^^ constant.numeric.css
-//                          ^ punctuation.definition.group.end.css
+//        ^ punctuation.definition.group.begin.css
+//         ^^^^^^^^^ support.type.property-name.media.css
+//                    ^^^^^ constant.numeric.css
+//                         ^ punctuation.definition.group.end.css
 
     @media (min-width: 700px) and (max-width: 2000px) {}
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.media.css

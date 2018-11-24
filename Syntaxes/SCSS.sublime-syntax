@@ -924,7 +924,7 @@ contexts:
         - match: '\s*(?:(,)|(?=[{;]))'
           captures:
             1: punctuation.definition.arbitrary-repetition.css
-    - match: '\s*((@)media)(?=\s+.*?)'
+    - match: '\s*((@)media)\b'
       captures:
         1: keyword.control.at-rule.media.css
         2: punctuation.definition.keyword.css
