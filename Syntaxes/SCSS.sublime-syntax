@@ -159,6 +159,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: selectors
+          - include: custom-element-selectors
         - match: '\)'
           scope: meta.group.css punctuation.definition.group.end.css
         - include: selector-parts
@@ -325,6 +326,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: selectors
+          - include: custom-element-selectors
         - match: '\)'
           scope: meta.group.css punctuation.definition.group.end.css
         - include: selector-parts
@@ -439,6 +441,7 @@ contexts:
           - match: ','
             scope: punctuation.separator.css
           - include: selectors
+          - include: custom-element-selectors
 
     - match: '(:)(drop)(?=\()'
       scope: entity.other.pseudo-class.css
@@ -741,6 +744,7 @@ contexts:
         - match: \!\s*(default|global|optional)
           scope: keyword.other.scss
         - include: selectors
+        - include: custom-element-selectors
 
     - match: '((@)(mixin|function))\s+([\w-]+)'
       captures:
@@ -804,6 +808,7 @@ contexts:
             - match: '{{ident}}'
               scope: string.unquoted.scss
             - include: selectors
+            - include: custom-element-selectors
             - match: '\)'
               scope: punctuation.definition.group.end.scss
               pop: true
