@@ -4,5 +4,5 @@ to-upper-case(${1:string})
 ]]></content>
 <tabTrigger>to-upper-case</tabTrigger>
 <description>sass string</description>
-<scope>source.css.scss, source.sass</scope>
+<scope>source.scss, source.sass</scope>
 </snippet>

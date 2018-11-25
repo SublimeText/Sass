@@ -4,5 +4,5 @@ selector-nest(${1:selectors…})
 ]]></content>
 <tabTrigger>selector-nest</tabTrigger>
 <description>sass selector</description>
-<scope>source.css.scss, source.sass</scope>
+<scope>source.scss, source.sass</scope>
 </snippet>

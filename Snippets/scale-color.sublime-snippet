@@ -4,5 +4,5 @@ scale-color(${1:color}, ${2:component})
 ]]></content>
 <tabTrigger>scale-color</tabTrigger>
 <description>sass color</description>
-<scope>source.css.scss, source.sass</scope>
+<scope>source.scss, source.sass</scope>
 </snippet>

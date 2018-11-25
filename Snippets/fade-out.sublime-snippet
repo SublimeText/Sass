@@ -4,5 +4,5 @@ fade-out(${1:color}, ${1:amount})
 ]]></content>
 <tabTrigger>fade-out</tabTrigger>
 <description>sass color</description>
-<scope>source.css.scss, source.sass</scope>
+<scope>source.scss, source.sass</scope>
 </snippet>

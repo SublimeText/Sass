@@ -4,5 +4,5 @@ mix(${1:color}1, ${2:color}2, ${3:weight})
 ]]></content>
 <tabTrigger>mix</tabTrigger>
 <description>sass color</description>
-<scope>source.css.scss, source.sass</scope>
+<scope>source.scss, source.sass</scope>
 </snippet>

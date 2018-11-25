@@ -4,5 +4,5 @@ adjust-hue(${1:color}, ${2:degrees})
 ]]></content>
 <tabTrigger>adjust-hue</tabTrigger>
 <description>sass color</description>
-<scope>source.css.scss, source.sass</scope>
+<scope>source.scss, source.sass</scope>
 </snippet>

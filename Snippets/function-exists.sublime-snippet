@@ -4,5 +4,5 @@ function-exists(${1:name})
 ]]></content>
 <tabTrigger>function-exists</tabTrigger>
 <description>sass function</description>
-<scope>source.css.scss, source.sass</scope>
+<scope>source.scss, source.sass</scope>
 </snippet>

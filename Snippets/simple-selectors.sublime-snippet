@@ -4,5 +4,5 @@ simple-selectors(${1:selector})
 ]]></content>
 <tabTrigger>simple-selectors</tabTrigger>
 <description>sass selector</description>
-<scope>source.css.scss, source.sass</scope>
+<scope>source.scss, source.sass</scope>
 </snippet>

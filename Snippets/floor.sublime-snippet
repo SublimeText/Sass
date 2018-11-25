@@ -4,5 +4,5 @@ floor(${1:number})
 ]]></content>
 <tabTrigger>floor</tabTrigger>
 <description>sass number</description>
-<scope>source.css.scss, source.sass</scope>
+<scope>source.scss, source.sass</scope>
 </snippet>

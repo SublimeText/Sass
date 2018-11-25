@@ -4,5 +4,5 @@ append(${1:list}, ${2:val}, ${3:separator})
 ]]></content>
 <tabTrigger>append</tabTrigger>
 <description>sass list</description>
-<scope>source.css.scss, source.sass</scope>
+<scope>source.scss, source.sass</scope>
 </snippet>

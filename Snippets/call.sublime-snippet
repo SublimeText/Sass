@@ -4,5 +4,5 @@ call(${1:function}, ${2:args}…)
 ]]></content>
 <tabTrigger>call</tabTrigger>
 <description>sass function</description>
-<scope>source.css.scss, source.sass</scope>
+<scope>source.scss, source.sass</scope>
 </snippet>

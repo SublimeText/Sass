@@ -4,5 +4,5 @@ variable-exists(${1:name})
 ]]></content>
 <tabTrigger>variable-exists</tabTrigger>
 <description>sass function</description>
-<scope>source.css.scss, source.sass</scope>
+<scope>source.scss, source.sass</scope>
 </snippet>

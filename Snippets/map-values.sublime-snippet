@@ -4,5 +4,5 @@ map-values(${1:map})
 ]]></content>
 <tabTrigger>map-values</tabTrigger>
 <description>sass map</description>
-<scope>source.css.scss, source.sass</scope>
+<scope>source.scss, source.sass</scope>
 </snippet>

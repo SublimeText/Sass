@@ -4,5 +4,5 @@ invert(${1:color}, ${2:weight})
 ]]></content>
 <tabTrigger>invert</tabTrigger>
 <description>sass color</description>
-<scope>source.css.scss, source.sass</scope>
+<scope>source.scss, source.sass</scope>
 </snippet>

@@ -4,5 +4,5 @@ map-has-key(${1:map}, ${2:key})
 ]]></content>
 <tabTrigger>map-has-key</tabTrigger>
 <description>sass map</description>
-<scope>source.css.scss, source.sass</scope>
+<scope>source.scss, source.sass</scope>
 </snippet>

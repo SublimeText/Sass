@@ -4,5 +4,5 @@ keywords(${1:args})
 ]]></content>
 <tabTrigger>keywords</tabTrigger>
 <description>sass map</description>
-<scope>source.css.scss, source.sass</scope>
+<scope>source.scss, source.sass</scope>
 </snippet>
