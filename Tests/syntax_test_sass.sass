@@ -174,16 +174,16 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
 
 */
 
-@mixin firefox-message($selector)
+@mixin firefox-message($selector: false)
 // <- punctuation.definition.keyword.sass
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.declaration.sass
 // ^ keyword.control.at-rule.sass
 //     ^^^^^^^^^^^^^^^ entity.name.function.sass
 //                    ^ meta.function.parameters.sass punctuation.definition.group.begin.sass
-//                              ^ meta.function.parameters.sass punctuation.definition.group.end.sass
 //                     ^^ meta.function.parameters.sass variable.parameter.sass
 //                     ^ punctuation.definition.variable.sass
-
+//                                 ^ constant.language
+//                                     ^ meta.function.parameters.sass punctuation.definition.group.end.sass
   body.firefox #{$selector}:before
 //             ^^^^^^^^^^^^ meta.group.interpolation.sass
 //             ^ punctuation.definition.variable.sass
@@ -351,6 +351,7 @@ $map: (
 +cm('png icons')
 +ic
 @if (global-variable-exists(spritesheet-sprites))
+//                                     ^ - keyword.operator
   @each $sprite in $spritesheet-sprites
     .ic--#{nth($sprite, 10)}
       &:before
@@ -358,6 +359,17 @@ $map: (
 .svg--like
   fill: transparent
 
+
+@if 1 + 1 == 2
+//^ keyword.control.flow.conditional.sass
+//  ^ meta.at-rule constant.numeric.css
+//    ^ keyword.operator.sass
+//      ^ constant.numeric.css
+  border: 1px solid
+@if $scope == ie9
+//              ^ - constant.numeric
+@if null
+//     ^ constant.language
 
 
 /*

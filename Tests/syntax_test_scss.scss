@@ -324,16 +324,18 @@ Support property values after a line break?
   http://sass-lang.com/documentation/file.SASS_REFERENCE.html#mixin-arguments
 */
 
-@mixin sexy-border($color, $width: 1in) {
+@mixin sexy-border($color: false, $width: 1in) {
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.declaration
 //     ^^^^^^^^^^^ entity.name.function
 //                 ^^^^^^^^^^^^^^^^^^^ meta.function.parameters
 //                 ^^^^^^ variable.parameter
 //                 ^ punctuation.definition.variable
 //                       ^ punctuation.separator
-//                               ^ punctuation.separator.key-value
-//                                 ^^^ constant.numeric
-//                                  ^^ keyword.other.unit
+//                         ^ constant.language
+//                              ^ punctuation.separator
+//                                      ^ punctuation.separator.key-value
+//                                        ^^^ constant.numeric
+//                                         ^^ keyword.other.unit
     @content;
 //  ^^^^^^^^ keyword.control.at-rule.content
 //  ^ punctuation.definition.keyword
@@ -500,6 +502,8 @@ $gutter-width: 10px;
 //             ^ punctuation.section.property-list.begin.css
 @if $scope == ie9 { border: 1px solid; }
 //              ^ - constant.numeric
+@if null       { border: 3px double; }
+//  ^ constant.language
 @mixin adjust-location($x, $y) {
   @if unitless($x) {
 //    ^^^^^^^^^^^^ meta.function-call.scss

@@ -771,6 +771,8 @@ contexts:
                   pop: true
                 - match: ':'
                   scope: punctuation.separator.key-value.css
+                - match: '\b(false|true|null)\b'
+                  scope: constant.language.sass
                 - include: property-values
     - match: '((@)(include))\s+([\w-]+)'
       captures:
@@ -1059,6 +1061,8 @@ contexts:
     - include: scss-functions
     - include: scss-operators
     - include: scss-interpolation
+    - match: '\b(false|true|null)\b'
+      scope: constant.language.sass
     - include: literal-string
     - include: unquoted-string
 

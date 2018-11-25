@@ -772,6 +772,8 @@ contexts:
                   pop: true
                 - match: ':'
                   scope: punctuation.separator.key-value.css
+                - match: '\b(false|true|null)\b'
+                  scope: constant.language.scss
                 - include: property-values
             - match: '\{'
               scope: punctuation.section.property-list.begin.scss
@@ -1080,6 +1082,8 @@ contexts:
     - include: scss-functions
     - include: scss-operators
     - include: scss-interpolation
+    - match: '\b(false|true|null)\b'
+      scope: constant.language.scss
     - include: literal-string
     - include: unquoted-string
 
