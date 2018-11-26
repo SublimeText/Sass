@@ -747,9 +747,9 @@ contexts:
 
     - match: '((@)(mixin|function))\s+([\w-]+)'
       captures:
-        0: entity.name.function.sass
         1: keyword.control.at-rule.sass
         2: punctuation.definition.keyword.sass
+        4: entity.name.function.sass
       push:
         - meta_scope: meta.function.declaration.sass
         - match: '\s*(?=$)'
@@ -788,7 +788,7 @@ contexts:
         - match: '\('
           scope: punctuation.definition.group.begin.sass
           push:
-            - meta_scope: meta.function.parameters.sass
+            - meta_scope: meta.function-call.arguments.sass
             - include: comment-block
             - include: comment-line
             - include: scss-variables
@@ -886,7 +886,7 @@ contexts:
           pop: true
         - match: '(\()(reference|inline|less|css|once|multiple|optional)(\))'
           captures:
-            0: meta.function.parameters.sass
+            0: meta.at-rule.arguments.sass
             1: punctuation.definition.group.begin.sass
             2: constant.other.sass
             3: punctuation.definition.group.end.sass
@@ -1071,7 +1071,7 @@ contexts:
       captures:
         0: punctuation.definition.group.begin.sass
       push:
-        - meta_scope: meta.group.css meta.function.parameters.css
+        - meta_scope: meta.group.css meta.map.arguments.css
         - match: '\)'
           captures:
             0: punctuation.definition.group.end.sass
@@ -1101,7 +1101,7 @@ contexts:
         2: meta.group.sass punctuation.definition.group.begin.sass
       push:
         - meta_scope: meta.function-call.sass
-        - meta_content_scope: meta.group.sass meta.function.parameters.sass
+        - meta_content_scope: meta.group.sass meta.function-call.arguments.sass
         - match: '\)'
           scope: meta.group.sass punctuation.definition.group.end.sass
           pop: true
@@ -1156,7 +1156,7 @@ contexts:
     - match: '\('
       scope: punctuation.definition.group.begin.sass
       push:
-        - meta_scope: meta.function.parameters.sass
+        - meta_scope: meta.function-call.arguments.sass
         - include: scss-variables
         - include: scss-functions
         - include: scss-operators

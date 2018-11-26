@@ -2,15 +2,13 @@
 <plist version="1.0">
 <dict>
 	<key>name</key>
-	<string>Symbol List: Selector</string>
+	<string>Symbol List</string>
 	<key>scope</key>
-	<string>source.css meta.selector</string>
+	<string>source.sass meta.selector, source.scss meta.selector</string>
 	<key>settings</key>
 	<dict>
 		<key>showInSymbolList</key>
-		<integer>1</integer>
-		<key>symbolTransformation</key>
-		<string>s/^\s*/CSS: /; s/\s+/ /g</string>
+		<integer>0</integer>
 	</dict>
 </dict>
 </plist>

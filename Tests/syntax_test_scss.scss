@@ -306,7 +306,7 @@ Support property values after a line break?
 }
 
 @include firefox-message(".header" + test);
-//                       ^^^^^^^^^ meta.function.parameters.scss string.quoted.double.css
+//                       ^^^^^^^^^ meta.function-call.arguments.scss string.quoted.double.css
 //                                 ^ keyword.operator.scss
 //                                   ^ string.unquoted
 //                                       ^ - string
@@ -352,7 +352,7 @@ Support property values after a line break?
 p { @include sexy-border(blue); }
 h1 { @include sexy-border(blue, 2in); }
 //   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call
-//                       ^^^^^^^^^^^ meta.function.parameters
+//                       ^^^^^^^^^^^ meta.function-call.arguments
 //                              ^^^ constant.numeric
 //                               ^^ keyword.other.unit
 //                                  ^ punctuation.terminator.rule
@@ -398,7 +398,7 @@ $map: (
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css meta.function-call.scss
 //       ^^^ support.function.scss
 //          ^ punctuation.definition.group.begin.scss
-//           ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.parameters.scss
+//           ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.scss
 //           ^^^^^^^^^ support.function.scss
 //                    ^ punctuation.definition.group.begin.scss
 //                         ^ punctuation.separator.css
@@ -508,7 +508,7 @@ $gutter-width: 10px;
   @if unitless($x) {
 //    ^^^^^^^^^^^^ meta.function-call.scss
 //    ^^^^^^^^ support.function.scss
-//              ^ meta.group.scss meta.function.parameters.scss variable.other.scss
+//              ^ meta.group.scss meta.function-call.arguments.scss variable.other.scss
     @debug 10em + 12em;
 //         ^^^^ constant.numeric.css
 //           ^ meta.at-rule keyword.other.unit.css

@@ -748,9 +748,9 @@ contexts:
 
     - match: '((@)(mixin|function))\s+([\w-]+)'
       captures:
-        0: entity.name.function.scss
         1: keyword.control.at-rule.scss
         2: punctuation.definition.keyword.scss
+        4: entity.name.function.scss
       push:
         - meta_scope: meta.function.declaration.scss
         - match: '\s*(?=[\{;])'
@@ -798,7 +798,7 @@ contexts:
         - match: '\('
           scope: punctuation.definition.group.begin.scss
           push:
-            - meta_scope: meta.function.parameters.scss
+            - meta_scope: meta.function-call.arguments.scss
             - include: comment-block
             - include: comment-line
             - include: scss-variables
@@ -902,7 +902,7 @@ contexts:
           pop: true
         - match: '(\()(reference|inline|less|css|once|multiple|optional)(\))'
           captures:
-            0: meta.function.parameters.scss
+            0: meta.at-rule.arguments.scss
             1: punctuation.definition.group.begin.scss
             2: constant.other.scss
             3: punctuation.definition.group.end.scss
@@ -1092,7 +1092,7 @@ contexts:
       captures:
         0: punctuation.definition.group.begin.scss
       push:
-        - meta_scope: meta.group.css meta.function.parameters.css
+        - meta_scope: meta.group.css meta.map.arguments.css
         - match: '\)'
           captures:
             0: punctuation.definition.group.end.scss
@@ -1122,7 +1122,7 @@ contexts:
         2: meta.group.scss punctuation.definition.group.begin.scss
       push:
         - meta_scope: meta.function-call.scss
-        - meta_content_scope: meta.group.scss meta.function.parameters.scss
+        - meta_content_scope: meta.group.scss meta.function-call.arguments.scss
         - match: '\)'
           scope: meta.group.scss punctuation.definition.group.end.scss
           pop: true
