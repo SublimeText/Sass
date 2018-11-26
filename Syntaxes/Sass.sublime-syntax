@@ -819,8 +819,6 @@ contexts:
         - meta_scope: meta.function-call.sass
         - match: '\s*(?=$)'
           pop: true
-        - match: '\s*(?=[\{])'
-          pop: true
         - match: '\('
           scope: punctuation.definition.group.begin.sass
           push:
@@ -856,8 +854,6 @@ contexts:
       push:
         - meta_scope: meta.at-rule.css
         - match: '\s*(?=$)'
-          pop: true
-        - match: '\s*(?=[\{])'
           pop: true
         - match: '(url)(\()'
           captures:
@@ -903,7 +899,7 @@ contexts:
         2: punctuation.definition.keyword.css
       push:
         - meta_scope: meta.at-rule.document.css
-        - match: '(?=[\{])'
+        - match: '(?=$)'
           pop: true
         - include: comment-block
         - include: comment-line
