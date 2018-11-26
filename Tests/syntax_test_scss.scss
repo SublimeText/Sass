@@ -782,7 +782,8 @@ $gutter-width: 10px;
 //                 ^        punctuation.definition.arbitrary-repetition.css
 //                   ^^^^^^ entity.other.animation-name.css
 
-@keyframes test-keyframes-keywords {
+@keyframes #{$animation + '-' + $direction} {
+//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.interpolation
     from, to {}
 //  ^^^^     keyword.keyframe-selector.css
 //        ^^ keyword.keyframe-selector.css

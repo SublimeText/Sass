@@ -954,6 +954,7 @@ contexts:
         - match: '\s*(?=[\{;])'
           pop: true
         - include: comment-block
+        - include: sass-interpolation
         - match: '\s*({{ident}})?'
           captures:
             1: entity.other.animation-name.css

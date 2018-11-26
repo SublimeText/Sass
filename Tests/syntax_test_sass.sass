@@ -278,6 +278,19 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
 //                   ^^^^^^^^^^^^^^^^^^^ support.constant.property-value.css
 
 
+@keyframes beat, bounce
+//  ^^^^^^^^^^^^^^^^^^^ meta.at-rule.keyframe.css
+// <-                       punctuation.definition.keyword.css
+//   ^^^^^              keyword.control.at-rule.keyframe.css
+//         ^^^^         entity.other.animation-name.css
+//             ^        punctuation.definition.arbitrary-repetition.css
+//               ^^^^^^ entity.other.animation-name.css
+
+@keyframes #{$animation + '-' + $direction}
+//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.interpolation
+    from,
+    to
+
 
 @include firefox-message(".header" + test)
 //                       ^^^^^^^^^ meta.function-call.sass meta.function-call.arguments.sass string.quoted.double.css
