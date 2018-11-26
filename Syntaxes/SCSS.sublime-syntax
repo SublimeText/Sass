@@ -1776,14 +1776,14 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: comma-delimiter
-          - include: sass-variables
-          - include: sass-functions
           - match: '(--)({{nmchar}}+)'
             captures:
               0: meta.property-name.css support.type.custom-property.css
               1: punctuation.definition.custom-property.css
               2: support.type.custom-property.name.css
+          - include: comma-delimiter
+          - include: property-values
+          - include: sass-script-expression
 
   filter-functions:
     - match: '\b(blur)(?=\()'
