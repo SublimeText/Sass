@@ -91,6 +91,24 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
 //^^^^^^^^ meta.selector.css
 //^ keyword.operator.ampersand.sass
 // ^ entity.other.pseudo-class.css punctuation.definition.entity.css
+  main
+    input:-webkit-autofill,
+//  ^^^^^ entity.name.tag
+//        ^^^^^^^^^^^^^^^^ meta.selector.css entity.other.pseudo-class.css
+//        ^^^^^^^^ support.type.vendor-prefix.css
+//       ^ punctuation.definition.entity.css
+    custom-input:-webkit-autofill:hover {}
+//  ^^^^^^^^^^^^ entity.name.tag
+//               ^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css entity.other.pseudo-class.css
+//               ^^^^^^^^ support.type.vendor-prefix.css
+//              ^ punctuation.definition.entity.css
+//                               ^ punctuation.definition.entity.css
+
+    -ms-text-size-adjust: 100%;
+//  ^^^^^^^^^^^^^^^^^^^^ meta.property-name.css
+//  ^^^^ support.type.vendor-prefix.css
+
+  span:hover { }
 
   body.firefox ~ & font-weight: normal
 //^^^^^^^^^^^^^^^^^ meta.selector
