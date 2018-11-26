@@ -1052,6 +1052,7 @@ contexts:
           - include: scss-functions
 
   sass-script-expression:
+    - include: comment-line
     - include: comment-block
     - include: comma-delimiter
     - include: scss-maps
