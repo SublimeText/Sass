@@ -1150,11 +1150,7 @@ contexts:
         - match: '(})'
           scope: punctuation.definition.group.end.scss
           pop: true
-        - include: sass-custom-functions
-        - include: sass-functions
-        - include: sass-variables
-        - include: sass-operators
-        - include: numeric-values
+        - include: sass-script-expression
 
   sass-operators:
     - match: /|$|%|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|%=|\+=|\-=|&=|\bnot\b|\bor\b|\band\b|\bwhen\b

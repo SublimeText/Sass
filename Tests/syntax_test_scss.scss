@@ -298,6 +298,11 @@ Support property values after a line break?
 //                      ^ keyword.operator.scss
 //                        ^ constant.numeric.css
 //                          ^ punctuation.definition.group.end.scss
+    transform: #{translate + $axis + '(' + $span * $aim + ')'};
+//                           ^^^^^ variable.other
+//                           ^ punctuation.definition.variable
+//                                 ^ keyword.operator
+//                                   ^^^ string.quoted.single
     content: "I ate #{$value} pies!";
 //                    ^^^^^^ variable.other.scss
 //                    ^ punctuation.definition.variable.scss
