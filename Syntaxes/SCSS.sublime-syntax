@@ -218,7 +218,7 @@ contexts:
         - meta_scope: meta.selector.css
         - match: '{{ident}}'
           scope: entity.other.attribute-name.class.css
-        - include: scss-interpolation
+        - include: sass-interpolation
         - include: selector-parts
     # id's
     - match: '(\#)(?={{ident}}|#)'
@@ -228,7 +228,7 @@ contexts:
         - meta_scope: meta.selector.css
         - match: '{{ident}}'
           scope: entity.other.attribute-name.id.css
-        - include: scss-interpolation
+        - include: sass-interpolation
         - include: selector-parts
     # extend-only selectors
     - match: '(%){{ident}}*'
@@ -239,7 +239,7 @@ contexts:
         - meta_scope: meta.selector.css
         - match: '{{ident}}'
           scope: entity.other.attribute-name.placeholder.css
-        - include: scss-interpolation
+        - include: sass-interpolation
         - include: selector-parts
     # attributes
     - match: '(?=\[)'
@@ -270,7 +270,7 @@ contexts:
         - include: selector-parts
     - include: pseudo-elements
     - include: pseudo-classes
-    - include: scss-interpolation
+    - include: sass-interpolation
 
 
   custom-element-selectors:
@@ -511,13 +511,13 @@ contexts:
             - include: property-value-constants
             - include: literal-string
             - include: unquoted-concatenated-string
-            - include: scss-maps
-            - include: scss-variables
-            - include: scss-functions
-            - include: custom-functions
+            - include: sass-maps
+            - include: sass-variables
+            - include: sass-functions
+            - include: sass-custom-functions
             - match: '{{ident}}(\s+{{ident}})*\b(?!:)'
               scope: string.unquoted.css
-            - include: scss-operators
+            - include: sass-operators
             - match: '\s*(,)\s*'
               captures:
                 1: punctuation.separator.css
@@ -667,11 +667,11 @@ contexts:
     - include: property-value-constants
     - include: literal-string
     - include: unquoted-concatenated-string
-    - include: scss-maps
-    - include: scss-variables
-    - include: scss-functions
-    - include: custom-functions
-    - include: scss-operators
+    - include: sass-maps
+    - include: sass-variables
+    - include: sass-functions
+    - include: sass-custom-functions
+    - include: sass-operators
     - match: '\s*(,)\s*'
       captures:
         1: punctuation.separator.css
@@ -685,7 +685,7 @@ contexts:
         1: punctuation.definition.keyword.scss
       push:
         - meta_scope: meta.at-rule.each.scss
-        - include: scss-variables
+        - include: sass-variables
         - include: comma-delimiter
         - match: '(?={)'
           pop: true
@@ -697,8 +697,8 @@ contexts:
             - include: comment-block
             - include: comment-line
             - include: comma-delimiter
-            - include: scss-variables
-            - include: scss-maps
+            - include: sass-variables
+            - include: sass-maps
             - include: unquoted-string
     - match: '(@)(for|while)\b'
       scope: keyword.control.flow.scss
@@ -801,9 +801,9 @@ contexts:
             - meta_scope: meta.function-call.arguments.scss
             - include: comment-block
             - include: comment-line
-            - include: scss-variables
-            - include: scss-functions
-            - include: scss-operators
+            - include: sass-variables
+            - include: sass-functions
+            - include: sass-operators
             - include: comma-delimiter
             - include: property-values
             - include: literal-string
@@ -1050,12 +1050,12 @@ contexts:
             1: constant.numeric.css
             2: keyword.operator.arithmetic.css
             3: constant.numeric.css
-        - include: scss-variables
-        - include: scss-functions
+        - include: sass-variables
+        - include: sass-functions
         - include: numeric-values
 
 
-  custom-functions:
+  sass-custom-functions:
     - match: '\b([a-z_-]+)(?=\()'
       scope: support.function.custom.scss
       push:
@@ -1069,26 +1069,27 @@ contexts:
             pop: true
           - include: comma-delimiter
           - include: property-values
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
 
   sass-script-expression:
     - include: comment-line
     - include: comment-block
     - include: comma-delimiter
-    - include: scss-maps
     - include: color-values
     - include: numeric-values
-    - include: scss-variables
-    - include: scss-functions
-    - include: scss-operators
-    - include: scss-interpolation
+    - include: sass-maps
+    - include: sass-variables
+    - include: sass-functions
+    - include: sass-custom-functions
+    - include: sass-operators
+    - include: sass-interpolation
     - match: '\b(false|true|null)\b'
       scope: constant.language.scss
     - include: literal-string
     - include: unquoted-string
 
-  scss-maps:
+  sass-maps:
     - match: '\('
       captures:
         0: punctuation.definition.group.begin.scss
@@ -1109,15 +1110,15 @@ contexts:
             2: punctuation.separator.key-value.css
         - include: property-values
 
-  scss-variables:
+  sass-variables:
     - match: '(\$)([a-zA-Z0-9_-][\w-]*)'
       scope: variable.other.scss
       captures:
         1: punctuation.definition.variable.scss
-    - include: scss-interpolation
+    - include: sass-interpolation
 
-  scss-functions:
-    - match: \b(zip|variable-exists|unquote|unitless|unit|unique-id|type-of|transparentize|to-upper-case|to-lower-case|tan|str-slice|str-length|str-insert|str-index|sqrt|spin|softlight|sin|simple-selectors|set-nth|selector-unify|selector-replace|selector-parse|selector-nest|selector-extend|selector-append|screen|scale-color|saturation|saturate|round|rgba|rgb|replace|red|random|quote|pow|pi|percentage|overlay|opacify|nth|negation|multiply|mod|mixin-exists|mix|min|max|map-values|map-remove|map-merge|map-keys|map-has-key|map-get|luma|list-separator|lightness|lighten|length|keywords|join|isnumber|is-superselector|is-bracketed|invert|inspect|index|if|ie-hex-str|hue|hsvvalue|hsvsaturation|hsvhue|hsva|hsv|hsla|hsl|hardlight|greyscale|green|grayscale|global-variable-exists|get-function|function-exists|format|floor|feature-exists|fadeout|fadein|fade|extract|exclusion|escape|e|difference|desaturate|data-uri|darken|cos|convert|contrast|content-exists|complement|comparable|color|change-color|ceil|call|calc|blue|average|atan|asin|argb|append|alpha|adjust-hue|adjust-color|acos|abs)(\()
+  sass-functions:
+    - match: \b(zip|variable-exists|unquote|unitless|unit|unique-id|type-of|transparentize|to-upper-case|to-lower-case|tan|str-slice|str-length|str-insert|str-index|sqrt|spin|softlight|sin|simple-selectors|set-nth|selector-unify|selector-replace|selector-parse|selector-nest|selector-extend|selector-append|screen|scale-color|saturation|saturate|round|rgba|rgb|replace|red|random|quote|pow|pi|percentage|overlay|opacify|nth|negation|multiply|mod|mixin-exists|mix|min|max|map-values|map-remove|map-merge|map-keys|map-has-key|map-get|luma|list-separator|lightness|lighten|length|keywords|join|isnumber|is-superselector|is-bracketed|invert|inspect|index|if|ie-hex-str|hue|hsvvalue|hsvsaturation|hsvhue|hsva|hsv|hsla|hsl|hardlight|greyscale|green|grayscale|global-variable-exists|get-function|function-exists|format|floor|feature-exists|fadeout|fadein|fade|extract|exclusion|escape|e|difference|desaturate|data-uri|darken|cos|convert|contrast|content-exists|complement|comparable|color|change-color|ceil|call|calc|blue|average|atan|asin|argb|append|alpha|adjust-hue|adjust-color|acos|abs)\s*(\()
       captures:
         1: support.function.scss
         2: meta.group.scss punctuation.definition.group.begin.scss
@@ -1131,7 +1132,7 @@ contexts:
           scope: punctuation.separator.key-value.css
         - include: sass-script-expression
 
-  scss-interpolation:
+  sass-interpolation:
     - match: '(#)({)'
       captures:
         1: punctuation.definition.variable.scss
@@ -1141,13 +1142,13 @@ contexts:
         - match: '(})'
           scope: punctuation.definition.group.end.scss
           pop: true
-        - include: custom-functions
-        - include: scss-functions
-        - include: scss-variables
-        - include: scss-operators
+        - include: sass-custom-functions
+        - include: sass-functions
+        - include: sass-variables
+        - include: sass-operators
         - include: numeric-values
 
-  scss-operators:
+  sass-operators:
     - match: /|$|%|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|%=|\+=|\-=|&=|\bnot\b|\bor\b|\band\b|\bwhen\b
       scope: keyword.operator.scss
     - match: (?:\s*)\b(not|or|and|when|from|to|through|in)(?=\s)
@@ -1349,8 +1350,8 @@ contexts:
           - include: image-type
           - include: literal-string
           - include: filter-functions
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
 
     - match: '\b(counter)(?=\()'
       scope: support.function.counter.css
@@ -1370,8 +1371,8 @@ contexts:
               - match: '(?=\))'
                 pop: true
               - include: comma-delimiter
-              - include: scss-variables
-              - include: scss-functions
+              - include: sass-variables
+              - include: sass-functions
               - match: '\b({{counter_styles}}|none)\b'
                 scope: support.constant.property-value.counter-style.css
 
@@ -1393,8 +1394,8 @@ contexts:
               - match: '(?=\))'
                 pop: true
               - include: comma-delimiter
-              - include: scss-variables
-              - include: scss-functions
+              - include: sass-variables
+              - include: sass-functions
               - include: literal-string
               - match: '\b({{counter_styles}}|none)\b'
                 scope: support.constant.property-value.counter-style.css
@@ -1413,8 +1414,8 @@ contexts:
           - match: '\b(cyclic|numeric|alphabetic|symbolic|fixed)\b'
             scope: support.constant.symbol-type.css
           - include: comma-delimiter
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: literal-string
           - include: image-type
 
@@ -1429,8 +1430,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: literal-string
 
     - match: '\b(local)(?=\()'
@@ -1444,8 +1445,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: unquoted-string
 
     - match: '\b(matrix3d|scale3d|matrix|scale)(?=\()'
@@ -1460,8 +1461,8 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: number-type
           - include: var-function
 
@@ -1477,8 +1478,8 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: percentage-type
           - include: length-type
           - include: number-type
@@ -1495,8 +1496,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: percentage-type
           - include: length-type
           - include: number-type
@@ -1512,8 +1513,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: angle-type
 
     - match: '\b(skew)(?=\()'
@@ -1528,8 +1529,8 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: angle-type
 
     - match: '\b(translateZ|perspective)(?=\()'
@@ -1543,8 +1544,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: length-type
 
     - match: '\b(rotate3d)(?=\()'
@@ -1559,8 +1560,8 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: angle-type
           - include: number-type
 
@@ -1576,8 +1577,8 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: number-type
 
     - match: '\b(cubic-bezier)(?=\()'
@@ -1592,8 +1593,8 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: number-type
 
     - match: '\b(steps)(?=\()'
@@ -1608,8 +1609,8 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: integer-type
           - match: (end|middle|start)
             scope: support.keyword.timing-direction.css
@@ -1627,8 +1628,8 @@ contexts:
             pop: true
           - match: \bauto\b
             scope: support.constant.property-value.css
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: length-type
 
     - match: '\b(inset)(?=\()'
@@ -1644,8 +1645,8 @@ contexts:
             pop: true
           - match: '\bround\b'
             scope: keyword.other.css
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: length-type
           - include: percentage-type
 
@@ -1664,8 +1665,8 @@ contexts:
             scope: keyword.other.css
           - match: '\b(top|right|bottom|left|center|closest-side|farthest-side)\b'
             scope: support.constant.property-value.css
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: length-type
           - include: percentage-type
 
@@ -1682,8 +1683,8 @@ contexts:
             pop: true
           - match: '\b(nonzero|evenodd)\b'
             scope: support.constant.property-value.css
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: length-type
           - include: percentage-type
 
@@ -1701,8 +1702,8 @@ contexts:
           - match: "-(?:webkit|moz|ms|o)-"
             scope: support.type.vendor-prefix.css
           - include: comma-delimiter
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: property-value-constants
           - include: numeric-values
           - include: color-values
@@ -1720,8 +1721,8 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: length-type
           - include: percentage-type
           - include: minmax-function
@@ -1745,8 +1746,8 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - match: '(--)({{nmchar}}+)'
             captures:
               0: meta.property-name.css support.type.custom-property.css
@@ -1765,8 +1766,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: length-type
 
     - match: '\b(brightness|contrast|grayscale|invert|opacity|saturate|sepia)(?=\()'
@@ -1780,8 +1781,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: percentage-type
           - include: number-type
 
@@ -1796,8 +1797,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: length-type
           - include: color-values
 
@@ -1812,8 +1813,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: angle-type
 
   calc-function:
@@ -1835,8 +1836,8 @@ contexts:
     - include: var-function
     - include: numeric-values
     - include: attr-function
-    - include: scss-variables
-    - include: scss-functions
+    - include: sass-variables
+    - include: sass-functions
     - match: "[-/*+]"
       scope: keyword.operator.css
     - match: '\('
@@ -1855,8 +1856,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: qualified-name
           - include: literal-string
           - match: '({{ident}})'
@@ -1876,8 +1877,8 @@ contexts:
             - match: '(?=\))'
               pop: true
             - include: comma-delimiter
-            - include: scss-variables
-            - include: scss-functions
+            - include: sass-variables
+            - include: sass-functions
             - include: property-value-constants
             - include: numeric-values
             - include: color-values
@@ -1894,8 +1895,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: literal-string
           - include: unquoted-string
 
@@ -1911,8 +1912,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: literal-string
           - include: unquoted-string
 
@@ -1928,8 +1929,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: literal-string
           - include: unquoted-string
 
@@ -1945,8 +1946,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: literal-string
 
   image-function:
@@ -1961,8 +1962,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: image-type
           - include: literal-string
           - include: color-values
@@ -1981,8 +1982,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: literal-string
           - include: color-values
           - include: comma-delimiter
@@ -2006,8 +2007,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: angle-type
           - include: comma-delimiter
           - include: color-values
@@ -2030,8 +2031,8 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: color-values
           - include: percentage-type
           - include: length-type
@@ -2064,8 +2065,8 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: percentage-type
           - include: color-values
           - include: image-type
@@ -2085,8 +2086,8 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: scss-variables
-          - include: scss-functions
+          - include: sass-variables
+          - include: sass-functions
           - include: length-type
           - match: \b(auto|max-content|min-content)\b
             scope: support.constant.property-value.css
@@ -2132,7 +2133,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: scss-variables
+          - include: sass-variables
           - include: percentage-type
           - include: number-type
 
@@ -2148,7 +2149,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: scss-variables
+          - include: sass-variables
           - include: color-adjuster-functions # must be included before `color-values`
           - include: color-values
           - include: percentage-type
@@ -2166,7 +2167,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: scss-variables
+          - include: sass-variables
           - include: color-adjuster-functions # must be included before `color-values`
           - include: var-function
           - include: color-values
@@ -2200,7 +2201,7 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: scss-variables
+          - include: sass-variables
           - include: color-adjuster-operators
           - include: angle-type
 
@@ -2215,7 +2216,7 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: scss-variables
+          - include: sass-variables
           - include: color-adjuster-operators
           - include: percentage-type
 
@@ -2230,7 +2231,7 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: scss-variables
+          - include: sass-variables
           - include: percentage-type
 
     - match: '\b(blenda|blend)(?=\()'
@@ -2246,7 +2247,7 @@ contexts:
             pop: true
           - match: '\b(rgb|hsl|hwb)\b'
             scope: keyword.other.color-space.css
-          - include: scss-variables
+          - include: sass-variables
           - include: color-values
           - include: percentage-type
           - include: var-function
@@ -2416,7 +2417,7 @@ contexts:
       scope: constant.character.escape.newline.css
     - match: '\\(\h{1,6}|.)'
       scope: constant.character.escape.css
-    - include: scss-interpolation
+    - include: sass-interpolation
 
 
 

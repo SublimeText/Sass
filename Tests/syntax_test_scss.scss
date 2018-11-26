@@ -368,13 +368,24 @@ h1 { @include sexy-border(blue, 2in); }
 */
 @function tone-color($color, $tone: primary, $tone-factor: 10%) {
   @return if(
-    $tone == primary, // Do not tone primary color
+    $tone == primary,
     $color,
     mix($color, color($tone, unthemed), if(
-      $tone == inverted, // Tone inverted color with different factor
+      $tone == inverted,
       75%,
       $tone-factor
     ))
+  );
+}
+
+@function size($size, $base: $base-font-size, $unit: null) {
+  @return if (
+    $unit == 'px',
+    strip($size) * strip($base),
+//  ^ meta.function-call
+//                 ^ meta.function-call
+    strip($size) / strip($base) + 0.00001
+//  ^ meta.function-call
   );
 }
 

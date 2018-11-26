@@ -374,6 +374,20 @@ $map: (
 @if null
 //     ^ constant.language
 
+/*
+  Function Directives
+  https://sass-lang.com/documentation/file.SASS_REFERENCE.html#function_directives
+*/
+@function size($size, $base: $base-font-size, $unit: null)
+  @return if (
+    $unit == 'px',
+    strip($size) * strip($base),
+//  ^ meta.function-call
+//                 ^ meta.function-call
+    strip($size) / strip($base) + 0.00001
+//  ^ meta.function-call
+  )
+
 
 /*
   Operators
