@@ -700,11 +700,12 @@ contexts:
     - include: color-values
     - include: property-value-constants
     - include: literal-string
-    - include: unquoted-concatenated-string
     - include: sass-maps
     - include: sass-variables
     - include: sass-functions
     - include: sass-custom-functions
+    - include: sass-interpolation
+    - include: unquoted-concatenated-string
     - include: sass-operators
     - match: '\s*(,)\s*'
       captures:
@@ -1085,9 +1086,8 @@ contexts:
             1: constant.numeric.css
             2: keyword.operator.arithmetic.css
             3: constant.numeric.css
-        - include: sass-variables
-        - include: sass-functions
         - include: numeric-values
+        - include: sass-value-expression
 
 
   sass-custom-functions:
@@ -1104,8 +1104,7 @@ contexts:
             pop: true
           - include: comma-delimiter
           - include: property-values
-          - include: sass-variables
-          - include: sass-functions
+          - include: sass-value-expression
 
   sass-script-expression:
     - include: comment-line
@@ -1123,6 +1122,14 @@ contexts:
       scope: constant.language.scss
     - include: literal-string
     - include: unquoted-string
+
+  sass-value-expression:
+    - include: comment-block
+    - include: sass-variables
+    - include: sass-functions
+    - include: sass-custom-functions
+    - include: sass-interpolation
+    - include: sass-operators
 
   sass-maps:
     - match: '\('
@@ -1381,8 +1388,7 @@ contexts:
           - include: image-type
           - include: literal-string
           - include: filter-functions
-          - include: sass-variables
-          - include: sass-functions
+          - include: sass-value-expression
 
     - match: '\b(counter)(?=\()'
       scope: support.function.counter.css
@@ -1402,10 +1408,9 @@ contexts:
               - match: '(?=\))'
                 pop: true
               - include: comma-delimiter
-              - include: sass-variables
-              - include: sass-functions
               - match: '\b({{counter_styles}}|none)\b'
                 scope: support.constant.property-value.counter-style.css
+              - include: sass-value-expression
 
     - match: '\b(counters)(?=\()'
       scope: support.function.counter.css
@@ -1425,11 +1430,10 @@ contexts:
               - match: '(?=\))'
                 pop: true
               - include: comma-delimiter
-              - include: sass-variables
-              - include: sass-functions
               - include: literal-string
               - match: '\b({{counter_styles}}|none)\b'
                 scope: support.constant.property-value.counter-style.css
+              - include: sass-value-expression
 
     - match: '\b(symbols)(?=\()'
       scope: support.function.counter.css
@@ -1445,10 +1449,9 @@ contexts:
           - match: '\b(cyclic|numeric|alphabetic|symbolic|fixed)\b'
             scope: support.constant.symbol-type.css
           - include: comma-delimiter
-          - include: sass-variables
-          - include: sass-functions
           - include: literal-string
           - include: image-type
+          - include: sass-value-expression
 
     - match: '\b(format)(?=\()'
       scope: support.function.font-face.css
@@ -1461,9 +1464,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: sass-variables
-          - include: sass-functions
           - include: literal-string
+          - include: sass-value-expression
 
     - match: '\b(local)(?=\()'
       scope: support.function.font-face.css
@@ -1476,9 +1478,13 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
+          - include: comment-block
           - include: sass-variables
           - include: sass-functions
+          - include: sass-custom-functions
+          - include: sass-interpolation
           - include: unquoted-string
+          - include: sass-operators
 
     - match: '\b(matrix3d|scale3d|matrix|scale)(?=\()'
       scope: support.function.transform.css
@@ -1492,10 +1498,9 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: sass-variables
-          - include: sass-functions
           - include: number-type
           - include: var-function
+          - include: sass-value-expression
 
     - match: '\b(translate(3d)?)(?=\()'
       scope: support.function.transform.css
@@ -1509,12 +1514,11 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: sass-variables
-          - include: sass-functions
           - include: percentage-type
           - include: length-type
           - include: number-type
           - include: var-function
+          - include: sass-value-expression
 
     - match: '\b(translate[XY])(?=\()'
       scope: support.function.transform.css
@@ -1527,11 +1531,10 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: sass-variables
-          - include: sass-functions
           - include: percentage-type
           - include: length-type
           - include: number-type
+          - include: sass-value-expression
 
     - match: '\b(rotate[XYZ]?|skew[XY])(?=\()'
       scope: support.function.transform.css
@@ -1544,9 +1547,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: sass-variables
-          - include: sass-functions
           - include: angle-type
+          - include: sass-value-expression
 
     - match: '\b(skew)(?=\()'
       scope: support.function.transform.css
@@ -1560,9 +1562,8 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: sass-variables
-          - include: sass-functions
           - include: angle-type
+          - include: sass-value-expression
 
     - match: '\b(translateZ|perspective)(?=\()'
       scope: support.function.transform.css
@@ -1575,9 +1576,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: sass-variables
-          - include: sass-functions
           - include: length-type
+          - include: sass-value-expression
 
     - match: '\b(rotate3d)(?=\()'
       scope: support.function.transform.css
@@ -1591,10 +1591,9 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: sass-variables
-          - include: sass-functions
           - include: angle-type
           - include: number-type
+          - include: sass-value-expression
 
     - match: '\b(scale[XYZ])(?=\()'
       scope: support.function.transform.css
@@ -1608,9 +1607,8 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: sass-variables
-          - include: sass-functions
           - include: number-type
+          - include: sass-value-expression
 
     - match: '\b(cubic-bezier)(?=\()'
       scope: support.function.timing.css
@@ -1624,9 +1622,8 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: sass-variables
-          - include: sass-functions
           - include: number-type
+          - include: sass-value-expression
 
     - match: '\b(steps)(?=\()'
       scope: support.function.timing.css
@@ -1640,11 +1637,10 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: sass-variables
-          - include: sass-functions
           - include: integer-type
           - match: (end|middle|start)
             scope: support.keyword.timing-direction.css
+          - include: sass-value-expression
 
     - match: '\b(rect)(?=\()'
       scope: support.function.shape.css
@@ -1659,9 +1655,8 @@ contexts:
             pop: true
           - match: \bauto\b
             scope: support.constant.property-value.css
-          - include: sass-variables
-          - include: sass-functions
           - include: length-type
+          - include: sass-value-expression
 
     - match: '\b(inset)(?=\()'
       scope: support.function.shape.css
@@ -1676,10 +1671,9 @@ contexts:
             pop: true
           - match: '\bround\b'
             scope: keyword.other.css
-          - include: sass-variables
-          - include: sass-functions
           - include: length-type
           - include: percentage-type
+          - include: sass-value-expression
 
     - match: '\b(circle|ellipse)(?=\()'
       scope: support.function.shape.css
@@ -1696,10 +1690,9 @@ contexts:
             scope: keyword.other.css
           - match: '\b(top|right|bottom|left|center|closest-side|farthest-side)\b'
             scope: support.constant.property-value.css
-          - include: sass-variables
-          - include: sass-functions
           - include: length-type
           - include: percentage-type
+          - include: sass-value-expression
 
     - match: '\b(polygon)(?=\()'
       scope: support.function.shape.css
@@ -1714,10 +1707,9 @@ contexts:
             pop: true
           - match: '\b(nonzero|evenodd)\b'
             scope: support.constant.property-value.css
-          - include: sass-variables
-          - include: sass-functions
           - include: length-type
           - include: percentage-type
+          - include: sass-value-expression
 
     - match: '\b(toggle)(?=\()'
       scope: support.function.toggle.css
@@ -1733,12 +1725,11 @@ contexts:
           - match: "-(?:webkit|moz|ms|o)-"
             scope: support.type.vendor-prefix.css
           - include: comma-delimiter
-          - include: sass-variables
-          - include: sass-functions
           - include: property-value-constants
           - include: numeric-values
           - include: color-values
           - include: literal-string
+          - include: sass-value-expression
 
     - match: '\b(repeat)(?=\()'
       scope: support.function.grid.css
@@ -1752,8 +1743,6 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: sass-variables
-          - include: sass-functions
           - include: length-type
           - include: percentage-type
           - include: minmax-function
@@ -1763,6 +1752,7 @@ contexts:
             scope: support.keyword.repetitions.css
           - match: \b(max-content|min-content|auto)\b
             scope: support.constant.property-value.css
+          - include: sass-value-expression
 
   var-function:
     - match: '\b(var)(?=\()'
@@ -1797,9 +1787,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: sass-variables
-          - include: sass-functions
           - include: length-type
+          - include: sass-value-expression
 
     - match: '\b(brightness|contrast|grayscale|invert|opacity|saturate|sepia)(?=\()'
       scope: support.function.filter.css
@@ -1812,10 +1801,9 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: sass-variables
-          - include: sass-functions
           - include: percentage-type
           - include: number-type
+          - include: sass-value-expression
 
     - match: '\b(drop-shadow)(?=\()'
       scope: support.function.filter.css
@@ -1828,10 +1816,9 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: sass-variables
-          - include: sass-functions
           - include: length-type
           - include: color-values
+          - include: sass-value-expression
 
     - match: '\b(hue-rotate)(?=\()'
       scope: support.function.filter.css
@@ -1844,9 +1831,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: sass-variables
-          - include: sass-functions
           - include: angle-type
+          - include: sass-value-expression
 
   calc-function:
     - match: '\b(calc)(?=\()'
@@ -1867,10 +1853,7 @@ contexts:
     - include: var-function
     - include: numeric-values
     - include: attr-function
-    - include: sass-variables
-    - include: sass-functions
-    - match: "[-/*+]"
-      scope: keyword.operator.css
+    - include: sass-value-expression
     - match: '\('
       scope: punctuation.definition.group.begin.css
       push: inside-calc-parens
@@ -1887,10 +1870,9 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: sass-variables
-          - include: sass-functions
           - include: qualified-name
           - include: literal-string
+          - include: sass-value-expression
           - match: '({{ident}})'
             scope: entity.other.attribute-name.css
             push:
@@ -1908,11 +1890,10 @@ contexts:
             - match: '(?=\))'
               pop: true
             - include: comma-delimiter
-            - include: sass-variables
-            - include: sass-functions
             - include: property-value-constants
             - include: numeric-values
             - include: color-values
+            - include: sass-value-expression
 
   url-function:
     - match: '\b(url)(?=\()'
@@ -1926,10 +1907,14 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
+          - include: literal-string
+          - include: comment-block
           - include: sass-variables
           - include: sass-functions
-          - include: literal-string
+          - include: sass-custom-functions
+          - include: sass-interpolation
           - include: unquoted-string
+          - include: sass-operators
 
   url-prefix-function:
     - match: '\b(url-prefix)(?=\()'
@@ -1943,10 +1928,14 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
+          - include: literal-string
+          - include: comment-block
           - include: sass-variables
           - include: sass-functions
-          - include: literal-string
+          - include: sass-custom-functions
+          - include: sass-interpolation
           - include: unquoted-string
+          - include: sass-operators
 
   domain-function:
     - match: '\b(domain)(?=\()'
@@ -1960,10 +1949,14 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
+          - include: literal-string
+          - include: comment-block
           - include: sass-variables
           - include: sass-functions
-          - include: literal-string
+          - include: sass-custom-functions
+          - include: sass-interpolation
           - include: unquoted-string
+          - include: sass-operators
 
   regexp-function:
     - match: '\b(regexp)(?=\()'
@@ -1977,9 +1970,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: sass-variables
-          - include: sass-functions
           - include: literal-string
+          - include: sass-value-expression
 
   image-function:
     - match: '\b(image)(?=\()'
@@ -1993,13 +1985,17 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: sass-variables
-          - include: sass-functions
           - include: image-type
           - include: literal-string
           - include: color-values
           - include: comma-delimiter
+          - include: comment-block
+          - include: sass-variables
+          - include: sass-functions
+          - include: sass-custom-functions
+          - include: sass-interpolation
           - include: unquoted-string
+          - include: sass-operators
 
   image-set-function:
     - match: '\b(image-set)(?=\()'
@@ -2013,8 +2009,6 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: sass-variables
-          - include: sass-functions
           - include: literal-string
           - include: color-values
           - include: comma-delimiter
@@ -2024,7 +2018,13 @@ contexts:
             scope: constant.numeric.css
             captures:
               1: keyword.other.unit.css
+          - include: comment-block
+          - include: sass-variables
+          - include: sass-functions
+          - include: sass-custom-functions
+          - include: sass-interpolation
           - include: unquoted-string
+          - include: sass-operators
 
   gradient-functions:
     - match: '\b((?:repeating-)?linear-gradient)(?=\()'
@@ -2038,8 +2038,6 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: sass-variables
-          - include: sass-functions
           - include: angle-type
           - include: comma-delimiter
           - include: color-values
@@ -2049,6 +2047,7 @@ contexts:
             scope: keyword.other.css
           - match: \b(top|right|bottom|left)\b
             scope: support.constant.property-value.css
+          - include: sass-value-expression
 
     - match: '\b((?:repeating-)?radial-gradient)(?=\()'
       scope: support.function.gradient.css
@@ -2062,8 +2061,6 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: sass-variables
-          - include: sass-functions
           - include: color-values
           - include: percentage-type
           - include: length-type
@@ -2082,6 +2079,7 @@ contexts:
                 | farthest-side
               )\b
             scope: support.constant.property-value.css
+          - include: sass-value-expression
 
   cross-fade-function:
     - match: '\b(cross-fade)(?=\()'
@@ -2096,13 +2094,17 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: sass-variables
-          - include: sass-functions
           - include: percentage-type
           - include: color-values
           - include: image-type
           - include: literal-string
+          - include: comment-block
+          - include: sass-variables
+          - include: sass-functions
+          - include: sass-custom-functions
+          - include: sass-interpolation
           - include: unquoted-string
+          - include: sass-operators
 
   minmax-function:
     - match: '\b(minmax)(?=\()'
@@ -2117,11 +2119,10 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: sass-variables
-          - include: sass-functions
           - include: length-type
           - match: \b(auto|max-content|min-content)\b
             scope: support.constant.property-value.css
+          - include: sass-value-expression
 
   color-functions:
     - match: '\b(rgba?)(?=\()'
@@ -2164,9 +2165,9 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: sass-variables
           - include: percentage-type
           - include: number-type
+          - include: sass-value-expression
 
     - match: '\b(device-cmyk)(?=\()'
       scope: support.function.color.css
@@ -2180,11 +2181,11 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: sass-variables
           - include: color-adjuster-functions # must be included before `color-values`
           - include: color-values
           - include: percentage-type
           - include: number-type
+          - include: sass-value-expression
 
     - match: '\b(color)(?=\()'
       scope: support.function.color.css
@@ -2198,12 +2199,12 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: sass-variables
           - include: color-adjuster-functions # must be included before `color-values`
           - include: var-function
           - include: color-values
           - include: angle-type
           - include: number-type
+          - include: sass-value-expression
 
   color-adjuster-functions:
     - match: '\b(red|green|blue|alpha|a)(?=\()'
@@ -2220,6 +2221,7 @@ contexts:
           - include: color-adjuster-operators
           - include: percentage-type
           - include: number-type
+          - include: sass-value-expression
 
     - match: '\b(hue|h)(?=\()'
       scope: support.function.color.css
@@ -2232,9 +2234,9 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: sass-variables
           - include: color-adjuster-operators
           - include: angle-type
+          - include: sass-value-expression
 
     - match: '\b(saturation|lightness|whiteness|blackness|[slwb])(?=\()'
       scope: support.function.color.css
@@ -2247,9 +2249,9 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: sass-variables
           - include: color-adjuster-operators
           - include: percentage-type
+          - include: sass-value-expression
 
     - match: '\b(tint|shade)(?=\()'
       scope: support.function.color.css
@@ -2262,8 +2264,8 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: sass-variables
           - include: percentage-type
+          - include: sass-value-expression
 
     - match: '\b(blenda|blend)(?=\()'
       scope: support.function.color.css
@@ -2278,10 +2280,10 @@ contexts:
             pop: true
           - match: '\b(rgb|hsl|hwb)\b'
             scope: keyword.other.color-space.css
-          - include: sass-variables
           - include: color-values
           - include: percentage-type
           - include: var-function
+          - include: sass-value-expression
 
   color-adjuster-operators:
     - match: '[\-\+*](?=\s+)'

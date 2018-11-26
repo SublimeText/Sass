@@ -44,7 +44,7 @@ selector-ish::before[data-type="text"]:not(:first-child),
     }
   }
   color: rgba(100, 120, 12, 95%);
-  background-color: blue;
+  background: url($blue);
   testbackground-color: blue;
 }
 
@@ -93,6 +93,8 @@ selector-ish::before[data-type="text"]:not(:first-child),
 //             ^ punctuation.terminator.rule.css
   will-change: transform, scroll-position;
 //             ^ support.constant.property-value.css
+  background: url($blue);
+//                ^^^^^ variable
   background: url('../assets/photo1-blue.jpg') center/cover no-repeat;
 //                                             ^ support.constant.property-value.css
 //                                                    ^ support.constant.property-value.css
@@ -503,6 +505,9 @@ p {
   background-color: transparentize(#E82C0C, 0.25);
 //                  ^^^^^^^ support.function.scss
 //                                 ^^^ constant.other.color.rgb-value.css
+  background-color: color($mark, custom-function(unthemed));
+//                        ^ variable.other
+//                               ^ support.function
 }
 
 
@@ -945,22 +950,22 @@ $gutter-width: 10px;
 
 .test-operators {
     top: calc(1px + 1px);
-    /*            ^ keyword.operator.css */
+    /*            ^ keyword.operator */
     top: calc(1px - 1px);
-    /*            ^ keyword.operator.css */
+    /*            ^ keyword.operator */
     top: calc(1px / 1px);
-    /*            ^ keyword.operator.css */
+    /*            ^ keyword.operator */
     top: calc(1px * 1px);
-    /*            ^ keyword.operator.css */
+    /*            ^ keyword.operator */
 
     top: calc(1px+1px);
-    /*           ^ -keyword.operator.css */
+    /*           ^ -keyword.operator */
     top: calc(1px-1px);
-    /*           ^ -keyword.operator.css */
+    /*           ^ -keyword.operator */
     top: calc(1px/1px);
-    /*           ^ keyword.operator.css */
+    /*           ^ keyword.operator */
     top: calc(1px*1px);
-    /*           ^ keyword.operator.css */
+    /*           ^ keyword.operator */
 }
 
 .test-important {
@@ -1188,17 +1193,17 @@ $gutter-width: 10px;
 
     top: alpha(- 1.5%);
 //       ^^^^^        support.function.color.css
-//             ^      keyword.operator.css
+//             ^      keyword.operator
 //               ^^^^ constant.numeric.css
 
     top: h(+ 1.5deg);
 //       ^          support.function.color.css
-//         ^        keyword.operator.css
+//         ^        keyword.operator
 //           ^^^^^^ constant.numeric.css
 
     top: w(* 1.5%);
 //       ^        support.function.color.css
-//         ^      keyword.operator.css
+//         ^      keyword.operator
 //           ^^^^ constant.numeric.css
 
     top: shade(1.5%);
@@ -1352,7 +1357,7 @@ $gutter-width: 10px;
     top: calc(calc() * calc());
 //       ^^^^               support.function.calc.css
 //            ^^^^          support.function.calc.css
-//                   ^      keyword.operator.css
+//                   ^      keyword.operator
 //                     ^^^^ support.function.calc.css
     top: calc(100% - (1 * 10px) / 1 - (1 * 10px) / 1 - (1 * 10px) / 1);
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.css
@@ -1360,23 +1365,23 @@ $gutter-width: 10px;
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.css
 //           ^ punctuation.definition.group.begin.css
 //            ^^^ constant.numeric.css
-//                 ^ keyword.operator.css
+//                 ^ keyword.operator
 //                   ^ punctuation.definition.group.begin.css
 //                   ^^^^^^^^^^ meta.group.css meta.group.css
 //                            ^ punctuation.definition.group.end.css
-//                              ^ keyword.operator.css
+//                              ^ keyword.operator
 //                                    ^ punctuation.definition.group.begin.css
 //                                         ^^ constant.numeric.css
 //                                           ^^ keyword.other.unit.css
 //                                             ^ punctuation.definition.group.end.css
-//                                               ^ keyword.operator.css
-//                                                   ^ keyword.operator.css
+//                                               ^ keyword.operator
+//                                                   ^ keyword.operator
 //                                                     ^ punctuation.definition.group.begin.css
 //                                                      ^ constant.numeric.css
-//                                                        ^ keyword.operator.css
+//                                                        ^ keyword.operator
 //                                                          ^^ constant.numeric.css
 //                                                              ^ punctuation.definition.group.end.css
-//                                                                ^ keyword.operator.css
+//                                                                ^ keyword.operator
 //                                                                  ^ constant.numeric.css
 //                                                                   ^ punctuation.definition.group.end.css
 //                                                                    ^ punctuation.terminator.rule.css - meta.group

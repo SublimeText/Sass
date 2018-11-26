@@ -74,7 +74,11 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
 //                                                                                                      ^ punctuation.definition.group.end.css
 //                                                                                                        ^^^ constant.numeric.css
 //                                                                                                           ^^ punctuation.definition.group.end.css
-
+  @document url(http://www)
+    background: url($blue)
+    background-color: color($mark, custom-function(unthemed))
+//                          ^ variable.other
+//                                 ^ support.function
 
   background: url('../assets/photo1-blue.jpg') center/cover no-repeat
 //                                             ^ support.constant.property-value.css
