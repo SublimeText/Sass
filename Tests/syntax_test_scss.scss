@@ -362,6 +362,22 @@ h1 { @include sexy-border(blue, 2in); }
 //                               ^^ keyword.other.unit
 //                                  ^ punctuation.terminator.rule
 
+/*
+  Function Directives
+  https://sass-lang.com/documentation/file.SASS_REFERENCE.html#function_directives
+*/
+@function tone-color($color, $tone: primary, $tone-factor: 10%) {
+  @return if(
+    $tone == primary, // Do not tone primary color
+    $color,
+    mix($color, color($tone, unthemed), if(
+      $tone == inverted, // Tone inverted color with different factor
+      75%,
+      $tone-factor
+    ))
+  );
+}
+
 
 /*
   Lists, Maps
