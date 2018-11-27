@@ -127,6 +127,10 @@ selector-ish::before[data-type="text"]:not(:first-child),
 //              ^ punctuation.definition.entity.css
 //                               ^ punctuation.definition.entity.css
 
+[type="submit"]:-moz-focusring {}
+//              ^^^^^^^^^^^^^^ meta.selector.css entity.other.pseudo-class.css
+//              ^^^^^ support.type.vendor-prefix.css
+
     -ms-text-size-adjust: 100%;
 //  ^^^^^^^^^^^^^^^^^^^^ meta.property-name.css
 //  ^^^^ support.type.vendor-prefix.css
