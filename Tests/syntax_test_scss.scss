@@ -443,7 +443,7 @@ $map: (
 }
 @each $icon in $icons-16 {
 //    ^^^^^ variable
-//          ^^ keyword.control
+//          ^^ keyword.operator
 //             ^^^^^^^^^ variable
     %icon-#{$icon}--primary {
 //                ^^^^^^^^^ meta.selector
@@ -614,7 +614,7 @@ $gutter-width: 10px;
 //                                                 ^ - meta.at-rule.each.scss
 //                                                 ^ punctuation.section.property-list.begin.css
 //    ^^^^^^^ variable.other.scss
-//            ^^ keyword.control
+//            ^^ keyword.operator
 //               ^^^^ string.unquoted
 //                     ^^^^^^ string.unquoted
 //                   ^ punctuation.separator
@@ -622,11 +622,15 @@ $gutter-width: 10px;
 //    ^^^^^^^ variable.other.scss
 //           ^ punctuation.separator
 //             ^^^^^ variable.other.scss
-//                   ^^ keyword.control
+//                   ^^ keyword.operator
   #{$header} {
     font-size: $size;
   }
 }
+@each $item, $item2 in fn($items) {}
+//                  ^ keyword.operator
+//                     ^ support.function
+
 @while $i > 0 {
   .item-#{$i} { width: 2em * $i; }
   $i: $i - 2;

@@ -401,6 +401,10 @@ $map: (
     border: 2px solid $color
     cursor: $cursor
 
+@each $item, $item2 in fn($items) {}
+//                  ^ keyword.operator
+//                     ^ support.function
+
 
 .selector
   color: nth(map-merge($map, $map2), 3)

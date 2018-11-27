@@ -728,7 +728,7 @@ contexts:
         - match: '(?=$)'
           pop: true
         - match: \b(in)\b
-          scope: keyword.control.in.sass
+          scope: keyword.operator.sass
           push:
             - match: '(?=$)'
               pop: true
@@ -736,8 +736,12 @@ contexts:
             - include: comment-line
             - include: comma-delimiter
             - include: sass-variables
+            - include: sass-functions
+            - include: sass-custom-functions
+            - include: sass-interpolation
             - include: sass-maps
             - include: unquoted-string
+            - include: sass-operators
     - match: '(@)(for|while)\b'
       scope: keyword.control.flow.sass
       captures:
