@@ -151,8 +151,11 @@ selector-ish::before[data-type="text"]:not(:first-child),
 //                  ^ punctuation.separator.css
 //                    ^^^^^^^^^^^ entity.other.pseudo-class.css
 //                    ^ punctuation.definition.entity.css
-  .test:first-child & {}
-//                  ^ keyword.operator.ampersand
+  +,
+//^ punctuation.separator.combinator
+  .test:first-child + & {}
+//                  ^ punctuation.separator.combinator
+//                    ^ keyword.operator.ampersand
   .test:not(.class) & {}
 //                  ^ keyword.operator.ampersand
 

@@ -288,6 +288,9 @@ contexts:
     - include: pseudo-elements
     - include: pseudo-classes
     - include: sass-interpolation
+    - match: '^\s*({{combinators}})(?![>~+])\s*'
+      captures:
+        1: punctuation.separator.combinator.css
 
 
   custom-element-selectors:

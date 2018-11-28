@@ -364,6 +364,9 @@ contexts:
     - include: pseudo-classes
     - include: sass-interpolation
     - include: sass-mixin-directives
+    - match: '^\s*({{combinators}})(?![>~+])\s*'
+      captures:
+        1: punctuation.separator.combinator.css
 
   custom-element-selectors:
     # custom elements + pseudo elements
