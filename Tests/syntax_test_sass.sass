@@ -136,7 +136,11 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
 //  ^^^^^^^^^^^^^^^^^^^^ meta.property-name.css
 //  ^^^^ support.type.vendor-prefix.css
 
-  span:hover { }
+  span:hover,
+  .test:first-child &,
+//                  ^ keyword.operator.ampersand
+  .test:not(.class) &,
+//                  ^ keyword.operator.ampersand
 
   body.firefox ~ & font-weight: normal
 //^^^^^^^^^^^^^^^^^ meta.selector

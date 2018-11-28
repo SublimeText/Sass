@@ -415,7 +415,7 @@ contexts:
       pop: true
     - match: '\s*(?=\{)'
       pop: true
-    - match: '(?=[.#\[])' # look ahead for classes, id's and attr's
+    - match: '(?=[.#\[&])' # look ahead for classes, id's, attr's and &
       pop: true
     - match: '(?=\))' # if passed as a parameter
       pop: true
@@ -442,14 +442,15 @@ contexts:
         1: punctuation.definition.entity.css
       push:
         - meta_scope: meta.function-call.css
-        - include: function-notation-terminator
         - match: '\('
           scope: punctuation.definition.group.begin.css
           push:
-          - meta_scope: meta.group.css
-          - match: '(?=\))'
-            pop: true
-          - include: unquoted-string
+            - meta_scope: meta.group.css
+            - match: '\)'
+              scope: punctuation.definition.group.end.css
+              pop: true
+            - include: unquoted-string
+        - include: selector-parts
 
     - match: '(:)(matches|not|has)(?=\()'
       scope: entity.other.pseudo-class.css
@@ -457,17 +458,20 @@ contexts:
         1: punctuation.definition.entity.css
       push:
         - meta_scope: meta.function-call.css
-        - include: function-notation-terminator
         - match: '\('
           scope: punctuation.definition.group.begin.css
           push:
-          - meta_scope: meta.group.css
-          - match: '(?=\))'
-            pop: true
-          - match: ','
-            scope: punctuation.separator.css
-          - include: selectors
-          - include: custom-element-selectors
+            - meta_scope: rmeta.group.css
+            - match: '\)'
+              scope: punctuation.definition.group.end.css
+              pop: true
+            - match: ','
+              scope: punctuation.separator.css
+            - include: selectors
+            - include: custom-element-selectors
+        - match: ''
+          pop: true
+        - include: selector-parts
 
     - match: '(:)(drop)(?=\()'
       scope: entity.other.pseudo-class.css
@@ -475,15 +479,16 @@ contexts:
         1: punctuation.definition.entity.css
       push:
         - meta_scope: meta.function-call.css
-        - include: function-notation-terminator
         - match: '\('
           scope: punctuation.definition.group.begin.css
           push:
-          - meta_scope: meta.group.css
-          - match: '(?=\))'
-            pop: true
-          - match: \b(active|valid|invalid)\b
-            scope: keyword.other.pseudo-class.css
+            - meta_scope: meta.group.css
+            - match: '\)'
+              scope: punctuation.definition.group.end.css
+              pop: true
+            - match: \b(active|valid|invalid)\b
+              scope: keyword.other.pseudo-class.css
+        - include: selector-parts
 
     - match: '(:)(nth-last-child|nth-child|nth-last-of-type|nth-of-type)(?=\()'
       scope: entity.other.pseudo-class.css
@@ -491,19 +496,20 @@ contexts:
         1: punctuation.definition.entity.css
       push:
         - meta_scope: meta.function-call.css
-        - include: function-notation-terminator
         - match: '\('
           scope: punctuation.definition.group.begin.css
           push:
-          - meta_scope: meta.group.css
-          - match: '(?=\))'
-            pop: true
-          - match: \b(even|odd)\b
-            scope: keyword.other.pseudo-class.css
-          - match: '(?:[-+]?(?:\d+)?(n)(\s*[-+]\s*\d+)?|[-+]?\s*\d+)'
-            scope: constant.numeric.css
-            captures:
-              1: keyword.other.unit.css
+            - meta_scope: meta.group.css
+            - match: '\)'
+              scope: punctuation.definition.group.end.css
+              pop: true
+            - match: \b(even|odd)\b
+              scope: keyword.other.pseudo-class.css
+            - match: '(?:[-+]?(?:\d+)?(n)(\s*[-+]\s*\d+)?|[-+]?\s*\d+)'
+              scope: constant.numeric.css
+              captures:
+                1: keyword.other.unit.css
+        - include: selector-parts
 
     - match: '(:)(-(moz|ms|webkit)-){{ident}}'
       scope: entity.other.pseudo-class.css
