@@ -102,21 +102,23 @@ contexts:
 
   selectors:
     # wild card
-    - match: '\*'
-      scope: entity.name.tag.wildcard.css
+    - match: '\s*(\*)'
+      captures:
+        1: entity.name.tag.wildcard.css
       push:
         - meta_scope: meta.selector.css
         - include: selector-parts
     # ampersand
-    - match: '&'
-      scope: keyword.operator.ampersand.scss
+    - match: '\s*(&)'
+      captures:
+        1: keyword.operator.ampersand.scss
       push:
         - match: '{{ident}}*'
           scope: entity.other.attribute-name.css
         - meta_scope: meta.selector.css
         - include: selector-parts
     # standard elements + pseudo elements
-    - match: '({{element_names}})({{pseudo_elements}})'
+    - match: '\s*({{element_names}})({{pseudo_elements}})'
       captures:
         1: entity.name.tag.css
         3: entity.other.pseudo-element.css
@@ -127,7 +129,7 @@ contexts:
         - meta_scope: meta.selector.css
         - include: selector-parts
     # standard elements + pseudoclasses
-    - match: '({{element_names}})((:)({{regular_pseudo_classes}}))'
+    - match: '\s*({{element_names}})((:)({{regular_pseudo_classes}}))'
       captures:
         1: entity.name.tag.css
         3: entity.other.pseudo-class.css
@@ -135,7 +137,7 @@ contexts:
       push:
         - meta_scope: meta.selector.css
         - include: selector-parts
-    - match: '({{element_names}})((:)(dir|lang))(?=\()'
+    - match: '\s*({{element_names}})((:)(dir|lang))(?=\()'
       captures:
         1: entity.name.tag.css
         3: meta.function-call.cssentity.other.pseudo-class.css
@@ -152,7 +154,7 @@ contexts:
         - match: '\)'
           scope: meta.group.css punctuation.definition.group.end.css
         - include: selector-parts
-    - match: '({{element_names}})((:)(matches|not|has))(?=\()'
+    - match: '\s*({{element_names}})((:)(matches|not|has))(?=\()'
       captures:
         1: entity.name.tag.css
         3: meta.function-call.css entity.other.pseudo-class.css
@@ -170,7 +172,7 @@ contexts:
         - match: '\)'
           scope: meta.group.css punctuation.definition.group.end.css
         - include: selector-parts
-    - match: '({{element_names}})((:)(drop))(?=\()'
+    - match: '\s*({{element_names}})((:)(drop))(?=\()'
       captures:
         1: entity.name.tag.css
         3: meta.function-call.css entity.other.pseudo-class.css
@@ -188,7 +190,7 @@ contexts:
         - match: '\)'
           scope: meta.group.css punctuation.definition.group.end.css
         - include: selector-parts
-    - match: '({{element_names}})((:)(nth-last-child|nth-child|nth-last-of-type|nth-of-type))(?=\()'
+    - match: '\s*({{element_names}})((:)(nth-last-child|nth-child|nth-last-of-type|nth-of-type))(?=\()'
       captures:
         1: entity.name.tag.css
         3: meta.function-call.css entity.other.pseudo-class.css
@@ -210,7 +212,7 @@ contexts:
         - match: '\)'
           scope: meta.group.css punctuation.definition.group.end.css
         - include: selector-parts
-    - match: '({{element_names}})((:)(-(moz|ms|webkit)-){{ident}})'
+    - match: '\s*({{element_names}})((:)(-(moz|ms|webkit)-){{ident}})'
       captures:
         1: entity.name.tag.css
         3: entity.other.pseudo-class.css
@@ -220,14 +222,15 @@ contexts:
         - meta_scope: meta.selector.css
         - include: selector-parts
     # standard elements
-    - match: '{{element_names}}(?![-:])'
+    - match: '\s*({{element_names}})(?![-:])'
       # stop this at word break and not -, plus : is for pseudos
-      scope: entity.name.tag.css
+      captures:
+        1: entity.name.tag.css
       push:
         - meta_scope: meta.selector.css
         - include: selector-parts
     # classes
-    - match: '(\.)(?={{ident}}|#)'
+    - match: '\s*(\.)(?={{ident}}|#)'
       captures:
         1: entity.other.attribute-name.class.css punctuation.definition.entity.css
       push:
@@ -237,7 +240,7 @@ contexts:
         - include: sass-interpolation
         - include: selector-parts
     # id's
-    - match: '(\#)(?={{ident}}|#)'
+    - match: '\s*(\#)(?={{ident}}|#)'
       captures:
         1: entity.other.attribute-name.id.css punctuation.definition.entity.css
       push:
@@ -247,7 +250,7 @@ contexts:
         - include: sass-interpolation
         - include: selector-parts
     # extend-only selectors
-    - match: '(%){{ident}}*'
+    - match: '\s*(%){{ident}}*'
       captures:
         0: entity.other.attribute-name.placeholder.scss
         1: punctuation.definition.entity.scss
@@ -258,7 +261,7 @@ contexts:
         - include: sass-interpolation
         - include: selector-parts
     # attributes
-    - match: '(?=\[)'
+    - match: '\s*(?=\[)'
       push:
         - meta_scope: meta.selector.css
         - match: '\['
@@ -289,12 +292,13 @@ contexts:
     - include: sass-interpolation
     - match: '^\s*({{combinators}})(?![>~+])\s*'
       captures:
+        0: meta.selector.css
         1: punctuation.separator.combinator.css
 
 
   custom-element-selectors:
     # custom elements + pseudo elements
-    - match: '({{custom_elements}})({{pseudo_elements}})'
+    - match: '\s*({{custom_elements}})({{pseudo_elements}})'
       captures:
         1: entity.name.tag.custom.css
         3: entity.other.pseudo-element.css
@@ -305,7 +309,7 @@ contexts:
         - meta_scope: meta.selector.css
         - include: selector-parts
     # custom elements + pseudoclasses
-    - match: '({{custom_elements}})((:)({{regular_pseudo_classes}}))'
+    - match: '\s*({{custom_elements}})((:)({{regular_pseudo_classes}}))'
       captures:
         1: entity.name.tag.custom.css
         3: entity.other.pseudo-class.css
@@ -313,7 +317,7 @@ contexts:
       push:
         - meta_scope: meta.selector.css
         - include: selector-parts
-    - match: '({{custom_elements}})((:)(dir|lang))(?=\()'
+    - match: '\s*({{custom_elements}})((:)(dir|lang))(?=\()'
       captures:
         1: entity.name.tag.custom.css
         3: meta.function-call.cssentity.other.pseudo-class.css
@@ -330,7 +334,7 @@ contexts:
         - match: '\)'
           scope: meta.group.css punctuation.definition.group.end.css
         - include: selector-parts
-    - match: '({{custom_elements}})((:)(matches|not|has))(?=\()'
+    - match: '\s*({{custom_elements}})((:)(matches|not|has))(?=\()'
       captures:
         1: entity.name.tag.custom.css
         3: meta.function-call.css entity.other.pseudo-class.css
@@ -348,7 +352,7 @@ contexts:
         - match: '\)'
           scope: meta.group.css punctuation.definition.group.end.css
         - include: selector-parts
-    - match: '({{custom_elements}})((:)(drop))(?=\()'
+    - match: '\s*({{custom_elements}})((:)(drop))(?=\()'
       captures:
         1: entity.name.tag.custom.css
         3: meta.function-call.css entity.other.pseudo-class.css
@@ -366,7 +370,7 @@ contexts:
         - match: '\)'
           scope: meta.group.css punctuation.definition.group.end.css
         - include: selector-parts
-    - match: '({{custom_elements}})((:)(nth-last-child|nth-child|nth-last-of-type|nth-of-type))(?=\()'
+    - match: '\s*({{custom_elements}})((:)(nth-last-child|nth-child|nth-last-of-type|nth-of-type))(?=\()'
       captures:
         1: entity.name.tag.custom.css
         3: meta.function-call.css entity.other.pseudo-class.css
@@ -388,7 +392,7 @@ contexts:
         - match: '\)'
           scope: meta.group.css punctuation.definition.group.end.css
         - include: selector-parts
-    - match: '({{custom_elements}})((:)(-(moz|ms|webkit)-){{ident}})'
+    - match: '\s*({{custom_elements}})((:)(-(moz|ms|webkit)-){{ident}})'
       captures:
         1: entity.name.tag.css
         3: entity.other.pseudo-class.css
@@ -398,9 +402,9 @@ contexts:
         - meta_scope: meta.selector.css
         - include: selector-parts
     # custom elements
-    - match: '{{custom_elements}}(?![-:])'
+    - match: '\s*({{custom_elements}})(?![-:])'
       captures:
-        0: entity.name.tag.custom.css
+        1: entity.name.tag.custom.css
       push:
         - meta_scope: meta.selector.css
         - include: selector-parts
@@ -429,20 +433,20 @@ contexts:
       pop: true
 
   pseudo-elements:
-    - match: '{{pseudo_elements}}'
-      scope: entity.other.pseudo-element.css
+    - match: '\s*{{pseudo_elements}}'
+      scope: meta.selector.css entity.other.pseudo-element.css
       captures:
         1: punctuation.definition.entity.css
         2: punctuation.definition.entity.css
         3: support.type.vendor-prefix.css
 
   pseudo-classes:
-    - match: '(:)(dir|lang)(?=\()'
+    - match: '\s*(:)(dir|lang)(?=\()'
       scope: entity.other.pseudo-class.css
       captures:
         1: punctuation.definition.entity.css
       push:
-        - meta_scope: meta.function-call.css
+        - meta_scope: meta.selector.css meta.function-call.css
         - match: '\('
           scope: punctuation.definition.group.begin.css
           push:
@@ -453,12 +457,12 @@ contexts:
             - include: unquoted-string
         - include: selector-parts
 
-    - match: '(:)(matches|not|has)(?=\()'
+    - match: '\s*(:)(matches|not|has)(?=\()'
       scope: entity.other.pseudo-class.css
       captures:
         1: punctuation.definition.entity.css
       push:
-        - meta_scope: meta.function-call.css
+        - meta_scope: meta.selector.css meta.function-call.css
         - match: '\('
           scope: punctuation.definition.group.begin.css
           push:
@@ -474,12 +478,12 @@ contexts:
           pop: true
         - include: selector-parts
 
-    - match: '(:)(drop)(?=\()'
+    - match: '\s*(:)(drop)(?=\()'
       scope: entity.other.pseudo-class.css
       captures:
         1: punctuation.definition.entity.css
       push:
-        - meta_scope: meta.function-call.css
+        - meta_scope: meta.selector.css meta.function-call.css
         - match: '\('
           scope: punctuation.definition.group.begin.css
           push:
@@ -491,12 +495,12 @@ contexts:
               scope: keyword.other.pseudo-class.css
         - include: selector-parts
 
-    - match: '(:)(nth-last-child|nth-child|nth-last-of-type|nth-of-type)(?=\()'
+    - match: '\s*(:)(nth-last-child|nth-child|nth-last-of-type|nth-of-type)(?=\()'
       scope: entity.other.pseudo-class.css
       captures:
         1: punctuation.definition.entity.css
       push:
-        - meta_scope: meta.function-call.css
+        - meta_scope: meta.selector.css meta.function-call.css
         - match: '\('
           scope: punctuation.definition.group.begin.css
           push:
@@ -512,7 +516,7 @@ contexts:
                 1: keyword.other.unit.css
         - include: selector-parts
 
-    - match: '(:)(-(moz|ms|webkit)-){{ident}}'
+    - match: '\s*(:)(-(moz|ms|webkit)-){{ident}}'
       scope: entity.other.pseudo-class.css
       captures:
         1: punctuation.definition.entity.css
@@ -521,8 +525,8 @@ contexts:
         - meta_scope: meta.selector.css
         - include: selector-parts
 
-    - match: '(:)({{regular_pseudo_classes}})'
-      scope: entity.other.pseudo-class.css
+    - match: '\s*(:)({{regular_pseudo_classes}})'
+      scope: meta.selector.css entity.other.pseudo-class.css
       captures:
         1: punctuation.definition.entity.css
 
