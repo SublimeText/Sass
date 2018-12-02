@@ -117,7 +117,6 @@ contexts:
         - include: selector-parts
     # standard elements + pseudo elements
     - match: '({{element_names}})({{pseudo_elements}})'
-      scope: pseudo.jetser.unit
       captures:
         1: entity.name.tag.css
         3: entity.other.pseudo-element.css
@@ -296,7 +295,6 @@ contexts:
   custom-element-selectors:
     # custom elements + pseudo elements
     - match: '({{custom_elements}})({{pseudo_elements}})'
-      scope: pseudo.jetser.unit
       captures:
         1: entity.name.tag.custom.css
         3: entity.other.pseudo-element.css
