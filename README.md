@@ -1,7 +1,6 @@
 # SCSS and Sass syntax for Sublime Text 3
 
-- snippets to auto-complete Sass functions
-- completions for CSS properties and values
+Includes completions for CSS properties and values, as well as relevant Sass functions.
 
 Highlights code using up to date specifications for properties and values to help you catch typos.
 
