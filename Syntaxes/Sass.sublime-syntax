@@ -155,14 +155,7 @@ variables:
 
 contexts:
   main:
-    - match: '^---$'
-      scope: frontmatter.jekyll punctuation.section.frontmatter.begin.jekyll
-      embed: scope:source.yaml
-      embed_scope: frontmatter.jekyll
-      escape: '^---$'
-      escape_captures:
-        0: frontmatter.jekyll punctuation.section.frontmatter.end.jekyll
-
+    - include: frontmatter
     - include: comment-block
     - include: comment-line
     - include: selectors
@@ -173,6 +166,16 @@ contexts:
     - match: '\s*(,)\s*'
       captures:
         1: punctuation.separator.css
+
+
+  frontmatter:
+    - match: '^---$'
+      scope: frontmatter.jekyll punctuation.section.frontmatter.begin.jekyll
+      embed: scope:source.yaml
+      embed_scope: frontmatter.jekyll
+      escape: '^---$'
+      escape_captures:
+        0: frontmatter.jekyll punctuation.section.frontmatter.end.jekyll
 
 
   selectors:
@@ -194,7 +197,6 @@ contexts:
         - include: selector-parts
     # standard elements + pseudo elements
     - match: '\s*({{element_names}})({{pseudo_elements}})'
-      scope: pseudo.jetser.unit
       captures:
         1: entity.name.tag.css
         3: entity.other.pseudo-element.css
@@ -375,7 +377,6 @@ contexts:
   custom-element-selectors:
     # custom elements + pseudo elements
     - match: '\s*({{custom_elements}})({{pseudo_elements}})'
-      scope: pseudo.jetser.unit
       captures:
         1: entity.name.tag.custom.css
         3: entity.other.pseudo-element.css
@@ -1389,9 +1390,9 @@ contexts:
               | z-index|zero
               | zoom(-in|-out)?
               | ({{counter_styles}})
-            )\b(?=[\s{)/])
+            )\b(?=[\s;{)/])
       scope: support.constant.property-value.css
-    - match: \b(?i:sans-serif|serif|monospace|fantasy|cursive|system-ui)\b(?=\s*[,\n}{])
+    - match: \b(?i:sans-serif|serif|monospace|fantasy|cursive|system-ui)\b(?=\s*[;,\n}{])
       scope: support.constant.font-name.css
 
 
@@ -2595,7 +2596,7 @@ contexts:
     # unquoted string +
     # + unquoted string
     # unquoted string + unquoted string
-    - match: '([a-zA-Z_-]+)\s+(\+)\s+([a-zA-Z_-]+(?=\s|$))|(\+)\s+([a-zA-Z_-]+(?=\s|$))|([a-zA-Z_-]+)\s+(\+)'
+    - match: '([a-zA-Z_-]+)\s+(\+)\s+([a-zA-Z_-]+(?=\s|$|;))|(\+)\s+([a-zA-Z_-]+(?=\s|$|;))|([a-zA-Z_-]+)\s+(\+)'
       captures:
         1: string.unquoted.css
         2: keyword.operator.sass
