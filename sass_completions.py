@@ -479,33 +479,20 @@ def parse_css_data():
 
     return props
 
+
 class CSSCompletions(sublime_plugin.EventListener):
     props = None
     regex = None
 
     def on_query_completions(self, view, prefix, locations):
-        # match inside a CSS document and
-        # match inside the style attribute of HTML tags, incl. just before the quote that closes the attribute value
-        css_selector_scope = "source.scss - meta.selector.css"
-        html_style_attr_selector_scope = "text.html meta.attribute-with-value.style.html " + \
-                                    "string.quoted - punctuation.definition.string.begin.html"
-        selector_scope = css_selector_scope + ', ' + html_style_attr_selector_scope
+        selector_scope = "source.scss - meta.selector.css, source.sass - meta.selector.css"
         prop_name_scope = "meta.property-name.css"
         prop_value_scope = "meta.property-value.css"
         loc = locations[0]
 
-        # When not inside CSS, don’t trigger
+        # When not inside Sass/SCSS, don’t trigger
         if not view.match_selector(loc, selector_scope):
-            # if the text immediately after the caret is a HTML style tag beginning, and the character before the
-            # caret matches the CSS scope, then probably the user is typing here (where | represents the caret):
-            # <style type="text/css">.test { f|</style>
-            # i.e. after a "style" HTML open tag and immediately before the closing tag.
-            # so we want to offer CSS completions here.
-            if view.match_selector(loc, 'text.html meta.tag.style.end punctuation.definition.tag.begin.html') and \
-               view.match_selector(loc - 1, selector_scope):
-                pass
-            else:
-                return []
+            return []
 
         if not self.props:
             self.props = parse_css_data()
@@ -515,7 +502,6 @@ class CSSCompletions(sublime_plugin.EventListener):
         if (view.match_selector(loc, prop_value_scope) or
             # This will catch scenarios like:
             # - .foo {font-style: |}
-            # - <style type="text/css">.foo { font-weight: b|</style>
             view.match_selector(loc - 1, prop_value_scope)):
 
             alt_loc = loc - len(prefix)
@@ -527,7 +513,10 @@ class CSSCompletions(sublime_plugin.EventListener):
                 if prop_name in self.props:
                     values = self.props[prop_name]
 
-                    add_semi_colon = view.substr(sublime.Region(loc, loc + 1)) != ';'
+                    if view.match_selector(loc, "source.scss"):
+                        add_semi_colon = view.substr(sublime.Region(loc, loc + 1)) != ';'
+                    else:
+                        add_semi_colon = False
 
                     for value in values:
                         desc = value + "\t" + prop_name
@@ -554,7 +543,10 @@ class CSSCompletions(sublime_plugin.EventListener):
 
             return None
         else:
-            add_colon = not view.match_selector(loc, prop_name_scope)
+            if view.match_selector(loc, "source.scss"):
+                add_colon = not view.match_selector(loc, prop_name_scope)
+            else:
+                add_colon = False
 
             for prop in self.props:
                 if add_colon:
