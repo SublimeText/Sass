@@ -489,6 +489,7 @@ class CSSCompletions(sublime_plugin.EventListener):
         prop_name_scope = "meta.property-name.css"
         prop_value_scope = "meta.property-value.css"
         loc = locations[0]
+        is_scss = view.match_selector(loc, "source.scss")
 
         # When not inside Sass/SCSS, don’t trigger
         if not view.match_selector(loc, selector_scope):
@@ -496,7 +497,10 @@ class CSSCompletions(sublime_plugin.EventListener):
 
         if not self.props:
             self.props = parse_css_data()
-            self.regex = re.compile(r"([a-zA-Z-]+):\s*$")
+            if is_scss:
+                self.regex = re.compile(r"([a-zA-Z-]+):\s*$")
+            else:
+                self.regex = re.compile(r":([a-zA-Z-]+)\s*$")
 
         l = []
         if (view.match_selector(loc, prop_value_scope) or
@@ -508,12 +512,13 @@ class CSSCompletions(sublime_plugin.EventListener):
             line = view.substr(sublime.Region(view.line(alt_loc).begin(), alt_loc))
 
             match = re.search(self.regex, line)
+
             if match:
                 prop_name = match.group(1)
                 if prop_name in self.props:
                     values = self.props[prop_name]
 
-                    if view.match_selector(loc, "source.scss"):
+                    if is_scss:
                         add_semi_colon = view.substr(sublime.Region(loc, loc + 1)) != ';'
                     else:
                         add_semi_colon = False
@@ -543,7 +548,7 @@ class CSSCompletions(sublime_plugin.EventListener):
 
             return None
         else:
-            if view.match_selector(loc, "source.scss"):
+            if is_scss:
                 add_colon = not view.match_selector(loc, prop_name_scope)
             else:
                 add_colon = False
