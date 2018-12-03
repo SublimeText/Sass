@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-round(${1:number})
-]]></content>
-<tabTrigger>round</tabTrigger>
-<description>sass number</description>
-<scope>source.scss, source.sass</scope>
-</snippet>

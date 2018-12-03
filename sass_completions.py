@@ -36,7 +36,27 @@ COMMON_VALUES = {
     'break_inside': [
         'auto', 'avoid', 'avoid-page', 'avoid-column', 'avoid-region'
     ],
-    'color': ['currentColor', 'rgb($1)', 'rgba($1)', 'hsl($1)', 'hsla($1)', 'transparent'],
+    'color': [
+        'currentColor', 'rgb($1)', 'rgba($1)', 'hsl($1)', 'hsla($1)', 'transparent',
+        'adjust-color(${1:color}, ${2:component})',
+        'adjust-hue(${1:color}, ${2:degrees})',
+        'change-color(${1:color}, ${2:component})',
+        'complement(${1:color})',
+        'darken(${1:color}, ${2:amount})',
+        'desaturate(${1:color}, ${2:amount})',
+        'fade-in(${1:color}, ${1:amount})',
+        'fade-out(${1:color}, ${1:amount})',
+        'grayscale(${1:color})',
+        'ie-hex-str(${1:color})',
+        'invert(${1:color}, ${2:weight})',
+        'lighten(${1:color}, ${2:amount})',
+        'mix(${1:color}1, ${2:color}2, ${3:weight})',
+        'opacify(${1:color}, ${1:amount})',
+        'rgba(${1:color}, ${2:alpha})',
+        'saturate(${1:color}, ${2:amount})',
+        'scale-color(${1:color}, ${2:component})',
+        'transparentize(${1:color}, ${2:amount})'
+    ],
     'font_variant_alternates': [
         'normal', 'historical-forms', 'stylistic($1)', 'styleset($1)',
         'character-variant($1)', 'swash($1)', 'ornaments($1)', 'annotation($1)'
@@ -67,13 +87,32 @@ COMMON_VALUES = {
         'lower-armenian', 'upper-armenian', 'georgian', 'cjk-ideographic',
         'hiragana', 'katakana', 'hiragana-iroha', 'katakana-iroha'
     ],
+    'number': [
+        'abs(${1:number})',
+        'ceil(${1:number})',
+        'floor(${1:number})',
+        'max(${1:numbers…})',
+        'min(${1:numbers…})',
+        'random()',
+        'round(${1:number})'
+    ],
+    'percentage': [
+        'percentage(${1:number})'
+    ],
     'position': ['top', 'right', 'bottom', 'left', 'center'],
     'relative_size': ['larger', 'smaller'],
     'relative_weight': ['bolder', 'lighter'],
     'repeat_style': [
         'repeat', 'repeat-x', 'repeat-y', 'space', 'round', 'no-repeat'
     ],
-    'string': ['\"$1\"'],
+    'string': [
+        '\"$1\"',
+        'quote(${1:string})',
+        'unquote(${1:string})',
+        'str-slice(${1:string}, ${2:start})',
+        'to-lower-case(${1:string})',
+        'to-upper-case(${1:string})'
+    ],
     'timing_function': [
         'ease', 'ease-in', 'ease-out', 'ease-in-out', 'linear',
         'cubic-bezier($1)', 'step-start', 'step-end', 'steps($1)'
@@ -499,6 +538,15 @@ class CSSCompletions(sublime_plugin.EventListener):
 
                         if "$1" in snippet:
                             desc = desc.replace("$1", "")
+
+                        if "${1:" in snippet:
+                            desc = desc.replace("${1:", "")
+
+                        if "${2:" in snippet:
+                            desc = desc.replace("${2:", "")
+
+                        if "}" in snippet:
+                            desc = desc.replace("}", "")
 
                         l.append((desc, snippet))
 

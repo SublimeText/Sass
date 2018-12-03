@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-lightness(${1:color})
-]]></content>
-<tabTrigger>lightness</tabTrigger>
-<description>sass color</description>
-<scope>source.scss, source.sass</scope>
-</snippet>

@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-map-merge(${1:map}, ${2:map})
-]]></content>
-<tabTrigger>map-merge</tabTrigger>
-<description>sass map</description>
-<scope>source.scss, source.sass</scope>
-</snippet>

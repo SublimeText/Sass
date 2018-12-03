@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-nth(${1:list}, ${2:n})
-]]></content>
-<tabTrigger>nth</tabTrigger>
-<description>sass list</description>
-<scope>source.scss, source.sass</scope>
-</snippet>

@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-str-insert(${1:string}, ${2:insert}, ${3:index})
-]]></content>
-<tabTrigger>str-insert</tabTrigger>
-<description>sass string</description>
-<scope>source.scss, source.sass</scope>
-</snippet>

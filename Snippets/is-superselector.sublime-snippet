@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-is-superselector(${1:super}, ${2:sub})
-]]></content>
-<tabTrigger>is-superselector</tabTrigger>
-<description>sass selector</description>
-<scope>source.scss, source.sass</scope>
-</snippet>

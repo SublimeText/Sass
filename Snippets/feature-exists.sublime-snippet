@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-feature-exists(${1:feature})
-]]></content>
-<tabTrigger>feature-exists</tabTrigger>
-<description>sass function</description>
-<scope>source.scss, source.sass</scope>
-</snippet>

@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-str-length(${1:string})
-]]></content>
-<tabTrigger>str-length</tabTrigger>
-<description>sass string</description>
-<scope>source.scss, source.sass</scope>
-</snippet>

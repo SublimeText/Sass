@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-variable-exists(${1:name})
-]]></content>
-<tabTrigger>variable-exists</tabTrigger>
-<description>sass function</description>
-<scope>source.scss, source.sass</scope>
-</snippet>

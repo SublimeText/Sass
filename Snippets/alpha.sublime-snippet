@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-alpha(${1:color}) / opacity(${2:color})
-]]></content>
-<tabTrigger>alpha</tabTrigger>
-<description>sass color</description>
-<scope>source.scss, source.sass</scope>
-</snippet>

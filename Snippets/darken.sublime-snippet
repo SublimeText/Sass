@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-darken(${1:color}, ${2:amount})
-]]></content>
-<tabTrigger>darken</tabTrigger>
-<description>sass color</description>
-<scope>source.scss, source.sass</scope>
-</snippet>

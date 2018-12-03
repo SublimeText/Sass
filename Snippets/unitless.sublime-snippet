@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-unitless(${1:number})
-]]></content>
-<tabTrigger>unitless</tabTrigger>
-<description>sass function</description>
-<scope>source.scss, source.sass</scope>
-</snippet>

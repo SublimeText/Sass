@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-content-exists()
-]]></content>
-<tabTrigger>content-exists</tabTrigger>
-<description>sass function</description>
-<scope>source.scss, source.sass</scope>
-</snippet>

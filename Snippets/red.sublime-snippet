@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-red(${1:color})
-]]></content>
-<tabTrigger>red</tabTrigger>
-<description>sass color</description>
-<scope>source.scss, source.sass</scope>
-</snippet>
