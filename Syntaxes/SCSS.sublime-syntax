@@ -78,9 +78,9 @@ contexts:
         1: keyword.operator.ampersand.sass
       push:
         - meta_scope: meta.selector.css
-        - include: selector-parts
-        - match: '{{ident}}*'
+        - match: '[-_]+{{ident}}*'
           scope: entity.other.attribute-name.css
+        - include: selector-parts
     # standard elements + pseudo elements
     - match: '\s*({{element_names}})({{pseudo_elements}})'
       captures:

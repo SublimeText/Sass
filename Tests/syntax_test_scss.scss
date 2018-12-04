@@ -199,6 +199,12 @@ selector-ish::before[data-type="text"]:not(:first-child),
 //^ keyword.operator.ampersand.sass
 // ^^^^^^^ entity.other.attribute-name.css
 // ^^^^^^^^ meta.selector.css
+  &--bem {}
+// ^^^^^ meta.selector.css entity.other.attribute-name
+//^ keyword.operator.ampersand.sass
+  &_bem {}
+// ^^^^ meta.selector.css entity.other.attribute-name
+//     ^ meta.selector.css
   [data-type="text"]:hover,
 //^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector
 //                  ^^^^^^ entity.other.pseudo-class.css
