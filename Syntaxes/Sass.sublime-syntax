@@ -706,8 +706,7 @@ contexts:
         1: punctuation.definition.keyword.css
     - match: \!\s*(default|global|optional)
       scope: keyword.other.sass
-    - match: "-(?:webkit|moz|ms|o)-"
-      scope: support.type.vendor-prefix.css
+    - include: vendor-prefix
     - include: comment-line
     - include: comment-block
     - include: builtin-functions
@@ -717,7 +716,6 @@ contexts:
     - include: property-value-constants
     - include: literal-string
     - include: sass-maps
-    - include: comment-block
     - include: sass-variables
     - include: sass-functions
     - include: sass-custom-functions
@@ -980,7 +978,8 @@ contexts:
         3: entity.other.namespace-prefix.css
       push:
         - meta_scope: meta.at-rule.namespace.css
-        - include: at-rule-punctuation
+        - match: '(?=$)'
+          pop: true
         - include: literal-string
         - include: url-function
         - include: comment-block
@@ -1032,25 +1031,21 @@ contexts:
 
   keyframe-operators:
     - include: numeric-values
-    - match: \b(from|to)\b
+    - match: '\b(from|to)\b'
       scope: keyword.keyframe-selector.css
-
-  at-rule-punctuation:
-    - match: '(?=$)'
-      pop: true
 
   media-query:
     - include: comment-block
-    - match: \b(?i:all|aural|braille|embossed|handheld|print|projection|screen|speech|tty|tv)\b
+    - match: '\b(?i:all|aural|braille|embossed|handheld|print|projection|screen|speech|tty|tv)\b'
       scope: support.constant.media.css
     - match: '\b(?i:and|or|not|only)\b'
       scope: keyword.operator.logic.media.css
     - match: ','
       scope: punctuation.definition.arbitrary-repetition.css
-    - match: \(
+    - match: '\('
       scope: punctuation.definition.group.begin.css
       push:
-        - match: \)
+        - match: '\)'
           scope: punctuation.definition.group.end.css
           pop: true
         - include: comment-block
@@ -1071,13 +1066,13 @@ contexts:
             2: support.type.vendor-prefix.css
             5: support.type.vendor-prefix.css
           push:
-            - match: (:)|(?=\))
+            - match: '(:)|(?=\))'
               captures:
                 1: punctuation.separator.key-value.css
               pop: true
-        - match: \b(portrait|landscape|progressive|interlace)
+        - match: '\b(portrait|landscape|progressive|interlace)'
           scope: support.constant.property-value.css
-        - match: \s*(\d+)(/)(\d+)
+        - match: '\s*(\d+)(/)(\d+)'
           captures:
             1: constant.numeric.css
             2: keyword.operator.arithmetic.css
@@ -2369,7 +2364,7 @@ contexts:
           - include: sass-value-expression
 
   # Color Adjuster Functions - Not yet implemented by browsers
-  # https://drafts.csswg.org/css-color/#typedef-color-adjuster
+  # https://www.w3.org/TR/css-color-4/#typedef-color-adjuster
   color-adjuster-functions:
       # red(), green(), blue(), alpha() - Not yet implemented by browsers
     - match: '\b(red|green|blue|alpha|a)(?=\()'
