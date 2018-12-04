@@ -1428,7 +1428,8 @@ contexts:
       - include: sass-custom-functions
       - include: sass-interpolation
       - include: sass-operators
-      - include: unquoted-string
+      - match: '\b[^\s''"\(\)]+\b'
+        scope: string.unquoted.css
 
   builtin-functions:
     - include: attr-function

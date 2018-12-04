@@ -104,6 +104,7 @@ selector-ish::before[data-type="text"]:not(:first-child),
 // ^ support.type.property-name.css
 // ^ - meta.selector
 //      ^ - keyword.operator
+  $variable: '#{$font-path}#{get-font-name(param12)}/dt_primary_#{$size}';
   $width: 5em !global;
 //^^^^^^ variable.declaration.sass
 //^ punctuation.definition.variable.sass
