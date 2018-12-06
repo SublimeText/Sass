@@ -784,6 +784,7 @@ contexts:
             - include: literal-string
             - include: unquoted-string
         - include: comment-block
+        - include: comment-line
         - include: literal-string
     - match: '\s*((@)counter-style\b)\s+(?:(?i:\b(decimal|none)\b)|({{ident}}))?\s*(?=\{|$)'
       captures:
@@ -794,6 +795,7 @@ contexts:
       push:
         - meta_scope: meta.at-rule.counter-style.css
         - include: comment-block
+        - include: comment-line
         - match: '(?=$)'
           pop: true
     - match: '(?=\s*@custom-media\b)'
@@ -853,6 +855,7 @@ contexts:
         - match: '\s*(?=$)'
           pop: true
         - include: comment-block
+        - include: comment-line
         - include: sass-interpolation
         - match: '\s*({{ident}})?'
           captures:
@@ -882,6 +885,7 @@ contexts:
         - include: literal-string
         - include: url-function
         - include: comment-block
+        - include: comment-line
     - match: '\s*((@)page)\s*(?:(:)(first|left|right))?\s*'
       captures:
         1: keyword.control.at-rule.page.css
@@ -891,6 +895,7 @@ contexts:
       push:
         - meta_scope: meta.at-rule.page.css
         - include: comment-block
+        - include: comment-line
         - match: '\s*(?=$)'
           pop: true
     - match: '((@)supports)'
@@ -926,6 +931,7 @@ contexts:
         - include: at-supports-operators
         - include: at-supports-parens
         - include: comment-block
+        - include: comment-line
         - include: properties
 
   keyframe-operators:
@@ -935,6 +941,7 @@ contexts:
 
   media-query:
     - include: comment-block
+    - include: comment-line
     - match: '\b(?i:all|aural|braille|embossed|handheld|print|projection|screen|speech|tty|tv)\b'
       scope: support.constant.media.css
     - match: '\b(?i:and|or|not|only)\b'
@@ -948,6 +955,7 @@ contexts:
           scope: punctuation.definition.group.end.css
           pop: true
         - include: comment-block
+        - include: comment-line
         - match: |-
             (?x)
             (
@@ -1005,7 +1013,9 @@ contexts:
     - include: unquoted-string
 
   sass-value-expression:
+    - include: comment-line
     - include: comment-block
+    - include: comma-delimiter
     - include: var-function
     - include: sass-variables
     - include: sass-functions

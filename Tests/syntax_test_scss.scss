@@ -791,13 +791,14 @@ $gutter-width: 10px;
 /*  ^     punctuation.definition.keyword.css */
 /*   ^^^^ keyword.control.at-rule.page.css   */
 
-    @media only screen {}
-/*  ^^^^^^^^^^^^^^^^^^^ meta.at-rule.media.css */
-/*  ^                  punctuation.definition.keyword.css */
-/*   ^^^^^             keyword.control.at-rule.media.css  */
-/*         ^^^^        keyword.operator.logic.media.css   */
-/*              ^^^^^^ support.constant.media.css         */
-
+    @media only screen //test comment {}
+//  ^^^^^^^^^^^^^^^^^^^ meta.at-rule.media.css
+//  ^                  punctuation.definition.keyword.css
+//   ^^^^^             keyword.control.at-rule.media.css
+//         ^^^^        keyword.operator.logic.media.css
+//              ^^^^^^ support.constant.media.css
+//                     ^ comment.line.double-slash
+    {}
     @media (min-width: 700px) {}
 /*  ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.media.css */
 /*  ^                  punctuation.definition.keyword.css */
