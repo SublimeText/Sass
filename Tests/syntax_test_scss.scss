@@ -321,6 +321,20 @@ color: format(
 //                              ^ meta.function.parameters.sass punctuation.definition.group.end.sass
 //                     ^^ meta.function.parameters.sass variable.parameter.sass
 //                     ^ punctuation.definition.variable.sass
+  #{$selector + "some string"}:not(.class),
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.interpolation.sass
+//^ punctuation.definition.variable.sass
+// ^ punctuation.definition.group.begin.sass
+//  ^^^^^^^^^ variable.other.sass
+//  ^ punctuation.definition.variable.sass
+//            ^ keyword.operator
+//              ^^^^^^^^^^^^^ string.quoted.double
+//                           ^ punctuation.definition.group.end.sass
+//                            ^ punctuation.definition.entity.css
+//                             ^ entity.other.pseudo-class.css
+  body.firefox #{$selector} + a:hover,
+  body.firefox #{$selector} :active,
   body.firefox #{$selector}:before {
 //             ^^^^^^^^^^^^ meta.group.interpolation.sass
 //             ^ punctuation.definition.variable.sass
@@ -384,6 +398,17 @@ color: format(
 //              ^ - meta.selector
 //                     ^ - keyword.operator
 //                           ^ - keyword.operator
+    #{$prop}: var(--#{$color}-primary, color(primary, unthemed));
+//  ^^^^^^^^ meta.group.interpolation.sass
+//  ^ punctuation.definition.variable.sass
+//   ^ punctuation.definition.group.begin.sass
+//    ^^^^^ variable.other.sass
+//    ^ punctuation.definition.variable.sass
+//         ^ punctuation.definition.group.end.sass
+//          ^ punctuation.separator.key-value
+  }
+  p.#{$name} {
+    #{$attr}-color: blue;
   }
 }
 
@@ -631,7 +656,9 @@ $gutter-width: 10px;
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double.css
 //                  ^^^^^ meta.group.interpolation.sass
 //                  ^ punctuation.definition.variable.sass
+
     $x: 1px * $x;
+    @if index((top, bottom), $dir) { }
   }
   @if unitless($y) {
     @warn "Assuming #{$y} to be in pixels";

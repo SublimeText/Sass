@@ -251,6 +251,20 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
 //                     ^ punctuation.definition.variable.sass
 //                                 ^ constant.language
 //                                     ^ meta.function.parameters.sass punctuation.definition.group.end.sass
+  #{$selector + "some string"}:not(.class),
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.interpolation.sass
+//^ punctuation.definition.variable.sass
+// ^ punctuation.definition.group.begin.sass
+//  ^^^^^^^^^ variable.other.sass
+//  ^ punctuation.definition.variable.sass
+//            ^ keyword.operator
+//              ^^^^^^^^^^^^^ string.quoted.double
+//                           ^ punctuation.definition.group.end.sass
+//                            ^ punctuation.definition.entity.css
+//                             ^ entity.other.pseudo-class.css
+  body.firefox #{$selector} + a:hover,
+  body.firefox #{$selector} :active,
   body.firefox #{$selector}:before
 //             ^^^^^^^^^^^^ meta.group.interpolation.sass
 //             ^ punctuation.definition.variable.sass
@@ -317,6 +331,14 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
     @include breathe(border-bottom-color)
 //                   ^^^^^^^^^^^^^^^^^^^ support.constant.property-value.css
 
+    #{$prop}: var(--#{$color}-primary, color(primary, unthemed))
+//  ^^^^^^^^ meta.group.interpolation.sass
+//  ^ punctuation.definition.variable.sass
+//   ^ punctuation.definition.group.begin.sass
+//    ^^^^^ variable.other.sass
+//    ^ punctuation.definition.variable.sass
+//         ^ punctuation.definition.group.end.sass
+//          ^ punctuation.separator.key-value
 
 @keyframes beat, bounce
 //  ^^^^^^^^^^^^^^^^^^^ meta.at-rule.keyframe.css
