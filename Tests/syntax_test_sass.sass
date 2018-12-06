@@ -428,9 +428,16 @@ $map: (
     key-3: 123px
   )
 )
-@each $animal, $color, $cursor in (puma, black, default),
-                                  (sea-slug, blue, pointer),
-                                  (egret, white, move)
+$list: (top, bottom, right, position, height);
+//      ^^^ support.constant.property-value
+//         ^ punctuation.separator.css
+//           ^^^ support.constant.property-value
+//                 ^ punctuation.separator.css
+//                   ^^^ support.constant.property-value
+//                          ^^^ string.unquoted
+//                                  ^ punctuation.separator.css
+
+@each $animal, $color, $cursor in (puma, black, default),(sea-slug, blue, pointer), (egret, white, move)
   .#{$animal-icon}
     background-image: url('/images/#{$animal}.png')
     border: 2px solid $color
