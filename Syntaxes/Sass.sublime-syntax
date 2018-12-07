@@ -2164,8 +2164,9 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
+          - include: percentage-type
           - include: length-type
-          - match: \b(max-content|min-content)\b
+          - match: \b(auto|max-content|min-content)\b
             scope: support.constant.property-value.css
           - include: sass-value-expression
 
