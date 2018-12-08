@@ -602,11 +602,11 @@ contexts:
       pop: true
 
   property-values:
-    - match: \!\s*important
+    - match: '\!\s*important'
       scope: keyword.other.important.css
       captures:
         1: punctuation.definition.keyword.css
-    - match: \!\s*(default|global|optional)
+    - match: '\!\s*(default|global|optional)'
       scope: keyword.other.sass
     - include: vendor-prefix
     - include: comment-line
