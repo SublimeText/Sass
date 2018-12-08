@@ -12,6 +12,17 @@
   so it also won't appear
 
 /*
+Sass indented syntax doesn't use { } or ;
+*/
+
+div {
+//  ^ invalid.illegal.sass
+  color: blue;
+//           ^ invalid.illegal.sass
+}
+// <- invalid.illegal.sass
+
+/*
   Property syntax with the colon before the property name
 */
 #main

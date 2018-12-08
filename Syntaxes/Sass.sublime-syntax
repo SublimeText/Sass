@@ -155,6 +155,8 @@ variables:
 
 contexts:
   main:
+    - match: '\{|\}|;'
+      scope: invalid.illegal.sass
     - include: frontmatter
     - include: comment-block
     - include: comment-line
@@ -602,6 +604,8 @@ contexts:
       pop: true
 
   property-values:
+    - match: ';'
+      scope: invalid.illegal.sass
     - match: '\!\s*important'
       scope: keyword.other.important.css
       captures:
