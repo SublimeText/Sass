@@ -340,6 +340,14 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
 //    ^ punctuation.definition.variable.sass
 //         ^ punctuation.definition.group.end.sass
 //          ^ punctuation.separator.key-value
+    #{$prop}-color: blue
+//  ^^^^^^^^^^^^^^ meta.property-name
+//  ^^^^^^^^ meta.group.interpolation
+//          ^ - meta.group.interpolation
+    background-#{$prop}: blue
+//             ^^^^^^^^ meta.group.interpolation
+//  ^^^^^^^^^^^^^^^^^^^ meta.property-name
+//            ^ - meta.group.interpolation
 
 @keyframes beat, bounce
 //  ^^^^^^^^^^^^^^^^^^^ meta.at-rule.keyframe.css

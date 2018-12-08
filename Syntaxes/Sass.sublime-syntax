@@ -571,14 +571,15 @@ contexts:
       scope: meta.property-name.css support.type.property-name.css
       push:
         - include: property-value-wrapper
-    - match: '(#)({)((\$)([a-zA-Z0-9_-][\w-]*))(})'
+    - match: '[a-zA-Z0-9_-]*((#)({)((\$)([a-zA-Z0-9_-][\w-]*))(}))[a-zA-Z0-9_-]*'
       captures:
-        0: meta.property-name.css meta.group.interpolation.sass
-        1: punctuation.definition.variable.sass
-        2: punctuation.definition.group.begin.sass
-        3: variable.other.sass
-        4: punctuation.definition.variable.sass
-        6: punctuation.definition.group.end.sass
+        0: meta.property-name.css support.type.property-name
+        1: meta.group.interpolation.sass
+        2: punctuation.definition.variable.sass
+        3: punctuation.definition.group.begin.sass
+        4: variable.other.sass
+        5: punctuation.definition.variable.sass
+        7: punctuation.definition.group.end.sass
       push:
         - include: property-value-wrapper
 

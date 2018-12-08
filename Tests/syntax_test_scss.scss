@@ -408,7 +408,14 @@ color: format(
 //          ^ punctuation.separator.key-value
   }
   p.#{$name} {
-    #{$attr}-color: blue;
+    #{$prop}-color: blue;
+//  ^^^^^^^^^^^^^^ meta.property-name
+//  ^^^^^^^^ meta.group.interpolation
+//          ^ - meta.group.interpolation
+    background-#{$prop}: blue;
+//             ^^^^^^^^ meta.group.interpolation
+//  ^^^^^^^^^^^^^^^^^^^ meta.property-name
+//            ^ - meta.group.interpolation
   }
 }
 
