@@ -311,7 +311,7 @@ contexts:
         - match: \!\s*(default|global|optional)
           scope: keyword.other.sass
         - include: Sass.sublime-syntax#selectors
-        - include: custom-element-selectors
+        - include: Sass.sublime-syntax#custom-element-selectors
 
     - match: '((@)(mixin|function))\s+([\w-]+)'
       captures:
@@ -377,7 +377,7 @@ contexts:
             - match: '{{ident}}'
               scope: string.unquoted.sass
             - include: Sass.sublime-syntax#selectors
-            - include: custom-element-selectors
+            - include: Sass.sublime-syntax#custom-element-selectors
             - match: '\)'
               scope: punctuation.definition.group.end.sass
               pop: true
