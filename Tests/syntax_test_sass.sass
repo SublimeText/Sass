@@ -275,6 +275,9 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
 //                           ^ punctuation.definition.group.end.sass
 //                            ^ punctuation.definition.entity.css
 //                             ^ entity.other.pseudo-class.css
+  &--#{$test}__123 a
+//^^^^^^^^^^^^^^^^^^ meta.selector
+
   body.firefox #{$selector} + a:hover,
   body.firefox #{$selector} :active,
   body.firefox #{$selector}:before

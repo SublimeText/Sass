@@ -425,6 +425,9 @@ color: format(
 //  ^^^^^^^^^^^^^^^^^^^ meta.property-name
 //            ^ - meta.group.interpolation
   }
+  &--#{$test}__123 a {}
+//^^^^^^^^^^^^^^^^^^ meta.selector
+//                   ^ punctuation.section.property-list.begin.css
 }
 
 @include firefox-message(".header" + test);
