@@ -1123,19 +1123,19 @@ contexts:
           pop: true
 
   sass-mixin-directives:
-    - match: '(\=)([\w-]+)'
+    - match: '\s*((\=)([\w-]+))'
       captures:
-        0: entity.name.function.sass
-        1: punctuation.definition.keyword.sass
+        1: entity.name.function.sass
+        2: punctuation.definition.keyword.sass
       push:
         - meta_scope: meta.function.declaration.sass
         - match: '(?=$)'
           pop: true
         - include: sass-mixin-def
-    - match: '(\+)([\w-]+)'
+    - match: '\s*((\+)([\w-]+))'
       captures:
-        0: variable.function.sass
-        1: punctuation.definition.keyword.sass
+        1: variable.function.sass
+        2: punctuation.definition.keyword.sass
       push:
         - meta_scope: meta.function-call.sass
         - match: '(?=$)'
