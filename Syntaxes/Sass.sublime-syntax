@@ -1973,6 +1973,8 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: literal-string
+          - match: '(https?|ftp)://'
+            scope: string.unquoted.css
           - include: sass-value-expression
           - include: unquoted-string
 
@@ -1991,6 +1993,8 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: literal-string
+          - match: '(https?|ftp)://'
+            scope: string.unquoted.css
           - include: sass-value-expression
           - include: unquoted-string
 
@@ -2009,6 +2013,8 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: literal-string
+          - match: '(https?|ftp)://'
+            scope: string.unquoted.css
           - include: sass-value-expression
           - include: unquoted-string
 
