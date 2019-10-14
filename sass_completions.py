@@ -247,6 +247,11 @@ PROPERTY_DICT = {
         'drop-shadow($1)', 'grayscale($1)', 'hue-rotate($1)', 'invert($1)',
         'opacity($1)', 'saturate($1)', 'sepia($1)'
     ],
+    'backdrop-filter': [
+        '<uri>', 'url($1)', 'blur($1)', 'brightness($1)', 'contrast($1)',
+        'drop-shadow($1)', 'grayscale($1)', 'hue-rotate($1)', 'invert($1)',
+        'opacity($1)', 'saturate($1)', 'sepia($1)'
+    ],
     'flex': ['none'],
     'flex-grow': ['<number>'],
     'flex-shrink': ['<number>'],
