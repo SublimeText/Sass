@@ -1488,6 +1488,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: sass-value-expression
+          - include: literal-string
           - include: unquoted-string
 
       # Transform Functions
