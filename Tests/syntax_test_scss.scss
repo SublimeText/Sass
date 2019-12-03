@@ -1064,6 +1064,11 @@ $gutter-width: 10px;
     top: +.95e-20;
 /*       ^^^^^^^^ constant.numeric.float.decimal.css */
 /*        ^ punctuation.separator.decimal.css */
+   top: +1e1e1 .1e1e1;
+/*       ^^^^ constant.numeric.float.decimal.css */
+/*           ^ - constant.numeric */
+/*              ^^^^ constant.numeric.float.decimal.css */
+/*                  ^ - constant.numeric */
     top: -1.5e+93%;
 /*       ^^^^^^^^^ constant.numeric.float.decimal.css */
 /*         ^ punctuation.separator.decimal.css */
