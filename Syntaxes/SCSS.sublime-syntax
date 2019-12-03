@@ -60,9 +60,7 @@ contexts:
     - include: Sass.sublime-syntax#custom-element-selectors
     - include: at-rules
     - include: curly-braces
-    - match: '\s*(,)\s*'
-      captures:
-        1: punctuation.separator.css
+    - include: Sass.sublime-syntax#comma-delimiter
 
 
   properties:
@@ -98,9 +96,7 @@ contexts:
             - include: Sass.sublime-syntax#literal-string
             - include: Sass.sublime-syntax#unquoted-concatenated-string
             - include: Sass.sublime-syntax#sass-operators
-            - match: '\s*(,)\s*'
-              captures:
-                1: punctuation.separator.css
+            - include: Sass.sublime-syntax#comma-delimiter
             - match: '(?={)'
               pop: true
         - match: ''

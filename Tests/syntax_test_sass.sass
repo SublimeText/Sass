@@ -89,7 +89,7 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
 //                                                                                              ^ variable.other
 //                                                                                                  ^ punctuation.separator
 //                                                                                                      ^ punctuation.definition.group.end.css
-//                                                                                                        ^^^ constant.numeric.css
+//                                                                                                        ^^^ constant.numeric
 //                                                                                                           ^^ punctuation.definition.group.end.css
   @document url(http://www)
     background: url($blue)
@@ -487,7 +487,7 @@ $list: (top, bottom, right, position, height);
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments
 //           ^^^^^^^^^ support.function.sass
 //                    ^ punctuation.definition.group.begin
-//                         ^ punctuation.separator.css
+//                         ^ punctuation.separator.sequence.css
 //                                ^ punctuation.definition.group.end
 
 
@@ -568,17 +568,17 @@ p
   top: rgb(1, 4.5%)
 //     ^^^         support.function.color.css
 //         ^       constant.numeric.css
-//          ^      punctuation.separator.css
-//            ^^^^ constant.numeric.css
+//          ^      punctuation.separator.sequence.css
+//            ^^^^ constant.numeric
 
   top: rgba()
 //     ^^^^ support.function.color.css
 
   top: hsl(1deg, 4.5%)
 //     ^^^            support.function.color.css
-//         ^^^^       constant.numeric.css
-//             ^      punctuation.separator.css
-//               ^^^^ constant.numeric.css
+//         ^^^^       constant.numeric
+//             ^      punctuation.separator.sequence.css
+//               ^^^^ constant.numeric
 
   top: hsla()
 //     ^^^^ support.function.color.css
@@ -589,15 +589,15 @@ p
 
   top: gray(1, 4.5%)
 //     ^^^^         support.function.color.css
-//          ^       constant.numeric.css
-//           ^      punctuation.separator.css
-//             ^^^^ constant.numeric.css
+//          ^       constant.numeric
+//           ^      punctuation.separator.sequence.css
+//             ^^^^ constant.numeric
 
   top: device-cmyk(0.5, 1%, red())
 //     ^^^^^^^^^^^              support.function.color.css
-//                 ^^^          constant.numeric.css
-//                    ^         punctuation.separator.css
-//                      ^^      constant.numeric.css
+//                 ^^^          constant.numeric
+//                    ^         punctuation.separator.sequence.css
+//                      ^^      constant.numeric
 //                          ^^^ support.function.color.css
 
   top: color(w() s())
@@ -608,26 +608,26 @@ p
   top: alpha(- 1.5%)
 //     ^^^^^        support.function.color.css
 //           ^      keyword.operator.css
-//             ^^^^ constant.numeric.css
+//             ^^^^ constant.numeric
 
   top: h(+ 1.5deg)
 //     ^          support.function.color.css
 //       ^        keyword.operator.css
-//         ^^^^^^ constant.numeric.css
+//         ^^^^^^ constant.numeric
 
   top: w(* 1.5%)
 //     ^        support.function.color.css
 //       ^      keyword.operator.css
-//         ^^^^ constant.numeric.css
+//         ^^^^ constant.numeric
 
   top: shade(1.5%)
 //     ^^^^^      support.function.color.css
-//           ^^^^ constant.numeric.css
+//           ^^^^ constant.numeric
 
   top: blenda(red 50% hsl)
 //     ^^^^^^             support.function.color.css
 //            ^^^         support.constant.color.w3c-standard-color-name.css
-//                ^^^     constant.numeric.css
+//                ^^^     constant.numeric
 //                    ^^^ keyword.other.color-space.css
 
   background-color: color(var(--background) blend(var(--foreground) 80%))
@@ -645,6 +645,6 @@ p
 //                                                   ^ punctuation.definition.group.begin.css
 //                                                    ^^^^^^^^^^^^ support.type.custom-property.css
 //                                                                ^ punctuation.definition.group.end.css
-//                                                                  ^^^ constant.numeric.css
+//                                                                  ^^^ constant.numeric
 //                                                                     ^^ punctuation.definition.group.end.css
 
