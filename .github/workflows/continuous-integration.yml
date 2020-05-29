@@ -1,11 +1,6 @@
-name: continuous-integration
+name: CI
 on:
   push:
-    branches:
-      - master
-    paths:
-      - 'Syntaxes/**.sublime-syntax'
-  pull_request:
     paths:
       - 'Syntaxes/**.sublime-syntax'
 
