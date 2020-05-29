@@ -3,7 +3,7 @@ on:
   push:
     paths:
       - 'Syntaxes/**.sublime-syntax'
-      - 'Tests/*'
+      - 'Tests/**'
 
 jobs:
   build:
