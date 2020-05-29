@@ -60,7 +60,7 @@ selector-ish::before[data-type="text"]:not(:first-child),
 
 /**
     *
-/*  ^ comment.block.css punctuation.definition.comment.css */
+/*   ^ comment.block.css punctuation.definition.comment.css */
 
 
 /*
@@ -105,7 +105,7 @@ selector-ish::before[data-type="text"]:not(:first-child),
 ::before, :hover,
 #main h1+.sub:not(.class) {
 //    ^^^^^^^^^^^^^^^^^^^^ meta.selector.css
-//    ^^ entity.name.tag.css
+//    ^^ entity.name.test.css
 //     ^ - constant.numeric
 //      ^ punctuation.separator.combinator.css
 //           ^ punctuation.definition.entity.css
