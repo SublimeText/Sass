@@ -403,10 +403,23 @@ color: format(
 //                    ^^^^^^ variable.other.sass
 //                    ^ punctuation.definition.variable.sass
     @include breathe(somestring);
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.sass
+//  ^^^^^^^^ keyword.control.at-rule.sass
+//  ^ punctuation.definition.keyword.sass
+//           ^^^^^^^ variable.function.sass
+//                  ^^^^^^^^^^^^ meta.function-call.arguments.sass
+//                  ^ punctuation.definition.group.begin.sass
+//                             ^ punctuation.definition.group.end.sass
+//                   ^^^^^^^^^^ string.unquoted.css
 //                   ^ string.unquoted
 //                             ^ - string
     @include breathe(border-bottom-color);
-//                   ^ support.constant.property-value
+//           ^^^^^^^^^^^^^^^^^^^ meta.function-call.sass
+//           ^^^^^^^ variable.function.sass
+//                  ^^^^^^^^^^^^ meta.function-call.arguments.sass
+//                  ^ punctuation.definition.group.begin.sass
+//                                      ^ punctuation.definition.group.end.sass
+//                   ^^^^^^^^^^^^^^^^^^^ support.constant.property-value
     animation: progress-fade-in-animation .15s ease-in;
 //              ^ - meta.selector
 //                     ^ - keyword.operator
@@ -436,15 +449,23 @@ color: format(
 }
 
 @include firefox-message(".header" + test);
+//  ^^^^ keyword.control.at-rule.sass
+//<- punctuation.definition.keyword.sass
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.sass
+//           ^^^^^^^ variable.function.sass
 //                       ^^^^^^^^^ meta.function-call.arguments.sass string.quoted.double.css
 //                                 ^ keyword.operator.sass
 //                                   ^ string.unquoted
 //                                       ^ - string
 
 @include firefox-message(
+//           ^^^^^^^^^^^^^^^^^^^ meta.function-call.sass
+//           ^^^^^^^ variable.function.sass
+//                      ^ punctuation.definition.group.begin.sass
   ".header", /*a comment*/
  test // this should also be a comment
- );
+   );
+// ^ punctuation.definition.group.end.sass
 
 
 
