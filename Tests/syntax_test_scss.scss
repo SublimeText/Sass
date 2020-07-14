@@ -580,7 +580,7 @@ $list: (top, bottom, right, position, height);
     }
 }
 .selector {
-  color: nth(map-merge($map, $map2), 3);
+  color: nth(map.merge($map, $map2), 3);
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css meta.function-call.sass
 //       ^^^ support.function.sass
 //          ^ punctuation.definition.group.begin
@@ -672,6 +672,7 @@ $gutter-width: 10px;
 //                     ^ punctuation.definition.variable.sass
 //                      ^^^^^^^^^ meta.group.interpolation.sass
 //                       ^^^^^^^ meta.group.interpolation.sass variable.other.sass
+  @return map.get(nth(map.get($config, 'radius'), 2), $namespace);
 }
 #sidebar { width: grid-width(5); }
 //                ^^^^^^^^^^^^^ meta.property-value.css meta.function-call.css
