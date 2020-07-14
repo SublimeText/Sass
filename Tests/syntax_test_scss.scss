@@ -685,6 +685,12 @@ $gutter-width: 10px;
 */
 @use /*import bootstrap*/ "bootstrap" as b;
 @use 'something else' as *;
+@use "src/corners";
+
+.button {
+  @include corners.rounded;
+  padding: 5px + corners.$radius;
+}
 
 .element {
   background-color: bootstrap.$body-bg;
