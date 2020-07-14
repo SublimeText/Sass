@@ -1064,6 +1064,12 @@ contexts:
         - include: property-values
 
   sass-variables:
+    - match: '({{ident}})(\.)(\$)([a-zA-Z0-9_-][\w-]*)'
+      scope: variable.other.sass
+      captures:
+        1: entity.name.namespace.sass
+        2: punctuation.separator.namespace.sass
+        3: punctuation.definition.variable.sass
     - match: '(\$)([a-zA-Z0-9_-][\w-]*)'
       scope: variable.other.sass
       captures:

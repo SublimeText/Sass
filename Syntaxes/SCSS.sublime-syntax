@@ -311,7 +311,6 @@ contexts:
           scope: keyword.other.sass
         - include: Sass.sublime-syntax#selectors
         - include: Sass.sublime-syntax#custom-element-selectors
-
     - match: '((@)(mixin|function))\s+([\w-]+)'
       captures:
         1: keyword.control.at-rule.sass
@@ -348,11 +347,13 @@ contexts:
                 scope: punctuation.section.property-list.end.sass
                 pop: true
               - include: main
-    - match: '((@)(include))\s+([\w-]+)'
+    - match: '((@)(include))\s+(([a-z]+)(\.))?([\w-]+)'
       captures:
         0: variable.function.sass
         1: keyword.control.at-rule.sass
         2: punctuation.definition.keyword.sass
+        5: entity.name.namespace.sass
+        6: punctuation.separator.namespace.sass
       push:
         - meta_scope: meta.function-call.sass
         - match: '\s*(;)'
@@ -391,6 +392,73 @@ contexts:
             1: punctuation.terminator.rule.css
           pop: true
         - include: Sass.sublime-syntax#property-values
+    - match: '\s*((@)use\b)\s*'
+      captures:
+        1: keyword.control.at-rule.use.css
+        2: punctuation.definition.keyword.css
+      push:
+        - meta_scope: meta.at-rule.use.css
+        - match: '\s*(;)'
+          scope: punctuation.terminator.rule.sass
+          pop: true
+        - match: '\bas\b'
+          scope: keyword.control.as.sass
+          push:
+            - match: '\s+(\S+)(?=;)'
+              captures:
+                1: meta.generic-name.sass
+              pop: true
+        - match: '(with)\s+(\()'
+          captures:
+            1: keyword.control.with.sass
+            2: punctuation.definition.group.begin.sass
+          push:
+            - match: '\)'
+              scope: punctuation.definition.group.end.sass
+              pop: true
+            - include: Sass.sublime-syntax#comment-block
+            - include: Sass.sublime-syntax#comment-line
+            - include: Sass.sublime-syntax#sass-variables
+            - include: Sass.sublime-syntax#sass-functions
+            - include: Sass.sublime-syntax#sass-operators
+            - include: Sass.sublime-syntax#comma-delimiter
+            - include: Sass.sublime-syntax#property-values
+        - include: Sass.sublime-syntax#comment-block
+        - include: Sass.sublime-syntax#comment-line
+        - include: Sass.sublime-syntax#literal-string
+    - match: '\s*((@)forward\b)\s*'
+      captures:
+        1: keyword.control.at-rule.use.css
+        2: punctuation.definition.keyword.css
+      push:
+        - meta_scope: meta.at-rule.use.css
+        - match: '\s*(;)'
+          scope: punctuation.terminator.rule.sass
+          pop: true
+        - match: '\bas\b'
+          scope: keyword.control.as.sass
+          push:
+            - match: '\s+(\S+)(?=;)'
+              captures:
+                1: meta.generic-name.sass
+              pop: true
+        - match: '\bshow\b'
+          scope: keyword.control.show.sass
+          push:
+            - match: '\s+(\S+)(?=;)'
+              captures:
+                1: meta.generic-name.sass
+              pop: true
+        - match: '\bhide\b'
+          scope: keyword.control.show.sass
+          push:
+            - match: '\s+(\S+)(?=;)'
+              captures:
+                1: meta.generic-name.sass
+              pop: true
+        - include: Sass.sublime-syntax#comment-block
+        - include: Sass.sublime-syntax#comment-line
+        - include: Sass.sublime-syntax#literal-string
     - match: '((@)(?:-(?:webkit|moz|o)-)?(charset|namespace|font-face)\b)'
       captures:
         1: keyword.control.at-rule.css

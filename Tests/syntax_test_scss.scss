@@ -679,6 +679,36 @@ $gutter-width: 10px;
 
 
 /*
+  Module system
+  https://sass-lang.com/blog/the-module-system-is-launched
+*/
+@use /*import bootstrap*/ "bootstrap" as b;
+@use 'something else' as *;
+
+.element {
+  background-color: bootstrap.$body-bg;
+  @include bootstrap.float-left;
+}
+$paragraph-margin-bottom: 1rem !default;
+
+p {
+  margin-top: 0;
+  margin-bottom: $paragraph-margin-bottom;
+}
+
+@use "bootstrap" with (
+  // This sets bootstrap’s $paragraph-margin-bottom variable to 1.2rem before evaluating it.
+  $paragraph-margin-bottom: 1.2rem
+);
+
+@forward "functions";
+@forward "variables";
+@forward "mixins";
+@forward "functions" show color-yiq;
+@forward "functions" hide assert-ascending;
+@forward "theme" as theme-*;
+
+/*
   More @ features
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#if
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#debug
