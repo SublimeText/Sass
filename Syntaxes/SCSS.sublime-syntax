@@ -392,7 +392,7 @@ contexts:
             1: punctuation.terminator.rule.css
           pop: true
         - include: Sass.sublime-syntax#property-values
-    - match: '\s*((@)use\b)\s*'
+    - match: '\s*((@)(use|forward)\b)\s*'
       captures:
         1: keyword.control.at-rule.use.css
         2: punctuation.definition.keyword.css
@@ -408,6 +408,19 @@ contexts:
               captures:
                 1: meta.generic-name.sass
               pop: true
+        - match: '\b(show|hide)\b'
+          scope: keyword.control.show-hide.sass
+          push:
+            - match: '(?=;)'
+              pop: true
+            - include: Sass.sublime-syntax#comment-block
+            - include: Sass.sublime-syntax#comment-line
+            - include: Sass.sublime-syntax#sass-variables
+            - include: Sass.sublime-syntax#sass-functions
+            - include: Sass.sublime-syntax#sass-operators
+            - include: Sass.sublime-syntax#comma-delimiter
+            - match: '{{ident}}'
+              scope: meta.generic-name.sass
         - match: '(with)\s+(\()'
           captures:
             1: keyword.control.with.sass
@@ -423,39 +436,6 @@ contexts:
             - include: Sass.sublime-syntax#sass-operators
             - include: Sass.sublime-syntax#comma-delimiter
             - include: Sass.sublime-syntax#property-values
-        - include: Sass.sublime-syntax#comment-block
-        - include: Sass.sublime-syntax#comment-line
-        - include: Sass.sublime-syntax#literal-string
-    - match: '\s*((@)forward\b)\s*'
-      captures:
-        1: keyword.control.at-rule.use.css
-        2: punctuation.definition.keyword.css
-      push:
-        - meta_scope: meta.at-rule.use.css
-        - match: '\s*(;)'
-          scope: punctuation.terminator.rule.sass
-          pop: true
-        - match: '\bas\b'
-          scope: keyword.control.as.sass
-          push:
-            - match: '\s+(\S+)(?=;)'
-              captures:
-                1: meta.generic-name.sass
-              pop: true
-        - match: '\bshow\b'
-          scope: keyword.control.show.sass
-          push:
-            - match: '\s+(\S+)(?=;)'
-              captures:
-                1: meta.generic-name.sass
-              pop: true
-        - match: '\bhide\b'
-          scope: keyword.control.show.sass
-          push:
-            - match: '\s+(\S+)(?=;)'
-              captures:
-                1: meta.generic-name.sass
-              pop: true
         - include: Sass.sublime-syntax#comment-block
         - include: Sass.sublime-syntax#comment-line
         - include: Sass.sublime-syntax#literal-string
