@@ -586,6 +586,8 @@ $list: (top, bottom, right, position, height);
 //          ^ punctuation.definition.group.begin
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments
 //           ^^^^^^^^^ support.function.sass
+//           ^^^ entity.name.namespace
+//              ^ punctuation
 //                    ^ punctuation.definition.group.begin
 //                         ^ punctuation.separator.sequence.css
 //                                ^ punctuation.definition.group.end
@@ -683,43 +685,94 @@ $gutter-width: 10px;
   Module system
   https://sass-lang.com/blog/the-module-system-is-launched
 */
-@use /*import bootstrap*/ "bootstrap" as b;
 @use 'something else' as *;
+// <- punctuation.definition.keyword.sass
+// ^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^ keyword.control.at-rule.module.sass
+//    ^^^^^^^^^^^^^^ string.quoted
+//                    ^^ keyword.control
+//                       ^ constant.language.import-all
+//                        ^ punctuation.terminator.rule.sass
 @use "src/corners";
+// <- punctuation.definition.keyword.sass
+// ^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^ keyword.control.at-rule.module.sass
+//    ^^^^^^^^^^^^ string.quoted
+//                ^ punctuation.terminator.rule.sass
+@use /*import bootstrap*/ "bootstrap" as b;
+// <- punctuation.definition.keyword.sass
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+//                                    ^^ keyword.control
+// ^ keyword.control.at-rule.module.sass
+//                ^ comment
+@forward "functions";
+// <- punctuation.definition.keyword.sass
+// ^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^^^^^ keyword.control.at-rule.module.sass
+//       ^^^^^^^^^^^ string.quoted
+//                  ^ punctuation.terminator.rule.sass
+@forward "functions" show color-yiq;
+// <- punctuation.definition.keyword.sass
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^ keyword.control.at-rule.module.sass
+//                   ^^^^ keyword.control
+//                        ^^^^^^^^^ meta.generic-name.sass
+//                                 ^ punctuation.terminator.rule.sass
+@forward "functions" hide assert-ascending, $some_variable;
+// <- punctuation.definition.keyword.sass
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^ keyword.control.at-rule.module.sass
+//                   ^^^^ keyword.control
+//                        ^^^^^^^^^^^^^^^ meta.generic-name.sass
+//                                        ^ punctuation.separator.sequence.css
+//                                          ^ variable.other.sass
+//                                                        ^ punctuation.terminator.rule.sass
+@forward "theme" as theme-*;
+// ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+//                  ^^^^^^^ meta.generic-name.sass
+//                        ^ constant.language.import-all.sass
+@use 'opinionated' with ($black: #333);
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+//                 ^^^^ keyword.control.with.sass
+//                       ^^^^ variable
+//                               ^^^^ constant
+//                             ^ punctuation
+//                      ^ punctuation.definition.group.begin.sass
+//                                   ^ punctuation.definition.group.end.sass
+//                                    ^ punctuation.terminator.rule.sass
+@forward "sass:meta" with (
+// ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+//                   ^^^^ keyword.control.with.sass
+//                        ^ punctuation.definition.group.begin.sass
+  // This sets bootstrap’s $paragraph-margin-bottom variable to 1.2rem before evaluating it.
+  $paragraph-margin-bottom: 1.2rem,
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^^^^^^^^^^^^^^^^^^^^^^^ variable
+//                           ^ punctuation
+//                            ^ constant
+//                                ^ punctuation
+  $some-color: aliceblue
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^^^^^^^^^^ variable
+//           ^ punctuation
+);
+
 
 .button {
   @include corners.rounded;
+//  ^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.sass
+//         ^^^^^^^^^^^^^^^ variable.function.sass
+//         ^^^^^^^ entity.name.namespace.sass
+//                ^ punctuation
+//                        ^ punctuation
   padding: 5px + corners.$radius;
+//        ^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css
+//               ^^^^^^^^^^^^^^^ variable
+//               ^^^^^^^ entity.name.namespace.sass
+//                      ^ punctuation
+//                              ^ punctuation
 }
 
-.element {
-  background-color: bootstrap.$body-bg;
-  @include bootstrap.float-left;
-}
-$paragraph-margin-bottom: 1rem !default;
-
-p {
-  margin-top: 0;
-  margin-bottom: $paragraph-margin-bottom;
-}
-
-@use "bootstrap" with (
-  // This sets bootstrap’s $paragraph-margin-bottom variable to 1.2rem before evaluating it.
-  $paragraph-margin-bottom: 1.2rem
-);
-@forward "sass:meta" with (
-  // This sets bootstrap’s $paragraph-margin-bottom variable to 1.2rem before evaluating it.
-  $paragraph-margin-bottom: 1.2rem,
-  $some-color: aliceblue
-);
-
-@forward "functions";
-@forward "variables";
-@forward "mixins";
-@forward "functions" show color-yiq;
-@forward "functions" hide assert-ascending, $some_variable;
-@use 'opinionated' with ($black: #333);
-@forward "theme" as theme-*;
 
 /*
   More @ features

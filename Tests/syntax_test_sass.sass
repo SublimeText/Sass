@@ -534,6 +534,77 @@ $list: (top, bottom, right, position, height);
 
 
 /*
+  Module system
+  https://sass-lang.com/blog/the-module-system-is-launched
+*/
+@use 'something else' as *
+// <- punctuation.definition.keyword.sass
+// ^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^ keyword.control.at-rule.module.sass
+//    ^^^^^^^^^^^^^^ string.quoted
+//                    ^^ keyword.control
+//                       ^ constant.language.import-all
+@use "src/corners"
+// <- punctuation.definition.keyword.sass
+// ^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^ keyword.control.at-rule.module.sass
+//    ^^^^^^^^^^^^ string.quoted
+@use /*import bootstrap*/ "bootstrap" as b
+// <- punctuation.definition.keyword.sass
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+//                                    ^^ keyword.control
+// ^ keyword.control.at-rule.module.sass
+//                ^ comment
+@forward "functions"
+// <- punctuation.definition.keyword.sass
+// ^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^^^^^ keyword.control.at-rule.module.sass
+//       ^^^^^^^^^^^ string.quoted
+@forward "functions" show color-yiq
+// <- punctuation.definition.keyword.sass
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^ keyword.control.at-rule.module.sass
+//                   ^^^^ keyword.control
+//                        ^^^^^^^^^ meta.generic-name.sass
+@forward "functions" hide assert-ascending, $some_variable
+// <- punctuation.definition.keyword.sass
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^ keyword.control.at-rule.module.sass
+//                   ^^^^ keyword.control
+//                        ^^^^^^^^^^^^^^^ meta.generic-name.sass
+//                                        ^ punctuation.separator.sequence.css
+//                                          ^ variable.other.sass
+@forward "theme" as theme-*
+// ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+//                  ^^^^^^^ meta.generic-name.sass
+//                        ^ constant.language.import-all.sass
+@use 'opinionated' with ($black: #333, $some-color: aliceblue)
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+//                 ^^^^ keyword.control.with.sass
+//                       ^^^^ variable
+//                               ^^^^ constant
+//                             ^ punctuation
+//                                   ^ punctuation
+//                      ^ punctuation.definition.group.begin.sass
+//                                                           ^ punctuation.definition.group.end.sass
+
+
+
+.button
+  @include corners.rounded
+//  ^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.sass
+//         ^^^^^^^^^^^^^^^ variable.function.sass
+//         ^^^^^^^ entity.name.namespace.sass
+//                ^ punctuation
+  padding: 5px + corners.$radius
+//        ^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css
+//               ^^^^^^^^^^^^^^^ variable
+//               ^^^^^^^ entity.name.namespace.sass
+//                      ^ punctuation
+
+
+
+/*
   Operators
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#operations
 */

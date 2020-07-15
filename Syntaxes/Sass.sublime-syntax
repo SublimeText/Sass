@@ -316,7 +316,7 @@ contexts:
         - match: '(})'
           scope: punctuation.definition.group.end.sass
           pop: true
-        - include: Sass.sublime-syntax#sass-script-expression
+        - include: sass-script-expression
     - include: selector-parts
 
   interpolated-selectors:
@@ -747,11 +747,13 @@ contexts:
                 - match: '\b(false|true|null)\b'
                   scope: constant.language.sass
                 - include: property-values
-    - match: '((@)(include))\s+([\w-]+)'
+    - match: '((@)(include))\s+(([a-z]+)(\.))?([\w-]+)'
       captures:
         0: variable.function.sass
         1: keyword.control.at-rule.sass
         2: punctuation.definition.keyword.sass
+        5: entity.name.namespace.sass
+        6: punctuation.separator.namespace.sass
       push:
         - meta_scope: meta.function-call.sass
         - match: '\s*(?=$)'
@@ -784,6 +786,55 @@ contexts:
         - match: '\s*(?=$)'
           pop: true
         - include: property-values
+    - match: '\s*((@)(use|forward)\b)\s*'
+      captures:
+        1: keyword.control.at-rule.module.sass
+        2: punctuation.definition.keyword.sass
+      push:
+        - meta_scope: meta.at-rule.module.sass
+        - match: '\s*(?=$)'
+          scope: punctuation.terminator.rule.sass
+          pop: true
+        - match: '\bas\b'
+          scope: keyword.control.as.sass
+          push:
+            - match: '\s+([a-zA-Z0-9_-]*(\*)?)(?=$)'
+              captures:
+                1: meta.generic-name.sass
+                2: constant.language.import-all.sass
+              pop: true
+        - match: '\b(show|hide)\b'
+          scope: keyword.control.show-hide.sass
+          push:
+            - match: '(?=$)'
+              pop: true
+            - include: comment-block
+            - include: sass-variables
+            - include: sass-functions
+            - include: sass-operators
+            - include: comma-delimiter
+            - match: '{{ident}}'
+              scope: meta.generic-name.sass
+        - match: '(with)\s+(\()'
+          captures:
+            1: keyword.control.with.sass
+            2: punctuation.definition.group.begin.sass
+          push:
+            - match: '\)(?=$)'
+              scope: punctuation.definition.group.end.sass
+              pop: true
+            - match: ':'
+              scope: punctuation.separator.key-value.css
+            - include: comment-block
+            - include: comment-line
+            - include: sass-variables
+            - include: sass-functions
+            - include: sass-operators
+            - include: comma-delimiter
+            - include: property-values
+        - include: comment-block
+        - include: comment-line
+        - include: literal-string
     - match: '((@)(?:-(?:webkit|moz|o)-)?(charset|namespace|font-face)\b)'
       captures:
         1: keyword.control.at-rule.css
