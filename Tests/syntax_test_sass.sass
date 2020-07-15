@@ -578,15 +578,17 @@ $list: (top, bottom, right, position, height);
 // ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
 //                  ^^^^^^^ meta.generic-name.sass
 //                        ^ constant.language.import-all.sass
-@use 'opinionated' with ($black: #333, $some-color: aliceblue)
+@use 'opinionated' as opinion with ($black: #333, $some-color: aliceblue)
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
-//                 ^^^^ keyword.control.with.sass
-//                       ^^^^ variable
-//                               ^^^^ constant
-//                             ^ punctuation
-//                                   ^ punctuation
-//                      ^ punctuation.definition.group.begin.sass
-//                                                           ^ punctuation.definition.group.end.sass
+//                 ^^ keyword.control.as.sass
+//                    ^^^^^^^ meta.generic-name.sass
+//                            ^^^^ keyword.control.with.sass
+//                                  ^^^^ variable
+//                                          ^^^^ constant
+//                                        ^ punctuation
+//                                              ^ punctuation
+//                                 ^ punctuation.definition.group.begin.sass
+//                                                                      ^ punctuation.definition.group.end.sass
 
 
 

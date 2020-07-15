@@ -401,14 +401,11 @@ contexts:
         - match: '\s*(;)'
           scope: punctuation.terminator.rule.sass
           pop: true
-        - match: '\bas\b'
-          scope: keyword.control.as.sass
-          push:
-            - match: '\s+([a-zA-Z0-9_-]*(\*)?)(?=;)'
-              captures:
-                1: meta.generic-name.sass
-                2: constant.language.import-all.sass
-              pop: true
+        - match: '\b(as)\b\s+([a-zA-Z0-9_-]*(\*)?)'
+          captures:
+            1: keyword.control.as.sass
+            2: meta.generic-name.sass
+            3: constant.language.import-all.sass
         - match: '\b(show|hide)\b'
           scope: keyword.control.show-hide.sass
           push:

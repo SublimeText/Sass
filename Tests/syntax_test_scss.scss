@@ -740,10 +740,12 @@ $gutter-width: 10px;
 //                      ^ punctuation.definition.group.begin.sass
 //                                   ^ punctuation.definition.group.end.sass
 //                                    ^ punctuation.terminator.rule.sass
-@forward "sass:meta" with (
+@forward "sass:meta" as meta with (
 // ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
-//                   ^^^^ keyword.control.with.sass
-//                        ^ punctuation.definition.group.begin.sass
+//                   ^^ keyword.control.as.sass
+//                      ^^^^ meta.generic-name.sass
+//                           ^^^^ keyword.control.with.sass
+//                                ^ punctuation.definition.group.begin.sass
   // This sets bootstrap’s $paragraph-margin-bottom variable to 1.2rem before evaluating it.
   $paragraph-margin-bottom: 1.2rem,
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
