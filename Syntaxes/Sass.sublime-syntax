@@ -521,7 +521,7 @@ contexts:
         1: punctuation.separator.key-value.css
         2: meta.property-name.css support.type.property-name.css
       push:
-        - meta_content_scope: meta.property-value.css
+        - meta_scope: meta.property-value.css
         - match: '\s*(?=$)'
           pop: true
         - include: property-values
