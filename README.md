@@ -11,6 +11,10 @@ Syntax highlighting should be very similar to [CSS](https://github.com/sublimehq
 
 This package is available through [Package Control](https://packagecontrol.io).
 
+## Key Bindings
+
+Previous versions of this package came with key bindings. Improved completions and ST's default behaviour should make this unnecessary. Bring them back by [adding them to your key binding settings](https://github.com/braver/SublimeSass/blob/2.4.1/Default.sublime-keymap).
+
 
 ## Buy me a coffee 
 
