@@ -1247,17 +1247,24 @@ $gutter-width: 10px;
 }
 
 // Test Functional Pseudo Class Meta Scopes
-.test:nth-child(even) {}
+.test:nth-child(even) div .class {}
 //   ^^^^^^^^^^^^^^^^ meta.function-call.css
 //             ^^^^^^ meta.group.css
 //             ^      punctuation.definition.group.begin.css
 //                  ^ punctuation.definition.group.end.css
+//                    ^^^ entity.name.tag.css
+//                        ^^^ entity.other.attribute-name.class.css
 
 .test-pseudo-classes:nth-child(2):hover {}
 //                   ^^^^^^^^^          entity.other.pseudo-class.css
 //                             ^        constant.numeric.css
 //                               ^      punctuation.definition.entity.css
 //                                ^^^^^ entity.other.pseudo-class.css
+
+.test-pseudo-class-numerics:last-of-type div .class {}
+/*                         ^^^^^^^^^^^^^ entity.other.pseudo-class.css */
+/*                                       ^^^ entity.name.tag.css */
+/*                                           ^^^ entity.other.attribute-name.class.css */
 
 .test-pseudo-class-numerics:nth-last-of-type(-n+3) {}
 /*                         ^^^^^^^^^^^^^^^^^ entity.other.pseudo-class.css */
@@ -1275,9 +1282,11 @@ $gutter-width: 10px;
 /*                    ^^^^ entity.other.pseudo-class.css */
 /*                         ^ entity.name.tag.wildcard.css */
 
-.test-pseudo-elements::before {}
+.test-pseudo-elements::before div .class {}
 /*                   ^^ punctuation.definition.entity.css */
 /*                   ^^^^^^^^ entity.other.pseudo-element.css */
+/*                            ^^^ entity.name.tag.css */
+/*                                ^^^ entity.other.attribute-name.class.css */
 
 .test-pseudo-elements:after {}
 /*                   ^ punctuation.definition.entity.css */

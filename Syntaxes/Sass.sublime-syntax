@@ -432,6 +432,8 @@ contexts:
               scope: punctuation.definition.group.end.css
               pop: true
             - include: unquoted-string
+        - match: ''
+          pop: true
         - include: selector-parts
 
     - match: '\s*(:)(matches|not|has)(?=\()'
@@ -470,6 +472,8 @@ contexts:
               pop: true
             - match: \b(active|valid|invalid)\b
               scope: keyword.other.pseudo-class.css
+        - match: ''
+          pop: true
         - include: selector-parts
 
     - match: '\s*(:)(nth-last-child|nth-child|nth-last-of-type|nth-of-type)(?=\()'
@@ -495,6 +499,8 @@ contexts:
             - match: '[-+]\s+\d+n?|[-+]?\d+\s+n'
               scope: invalid.illegal.numeric.css
             - include: integer-type
+        - match: ''
+          pop: true
         - include: selector-parts
 
     - match: '\s*(:)(-(moz|ms|webkit)-){{ident}}'
