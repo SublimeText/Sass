@@ -612,15 +612,18 @@ class CSSCompletions(sublime_plugin.EventListener):
 
     def on_query_completions(self, view, prefix, locations):
 
-        if sublime.load_settings('CSS.sublime-settings').get('disable_default_completions'):
+        pt = locations[0]
+        loc = locations[0]
+        is_scss = view.match_selector(loc, "source.scss")
+
+        if is_scss and sublime.load_settings('SCSS.sublime-settings').get('disable_default_completions'):
+            return None
+        elif sublime.load_settings('Sass.sublime-settings').get('disable_default_completions'):
             return None
 
-        pt = locations[0]
         if not match_selector(view, pt, self.selector_scope):
             return None
 
-        loc = locations[0]
-        is_scss = view.match_selector(loc, "source.scss")
         if not self.props:
             self.props = parse_css_data()
             self.re_value = re.compile(r"^(?:\s*(:)|([ \t]*))([^:]*)([;}])")
