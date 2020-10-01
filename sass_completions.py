@@ -602,7 +602,7 @@ def next_none_whitespace(view, pt):
 
 class CSSCompletions(sublime_plugin.EventListener):
     selector_scope = (
-        # match inside a CSS document and
+        # completions are for properties, not selectors, only inside sass/scss files
         "source.sass - meta.selector.css, source.scss - meta.selector.css"
     )
     props = None
