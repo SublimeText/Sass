@@ -699,7 +699,7 @@ contexts:
           pop: true
         - include: sass-script-expression
     - match: '(@)(debug|warn|error)\b'
-      scope: keyword.control.at-rule.sass
+      scope: keyword.control.at-rule.debugger.sass
       captures:
         1: punctuation.definition.keyword.sass
       push:
