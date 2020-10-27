@@ -439,7 +439,7 @@ contexts:
         - include: Sass.sublime-syntax#comment-block
         - include: Sass.sublime-syntax#comment-line
         - include: Sass.sublime-syntax#literal-string
-    - match: '((@)(?:-(?:webkit|moz|o)-)?(charset|namespace|font-face)\b)'
+    - match: '((@)(?:-(?:webkit|moz|ms|o)-)?(charset|namespace|font-face|viewport)\b)'
       captures:
         1: keyword.control.at-rule.css
         2: punctuation.definition.keyword.css
