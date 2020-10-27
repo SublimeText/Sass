@@ -698,7 +698,16 @@ contexts:
         - match: '(?=$)'
           pop: true
         - include: sass-script-expression
-    - match: '(@)(debug|warn|error)\b'
+    - match: '(@)(warn|error)\b'
+      scope: keyword.control.at-rule.warn.sass
+      captures:
+        1: punctuation.definition.keyword.sass
+      push:
+        - meta_scope: meta.at-rule.sass
+        - match: '(?=$)'
+          pop: true
+        - include: sass-script-expression
+    - match: '(@)(debug)\b'
       scope: keyword.control.at-rule.debugger.sass
       captures:
         1: punctuation.definition.keyword.sass
