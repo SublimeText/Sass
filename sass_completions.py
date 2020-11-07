@@ -685,7 +685,7 @@ class CSSCompletions(sublime_plugin.EventListener):
             prop = matches.group(1)
             values = self.props.get(prop)
             if values:
-                details = "<code>{prop}</code> property-value".format(prop=prop)
+                details = f"<code>{prop}</code> property-value"
 
                 if next_none_whitespace(view, pt) == ";" or not is_scss:
                     suffix = ""
