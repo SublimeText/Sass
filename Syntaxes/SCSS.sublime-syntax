@@ -216,6 +216,10 @@ contexts:
         7: punctuation.definition.group.end.sass
       push:
         - include: property-value-wrapper
+    - match: '\b(composes|localAlias|exportedKey)\b'
+      scope: meta.property-name.css-modules.css support.type.property-name
+      push:
+        - include: property-value-wrapper
 
   property-value-wrapper:
     - match: '(\s*)(;)'
