@@ -172,6 +172,7 @@ contexts:
     - include: interpolated-selectors
     - include: custom-element-selectors
     - include: at-rules
+    - include: css-modules
     - match: '\s*(,)\s*'
       captures:
         1: punctuation.separator.css
@@ -517,7 +518,27 @@ contexts:
       captures:
         1: punctuation.definition.entity.css
 
-
+    - match: '\s*(:)(local|global)(?=\()'
+      scope: meta.selector.css entity.other.pseudo-class.css-modules.css
+      captures:
+        1: punctuation.definition.entity.css
+      push:
+        - meta_scope: meta.selector.css meta.function-call.css
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+            - meta_scope: meta.group.css
+            - match: '\)'
+              scope: punctuation.definition.group.end.css
+              pop: true
+            - include: selectors
+            - include: literal-string
+        - match: ''
+          pop: true
+    - match: '\s*(:)(local|global)'
+      scope: meta.selector.css entity.other.pseudo-class.css-modules.css
+      captures:
+        1: punctuation.definition.entity.css
 
   properties:
     - include: comment-line
@@ -600,6 +621,10 @@ contexts:
         4: variable.other.sass
         5: punctuation.definition.variable.sass
         7: punctuation.definition.group.end.sass
+      push:
+        - include: property-value-wrapper
+    - match: '\b(composes)\b'
+      scope: meta.property-name.css-modules.css support.type.property-name
       push:
         - include: property-value-wrapper
 
@@ -2701,3 +2726,21 @@ contexts:
         - match: \n
           pop: true
 
+  css-modules:
+    - match: '\s*(:)(import|export)'
+      scope: meta.selector.css entity.other.pseudo-class.css-modules.css
+      captures:
+        1: punctuation.definition.entity.css
+      push:
+        - meta_scope: meta.selector.css meta.function-call.css
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+            - meta_scope: meta.group.css
+            - match: '\)'
+              scope: punctuation.definition.group.end.css
+              pop: true
+            - include: literal-string
+        - match: '\s*(?=$)'
+          scope: punctuation.terminator.rule.sass
+          pop: true

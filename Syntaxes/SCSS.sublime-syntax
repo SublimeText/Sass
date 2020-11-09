@@ -61,7 +61,7 @@ contexts:
     - include: at-rules
     - include: curly-braces
     - include: Sass.sublime-syntax#comma-delimiter
-
+    - include: css-modules
 
   properties:
     - include: Sass.sublime-syntax#comment-line
@@ -216,6 +216,10 @@ contexts:
         7: punctuation.definition.group.end.sass
       push:
         - include: property-value-wrapper
+    - match: '\b(composes)\b'
+      scope: meta.property-name.css-modules.css support.type.property-name
+      push:
+        - include: property-value-wrapper
 
   property-value-wrapper:
     - match: '(\s*)(;)'
@@ -237,7 +241,6 @@ contexts:
           pop: true
     - match: ''
       pop: true
-
 
   at-rules:
     - match: '(@)(each)\b'
@@ -667,9 +670,49 @@ contexts:
         - include: Sass.sublime-syntax#numeric-values
         - include: Sass.sublime-syntax#sass-value-expression
 
-
   curly-braces:
     - match: '\{'
       scope: punctuation.section.property-list.begin.css
     - match: '\}'
       scope: punctuation.section.property-list.end.css
+
+  css-modules:
+    - match: '\s*(:)(import|export)'
+      scope: meta.selector.css entity.other.pseudo-class.css-modules.css
+      captures:
+        1: punctuation.definition.entity.css
+      push:
+        - meta_scope: meta.selector.css meta.function-call.css
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+            - meta_scope: meta.group.css
+            - match: '\)'
+              scope: punctuation.definition.group.end.css
+              pop: true
+            - include: Sass.sublime-syntax#selectors
+            - include: Sass.sublime-syntax#literal-string
+        - match: '\s*(\{)'
+          scope: punctuation.section.property-list.begin.css
+          push:
+            - meta_scope: meta.group.css-modules.css
+            - match: '\}'
+              scope: punctuation.section.property-list.end.css
+              pop: true
+            - include: Sass.sublime-syntax#comment-line
+            - include: Sass.sublime-syntax#comment-block
+            - match: '([a-zA-Z0-9_-]+)\s*(:)'
+              captures:
+                1: meta.property-name.css-modules.css support.type.property-name.css-modules.css
+                2: punctuation.separator.key-value.css
+                3: variable.other.css-modules.css
+              push:
+                - match: '(;|\s*(?=$))'
+                  captures:
+                    1: punctuation.terminator.rule.css
+                  pop: true
+                - include: Sass.sublime-syntax#literal-string
+                - include: Sass.sublime-syntax#unquoted-string
+        - match: ''
+          pop: true
+
