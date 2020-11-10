@@ -334,11 +334,17 @@ color: format(
   localAlias: keyFromDep;
 // ^^^^^^^^^ meta.property-name.css-modules.css
 //          ^ punctuation
+//            ^^^^^^^^^^ variable.other.css-modules.css
 //                      ^ punctuation
 }
 // an exportedKey exposes a specific value (a selector, a value, anything really)
 :export {
+// ^^^^ entity.other.pseudo-class.css-modules.css
   exportedKey: exportedValue;
+// ^^^^^^^^^ meta.property-name.css-modules.css
+//           ^ punctuation
+//             ^^^^^^^^^^ variable.other.css-modules.css
+//                          ^ punctuation
 }
 /* CSS Modules
    Composing selectors: https://github.com/css-modules/css-modules#css-modules
