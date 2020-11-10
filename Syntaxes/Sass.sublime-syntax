@@ -2749,7 +2749,6 @@ contexts:
             - match: '\)'
               scope: punctuation.definition.group.end.css
               pop: true
-            - include: selectors
             - include: literal-string
         - match: '\s*(?=$)'
           scope: punctuation.terminator.rule.sass
