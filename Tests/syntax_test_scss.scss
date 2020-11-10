@@ -333,11 +333,12 @@ color: format(
 //                         ^ punctuation.section.property-list.begin.css
   localAlias: keyFromDep;
 // ^^^^^^^^^ meta.property-name.css-modules.css
-   blababla : keyFromDep;
+//            ^^^^^^^^^^ string
+   blababla : "keyFromDep";
 // ^^^^^^^^ meta.property-name.css-modules.css
 //          ^ punctuation
-//            ^^^^^^^^^^ variable.other.css-modules.css
-//                      ^ punctuation
+//            ^^^^^^^^^^ string
+//                        ^ punctuation
 }
 // an exportedKey exposes a specific value (a selector, a value, anything really)
 :export {
@@ -345,7 +346,7 @@ color: format(
   exportedKey: exportedValue;
 // ^^^^^^^^^ meta.property-name.css-modules.css
 //           ^ punctuation
-//             ^^^^^^^^^^ variable.other.css-modules.css
+//             ^^^^^^^^^^ string
 //                          ^ punctuation
 }
 /* CSS Modules

@@ -677,12 +677,18 @@ contexts:
               pop: true
             - include: Sass.sublime-syntax#comment-line
             - include: Sass.sublime-syntax#comment-block
-            - match: '([a-zA-Z0-9_-]+)\s*(:)\s*([a-zA-Z0-9_-]+)(;?)'
+            - match: '([a-zA-Z0-9_-]+)\s*(:)'
               captures:
                 1: meta.property-name.css-modules.css support.type.property-name.css-modules.css
                 2: punctuation.separator.key-value.css
                 3: variable.other.css-modules.css
-                4: punctuation.terminator.rule.css
+              push:
+                - match: '(;|\s*(?=$))'
+                  captures:
+                    1: punctuation.terminator.rule.css
+                  pop: true
+                - include: Sass.sublime-syntax#literal-string
+                - include: Sass.sublime-syntax#unquoted-string
         - match: ''
           pop: true
 
