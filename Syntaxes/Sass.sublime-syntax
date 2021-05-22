@@ -1413,6 +1413,8 @@ contexts:
       scope: support.constant.property-value.css
     - match: \b(?i:sans-serif|serif|monospace|fantasy|cursive|system-ui)\b(?=\s*[;,\n}{])
       scope: support.constant.font-name.css
+    - match: \b(true|false|null)\b
+      scope: constant.language.sass
 
 
   function-arguments:

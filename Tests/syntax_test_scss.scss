@@ -882,6 +882,13 @@ $gutter-width: 10px;
   }
   position: relative; left: $x; top: $y;
 }
+@function v($default, $value, $old: false) {
+//                                  ^ constant.language
+    @if (map.get($v_map, $value) != null) {
+//                                  ^ constant.language
+        @return map.get($v_map, $value);
+    }
+}
 .seriousError {
   @at-root .child {}
   @at-root (without: media) {
