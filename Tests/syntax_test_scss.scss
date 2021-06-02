@@ -113,6 +113,8 @@ selector-ish::before[data-type="text"]:not(:first-child),
 //                        ^ punctuation.section.property-list.begin
   color: #00ff00;
   height: 97%;
+  align-self : baseline;
+// ^ support.type.property-name.css
   object-fit: scale-down;
 // ^ support.type.property-name.css
 // ^ - meta.selector
