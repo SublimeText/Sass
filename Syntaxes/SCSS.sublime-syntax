@@ -625,7 +625,7 @@ contexts:
                     ((device-)?(height|width|aspect-ratio|pixel-ratio))|
                     (color(-index)?)|monochrome|resolution
                 )
-            )|grid|scan|orientation
+            )|grid|scan|orientation|pointer|hover|any-pointer|any-hover|prefers-color-scheme|prefers-reduced-motion
             \s*(?=[:)])
           captures:
             0: support.type.property-name.media.css
@@ -636,7 +636,7 @@ contexts:
               captures:
                 1: punctuation.separator.key-value.css
               pop: true
-        - match: \b(portrait|landscape|progressive|interlace)
+        - match: \b(portrait|landscape|progressive|interlace|light|dark|reduce|no-preference|fine|coarse|hover|none)
           scope: support.constant.property-value.css
         - match: \s*(\d+)(/)(\d+)
           captures:

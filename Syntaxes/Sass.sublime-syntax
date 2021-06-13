@@ -1077,14 +1077,14 @@ contexts:
                   |color(?:-index)?|monochrome|resolution
                 )
               )
-              |grid|scan|orientation
+              |grid|scan|orientation|pointer|hover|any-pointer|any-hover|prefers-color-scheme|prefers-reduced-motion
             )\s*(:)?
           captures:
             1: support.type.property-name.media.css
             2: support.type.vendor-prefix.css
             3: support.type.vendor-prefix.css
             4: punctuation.separator.key-value.css
-        - match: \b(portrait|landscape|progressive|interlace)
+        - match: \b(portrait|landscape|progressive|interlace|light|dark|reduce|no-preference|fine|coarse|hover|none)
           scope: support.constant.property-value.css
         - match: '\s*(\d+)(/)(\d+)'
           captures:
