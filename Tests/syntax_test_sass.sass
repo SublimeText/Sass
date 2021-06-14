@@ -510,12 +510,12 @@ $map: (
 )
 $list: (top, bottom, right, position, height);
 //      ^^^ support.constant.property-value
-//         ^ punctuation.separator.css
+//         ^ punctuation.separator.sequence.css
 //           ^^^ support.constant.property-value
-//                 ^ punctuation.separator.css
+//                 ^ punctuation.separator.sequence.css
 //                   ^^^ support.constant.property-value
 //                          ^^^ string.unquoted
-//                                  ^ punctuation.separator.css
+//                                  ^ punctuation.separator.sequence.css
 
 @each $animal, $color, $cursor in (puma, black, default),(sea-slug, blue, pointer), (egret, white, move)
   .#{$animal-icon}
@@ -722,10 +722,12 @@ p
 //                      ^^      constant.numeric
 //                          ^^^ support.function.color.css
 
-  top: color(w() s())
+  top: color(w(var()) s(var()));
 //     ^^^^^       support.function.color.css
 //           ^     support.function.color.css
-//               ^ support.function.color.css
+/*               ^^^ support.function.var.css */
+/*                      ^ support.function.color.css */
+/*                        ^^^ support.function.var.css */
 
   top: alpha(- 1.5%)
 //     ^^^^^        support.function.color.css
@@ -745,6 +747,9 @@ p
   top: shade(1.5%)
 //     ^^^^^      support.function.color.css
 //           ^^^^ constant.numeric
+
+  top: steps(1, var(--end));
+/*                ^^^ support.function.var.css */
 
   top: blenda(red 50% hsl)
 //     ^^^^^^             support.function.color.css

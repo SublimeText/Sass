@@ -621,16 +621,16 @@ $map: (
 );
 $list: (top, bottom, right, position, height);
 //      ^^^ support.constant.property-value
-//         ^ punctuation.separator.css
+//         ^ punctuation.separator.sequence.css
 //           ^^^ support.constant.property-value
-//                 ^ punctuation.separator.css
+//                 ^ punctuation.separator.sequence.css
 //                   ^^^ support.constant.property-value
 //                          ^^^ string.unquoted
-//                                  ^ punctuation.separator.css
+//                                  ^ punctuation.separator.sequence.css
 @each $animal, $color, $cursor in (puma, black, default),
                                   (sea-slug, blue, pointer),
                                   (egret, white, move) {
-//                                      ^ punctuation.separator.css
+//                                      ^ punctuation.separator.sequence.css
   .#{$animal}-icon {
     background-image: url('/images/#{$animal}.png');
     border: 2px solid $color;
@@ -1542,10 +1542,16 @@ $gutter-width: 10px;
 /*                        ^^ constant.numeric.integer.decimal.css */
 /*                            ^^^ support.function.color.css */
 
-    top: color(w() s());
-/*       ^^^^^ support.function.color.css */
-/*             ^ support.function.color.css */
-/*                 ^ support.function.color.css */
+  top: color(w(var()) s(var()));
+//     ^^^^^       support.function.color.css
+//           ^     support.function.color.css
+/*               ^^^ support.function.var.css */
+/*                      ^ support.function.color.css */
+/*                        ^^^ support.function.var.css */
+  top: rect(var());
+/*       ^^^^ support.function.shape.css */
+/*            ^^^ support.function.var.css */
+
 
     top: alpha(- 1.5%);
 /*       ^^^^^ support.function.color.css */
@@ -2056,3 +2062,29 @@ $gutter-width: 10px;
 //    ^^^ support.type.custom-property.name
 //       ^ punctuation.separator.key-value
 }
+
+.test-box-shadow {
+     box-shadow: 0 0 0 .125rem hsl(var(--red-50)) inset,
+ /*             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.property-value.css */
+ /*              ^ meta.number.integer.decimal.css constant.numeric.value.css */
+ /*                ^ meta.number.integer.decimal.css constant.numeric.value.css */
+ /*                  ^ meta.number.integer.decimal.css constant.numeric.value.css */
+ /*                    ^^^^ meta.number.float.decimal.css constant.numeric.value.css */
+ /*                        ^^^ meta.number.float.decimal.css constant.numeric.suffix.css */
+ /*                            ^^^ support.function.color.css */
+ /*                                ^^^ support.function.var.css */
+ /*                                               ^^^^^ support.constant.property-value.css */
+ /*                                                    ^ punctuation.separator.sequence.css */
+                 0 0 0 .1875rem hsl(var(--red-50), .3);
+ /*             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.property-value.css */
+ /*              ^ meta.number.integer.decimal.css constant.numeric.value.css */
+ /*                ^ meta.number.integer.decimal.css constant.numeric.value.css */
+ /*                  ^ meta.number.integer.decimal.css constant.numeric.value.css */
+ /*                    ^^^^^ meta.number.float.decimal.css constant.numeric.value.css */
+ /*                         ^^^ meta.number.float.decimal.css constant.numeric.suffix.css */
+ /*                             ^^^ support.function.color.css */
+ /*                                 ^^^ support.function.var.css */
+ /*                                              ^ punctuation.separator.sequence.css */
+ /*                                                ^^ meta.number.float.decimal.css constant.numeric.value.css */
+ /*                                                   ^ punctuation.terminator.rule.css */
+ }
