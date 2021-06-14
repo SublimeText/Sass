@@ -381,9 +381,9 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
 //                  ^^^^^^^^^ meta.group.interpolation.sass
 //                  ^ punctuation.definition.variable.sass
 //                   ^ punctuation.definition.group.begin.sass
-//                    ^ constant.numeric.css
+//                    ^ constant.numeric.value.css
 //                      ^ keyword.operator.sass
-//                        ^ constant.numeric.css
+//                        ^ constant.numeric.value.css
 //                          ^ punctuation.definition.group.end.sass
     transform: #{translate + $axis + '(' + $span * $aim + ')'}
 //                           ^^^^^ variable.other
@@ -479,7 +479,7 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
 //                 ^ punctuation.separator
 //                         ^ punctuation.separator.key-value
 //                           ^^^ constant.numeric
-//                            ^^ keyword.other.unit
+//                            ^^ constant.numeric.suffix
 
   border: $color
 
@@ -489,7 +489,7 @@ p
 h1
   @include sexy-border(blue, 2in)
 //                           ^^^ constant.numeric
-//                            ^^ keyword.other.unit
+//                            ^^ constant.numeric.suffix
 
 
 @function grid-width($n)
@@ -558,9 +558,9 @@ $list: (top, bottom, right, position, height);
 
 @if 1 + 1 == 2
 //^ keyword.control.flow.conditional.sass
-//  ^ meta.at-rule constant.numeric.css
+//  ^ meta.at-rule constant.numeric
 //    ^ keyword.operator.sass
-//      ^ constant.numeric.css
+//      ^ constant.numeric
   border: 1px solid
 @if $scope == ie9
 //              ^ - constant.numeric
@@ -665,8 +665,8 @@ p
 //                    ^^^^^^^^^^^^^^^^^^ - string
 //                     ^ constant.numeric
 //                       ^ keyword.operator.sass
-//                         ^^^^ constant.numeric
-//                           ^^ keyword.other.unit.css
+//                         ^^^^ meta.number
+//                           ^^ constant.numeric.suffix
 //                               ^ keyword.operator.sass
 //                                 ^ keyword.operator.sass
 //                                  ^^^^ variable.other.sass
@@ -689,7 +689,7 @@ p
 //                  ^^^^^^^ support.function.sass
   top: rgb(1, 4.5%)
 //     ^^^         support.function.color.css
-//         ^       constant.numeric.css
+//         ^       constant.numeric.value
 //          ^      punctuation.separator.sequence.css
 //            ^^^^ constant.numeric
 

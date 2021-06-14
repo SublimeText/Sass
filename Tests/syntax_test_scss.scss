@@ -458,9 +458,9 @@ color: format(
 //                  ^^^^^^^^^ meta.group.interpolation.sass
 //                  ^ punctuation.definition.variable.sass
 //                   ^ punctuation.definition.group.begin.sass
-//                    ^ constant.numeric.css
+//                    ^ constant.numeric.value.css
 //                      ^ keyword.operator.sass
-//                        ^ constant.numeric.css
+//                        ^ constant.numeric.value.css
 //                          ^ punctuation.definition.group.end.sass
     transform: #{translate + $axis + '(' + $span * $aim + ')'};
 //                           ^^^^^ variable.other
@@ -554,7 +554,7 @@ color: format(
 //                              ^ punctuation.separator
 //                                      ^ punctuation.separator.key-value
 //                                        ^^^ constant.numeric
-//                                         ^^ keyword.other.unit
+//                                         ^^ constant.numeric.suffix
     @content;
 //  ^^^^^^^^ keyword.control.at-rule.content
 //  ^ punctuation.definition.keyword
@@ -573,7 +573,7 @@ h1 { @include sexy-border(blue, 2in); }
 //   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call
 //                       ^^^^^^^^^^^ meta.function-call.arguments
 //                              ^^^ constant.numeric
-//                               ^^ keyword.other.unit
+//                               ^^ constant.numeric.suffix
 //                                  ^ punctuation.terminator.rule
 
 /*
@@ -672,8 +672,8 @@ p {
 //                    ^^^^^^^^^^^^^^^^^^ - string
 //                     ^ constant.numeric
 //                       ^ keyword.operator.sass
-//                         ^^^^ constant.numeric
-//                           ^^ keyword.other.unit.css
+//                         ^^^^ meta.number
+//                           ^^ constant.numeric
 //                               ^ keyword.operator.sass
 //                                 ^ keyword.operator.sass
 //                                  ^^^^ variable.other.sass
@@ -697,7 +697,7 @@ $translucent-red: rgba(red, 0.5);
 //                        ^ punctuation.separator.sequence.css
 $translucent-red: hsla(240deg 100% 50% / 5%);
 //                ^^^^ support.function.color.css
-//                        ^^^ constant.numeric keyword.other.unit.css
+//                        ^^^ constant.numeric.suffix
 p {
   color: opacify($translucent-red, 0.3);
 //       ^^^^^^^ support.function.sass
@@ -851,9 +851,9 @@ $gutter-width: 10px;
 */
 @if 1 + 1 == 2 { border: 1px solid; }
 //^ keyword.control.flow.conditional.sass
-//  ^ meta.at-rule constant.numeric.css
+//  ^ meta.at-rule constant.numeric
 //    ^ keyword.operator.sass
-//      ^ constant.numeric.css
+//      ^ constant.numeric
 //             ^ punctuation.section.property-list.begin.css
 @if $scope == ie9 { border: 1px solid; }
 //              ^ - constant.numeric
@@ -866,7 +866,7 @@ $gutter-width: 10px;
 //              ^ meta.group.css meta.function-call.arguments.css variable.other.sass
     @debug 10em + 12em;
 //         ^^^^ constant.numeric
-//           ^ meta.at-rule keyword.other.unit.css
+//           ^ meta.at-rule constant.numeric
 //              ^ keyword.operator.sass
 //                ^^^^ constant.numeric
 //                    ^ punctuation.terminator.rule.sass
@@ -1332,7 +1332,7 @@ $gutter-width: 10px;
 
 .test-pseudo-classes:nth-child(2):hover {}
 //                   ^^^^^^^^^          entity.other.pseudo-class.css
-//                             ^        constant.numeric.css
+//                             ^        constant.numeric
 //                               ^      punctuation.definition.entity.css
 //                                ^^^^^ entity.other.pseudo-class.css
 
