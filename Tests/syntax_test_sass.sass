@@ -382,7 +382,7 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
 //                  ^ punctuation.definition.variable.sass
 //                   ^ punctuation.definition.group.begin.sass
 //                    ^ constant.numeric.value.css
-//                      ^ keyword.operator.sass
+//                      ^ keyword.operator.arithmetic.sass
 //                        ^ constant.numeric.value.css
 //                          ^ punctuation.definition.group.end.sass
     transform: #{translate + $axis + '(' + $span * $aim + ')'}
@@ -434,7 +434,7 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
 
 @include firefox-message(".header" + test)
 //                       ^^^^^^^^^ meta.function-call.sass meta.function-call.arguments.sass string.quoted.double.css
-//                                 ^ keyword.operator.sass
+//                                 ^ keyword.operator.arithmetic.sass
 //                                   ^ string.unquoted
 //                                       ^ - string
 
@@ -449,7 +449,7 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.sass
 // ^^^^^^^^^^^^^ variable.function.sass
 //               ^^^^^^^^^ string.quoted.double.css
-//                         ^ keyword.operator.sass
+//                         ^ keyword.operator.arithmetic.sass
 //                           ^ string.unquoted
 //                               ^ - string
 
@@ -559,7 +559,7 @@ $list: (top, bottom, right, position, height);
 @if 1 + 1 == 2
 //^ keyword.control.flow.conditional.sass
 //  ^ meta.at-rule constant.numeric
-//    ^ keyword.operator.sass
+//    ^ keyword.operator.arithmetic.sass
 //      ^ constant.numeric
   border: 1px solid
 @if $scope == ie9
@@ -664,11 +664,11 @@ p
   width: $base-width + 2 * -5rem / -$var
 //                    ^^^^^^^^^^^^^^^^^^ - string
 //                     ^ constant.numeric
-//                       ^ keyword.operator.sass
+//                       ^ keyword.operator.arithmetic.sass
 //                         ^^^^ meta.number
 //                           ^^ constant.numeric.suffix
 //                               ^ keyword.operator.arithmetic
-//                                 ^ keyword.operator.sass
+//                                 ^ keyword.operator.arithmetic.sass
 //                                  ^^^^ variable.other.sass
 
 
@@ -731,24 +731,24 @@ p
 
   top: alpha(- 1.5%)
 //     ^^^^^        support.function.color.css
-//           ^      keyword.operator.css
+//           ^      keyword.operator.arithmetic.css
 //             ^^^^ constant.numeric
 
   top: h(+ 1.5deg)
 //     ^          support.function.color.css
-//       ^        keyword.operator.css
+//       ^        keyword.operator.arithmetic.css
 //         ^^^^^^ constant.numeric
 
   top: w(* 1.5%)
 //     ^        support.function.color.css
-//       ^      keyword.operator.css
+//       ^      keyword.operator.arithmetic.css
 //         ^^^^ constant.numeric
 
   top: shade(1.5%)
 //     ^^^^^      support.function.color.css
 //           ^^^^ constant.numeric
 
-  top: steps(1, var(--end));
+  top: steps(1, var(--end))
 /*                ^^^ support.function.var.css */
 
   top: blenda(red 50% hsl)
@@ -756,7 +756,76 @@ p
 //            ^^^         support.constant.color.w3c-standard-color-name.css
 //                ^^^     constant.numeric
 //                    ^^^ keyword.other.color-space.css
+      top: alpha(-1.5%)
+  /*       ^^^^^ support.function.color.css */
+  /*             ^ invalid.illegal.operator.css */
+  /*              ^^^ meta.number.float.decimal.css constant.numeric.value.css */
+  /*                 ^ meta.number.float.decimal.css constant.numeric.suffix.css */
 
+  top: calc(+1px+1px)
+  /*        ^ keyword.operator.arithmetic.css */
+  /*            ^ invalid.illegal.operator.css */
+  top: calc(1px+ 1px)
+  /*           ^ invalid.illegal.operator.css */
+  top: calc(1px +1px)
+  /*            ^ invalid.illegal.operator.css */
+  top: calc((1px) +1px)
+  /*              ^ invalid.illegal.operator.css */
+  top: calc((1px)+ 1px)
+  /*             ^ invalid.illegal.operator.css */
+  top: calc(+1px+(+1px)+1px)
+  /*        ^ keyword.operator.arithmetic.css */
+  /*            ^ keyword.operator.arithmetic.css */
+  /*              ^ keyword.operator.arithmetic.css */
+  /*                   ^ invalid.illegal.operator.css */
+  top: calc(1px / 1px)
+  /*            ^ keyword.operator.css */
+  /*            ^ keyword.operator.arithmetic.css */
+  top: calc(-1px-1px)
+  /*        ^ keyword.operator.arithmetic.css */
+  /*            ^ invalid.illegal.operator.css */
+  top: calc(1px- 1px)
+  /*           ^ invalid.illegal.operator.css */
+  top: calc(1px -1px)
+  /*            ^ invalid.illegal.operator.css */
+  top: calc((1px) -1px)
+  /*              ^ invalid.illegal.operator.css */
+  top: calc((1px)- 1px)
+  /*             ^ invalid.illegal.operator.css */
+  top: calc(-1px-(-1px)-1px)
+  /*        ^ keyword.operator.arithmetic.css */
+  /*            ^ keyword.operator.arithmetic.css */
+  /*              ^ keyword.operator.arithmetic.css */
+  /*                   ^ invalid.illegal.operator.css */
+  top: calc(1px * 1px)    top: alpha(-1.5%)
+ /*       ^^^^^ support.function.color.css */
+ /*             ^ invalid.illegal.operator.css */
+ /*              ^^^ meta.number.float.decimal.css constant.numeric.value.css */
+ /*                 ^ meta.number.float.decimal.css constant.numeric.suffix.css */
+
+  /*            ^ keyword.operator.css */
+  /*            ^ keyword.operator.arithmetic.css */
+  top: calc(1px* 1px)    top: alpha(-1.5%)
+ /*       ^^^^^ support.function.color.css */
+ /*             ^ invalid.illegal.operator.css */
+ /*              ^^^ meta.number.float.decimal.css constant.numeric.value.css */
+ /*                 ^ meta.number.float.decimal.css constant.numeric.suffix.css */
+
+  /*           ^ keyword.operator.arithmetic.css */
+  top: calc(1px *1px)    top: alpha(-1.5%)
+ /*       ^^^^^ support.function.color.css */
+ /*             ^ invalid.illegal.operator.css */
+ /*              ^^^ meta.number.float.decimal.css constant.numeric.value.css */
+ /*                 ^ meta.number.float.decimal.css constant.numeric.suffix.css */
+
+  /*            ^ keyword.operator.arithmetic.css */
+  top: calc(1px*1px)    top: alpha(-1.5%)
+ /*       ^^^^^ support.function.color.css */
+ /*             ^ invalid.illegal.operator.css */
+ /*              ^^^ meta.number.float.decimal.css constant.numeric.value.css */
+ /*                 ^ meta.number.float.decimal.css constant.numeric.suffix.css */
+
+/*           ^ keyword.operator.arithmetic.css */
   background-color: color(var(--background) blend(var(--foreground) 80%))
 //^^^^^^^^^^^^^^^^ support.type.property-name.css
 //                ^ punctuation.separator.key-value.css
