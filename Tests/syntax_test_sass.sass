@@ -667,7 +667,7 @@ p
 //                       ^ keyword.operator.sass
 //                         ^^^^ meta.number
 //                           ^^ constant.numeric.suffix
-//                               ^ keyword.operator.sass
+//                               ^ keyword.operator.arithmetic
 //                                 ^ keyword.operator.sass
 //                                  ^^^^ variable.other.sass
 
@@ -775,3 +775,16 @@ p
 //                                                                  ^^^ constant.numeric
 //                                                                     ^^ punctuation.definition.group.end.css
 
+    grid: [linename1] "a" 100px [linename2]
+ /*  ^^^^ meta.property-list.css meta.property-name.css */
+ /*       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.property-value.css */
+ /*  ^^^^ support.type.property-name.css */
+ /*      ^ punctuation.separator.key-value.css */
+ /*        ^ punctuation.section.begin.css */
+ /*         ^^^^^^^^^ string.unquoted.line-name.css */
+ /*                  ^ punctuation.section.end.css */
+ /*                    ^^^ string.quoted.double.css */
+ /*                        ^^^^^ meta.number.integer.decimal.css */
+ /*                              ^ punctuation.section.begin.css */
+ /*                               ^^^^^^^^^ string.unquoted.line-name.css */
+ /*                                        ^ punctuation.section.end.css */

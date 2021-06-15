@@ -674,7 +674,7 @@ p {
 //                       ^ keyword.operator.sass
 //                         ^^^^ meta.number
 //                           ^^ constant.numeric
-//                               ^ keyword.operator.sass
+//                               ^ keyword.operator.arithmetic
 //                                 ^ keyword.operator.sass
 //                                  ^^^^ variable.other.sass
 }
@@ -2064,7 +2064,7 @@ $gutter-width: 10px;
 }
 
 .test-box-shadow {
-     box-shadow: 0 0 0 .125rem hsl(var(--red-50)) inset,
+     box-shadow: 0 0 0 .125rem hsl(var(--red-50)) inset;
  /*             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.property-value.css */
  /*              ^ meta.number.integer.decimal.css constant.numeric.value.css */
  /*                ^ meta.number.integer.decimal.css constant.numeric.value.css */
@@ -2087,4 +2087,17 @@ $gutter-width: 10px;
  /*                                              ^ punctuation.separator.sequence.css */
  /*                                                ^^ meta.number.float.decimal.css constant.numeric.value.css */
  /*                                                   ^ punctuation.terminator.rule.css */
+    grid: [linename1] "a" 100px [linename2];
+ /*  ^^^^ meta.property-list.css meta.property-name.css */
+ /*       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.property-value.css */
+ /*  ^^^^ support.type.property-name.css */
+ /*      ^ punctuation.separator.key-value.css */
+ /*        ^ punctuation.section.begin.css */
+ /*         ^^^^^^^^^ string.unquoted.line-name.css */
+ /*                  ^ punctuation.section.end.css */
+ /*                    ^^^ string.quoted.double.css */
+ /*                        ^^^^^ meta.number.integer.decimal.css */
+ /*                              ^ punctuation.section.begin.css */
+ /*                               ^^^^^^^^^ string.unquoted.line-name.css */
+ /*                                        ^ punctuation.section.end.css */
  }

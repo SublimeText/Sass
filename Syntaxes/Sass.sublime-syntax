@@ -149,7 +149,7 @@ variables:
       | nbsp-mode|color|image-resolution|grid-row-gap|grid-row|grid-column
       | blend-mode|azimuth|pause-after|pause-before|pause|pitch-range|pitch
       | text-height|system|negative|prefix|suffix|range|pad|fallback
-      | additive-symbols|symbols|speak-as|speak|grid-gap
+      | additive-symbols|symbols|speak-as|speak|grid-gap|grid
     )\b
 
 
@@ -657,6 +657,8 @@ contexts:
         1: punctuation.definition.keyword.css
     - match: '\!\s*(default|global|optional)'
       scope: keyword.other.sass
+    - match: /
+      scope: keyword.operator.arithmetic.css
     - include: comma-delimiter
     - include: vendor-prefix
     - include: comment-line
