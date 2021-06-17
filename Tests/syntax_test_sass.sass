@@ -796,7 +796,36 @@ p
 //              ^ keyword.operator.arithmetic.css
 //                ^ keyword.operator.arithmetic.css
 //                     ^ invalid.illegal.operator.css
+  top: clamp(1*5pt, calc(12/5), 100rem)
+//     ^^^^^ support.function.calc.css
+//           ^ constant.numeric.value.css
+//            ^ keyword.operator.arithmetic.css
+//             ^ constant.numeric.value.css
+//              ^^ constant.numeric.suffix.css
+//                ^ punctuation.separator.sequence.css
+//                  ^^^^ support.function.calc.css
+//                       ^^ constant.numeric.value.css
+//                         ^ keyword.operator.arithmetic.css
+//                          ^ constant.numeric.value.css
+//                            ^ punctuation.separator.sequence.css
+//                              ^^^ constant.numeric.value.css
+//                                 ^^^ constant.numeric.suffix.css
 
+   top: max(5*6, min(10 + 5, calc(var(--size) / 5)))
+//      ^^^ support.function.calc.css
+//          ^ constant.numeric.value.css
+//           ^ keyword.operator.arithmetic.css
+//            ^ constant.numeric.value.css
+//             ^ punctuation.separator.sequence.css
+//               ^^^ support.function.calc.css
+//                   ^^ constant.numeric.value.css
+//                      ^ keyword.operator.arithmetic.css
+//                        ^ constant.numeric.value.css
+//                         ^ punctuation.separator.sequence.css
+//                           ^^^^ support.function.calc.css
+//                                ^^^ support.function.var.css
+//                                            ^ keyword.operator.arithmetic.css
+//                                              ^ constant.numeric.value.css
   background-color: color(var(--background) blend(var(--foreground) 80%))
 //^^^^^^^^^^^^^^^^ support.type.property-name.css
 //                ^ punctuation.separator.key-value.css

@@ -1624,6 +1624,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
+          - include: calc-function
           - include: number-type
           - include: var-function
           - include: sass-value-expression
@@ -1643,6 +1644,7 @@ contexts:
             pop: true
           - include: comma-delimiter
           - include: var-function
+          - include: calc-function
           - include: percentage-type
           - include: length-type
           - include: number-type
@@ -1662,6 +1664,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: var-function
+          - include: calc-function
           - include: percentage-type
           - include: length-type
           - include: number-type
@@ -1681,6 +1684,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: var-function
+          - include: calc-function
           - include: angle-type
           - include: sass-value-expression
 
@@ -1699,6 +1703,7 @@ contexts:
             pop: true
           - include: comma-delimiter
           - include: var-function
+          - include: calc-function
           - include: angle-type
           - include: sass-value-expression
 
@@ -1716,6 +1721,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: var-function
+          - include: calc-function
           - include: length-type
           - include: sass-value-expression
 
@@ -1734,6 +1740,7 @@ contexts:
             pop: true
           - include: comma-delimiter
           - include: var-function
+          - include: calc-function
           - include: angle-type
           - include: number-type
           - include: sass-value-expression
@@ -1753,6 +1760,7 @@ contexts:
             pop: true
           - include: comma-delimiter
           - include: var-function
+          - include: calc-function
           - include: number-type
           - include: sass-value-expression
 
@@ -1774,6 +1782,7 @@ contexts:
             pop: true
           - include: comma-delimiter
           - include: var-function
+          - include: calc-function
           - include: number-type
           - include: sass-value-expression
 
@@ -1792,6 +1801,7 @@ contexts:
             pop: true
           - include: comma-delimiter
           - include: var-function
+          - include: calc-function
           - include: integer-type
           - match: (end|middle|start)
             scope: support.keyword.timing-direction.css
@@ -1816,6 +1826,7 @@ contexts:
           - match: \bauto\b
             scope: support.constant.property-value.css
           - include: var-function
+          - include: calc-function
           - include: length-type
           - include: sass-value-expression
 
@@ -1835,6 +1846,7 @@ contexts:
           - match: '\bround\b'
             scope: keyword.other.css
           - include: var-function
+          - include: calc-function
           - include: length-type
           - include: percentage-type
           - include: sass-value-expression
@@ -1859,6 +1871,7 @@ contexts:
           - match: '\b(top|right|bottom|left|center|closest-side|farthest-side)\b'
             scope: support.constant.property-value.css
           - include: var-function
+          - include: calc-function
           - include: length-type
           - include: percentage-type
           - include: sass-value-expression
@@ -1901,6 +1914,7 @@ contexts:
             pop: true
           - include: comma-delimiter
           - include: var-function
+          - include: calc-function
           - include: vendor-prefix
           - include: property-value-constants
           - include: numeric-values
@@ -1922,6 +1936,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
+          - include: calc-function
           - include: var-function
           - include: length-type
           - include: percentage-type
@@ -1974,6 +1989,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: var-function
+          - include: calc-function
           - include: length-type
           - include: sass-value-expression
 
@@ -1991,6 +2007,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: var-function
+          - include: calc-function
           - include: percentage-type
           - include: number-type
           - include: sass-value-expression
@@ -2009,6 +2026,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: var-function
+          - include: calc-function
           - include: length-type
           - include: color-values
           - include: sass-value-expression
@@ -2027,6 +2045,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: var-function
+          - include: calc-function
           - include: angle-type
           - include: sass-value-expression
 
@@ -2034,6 +2053,15 @@ contexts:
   # https://www.w3.org/TR/css3-values/#funcdef-calc
   calc-function:
     - match: '\b(calc)(?=\()'
+      scope: support.function.calc.css
+      push:
+        - meta_scope: meta.function-call.css
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push: inside-calc-parens
+        - match: ''
+          pop: true
+    - match: '\b(?i:clamp|max|min)(?=\()'
       scope: support.function.calc.css
       push:
         - meta_scope: meta.function-call.css
@@ -2091,7 +2119,7 @@ contexts:
                   | {{frequency_units}}
                   | {{resolution_units}}
                 )\b
-              scope: keyword.other.unit.css
+              scope: constant.numeric.suffix.css
             - match: '(?=\))'
               pop: true
             - include: comma-delimiter
@@ -2338,6 +2366,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
+          - include: calc-function
           - include: var-function
           - include: percentage-type
           - include: length-type
@@ -2362,6 +2391,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
+          - include: calc-function
           - include: var-function
           - include: percentage-type
           - include: number-type
@@ -2386,6 +2416,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
+          - include: calc-function
           - include: var-function
           - include: angle-type
           - include: percentage-type
@@ -2406,6 +2437,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
+          - include: calc-function
           - include: var-function
           - include: percentage-type
           - include: number-type
@@ -2425,6 +2457,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
+          - include: calc-function
           - include: color-adjuster-functions # must be included before `color-values`
           - include: var-function
           - include: color-values
@@ -2446,6 +2479,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
+          - include: calc-function
           - include: color-adjuster-functions # must be included before `color-values`
           - include: var-function
           - include: color-values
@@ -2469,6 +2503,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: var-function
+          - include: calc-function
           - include: color-adjuster-operators
           - include: percentage-type
           - include: number-type
@@ -2487,6 +2522,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: var-function
+          - include: calc-function
           - include: color-adjuster-operators
           - include: angle-type
           - include: sass-value-expression
@@ -2504,6 +2540,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: var-function
+          - include: calc-function
           - include: color-adjuster-operators
           - include: percentage-type
           - include: sass-value-expression
@@ -2523,6 +2560,7 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: var-function
+          - include: calc-function
           - include: percentage-type
           - include: sass-value-expression
 
@@ -2541,6 +2579,7 @@ contexts:
           - match: '\b(rgb|hsl|hwb)\b'
             scope: keyword.other.color-space.css
           - include: var-function
+          - include: calc-function
           - include: color-values
           - include: percentage-type
           - include: sass-value-expression
