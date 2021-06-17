@@ -634,7 +634,7 @@ class CSSCompletions(sublime_plugin.EventListener):
                 self.re_name = re.compile(r":?([a-zA-Z-]+)\s*:?[^:;{}]*$")
 
         if match_selector(view, pt, "meta.property-value.css meta.function-call"):
-            items = self.complete_function_argument(view, prefix, pt, is_scss)
+            items = self.complete_function_argument(view, prefix, pt)
         elif match_selector(view, pt, "meta.property-value.css"):
             items = self.complete_property_value(view, prefix, pt, is_scss)
         else:
