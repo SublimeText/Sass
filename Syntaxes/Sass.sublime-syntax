@@ -433,7 +433,7 @@ contexts:
           pop: true
         - include: selector-parts
 
-    - match: '\s*(:)(matches|not|has)(?=\()'
+    - match: '\s*(:)(matches|is|where|not|has)(?=\()'
       scope: entity.other.pseudo-class.css
       captures:
         1: punctuation.definition.entity.css
