@@ -2263,6 +2263,32 @@ contexts:
   # Gradient Functions
   # https://drafts.csswg.org/css-images-3/#gradients
   gradient-functions:
+    # conic-gradient()
+    # https://developer.mozilla.org/en-US/docs/Web/CSS/conic-gradient()
+    # repeating-conic-gradient()
+    # https://developer.mozilla.org/en-US/docs/Web/CSS/repeating-conic-gradient()
+    - match: \b((?:repeating-)?conic-gradient)(?=\()
+      scope: support.function.gradient.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: \(
+          scope: punctuation.section.group.begin.css
+          push:
+            - meta_scope: meta.group.css
+            - match: '(?=\))'
+              pop: true
+            - include: comma-delimiter
+            - match: \b(?i:at|from)\b
+              scope: keyword.other.gradient.css
+            - match: \b(?i:bottom|center|left|right|top)\b
+              scope: support.constant.property-value.css
+            - include: color-values
+            - include: angle-type
+            - include: length-type
+            - include: percentage-type
+            - include: sass-value-expression
+
       # linear-gradient()
       # https://drafts.csswg.org/css-images-3/#linear-gradients
       # repeating-linear-gradient()
@@ -2286,7 +2312,7 @@ contexts:
           - include: percentage-type
           - match: '\bto\b'
             scope: keyword.other.css
-          - match: \b(top|right|bottom|left)\b
+          - match: \b(bottom|left|right|top)\b
             scope: support.constant.property-value.css
           - include: sass-value-expression
 
