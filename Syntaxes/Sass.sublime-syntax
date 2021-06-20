@@ -2602,12 +2602,12 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - match: '\b(rgb|hsl|hwb)\b'
-            scope: keyword.other.color-space.css
           - include: var-function
           - include: calc-function
           - include: color-values
           - include: percentage-type
+          - match: \b(?i:rgb|hsl|hwb)\b
+            scope: keyword.other.color-space.css
           - include: sass-value-expression
 
 
