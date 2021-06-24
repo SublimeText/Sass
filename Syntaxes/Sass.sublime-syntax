@@ -15,6 +15,15 @@ variables:
   nmchar: '(?:[[-\w]{{nonascii}}]|{{escape}})'
   ident: '(?:--{{nmchar}}+|-?{{nmstart}}{{nmchar}}*)'
 
+  # Identifier Break
+  # The proper pattern would be (?!{{nmchar}}), but its impact on performance
+  # is just too high, thus several optimizations are applied.
+  # 1. Use positive lookahead with \Z to handle `eof`
+  # 2. Breaks are ascii characters other than denoted by {{nmchar}}.
+  # 3. Assume unicode or escape character if backslash is matched, instead of
+  #    matching (?!{{escape}}) which also effects performance negative.
+  break: (?=[[^-_[:alnum:]\\]&&[[:ascii:]]]|\Z)
+
   integer: '([-+]?)(\d+)'
   float: '([-+]?)(\d*(\.)\d+(?:[eE][-+]?\d+)?|\d+[eE][-+]?\d+)'
 
@@ -26,23 +35,26 @@ variables:
   frequency_units: '(?i:Hz|kHz)'
   resolution_units: '(?i:dpi|dpcm|dppx)'
 
+  # Custom Element Names
+  # https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-core-concepts
+  custom_element_tags: \b[a-z]{{custom_element_chars}}*-{{custom_element_chars}}*{{break}}
+  # Note: Excludes `.` as it is used to identify attribute access
   custom_element_chars: |-
     (?x:
-        [-_a-z0-9\x{00B7}]
-      | \\\.
-      | [\x{00C0}-\x{00D6}]
-      | [\x{00D8}-\x{00F6}]
-      | [\x{00F8}-\x{02FF}]
-      | [\x{0300}-\x{037D}]
-      | [\x{037F}-\x{1FFF}]
-      | [\x{200C}-\x{200D}]
-      | [\x{203F}-\x{2040}]
-      | [\x{2070}-\x{218F}]
-      | [\x{2C00}-\x{2FEF}]
-      | [\x{3001}-\x{D7FF}]
-      | [\x{F900}-\x{FDCF}]
-      | [\x{FDF0}-\x{FFFD}]
-      | [\x{10000}-\x{EFFFF}]
+      [-_a-z0-9\x{00B7}]
+    | [\x{00C0}-\x{00D6}]
+    | [\x{00D8}-\x{00F6}]
+    | [\x{00F8}-\x{02FF}]
+    | [\x{0300}-\x{037D}]
+    | [\x{037F}-\x{1FFF}]
+    | [\x{200C}-\x{200D}]
+    | [\x{203F}-\x{2040}]
+    | [\x{2070}-\x{218F}]
+    | [\x{2C00}-\x{2FEF}]
+    | [\x{3001}-\x{D7FF}]
+    | [\x{F900}-\x{FDCF}]
+    | [\x{FDF0}-\x{FFFD}]
+    | [\x{10000}-\x{EFFFF}]
     )
 
   combinators: '(?:>{1,3}|[~+])'
@@ -71,10 +83,10 @@ variables:
     (?x:
         (:{1,2})(?:before|after|first-line|first-letter) # CSS1 & CSS2 require : or ::
       | (::)(-(?:moz|ms|webkit)-)?(?:{{ident}}) # CSS3 requires ::
-    )\b
+    ){{break}}
 
   regular_pseudo_classes: '\b(active|any-link|blank|checked|current|default|defined|disabled|drop|empty|enabled|first|first-child|first-of-type|fullscreen|future|focus|focus-visible|focus-within|host|hover|indeterminate|in-range|invalid|last-child|last-of-type|left|link|local-link|only-child|only-of-type|optional|out-of-range|past|placeholder-shown|read-only|read-write|required|right|root|scope|target|target-within|user-invalid|valid|visited)\b(?![-])'
-  functional_pseudo_classes: '\b(dir|lang|matches|not|has|drop|nth-last-child|nth-child|nth-last-of-type|nth-of-type)\b'
+  functional_pseudo_classes: '\b(dir|lang|matches|not|has|drop|nth-last-child|nth-child|nth-last-of-type|nth-of-type){{break}}'
 
   property_names: |-
     \b(?x)(
@@ -150,7 +162,7 @@ variables:
       | blend-mode|azimuth|pause-after|pause-before|pause|pitch-range|pitch
       | text-height|system|negative|prefix|suffix|range|pad|fallback
       | additive-symbols|symbols|speak-as|speak|grid-gap|grid
-    )\b
+    ){{break}}
 
 
 contexts:
@@ -487,7 +499,7 @@ contexts:
             - match: '\)'
               scope: punctuation.definition.group.end.css
               pop: true
-            - match: \b(even|odd)\b
+            - match: \b(even|odd){{break}}
               scope: keyword.other.pseudo-class.css
             - match: '(([-+]?)(\d*)(n))\s*(([-+])(\s*\d+))?'
               captures:
@@ -554,7 +566,7 @@ contexts:
         - match: '\s*(?=$)'
           pop: true
         - include: property-values
-    - match: '\b(font-family|font|family)\b(?=\s*:)'
+    - match: '\b(font-family|font|family){{break}}(?=\s*:)'
       scope: meta.property-name.css support.type.property-name.css
       push:
         - match: '(?=\s*[)])'
@@ -651,7 +663,7 @@ contexts:
   property-values:
     - match: ';'
       scope: invalid.illegal.sass
-    - match: '\!\s*important'
+    - match: '\!\s*important{{break}}'
       scope: keyword.other.important.css
       captures:
         1: punctuation.definition.keyword.css
@@ -762,7 +774,6 @@ contexts:
           scope: keyword.other.sass
         - include: selectors
         - include: custom-element-selectors
-
     - match: '((@)(mixin|function))\s+([\w-]+)'
       captures:
         1: keyword.control.at-rule.sass
@@ -877,7 +888,7 @@ contexts:
         - include: comment-block
         - include: comment-line
         - include: literal-string
-    - match: '((@)(?:-(?:webkit|moz|o)-)?(charset|namespace|font-face)\b)'
+    - match: '((@)(?:-(?:webkit|moz|o)-)?(charset|namespace|font-face){{break}})'
       captures:
         1: keyword.control.at-rule.css
         2: punctuation.definition.keyword.css
@@ -911,7 +922,7 @@ contexts:
         - include: comment-line
         - match: '(?=$)'
           pop: true
-    - match: '(?=\s*@custom-media\b)'
+    - match: '(?=\s*@custom-media){{break}}'
       push:
         - match: '(?=$)'
           pop: true
@@ -925,7 +936,7 @@ contexts:
             - match: '\s*(?=$)'
               pop: true
             - include: media-query
-    - match: '((@)document)'
+    - match: '((@)document){{break}}'
       captures:
         1: keyword.control.at-rule.document.css
         2: punctuation.definition.keyword.css
@@ -940,7 +951,7 @@ contexts:
         - include: domain-function
         - include: regexp-function
         - include: comma-delimiter
-    - match: '\s*((@)import\b)\s*'
+    - match: '\s*((@)import){{break}}\s*'
       captures:
         1: keyword.control.at-rule.import.css
         2: punctuation.definition.keyword.css
@@ -959,7 +970,7 @@ contexts:
         - include: literal-string
         - include: url-function
         - include: media-query
-    - match: '\s*((@)(-webkit-|-moz-|-o-)?keyframes)'
+    - match: '\s*((@)(-webkit-|-moz-|-o-)?keyframes){{break}}'
       captures:
         1: keyword.control.at-rule.keyframe.css
         2: punctuation.definition.keyword.css
@@ -976,7 +987,7 @@ contexts:
         - match: '\s*(?:(,)|(?=[{]))'
           captures:
             1: punctuation.definition.arbitrary-repetition.css
-    - match: '\s*((@)media)\b'
+    - match: '\s*((@)media){{break}}'
       captures:
         1: keyword.control.at-rule.media.css
         2: punctuation.definition.keyword.css
@@ -1011,7 +1022,7 @@ contexts:
         - include: comment-line
         - match: '\s*(?=$)'
           pop: true
-    - match: '((@)supports)'
+    - match: '((@)supports){{break}}'
       captures:
         1: keyword.control.at-rule.supports.css
         2: punctuation.definition.keyword.css
@@ -1021,7 +1032,7 @@ contexts:
           pop: true
         - include: at-supports-operators
         - include: at-supports-parens
-    - match: '((@)content)'
+    - match: '((@)content){{break}}'
       captures:
         1: keyword.control.at-rule.content.sass
         2: punctuation.definition.keyword.sass
@@ -1416,7 +1427,7 @@ contexts:
               | z-index|zero
               | zoom(-in|-out)?
               | ({{counter_styles}})
-            )\b(?=[\s;{),/])
+            ){{break}}(?=[\s;{),/])
       scope: support.constant.property-value.css
     - match: \b(?i:sans-serif|serif|monospace|fantasy|cursive|system-ui)\b(?=\s*[;,\n}{])
       scope: support.constant.font-name.css
@@ -1803,7 +1814,7 @@ contexts:
           - include: var-function
           - include: calc-function
           - include: integer-type
-          - match: (end|middle|start)
+          - match: \b(end|middle|start){{break}}
             scope: support.keyword.timing-direction.css
           - include: sass-value-expression
 
@@ -1823,7 +1834,7 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - match: \bauto\b
+          - match: \bauto{{break}}
             scope: support.constant.property-value.css
           - include: var-function
           - include: calc-function
@@ -1843,7 +1854,7 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - match: '\bround\b'
+          - match: '\bround{{break}}'
             scope: keyword.other.css
           - include: var-function
           - include: calc-function
@@ -1866,9 +1877,9 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - match: '\bat\b'
+          - match: '\bat{{break}}'
             scope: keyword.other.css
-          - match: '\b(top|right|bottom|left|center|closest-side|farthest-side)\b'
+          - match: '\b(top|right|bottom|left|center|closest-side|farthest-side){{break}}'
             scope: support.constant.property-value.css
           - include: var-function
           - include: calc-function
@@ -1895,7 +1906,7 @@ contexts:
           - include: length-type
           - include: percentage-type
           - include: calc-function
-          - match: '\b(nonzero|evenodd)\b'
+          - match: '\b(nonzero|evenodd){{break}}'
             scope: support.constant.property-value.css
           - include: sass-value-expression
 
@@ -1943,9 +1954,9 @@ contexts:
           - include: minmax-function
           - include: integer-type
           - include: line-names
-          - match: \b(auto-fill|auto-fit)\b
+          - match: \b(auto-fill|auto-fit){{break}}
             scope: support.keyword.repetitions.css
-          - match: \b(max-content|min-content|auto)\b
+          - match: \b(max-content|min-content|auto){{break}}
             scope: support.constant.property-value.css
           - include: sass-value-expression
 
@@ -2279,9 +2290,9 @@ contexts:
             - match: '(?=\))'
               pop: true
             - include: comma-delimiter
-            - match: \b(?i:at|from)\b
+            - match: \b(?i:at|from){{break}}
               scope: keyword.other.gradient.css
-            - match: \b(?i:bottom|center|left|right|top)\b
+            - match: \b(?i:bottom|center|left|right|top){{break}}
               scope: support.constant.property-value.css
             - include: color-values
             - include: angle-type
@@ -2310,9 +2321,9 @@ contexts:
           - include: angle-type
           - include: length-type
           - include: percentage-type
-          - match: '\bto\b'
+          - match: '\bto{{break}}'
             scope: keyword.other.css
-          - match: \b(bottom|left|right|top)\b
+          - match: \b(bottom|left|right|top){{break}}
             scope: support.constant.property-value.css
           - include: sass-value-expression
 
@@ -2337,7 +2348,7 @@ contexts:
           - include: angle-type
           - include: length-type
           - include: percentage-type
-          - match: '\b(at|circle|ellipse)\b'
+          - match: '\b(at|circle|ellipse){{break}}'
             scope: keyword.other.css
           - match: |-
               (?x)\b(
@@ -2350,7 +2361,7 @@ contexts:
                 | closest-side
                 | farthest-corner
                 | farthest-side
-              )\b
+              ){{break}}
             scope: support.constant.property-value.css
           - include: sass-value-expression
 
@@ -2396,7 +2407,7 @@ contexts:
           - include: var-function
           - include: percentage-type
           - include: length-type
-          - match: \b(auto|max-content|min-content)\b
+          - match: \b(auto|max-content|min-content){{break}}
             scope: support.constant.property-value.css
           - include: sass-value-expression
 
@@ -2606,7 +2617,7 @@ contexts:
           - include: calc-function
           - include: color-values
           - include: percentage-type
-          - match: \b(?i:rgb|hsl|hwb)\b
+          - match: \b(?i:rgb|hsl|hwb){{break}}
             scope: keyword.other.color-space.css
           - include: sass-value-expression
 
@@ -2683,11 +2694,11 @@ contexts:
   color-values:
     - include: color-functions
     - include: color-hex-values
-    - match: \b(?i:aqua|black|blue|fuchsia|gray|green|lime|maroon|navy|olive|orange|purple|red|silver|teal|white|yellow)\b
+    - match: \b(?i:aqua|black|blue|fuchsia|gray|green|lime|maroon|navy|olive|orange|purple|red|silver|teal|white|yellow){{break}}
       scope: support.constant.color.w3c-standard-color-name.css
-    - match: \b(?i:aliceblue|antiquewhite|aquamarine|azure|beige|bisque|blanchedalmond|blueviolet|brown|burlywood|cadetblue|chartreuse|chocolate|coral|cornflowerblue|cornsilk|crimson|cyan|darkblue|darkcyan|darkgoldenrod|darkgray|darkgreen|darkgrey|darkkhaki|darkmagenta|darkolivegreen|darkorange|darkorchid|darkred|darksalmon|darkseagreen|darkslateblue|darkslategray|darkslategrey|darkturquoise|darkviolet|deeppink|deepskyblue|dimgray|dimgrey|dodgerblue|firebrick|floralwhite|forestgreen|gainsboro|ghostwhite|gold|goldenrod|greenyellow|grey|honeydew|hotpink|indianred|indigo|ivory|khaki|lavender|lavenderblush|lawngreen|lemonchiffon|lightblue|lightcoral|lightcyan|lightgoldenrodyellow|lightgray|lightgreen|lightgrey|lightpink|lightsalmon|lightseagreen|lightskyblue|lightslategray|lightslategrey|lightsteelblue|lightyellow|limegreen|linen|magenta|mediumaquamarine|mediumblue|mediumorchid|mediumpurple|mediumseagreen|mediumslateblue|mediumspringgreen|mediumturquoise|mediumvioletred|midnightblue|mintcream|mistyrose|moccasin|navajowhite|oldlace|olivedrab|orangered|orchid|palegoldenrod|palegreen|paleturquoise|palevioletred|papayawhip|peachpuff|peru|pink|plum|powderblue|rebeccapurple|rosybrown|royalblue|saddlebrown|salmon|sandybrown|seagreen|seashell|sienna|skyblue|slateblue|slategray|slategrey|snow|springgreen|steelblue|tan|thistle|tomato|turquoise|violet|wheat|whitesmoke|yellowgreen)\b
+    - match: \b(?i:aliceblue|antiquewhite|aquamarine|azure|beige|bisque|blanchedalmond|blueviolet|brown|burlywood|cadetblue|chartreuse|chocolate|coral|cornflowerblue|cornsilk|crimson|cyan|darkblue|darkcyan|darkgoldenrod|darkgray|darkgreen|darkgrey|darkkhaki|darkmagenta|darkolivegreen|darkorange|darkorchid|darkred|darksalmon|darkseagreen|darkslateblue|darkslategray|darkslategrey|darkturquoise|darkviolet|deeppink|deepskyblue|dimgray|dimgrey|dodgerblue|firebrick|floralwhite|forestgreen|gainsboro|ghostwhite|gold|goldenrod|greenyellow|grey|honeydew|hotpink|indianred|indigo|ivory|khaki|lavender|lavenderblush|lawngreen|lemonchiffon|lightblue|lightcoral|lightcyan|lightgoldenrodyellow|lightgray|lightgreen|lightgrey|lightpink|lightsalmon|lightseagreen|lightskyblue|lightslategray|lightslategrey|lightsteelblue|lightyellow|limegreen|linen|magenta|mediumaquamarine|mediumblue|mediumorchid|mediumpurple|mediumseagreen|mediumslateblue|mediumspringgreen|mediumturquoise|mediumvioletred|midnightblue|mintcream|mistyrose|moccasin|navajowhite|oldlace|olivedrab|orangered|orchid|palegoldenrod|palegreen|paleturquoise|palevioletred|papayawhip|peachpuff|peru|pink|plum|powderblue|rebeccapurple|rosybrown|royalblue|saddlebrown|salmon|sandybrown|seagreen|seashell|sienna|skyblue|slateblue|slategray|slategrey|snow|springgreen|steelblue|tan|thistle|tomato|turquoise|violet|wheat|whitesmoke|yellowgreen){{break}}
       scope: support.constant.color.w3c-extended-color-keywords.css
-    - match: \b(?i:currentColor|transparent)\b
+    - match: \b(?i:currentColor|transparent){{break}}
       scope: support.constant.color.w3c-special-color-keyword.css
 
   numeric-values:
