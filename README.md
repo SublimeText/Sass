@@ -20,7 +20,7 @@ Previous versions of this package came with key bindings. Improved completions a
 
 ☕️👌🏻
 
-If you enjoy this package, feel free to make a little [donation via PayPal](https://paypal.me/pools/c/89Rf8xJKlw) towards the coffee that keeps this project running. It's much appreciated!
+If you enjoy this package, feel free to make a little [donation via PayPal](https://paypal.me/koenlageveen) towards the coffee that keeps this project running. It's much appreciated!
 
 
 ---
