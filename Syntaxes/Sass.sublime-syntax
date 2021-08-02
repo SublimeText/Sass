@@ -1170,26 +1170,37 @@ contexts:
   # or a property
 
   selectors:
-    - match: (?=^\s*{{svg_tags}})
+    - match: (?=\s*{{svg_tags}})
       push:
+        - meta_scope: meta.selector.css
         - include: selector-content
-    - match: (?=^\s*{{html_tags}}(?![-:]))
+    - match: (?=\s*({{html_tags}}|{{custom_element_tags}})(?![-:]))
       push:
+        - meta_scope: meta.selector.css
         - include: selector-content
-    - match: (?=^\s*{{html_tags}}(?={{pseudo_elements}}))
+    - match: (?=\s*({{html_tags}}|{{custom_element_tags}})(?={{pseudo_elements}}))
       push:
+        - meta_scope: meta.selector.css
         - include: selector-content
-    - match: (?=^\s*{{html_tags}}(?=:{{regular_pseudo_classes}}))
+    - match: (?=\s*({{html_tags}}|{{custom_element_tags}})(?=:{{regular_pseudo_classes}}))
       push:
+        - meta_scope: meta.selector.css
         - include: selector-content
-    - match: (?=^\s*{{html_tags}}(?=:({{functional_pseudo_classes}})\())
+    - match: (?=\s*({{html_tags}}|{{custom_element_tags}})(?=:({{functional_pseudo_classes}})\())
       push:
+        - meta_scope: meta.selector.css
         - include: selector-content
-    - match: (?=^\s*{{html_tags}}(?=:(-(moz|ms|webkit)-){{ident}}))
+    - match: (?=\s*(?=:({{functional_pseudo_classes}}|{{functional_pseudo_classes}})\())
       push:
+        - meta_scope: meta.selector.css
         - include: selector-content
-    - match: (?=^\s*[#.:\[\*%>~+,&])
+    - match: (?=\s*({{html_tags}}|{{custom_element_tags}})(?=:(-(moz|ms|webkit)-){{ident}}))
       push:
+        - meta_scope: meta.selector.css
+        - include: selector-content
+    - match: (?=\s*[#.:\[\*%>~+,&])
+      push:
+        - meta_scope: meta.selector.css
         - include: selector-content
 
   selector-content:
@@ -1274,7 +1285,7 @@ contexts:
       scope: invalid.illegal.combinator.css
 
   selector-end:
-    - match: (?=\s*[;@(){}])
+    - match: (?=\s*[;@(){}]|$)
       pop: 1
     - include: comments
 
@@ -1428,8 +1439,8 @@ contexts:
           scope: punctuation.section.group.begin.css
           set:
             - meta_scope: meta.function-call.arguments.css meta.group.css
-            - include: function-arguments-common
             - include: selectors
+            - include: function-arguments-common
 
   # Functional Pseudo Classes with generic arguments
   pseudo-class-function-with-generic-args:
@@ -3141,7 +3152,7 @@ contexts:
       pop: 1
 
   terminator-pop:
-    - match: (?=[;){}])
+    - match: (?=[;){}]|$)
       pop: 1
 
 ###############################################################################
