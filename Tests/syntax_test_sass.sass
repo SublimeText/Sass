@@ -62,28 +62,29 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
 //  ^ - comment.line
   animation: progress-fade-in-animation .15s ease-in
 //            ^ - meta.selector
+//            ^ constant.other
 //                   ^ - keyword.operator
 //                         ^ - keyword.operator
     background-color: color(var(--background, blue) blend(var(--foreground, change-color($var, $blue: 5)) 80%))
 //  ^^^^^^^^^^^^^^^^ support.type.property-name.css
 //                  ^ punctuation.separator.key-value.css
 //                    ^^^^^ support.function.color.css
-//                         ^ punctuation.definition.group.begin.css
+//                         ^ punctuation
 //                          ^^^ support.function.var.css
-//                             ^ punctuation.definition.group.begin.css
-//                              ^^^^^^^^^^^^ support.type.custom-property
+//                             ^ punctuation
+//                              ^^^^^^^^^^^^ variable.other.custom-property
 //                                          ^ punctuation.separator
-//                                                ^ punctuation.definition.group.end.css
+//                                                ^ punctuation
 //                                                  ^^^^^ support.function.color.css
-//                                                       ^ punctuation.definition.group.begin.css
+//                                                       ^ punctuation
 //                                                        ^^^ support.function.var.css
-//                                                           ^ punctuation.definition.group.begin.css
-//                                                            ^^^^^^^^^^^^ support.type.custom-property.css
+//                                                           ^ punctuation
+//                                                            ^^^^^^^^^^^^ variable.other.custom-property
 //                                                                                              ^ variable.other
 //                                                                                                  ^ punctuation.separator
-//                                                                                                      ^ punctuation.definition.group.end.css
+//                                                                                                      ^ punctuation
 //                                                                                                        ^^^ constant.numeric
-//                                                                                                           ^^ punctuation.definition.group.end.css
+//                                                                                                           ^^ punctuation
   @document url(http://www)
     background: url($blue)
     background-color: color($mark, custom-function(unthemed))

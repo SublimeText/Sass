@@ -1492,14 +1492,22 @@ contexts:
     - include: illegal-blocks
     - include: illegal-groups
 
+  push-to-value:
+    - match: ';'
+      scope: invalid.illegal.sass
+    - match: ':'
+      scope: punctuation.separator.key-value.css
+      push: property-value-content
+
 ###[ PROPERTY IDENTIFIERS ]####################################################
 
   property-identifiers:
-    - match: (?=[-[:alpha:]])
+    - match: (?=({{vendor_prefix}})?{{property_names}}|{{custom_ident}}|\b(?i:counter-(increment|reset|set)){{break}}|\b(?i:font(-family)?){{break}})
       push: property-identifier-content
 
   property-identifier-content:
-    - meta_scope: meta.property-name.css
+    - meta_scope: meta.property-list.css
+    - include: comments
     - include: vendor-prefixes
     # specific properties with special treatment
     - include: counter-property
@@ -1507,23 +1515,22 @@ contexts:
     # common properties
     - include: builtin-property
     - include: custom-property
-    - include: deprecated-property
-    - include: other-property
-    # bailout
-    - include: immediately-pop
+    # - include: deprecated-property
+    # - include: other-property
+    - include: push-to-value
+    - match: '\s*(?=$)'
+      pop: true
 
   builtin-property:
     - match: '{{property_names}}'
-      scope: support.type.property-name.css
-      pop: 1
+      scope: meta.property-name.css support.type.property-name.css
 
   # Custom Properties
   # https://drafts.csswg.org/css-variables/#typedef-custom-property
   custom-property:
     # custom property definition
     - match: '{{custom_ident}}'
-      scope: entity.other.custom-property.css
-      pop: 1
+      scope: meta.property-name.css entity.other.custom-property.css
 
   deprecated-property:
     - match: \b(var-)({{ident}})
@@ -1531,12 +1538,10 @@ contexts:
       captures:
         1: entity.other.custom-property.prefix.css
         2: entity.other.custom-property.name.css
-      pop: 1
 
-  other-property:
-    # Note: Consume unknown identifiers to maintain word boundaries.
-    - match: '{{generic_ident}}'
-      pop: 1
+  # other-property:
+  #   # Note: Consume unknown identifiers to maintain word boundaries.
+  #   - match: '{{generic_ident}}'
 
 ###[ PROPERTY VALUES ]#########################################################
 
@@ -1600,7 +1605,7 @@ contexts:
   counter-property:
     # https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Lists_and_Counters/Using_CSS_counters
     - match: \b(?i:counter-(increment|reset|set)){{break}}
-      scope: support.type.property-name.css
+      scope: meta.property-name.css support.type.property-name.css
       set: counter-property-value
 
   counter-property-value:
@@ -1614,7 +1619,7 @@ contexts:
   counter-identifier:
     - match: '{{ident}}'
       scope: entity.other.counter-name.css
-      pop: 1
+    - include: push-to-value
     - include: comments
     - include: else-pop
 
@@ -1712,7 +1717,7 @@ contexts:
   # https://drafts.csswg.org/css-fonts-3/#font-prop
   font-property:
     - match: \b(?i:font(-family)?){{break}}
-      scope: support.type.property-name.css
+      scope: meta.property-name.css support.type.property-name.css
       set: font-property-value
 
   font-property-value:
@@ -1752,14 +1757,12 @@ contexts:
     - include: transform-functions
     - include: url-functions
     - include: var-functions
-    - include: sass-value-expression
 
   function-arguments-common:
     - include: group-end
     - include: terminator-pop
     - include: comments
     - include: var-functions
-    - include: sass-value-expression
 
 ###[ BUILTIN AT RULE FUNCTIONS ]###############################################
 
@@ -3152,6 +3155,8 @@ contexts:
       pop: 1
 
   terminator-pop:
+    - match: '\s*(?=$)'
+      pop: 1
     - match: (?=[;){}]|$)
       pop: 1
 
@@ -3194,7 +3199,7 @@ contexts:
           captures:
             1: variable.parameter.sass
             2: punctuation.separator.key-value.css
-        - include: property-values
+        - include: property-value-content
 
   sass-variables:
     - match: '(({{ident}})(\.))?(\$)([a-zA-Z0-9_-][\w-]*)'
@@ -3210,18 +3215,38 @@ contexts:
       captures:
         1: support.function.sass
       push:
-        - meta_scope: meta.function-call.sass
-        - include: function-arguments-common
+        - meta_include_prototype: false
+        - match: \(
+          scope: punctuation.section.group.begin.css
+          set:
+            - meta_scope: meta.function-call.arguments.css meta.group.css
+            - match: (\$)([a-zA-Z0-9_-][\w-]*)(?=:)
+              scope: variable.other.sass
+              captures:
+                1: punctuation.definition.variable.sass
+              push:
+                - match: ':'
+                  scope: punctuation.separator.key-value.css
+                - include: property-value-content
+                - match: (?=\()
+                  pop: true
+            - include: sass-value-expression
+            - include: function-arguments-common
 
   sass-custom-functions:
     - match: '\b(({{ident}})(\.))?([a-z_-]+)(?=\()'
-      scope: support.function.sass
+      scope: support.function.custom.sass
       captures:
         2: entity.name.namespace.sass
         3: punctuation.separator.namespace.sass
       push:
-        - meta_scope: meta.function-call.css
-        - include: function-arguments-common
+        - meta_include_prototype: false
+        - match: \(
+          scope: punctuation.section.group.begin.css
+          set:
+            - meta_scope: meta.function-call.arguments.css meta.group.css
+            - include: sass-value-expression
+            - include: function-arguments-common
 
   sass-interpolation:
     - match: '(#)({)'
@@ -3270,7 +3295,7 @@ contexts:
                   pop: true
                 - match: ':'
                   scope: punctuation.separator.key-value.css
-                - include: property-values
+                - include: property-value-content
     - match: '\s*((\+)([\w-]+))'
       captures:
         1: variable.function.sass
@@ -3285,7 +3310,7 @@ contexts:
             - meta_scope: meta.function-call.arguments.sass
             - include: sass-value-expression
             - include: comma-delimiters
-            - include: property-values
+            - include: property-value-content
             - include: quoted-strings
             - match: '{{ident}}'
               scope: string.unquoted.sass
@@ -3418,7 +3443,7 @@ contexts:
                   scope: punctuation.separator.key-value.css
                 - match: '\b(false|true|null)\b'
                   scope: constant.language.sass
-                - include: property-values
+                - include: property-value-content
     - match: '((@)(include))\s+(([a-z]+)(\.))?([\w-]+)'
       captures:
         0: variable.function.sass
@@ -3440,7 +3465,7 @@ contexts:
             - include: sass-functions
             - include: sass-operators
             - include: comma-delimiters
-            - include: property-values
+            - include: property-value-content
             - include: quoted-strings
             - match: '{{ident}}'
               scope: string.unquoted.sass
@@ -3456,7 +3481,7 @@ contexts:
         - meta_scope: meta.at-rule.sass
         - match: '\s*(?=$)'
           pop: true
-        - include: property-values
+        - include: property-value-content
     - match: '\s*((@)(use|forward){{break}})\s*'
       captures:
         1: keyword.control.directive.module.sass
@@ -3499,7 +3524,7 @@ contexts:
             - include: sass-functions
             - include: sass-operators
             - include: comma-delimiters
-            - include: property-values
+            - include: property-value-content
         - include: comment-block
         - include: comment-line
         - include: quoted-strings
