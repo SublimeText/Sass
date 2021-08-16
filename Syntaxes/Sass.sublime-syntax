@@ -1763,6 +1763,7 @@ contexts:
     - include: terminator-pop
     - include: comments
     - include: var-functions
+    - include: sass-value-expression
 
 ###[ BUILTIN AT RULE FUNCTIONS ]###############################################
 
@@ -3230,11 +3231,18 @@ contexts:
                 - include: property-value-content
                 - match: (?=\()
                   pop: true
-            - include: sass-value-expression
             - include: function-arguments-common
+            - include: color-values
+            - include: percentage-constants
+            - include: scalar-constants
+            - include: angle-constants
+            - include: length-constants
+            - include: scalar-integer-constants
+            - include: generic-font-names
+            - include: numeric-constants
 
   sass-custom-functions:
-    - match: '\b(({{ident}})(\.))?([a-z_-]+)(?=\()'
+    - match: '\b(?!var)(({{ident}})(\.))?([a-z_-]+)(?=\()'
       scope: support.function.custom.sass
       captures:
         2: entity.name.namespace.sass
@@ -3245,8 +3253,15 @@ contexts:
           scope: punctuation.section.group.begin.css
           set:
             - meta_scope: meta.function-call.arguments.css meta.group.css
-            - include: sass-value-expression
             - include: function-arguments-common
+            - include: color-values
+            - include: percentage-constants
+            - include: scalar-constants
+            - include: angle-constants
+            - include: length-constants
+            - include: scalar-integer-constants
+            - include: generic-font-names
+            - include: numeric-constants
 
   sass-interpolation:
     - match: '(#)({)'
