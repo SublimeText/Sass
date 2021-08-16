@@ -665,6 +665,12 @@ contexts:
     - include: at-rules
     - include: rule-list-body
     - include: illegal-groups
+    - match: '(\$)([a-zA-Z0-9_-][\w-]*)'
+      captures:
+        0: variable.declaration.sass
+        1: punctuation.definition.variable.sass
+      push:
+        - include: push-to-value
     # - include: css-modules # need to re-implement?
 
 ###[ COMMENTS ]################################################################
@@ -1060,7 +1066,7 @@ contexts:
     - include: main
 
   at-rule-end:
-    - match: (?=[;{}])
+    - match: (?=[;{}]|$)
       pop: 1
     - include: comments
 
@@ -1554,6 +1560,8 @@ contexts:
 
   property-value-content:
     - meta_content_scope: meta.property-value.css
+    - match: '\!\s*(default|global|optional)\b'
+      scope: keyword.other.sass
     - include: terminator-pop
     - include: comments
     - include: comma-delimiters
