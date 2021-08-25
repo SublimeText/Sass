@@ -694,11 +694,11 @@ contexts:
       push:
         - meta_scope: meta.selector.css meta.function-call.css
         - match: '\('
-          scope: punctuation.definition.group.begin.css
+          scope: punctuation.section.group.begin.css
           push:
             - meta_scope: meta.group.css
             - match: '\)'
-              scope: punctuation.definition.group.end.css
+              scope: punctuation.section.group.end.css
               pop: true
             - include: quoted-strings
         - match: '\s*(?=$)'
@@ -1343,11 +1343,11 @@ contexts:
       push:
         - meta_scope: meta.selector.css meta.function-call.css
         - match: '\('
-          scope: punctuation.definition.group.begin.css
+          scope: punctuation.section.group.begin.css
           push:
             - meta_scope: meta.group.css
             - match: '\)'
-              scope: punctuation.definition.group.end.css
+              scope: punctuation.section.group.end.css
               pop: true
             - include: quoted-strings
         - match: ''
@@ -1638,10 +1638,10 @@ contexts:
         0: meta.property-name.css support.type.property-name
         1: meta.group.interpolation.sass
         2: punctuation.definition.variable.sass
-        3: punctuation.definition.group.begin.sass
+        3: punctuation.section.group.begin.sass
         4: variable.other.sass
         5: punctuation.definition.variable.sass
-        7: punctuation.definition.group.end.sass
+        7: punctuation.section.group.end.sass
       push:
         - include: push-to-value
         - match: '\s*(?=$)'
@@ -1658,7 +1658,7 @@ contexts:
     - include: builtin-values
     - include: other-functions
     - include: other-constants
-    - include: sass-maps
+    - include: sass-value-expression
 
   builtin-values:
     - include: quoted-strings
@@ -3232,17 +3232,6 @@ contexts:
     - match: \}
       scope: invalid.illegal.unexpected-token.css
 
-  illegal-groups:
-    # https://www.w3.org/TR/CSS22/syndata.html#parsing-errors
-    - match: \(
-      scope: invalid.illegal.unexpected-token.css
-      push:
-        - match: \)
-          scope: invalid.illegal.unexpected-token.css
-          pop: 1
-    - match: \)
-      scope: invalid.illegal.unexpected-token.css
-
 ###[ PROTOTYPES ]##############################################################
 
   else-pop:
@@ -3282,12 +3271,12 @@ contexts:
   sass-maps:
     - match: '\('
       captures:
-        0: punctuation.definition.group.begin.sass
+        0: punctuation.section.group.begin.sass
       push:
         - meta_scope: meta.group.css meta.map.arguments.css
         - match: '\)'
           captures:
-            0: punctuation.definition.group.end.sass
+            0: punctuation.section.group.end.sass
           pop: true
         - match: '(\$)([a-zA-Z0-9_-][\w-]*)\s*(:)'
           captures:
@@ -3314,11 +3303,12 @@ contexts:
       captures:
         1: support.function.sass
       push:
+        - meta_scope: meta.function-call.sass
         - meta_include_prototype: false
         - match: \(
           scope: punctuation.section.group.begin.css
           set:
-            - meta_scope: meta.function-call.arguments.css meta.group.css
+            - meta_scope: meta.function-call.sass meta.function-call.arguments.css meta.group.css
             - match: (\$)([a-zA-Z0-9_-][\w-]*)(?=:)
               scope: variable.other.sass
               captures:
@@ -3338,6 +3328,8 @@ contexts:
             - include: scalar-integer-constants
             - include: generic-font-names
             - include: numeric-constants
+            - match: '{{ident}}'
+              scope: constant.other.sass
 
   sass-custom-functions:
     - match: '\b(?!var)(({{ident}})(\.))?([a-z_-]+)(?=\()'
@@ -3346,11 +3338,12 @@ contexts:
         2: entity.name.namespace.sass
         3: punctuation.separator.namespace.sass
       push:
+        - meta_scope: meta.function-call.sass
         - meta_include_prototype: false
         - match: \(
           scope: punctuation.section.group.begin.css
           set:
-            - meta_scope: meta.function-call.arguments.css meta.group.css
+            - meta_scope: meta.function-call.sass meta.function-call.arguments.css meta.group.css
             - include: function-arguments-common
             - include: color-values
             - include: percentage-constants
@@ -3360,16 +3353,18 @@ contexts:
             - include: scalar-integer-constants
             - include: generic-font-names
             - include: numeric-constants
+            - match: '{{ident}}'
+              scope: constant.other.sass
 
   sass-interpolation:
     - match: '(#)({)'
       captures:
         1: punctuation.definition.variable.sass
-        2: punctuation.definition.group.begin.sass
+        2: punctuation.section.group.begin.sass
       push:
         - meta_scope: meta.group.interpolation.sass
         - match: '(})'
-          scope: punctuation.definition.group.end.sass
+          scope: punctuation.section.group.end.sass
           pop: true
         - include: sass-script-expression
 
@@ -3392,11 +3387,11 @@ contexts:
         - match: '(?=$)'
           pop: true
         - match: '\('
-          scope: punctuation.definition.group.begin.sass
+          scope: punctuation.section.group.begin.sass
           push:
             - meta_scope: meta.function.parameters.sass
             - match: '\)'
-              scope: punctuation.definition.group.end.sass
+              scope: punctuation.section.group.end.sass
               pop: true
             - include: comma-delimiters
             - match: '(\$)([a-zA-Z0-9_-][\w-]*)'
@@ -3418,11 +3413,11 @@ contexts:
         - match: '(?=$)'
           pop: true
         - match: '\('
-          scope: punctuation.definition.group.begin.sass
+          scope: punctuation.section.group.begin.sass
           push:
             - meta_scope: meta.function-call.arguments.sass
             - match: '\)'
-              scope: punctuation.definition.group.end.sass
+              scope: punctuation.section.group.end.sass
               pop: true
             - include: sass-value-expression
             - include: comma-delimiters
@@ -3474,12 +3469,7 @@ contexts:
             - include: comments
             - include: comma-delimiters
             - include: var-function
-            - include: sass-variables
-            - include: sass-functions
-            - include: sass-custom-functions
-            - include: sass-interpolation
-            - include: sass-maps
-            - include: sass-operators
+            - include: sass-value-expression
     - match: '(@)(for|while){{break}}'
       captures:
         0: keyword.control.flow.sass
@@ -3541,11 +3531,11 @@ contexts:
         - match: '\s*(?=$)'
           pop: true
         - match: '\('
-          scope: punctuation.definition.group.begin.sass
+          scope: punctuation.section.group.begin.sass
           push:
             - meta_scope: meta.function.parameters.sass
             - match: '\)'
-              scope: punctuation.definition.group.end.sass
+              scope: punctuation.section.group.end.sass
               pop: true
             - include: comma-delimiters
             - match: '(\$)([a-zA-Z0-9_-][\w-]*)'
@@ -3572,11 +3562,11 @@ contexts:
         - match: '\s*(?=$)'
           pop: true
         - match: '\('
-          scope: punctuation.definition.group.begin.sass
+          scope: punctuation.section.group.begin.sass
           push:
             - meta_scope: meta.function-call.arguments.sass
             - match: '\)'
-              scope: punctuation.definition.group.end.sass
+              scope: punctuation.section.group.end.sass
               pop: true
             - include: comments
             - include: sass-variables
@@ -3627,10 +3617,10 @@ contexts:
         - match: '(with)\s+(\()'
           captures:
             1: keyword.control.with.sass
-            2: punctuation.definition.group.begin.sass
+            2: punctuation.section.group.begin.sass
           push:
             - match: '\)(?=$)'
-              scope: punctuation.definition.group.end.sass
+              scope: punctuation.section.group.end.sass
               pop: true
             - match: ':'
               scope: punctuation.separator.key-value.css
@@ -3647,10 +3637,10 @@ contexts:
 
   sass-interpolated-selector-body:
     - match: '({)'
-      scope: punctuation.definition.group.begin.sass
+      scope: punctuation.section.group.begin.sass
       push:
         - match: '(})'
-          scope: punctuation.definition.group.end.sass
+          scope: punctuation.section.group.end.sass
           pop: 2
         - include: sass-script-expression
 
