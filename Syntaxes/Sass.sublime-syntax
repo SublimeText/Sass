@@ -2338,12 +2338,12 @@ contexts:
           scope: punctuation.section.group.begin.css
           set:
             - meta_scope: meta.function-call.arguments.css meta.group.css
-            - include: function-arguments-common
-            - include: comma-delimiters
             - match: \b(?i:at|from){{break}}
               scope: keyword.other.gradient.css
             - match: \b(?i:bottom|center|left|right|top){{break}}
               scope: support.constant.property-value.css
+            - include: function-arguments-common
+            - include: comma-delimiters
             - include: color-values
             - include: angle-constants
             - include: length-constants
@@ -2361,12 +2361,12 @@ contexts:
           scope: punctuation.section.group.begin.css
           set:
             - meta_scope: meta.function-call.arguments.css meta.group.css
-            - include: function-arguments-common
-            - include: comma-delimiters
             - match: \b(?i:to){{break}}
               scope: keyword.other.gradient.css
             - match: \b(?i:bottom|left|right|top){{break}}
               scope: support.constant.property-value.css
+            - include: function-arguments-common
+            - include: comma-delimiters
             - include: color-values
             - include: angle-constants
             - include: length-constants
@@ -2384,12 +2384,12 @@ contexts:
           scope: punctuation.section.group.begin.css
           set:
             - meta_scope: meta.function-call.arguments.css meta.group.css
-            - include: function-arguments-common
-            - include: comma-delimiters
             - match: \b(?i:at|circle|ellipse){{break}}
               scope: keyword.other.gradient.css
             - match: \b(?i:bottom|center|left|right|top|(closest|farthest)-(corner|side)){{break}}
               scope: support.constant.property-value.css
+            - include: function-arguments-common
+            - include: comma-delimiters
             - include: color-values
             - include: length-constants
             - include: percentage-constants
@@ -3255,6 +3255,8 @@ contexts:
   sass-script-expression:
     - include: sass-value-expression
     - include: builtin-values
+    - match: '{{ident}}'
+      scope: constant.other.sass
 
   sass-value-expression:
     - include: comments
