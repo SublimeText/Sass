@@ -3079,6 +3079,7 @@ contexts:
       scope: constant.character.escape.newline.css
     - match: \\(?:\h{1,6}|.)
       scope: constant.character.escape.css
+    - include: sass-interpolation
 
 ###[ URL STRING CONSTANTS ]####################################################
 
