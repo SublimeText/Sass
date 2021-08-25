@@ -671,6 +671,15 @@ contexts:
         - match: '\s*(?=$)'
           pop: true
 
+    # Sass content at-rule
+    - match: '((@)content){{break}}'
+      captures:
+        1: keyword.control.at-rule.content.sass
+        2: punctuation.definition.keyword.sass
+      push:
+        - match: '\s*(?=$)'
+          pop: true
+
     # CSS modules
     - match: '\b(composes)\b'
       scope: meta.property-name.css-modules.css support.type.property-name
