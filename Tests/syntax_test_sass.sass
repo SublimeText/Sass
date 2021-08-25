@@ -353,19 +353,6 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
     background: url(data:image/gifbase64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7)
 //                  ^^^^^ string.unquoted.css
 
-    cursor: e + -resize
-//          ^ string.unquoted
-//           ^ - string
-//            ^ keyword.operator
-//             ^ - string
-//              ^^^^^ string.unquoted
-
-    content: "Foo " + Bar
-//               ^ string.quoted.double
-//                  ^ keyword.operator
-//                    ^ string.unquoted
-//                       ^ - string
-
     font-family: sans- + "serif"
 //               ^^^^^ string.unquoted
 //                              ^ - string
@@ -388,10 +375,6 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
     content: "I ate #{$value} pies!"
 //                    ^^^^^^ variable.other.sass
 //                    ^ punctuation.definition.variable.sass
-
-    @include breathe(somestring)
-//                   ^ string.unquoted
-//                             ^ - string
 
     @include breathe(border-bottom-color)
 //                   ^^^^^^^^^^^^^^^^^^^ support.constant.property-value.css
@@ -430,22 +413,22 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
 @include firefox-message(".header" + test)
 //                       ^^^^^^^^^ meta.function-call.sass meta.function-call.arguments.sass string.quoted.double.css
 //                                 ^ keyword.operator.arithmetic.sass
-//                                   ^ string.unquoted
 //                                       ^ - string
-
 
 /*
   Mixin Directives
   http://sass-lang.com/documentation/file.INDENTED_SYNTAX.html#Mixin_Directives
 */
 
-+firefox-message(".header" + test)
++firefox-message(".header" + test + .class, #some-id:hover)
 // <- punctuation.definition.keyword.sass
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.sass
 // ^^^^^^^^^^^^^ variable.function.sass
+//              ^ punctuation.definition.group.begin
+//                                                        ^ punctuation.definition.group.end
 //               ^^^^^^^^^ string.quoted.double.css
 //                         ^ keyword.operator.arithmetic.sass
-//                           ^ string.unquoted
+//                           ^ constant.other
 //                               ^ - string
 
   +firefox-message($foo)

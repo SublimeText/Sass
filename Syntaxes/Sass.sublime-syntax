@@ -1241,22 +1241,7 @@ contexts:
         - meta_scope: meta.selector.css
         - include: selector-content
 
-  selector-content:
-    - meta_scope: meta.selector.css
-    - include: selector-end
-    - include: comma-delimiters
-    - include: sass-ampersand
-    - include: sass-interpolated-selectors
-
-    # Html Tags
-    - match: '{{html_tags}}'
-      scope: entity.name.tag.html.css
-    - match: '{{svg_tags}}'
-      scope: entity.name.tag.svg.css
-    # Custom Elements
-    # http://w3c.github.io/webcomponents/spec/custom/#custom-elements-core-concepts
-    - match: '{{custom_element_tags}}'
-      scope: entity.name.tag.custom.css
+  prefixed-selectors:
     - match: \*
       scope: variable.language.wildcard.asterisk.css
     # Class and Id Selectors
@@ -1320,6 +1305,24 @@ contexts:
     # https://drafts.csswg.org/css-scoping/#deep-combinator
     - match: '{{combinators}}(?![>~+|])'
       scope: keyword.operator.combinator.css
+
+  selector-content:
+    - meta_scope: meta.selector.css
+    - include: selector-end
+    - include: comma-delimiters
+    - include: sass-ampersand
+    - include: sass-interpolated-selectors
+
+    # Html Tags
+    - match: '{{html_tags}}'
+      scope: entity.name.tag.html.css
+    - match: '{{svg_tags}}'
+      scope: entity.name.tag.svg.css
+    # Custom Elements
+    # http://w3c.github.io/webcomponents/spec/custom/#custom-elements-core-concepts
+    - match: '{{custom_element_tags}}'
+      scope: entity.name.tag.custom.css
+    - include: prefixed-selectors
     - match: '{{combinators}}{2,}|\|{3,}'
       scope: invalid.illegal.combinator.css
 
@@ -3396,16 +3399,17 @@ contexts:
           scope: punctuation.definition.group.begin.sass
           push:
             - meta_scope: meta.function-call.arguments.sass
+            - match: '\)'
+              scope: punctuation.definition.group.end.sass
+              pop: true
             - include: sass-value-expression
             - include: comma-delimiters
             - include: property-value-content
             - include: quoted-strings
+            - include: sass-ampersand
+            - include: prefixed-selectors
             - match: '{{ident}}'
-              scope: string.unquoted.sass
-            - include: selectors
-            - match: '\)'
-              scope: punctuation.definition.group.end.sass
-              pop: true
+              scope: constant.other.sass
 
 ###[ SASS AMPERSAND ]#########################################
 
@@ -3549,6 +3553,9 @@ contexts:
           scope: punctuation.definition.group.begin.sass
           push:
             - meta_scope: meta.function-call.arguments.sass
+            - match: '\)'
+              scope: punctuation.definition.group.end.sass
+              pop: true
             - include: comments
             - include: sass-variables
             - include: sass-functions
@@ -3556,12 +3563,10 @@ contexts:
             - include: comma-delimiters
             - include: property-value-content
             - include: quoted-strings
+            - include: sass-ampersand
+            - include: prefixed-selectors
             - match: '{{ident}}'
-              scope: string.unquoted.sass
-            - include: selectors
-            - match: '\)'
-              scope: punctuation.definition.group.end.sass
-              pop: true
+              scope: constant.other.sass
     - match: '(@)(return){{break}}'
       captures:
         0: keyword.control.directive.return.sass
