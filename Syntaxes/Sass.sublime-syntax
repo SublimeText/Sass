@@ -1207,11 +1207,12 @@ contexts:
   # or a property
 
   selectors:
+    - include: sass-interpolated-selectors
     - match: (?=\s*{{svg_tags}})
       push:
         - meta_scope: meta.selector.css
         - include: selector-content
-    - match: (?=\s*({{html_tags}}|{{custom_element_tags}})(?![-:]))
+    - match: (?=\s*({{html_tags}}|{{custom_element_tags}})(?!-|\s*:))
       push:
         - meta_scope: meta.selector.css
         - include: selector-content
@@ -1245,6 +1246,7 @@ contexts:
     - include: selector-end
     - include: comma-delimiters
     - include: sass-ampersand
+    - include: sass-interpolated-selectors
 
     # Html Tags
     - match: '{{html_tags}}'
@@ -3615,44 +3617,43 @@ contexts:
 
 ###[ SASS INTERPOLATED SELECTORS ]#########################################
 
-  interpolated-selector-body:
+  sass-interpolated-selector-body:
     - match: '({)'
       scope: punctuation.definition.group.begin.sass
       push:
         - match: '(})'
           scope: punctuation.definition.group.end.sass
-          pop: true
+          pop: 2
         - include: sass-script-expression
-    - include: selector-content
 
-  interpolated-selectors:
-    # - match: '\s*(#)(?={.*}{{pseudo_elements}})'
-    #   captures:
-    #     1: punctuation.definition.variable.sass
-    #   push:
-    #     - meta_scope: meta.selector.css meta.group.interpolation.sass
-    #     - include: interpolated-selector-body
-    # - match: '\s*(#)(?={.*}:{{regular_pseudo_classes}})'
-    #   captures:
-    #     1: punctuation.definition.variable.sass
-    #   push:
-    #     - meta_scope: meta.selector.css meta.group.interpolation.sass
-    #     - include: interpolated-selector-body
-    # - match: '\s*(#)(?={.*}:({{functional_pseudo_classes}})\()'
-    #   captures:
-    #     1: punctuation.definition.variable.sass
-    #   push:
-    #     - meta_scope: meta.selector.css meta.group.interpolation.sass
-    #     - include: interpolated-selector-body
+  sass-interpolated-selectors:
+    - match: '\s*(#)(?={.*}{{pseudo_elements}})'
+      captures:
+        1: punctuation.definition.variable.sass
+      push:
+        - meta_scope: meta.selector.css meta.group.interpolation.sass
+        - include: sass-interpolated-selector-body
+    - match: '\s*(#)(?={.*}:{{regular_pseudo_classes}})'
+      captures:
+        1: punctuation.definition.variable.sass
+      push:
+        - meta_scope: meta.selector.css meta.group.interpolation.sass
+        - include: sass-interpolated-selector-body
+    - match: '\s*(#)(?={.*}:({{functional_pseudo_classes}})\()'
+      captures:
+        1: punctuation.definition.variable.sass
+      push:
+        - meta_scope: meta.selector.css meta.group.interpolation.sass
+        - include: sass-interpolated-selector-body
     - match: '\s*(#)(?={.*}:(-(moz|ms|webkit)-){{ident}})'
       captures:
         1: punctuation.definition.variable.sass
       push:
         - meta_scope: meta.selector.css meta.group.interpolation.sass
-        - include: interpolated-selector-body
+        - include: sass-interpolated-selector-body
     - match: '\s*(#)(?={.*}(?![-:]))'
       captures:
         1: punctuation.definition.variable.sass
       push:
         - meta_scope: meta.selector.css meta.group.interpolation.sass
-        - include: interpolated-selector-body
+        - include: sass-interpolated-selector-body
