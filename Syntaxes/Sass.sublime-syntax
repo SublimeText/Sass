@@ -708,10 +708,9 @@ contexts:
     - include: comments
     - include: sass-mixins
     - include: selectors
-    - include: interpolated-selectors
+    - include: sass-interpolated-selectors
     - include: at-rules
     - include: rule-list-body
-    - include: illegal-groups
 
 ###[ COMMENTS ]################################################################
 
@@ -796,8 +795,6 @@ contexts:
     - include: at-counter-style-property-names
     - include: property-values
     - include: rule-terminators
-    - include: illegal-blocks
-    - include: illegal-groups
 
   at-counter-style-names:
     - match: '{{counter_style_illegal_names}}'
@@ -875,8 +872,6 @@ contexts:
     - include: at-font-face-property-names
     - include: property-values
     - include: rule-terminators
-    - include: illegal-blocks
-    - include: illegal-groups
 
   at-font-face-property-names:
     - match: \b(?i:font-family){{break}}
@@ -1562,12 +1557,10 @@ contexts:
     - include: property-identifiers
     - include: property-values
     - include: rule-terminators
-    - include: illegal-blocks
-    - include: illegal-groups
 
   push-to-value:
     - match: ';'
-      scope: invalid.illegal.sass
+      scope: punctuation.terminator.rule.css
     - match: ':'
       scope: punctuation.separator.key-value.css
       push: property-value-content
@@ -1588,8 +1581,6 @@ contexts:
     # common properties
     - include: builtin-property
     - include: custom-property
-    # - include: deprecated-property
-    # - include: other-property
     - include: push-to-value
     - match: '\s*(?=$)'
       pop: true
@@ -1604,17 +1595,6 @@ contexts:
     # custom property definition
     - match: '{{custom_ident}}'
       scope: meta.property-name.css entity.other.custom-property.css
-
-  deprecated-property:
-    - match: \b(var-)({{ident}})
-      scope: invalid.deprecated.custom-property.css
-      captures:
-        1: entity.other.custom-property.prefix.css
-        2: entity.other.custom-property.name.css
-
-  # other-property:
-  #   # Note: Consume unknown identifiers to maintain word boundaries.
-  #   - match: '{{generic_ident}}'
 
 ###[ PROPERTY VALUES ]#########################################################
 
@@ -2774,13 +2754,11 @@ contexts:
     - match: \b(?i:var)(?=\()
       scope: meta.function-call.identifier.css support.function.var.css
       push: var-function-arguments
-    - include: illegal-groups
 
   var-function:
     - match: \b(?i:var)(?=\()
       scope: meta.function-call.identifier.css support.function.var.css
       set: var-function-arguments
-    - include: illegal-groups
 
   var-function-arguments:
     - match: \(
@@ -3220,17 +3198,6 @@ contexts:
   rule-terminators:
     - match: ;
       scope: punctuation.terminator.rule.css
-
-  illegal-blocks:
-    # https://www.w3.org/TR/CSS22/syndata.html#parsing-errors
-    - match: \{
-      scope: invalid.illegal.unexpected-token.css
-      push:
-        - match: \}
-          scope: invalid.illegal.unexpected-token.css
-          pop: 1
-    - match: \}
-      scope: invalid.illegal.unexpected-token.css
 
 ###[ PROTOTYPES ]##############################################################
 
