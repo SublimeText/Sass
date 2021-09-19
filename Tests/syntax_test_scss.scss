@@ -2090,6 +2090,10 @@ $gutter-width: 10px;
     grid-row: auto;
 //  ^^^^^^^^ support.type.property-name
 //          ^ punctuation.separator.key-value
+    place-items: center;
+//  ^^^^^^^^^^^ support.type.property-name
+//             ^ punctuation.separator.key-value
+//               ^^^^^^ support.constant.property-value.css
 }
 
 .test-meta-scopes-for-completions {
