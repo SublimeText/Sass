@@ -328,11 +328,11 @@ contexts:
               - include: main
     - match: '((@)(include))\s+(([a-z]+)(\.))?([\w-]+)'
       captures:
-        0: variable.function.sass
         1: keyword.control.at-rule.sass
         2: punctuation.definition.keyword.sass
         5: entity.name.namespace.sass
         6: punctuation.separator.namespace.sass
+        7: variable.function.sass
       push:
         - meta_scope: meta.function-call.sass
         - match: '\s*(;)'
