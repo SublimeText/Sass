@@ -280,13 +280,18 @@ variables:
     | font-weight | font-variant | line-gap-override | size-adjust | unicode-range
     ){{break}}
 
-  # Page Margin Property Names
-  # https://www.w3.org/TR/css-page-3/#margin-at-rule
-  page_margin_property_names: |-
+  # @page Margin Names
+  # https://developer.mozilla.org/en-US/docs/Web/CSS/@page
+  page_margin_names: |-
     \b(?xi:
         (?: bottom | top ) - (?: left-corner | left | center | right | right-corner )
       | (?: left | right ) - (?: top | middle | bottom )
     ){{break}}
+
+  # @page Property Names
+  # https://developer.mozilla.org/en-US/docs/Web/CSS/@page
+  page_property_names: |-
+    \b(?xi: bleed | margin | marks | size ){{break}}
 
   # Property names are sorted by popularity in descending order.
   # Note:
@@ -332,7 +337,7 @@ variables:
     | margin-block-end | background-origin | animation-play-state | hyphens
     | stroke-linecap | font-stretch | object-position | page-break-inside
     | column-gap | counter-reset | counter-increment | background-position-y
-    | margin-block-start | size | grid-template-rows | column-count | quotes
+    | margin-block-start | grid-template-rows | column-count | quotes
     | padding-inline-end | text-decoration-skip | border-image | all
     | page-break-after | fill-opacity | font-variant-ligatures
     | scroll-boundary-behavior | empty-cells | list-style-image | justify-self
@@ -715,22 +720,31 @@ contexts:
 ###[ COMMENTS ]################################################################
 
   comments:
-    - include: comment-block
-    - include: comment-line
+    - include: comments-block
+    - include: comments-line
 
-  comment-block:
-    - match: /\*
-      scope: punctuation.definition.comment.css
-      push:
-        - meta_scope: comment.block.css
-        - match: \*/
-          scope: punctuation.definition.comment.css
-          pop: true
-        - match: ^\s*(\*)(?!/)
-          captures:
-            1: punctuation.definition.comment.css
+  comments-block:
+    # empty block comment
+    - match: (/\*+)(\*/)
+      scope: comment.block.css
+      captures:
+         1: punctuation.definition.comment.begin.css
+         2: punctuation.definition.comment.end.css
+    # normal block comment
+    - match: /\*+
+      scope: punctuation.definition.comment.begin.css
+      push: comments-content
 
-  comment-line:
+  comments-content:
+    - meta_scope: comment.block.css
+    - match: \*+/
+      scope: punctuation.definition.comment.end.css
+      pop: 1
+    - match: ^\s*(\*)(?!/)
+      captures:
+        1: punctuation.definition.comment.css
+
+  comments-line:
     - match: //
       scope: punctuation.definition.comment.css
       push:
@@ -767,7 +781,6 @@ contexts:
 
   at-charset-content:
     - meta_scope: meta.at-rule.charset.css
-    - include: comments
     - include: quoted-strings
     - include: at-rule-end
 
@@ -929,7 +942,7 @@ contexts:
     - meta_scope: meta.block.css
     - include: block-end2
     - include: comments
-    # - include: property-lists
+    - include: property-lists
     - include: at-keyframe-selectors
 
   at-keyframe-selectors:
@@ -986,6 +999,7 @@ contexts:
 
   # @page
   # https://www.w3.org/TR/css3-page/#at-ruledef-page
+  # https://developer.mozilla.org/en-US/docs/Web/CSS/@page
   at-page:
     - match: (@)(?i:page){{break}}
       captures:
@@ -1001,7 +1015,7 @@ contexts:
     - include: at-rule-end
 
   at-page-names:
-    - match: (:)(?i:blank|first|left|right){{break}}
+    - match: (:)(?i:blank|first|left|right|recto|verso){{break}}
       captures:
         0: entity.other.pseudo-class.css
         1: punctuation.definition.entity.css
@@ -1019,15 +1033,12 @@ contexts:
 
   at-page-block-content:
     - meta_scope: meta.property-list.css meta.block.css
-    - include: block-end2
     - include: at-page-margin
+    - include: at-page-property-list-content
     - include: at-other
-    - include: rule-list-body
 
-  # @top-center, ...
-  # https://www.w3.org/TR/css-page-3/#margin-at-rule
   at-page-margin:
-    - match: (@){{page_margin_property_names}}
+    - match: (@){{page_margin_names}}
       captures:
         0: keyword.control.directive.css
         1: punctuation.definition.keyword.css
@@ -1035,8 +1046,29 @@ contexts:
 
   at-page-margin-content:
     - meta_scope: meta.at-rule.margin.css
-    - include: at-page-block
+    - include: at-page-property-lists
     - include: at-rule-end
+
+  at-page-property-lists:
+    - match: \{
+      scope: punctuation.section.block.begin.css
+      push: at-page-property-list-content
+
+  at-page-property-list-content:
+    - meta_scope: meta.property-list.css meta.block.css
+    - include: block-end2
+    - include: comments
+    - include: at-page-property-names
+    - include: property-values
+    - include: rule-terminators
+    - include: illegal-blocks
+    - include: illegal-groups
+
+  at-page-property-names:
+    - match: '{{page_property_names}}'
+      scope: meta.property-name.css support.type.property-name.css
+    # Note: Consume unknown identifiers to maintain word boundaries.
+    - match: '{{generic_ident}}'
 
   # @supports
   # https://drafts.csswg.org/css-conditional-3/#at-supports
@@ -1107,6 +1139,7 @@ contexts:
 
 ###[ MEDIA QUERIES ]###########################################################
 
+  # https://drafts.csswg.org/mediaqueries-5/#media
   media-queries:
     - include: comma-delimiters
     - include: media-query-conditions
@@ -1148,6 +1181,7 @@ contexts:
             | (?: device- )? (?: height | width | aspect-ratio | pixel-ratio )
             )
           | (?:any-)?(?: pointer | hover )
+          | prefers-(?: reduced-motion | color-scheme )
           | display-mode | grid | orientation | scan | scripting
           | overflow-(?: block | inline )
           )
@@ -1178,6 +1212,8 @@ contexts:
         | optional-paged | paged | scroll
         # pointer:
         | coarse | fine
+        # prefers-color-scheme:
+        | dark | light
         # scan:
         | interlace | progressive
         # scripting:
@@ -1507,8 +1543,8 @@ contexts:
           scope: punctuation.section.group.begin.css
           set:
             - meta_scope: meta.function-call.arguments.css meta.group.css
-            - include: selectors
             - include: function-arguments-common
+            - include: selectors
 
   # Functional Pseudo Classes with generic arguments
   pseudo-class-function-with-generic-args:
@@ -1560,7 +1596,7 @@ contexts:
 
   push-to-value:
     - match: ';'
-      scope: punctuation.terminator.rule.css
+      scope: invalid.illegal.sass
     - match: ':'
       scope: punctuation.separator.key-value.css
       push: property-value-content
@@ -1572,7 +1608,7 @@ contexts:
       push: property-identifier-content
 
   property-identifier-content:
-    - meta_scope: meta.property-list.css
+    - meta_scope: meta.property-name.css
     - include: comments
     - include: vendor-prefixes
     # specific properties with special treatment
@@ -1581,6 +1617,7 @@ contexts:
     # common properties
     - include: builtin-property
     - include: custom-property
+    
     - include: push-to-value
     - match: '\s*(?=$)'
       pop: true
@@ -1696,7 +1733,7 @@ contexts:
   counter-identifier:
     - match: '{{ident}}'
       scope: entity.other.counter-name.css
-    - include: push-to-value
+      pop: 1
     - include: comments
     - include: else-pop
 
@@ -1794,7 +1831,7 @@ contexts:
   # https://drafts.csswg.org/css-fonts-3/#font-prop
   font-property:
     - match: \b(?i:font(-family)?){{break}}
-      scope: meta.property-name.css support.type.property-name.css
+      scope: support.type.property-name.css
       set: font-property-value
 
   font-property-value:
@@ -2318,12 +2355,12 @@ contexts:
           scope: punctuation.section.group.begin.css
           set:
             - meta_scope: meta.function-call.arguments.css meta.group.css
+            - include: function-arguments-common
+            - include: comma-delimiters
             - match: \b(?i:at|from){{break}}
               scope: keyword.other.gradient.css
             - match: \b(?i:bottom|center|left|right|top){{break}}
               scope: support.constant.property-value.css
-            - include: function-arguments-common
-            - include: comma-delimiters
             - include: color-values
             - include: angle-constants
             - include: length-constants
@@ -2341,12 +2378,12 @@ contexts:
           scope: punctuation.section.group.begin.css
           set:
             - meta_scope: meta.function-call.arguments.css meta.group.css
+            - include: function-arguments-common
+            - include: comma-delimiters
             - match: \b(?i:to){{break}}
               scope: keyword.other.gradient.css
             - match: \b(?i:bottom|left|right|top){{break}}
               scope: support.constant.property-value.css
-            - include: function-arguments-common
-            - include: comma-delimiters
             - include: color-values
             - include: angle-constants
             - include: length-constants
@@ -2364,12 +2401,12 @@ contexts:
           scope: punctuation.section.group.begin.css
           set:
             - meta_scope: meta.function-call.arguments.css meta.group.css
+            - include: function-arguments-common
+            - include: comma-delimiters
             - match: \b(?i:at|circle|ellipse){{break}}
               scope: keyword.other.gradient.css
             - match: \b(?i:bottom|center|left|right|top|(closest|farthest)-(corner|side)){{break}}
               scope: support.constant.property-value.css
-            - include: function-arguments-common
-            - include: comma-delimiters
             - include: color-values
             - include: length-constants
             - include: percentage-constants
