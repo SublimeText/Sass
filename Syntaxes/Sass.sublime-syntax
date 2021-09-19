@@ -805,11 +805,11 @@ contexts:
                 - include: property-values
     - match: '((@)(include))\s+(([a-z]+)(\.))?([\w-]+)'
       captures:
-        0: variable.function.sass
         1: keyword.control.at-rule.sass
         2: punctuation.definition.keyword.sass
         5: entity.name.namespace.sass
         6: punctuation.separator.namespace.sass
+        7: variable.function.sass
       push:
         - meta_scope: meta.function-call.sass
         - match: '\s*(?=$)'
@@ -1247,8 +1247,8 @@ contexts:
   sass-mixin-directives:
     - match: '\s*((\=)([\w-]+))'
       captures:
-        1: entity.name.function.sass
-        2: punctuation.definition.keyword.sass
+        2: keyword.control.at-rule.sass
+        3: entity.name.function.sass
       push:
         - meta_scope: meta.function.declaration.sass
         - match: '(?=$)'
@@ -1256,8 +1256,8 @@ contexts:
         - include: sass-mixin-def
     - match: '\s*((\+)([\w-]+))'
       captures:
-        1: variable.function.sass
-        2: punctuation.definition.keyword.sass
+        2: keyword.control.at-rule.sass
+        3: variable.function.sass
       push:
         - meta_scope: meta.function-call.sass
         - match: '(?=$)'
