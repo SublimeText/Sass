@@ -1617,7 +1617,7 @@ contexts:
     # common properties
     - include: builtin-property
     - include: custom-property
-    
+
     - include: push-to-value
     - match: '\s*(?=$)'
       pop: true
@@ -3386,8 +3386,8 @@ contexts:
   sass-mixins:
     - match: '\s*((\=)([\w-]+))'
       captures:
-        1: entity.name.function.sass
-        2: punctuation.definition.keyword.sass
+        2: keyword.control.directive.sass
+        3: entity.name.function.sass
       push:
         - meta_scope: meta.function.declaration.sass
         - match: '(?=$)'
@@ -3412,8 +3412,8 @@ contexts:
                 - include: property-value-content
     - match: '\s*((\+)([\w-]+))'
       captures:
-        1: variable.function.sass
-        2: punctuation.definition.keyword.sass
+        2: keyword.control.directive.sass
+        3: variable.function.sass
       push:
         - meta_scope: meta.function-call.sass
         - match: '(?=$)'
@@ -3558,11 +3558,11 @@ contexts:
                 - include: property-value-content
     - match: '((@)(include))\s+(([a-z]+)(\.))?([\w-]+)'
       captures:
-        0: variable.function.sass
         1: keyword.control.directive.sass
         2: punctuation.definition.keyword.sass
         5: entity.name.namespace.sass
         6: punctuation.separator.namespace.sass
+        7: variable.function.sass
       push:
         - meta_scope: meta.function-call.sass
         - match: '\s*(?=$)'
