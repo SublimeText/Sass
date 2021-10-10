@@ -1286,7 +1286,7 @@ contexts:
       scope: variable.language.wildcard.asterisk.css
     # Class and Id Selectors
     # https://drafts.csswg.org/selectors-4/#class-html
-    - match: \.
+    - match: \.(?={{nmchar}})
       scope: punctuation.definition.entity.css
       push:
         - meta_scope: entity.other.attribute-name.class.css
@@ -1295,7 +1295,7 @@ contexts:
           pop: 1
         - include: immediately-pop
     # https://drafts.csswg.org/selectors-4/#id-selectors
-    - match: \#
+    - match: \#(?={{nmchar}})
       scope: punctuation.definition.entity.css
       push:
         - meta_scope: entity.other.attribute-name.id.css
@@ -1304,7 +1304,7 @@ contexts:
           pop: 1
         - include: immediately-pop
     # sass extend-only selectors
-    - match: \%
+    - match: \%(?={{nmchar}})
       scope: punctuation.definition.entity.sass
       push:
         - meta_scope: entity.other.attribute-name.placeholder.sass
@@ -1543,8 +1543,8 @@ contexts:
           scope: punctuation.section.group.begin.css
           set:
             - meta_scope: meta.function-call.arguments.css meta.group.css
-            - include: function-arguments-common
             - include: selectors
+            - include: function-arguments-common
 
   # Functional Pseudo Classes with generic arguments
   pseudo-class-function-with-generic-args:
