@@ -3279,7 +3279,7 @@ contexts:
       captures:
         0: punctuation.section.group.begin.sass
       push:
-        - meta_scope: meta.group.css meta.map.arguments.css
+        - meta_scope: meta.group.css meta.map.arguments.sass
         - match: '\)'
           captures:
             0: punctuation.section.group.end.sass
