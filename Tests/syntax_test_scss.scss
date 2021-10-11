@@ -56,14 +56,14 @@ selector-ish::before[data-type="text"]:not(:first-child),
   color: rgba(100, #aaa, 12deg, 95%);
   background: url($blue);
   testbackground-color: blue;
-//
+/*
 
 *
     *
 /*  ^ comment.block.css punctuation.definition.comment.css */
 //
 
-
+/*
   CSS grids
 */
   grid-template-columns:
@@ -77,8 +77,7 @@ selector-ish::before[data-type="text"]:not(:first-child),
                          repeat(auto-fit, [linename3 first nav-start] 300px)
                          100px;
 }
-//
-
+/*
   Var function arguments
 */
 .test {
@@ -88,8 +87,8 @@ selector-ish::before[data-type="text"]:not(:first-child),
   content: translateX(calc(var(--progress)));
   content: fn(height-$width);
 }
-//
 
+/*
   Nested selectors and &
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#nested_rules
   Variables and !global etc
@@ -232,9 +231,9 @@ selector-ish::before[data-type="text"]:not(:first-child),
 //                  ^ punctuation.definition.entity.css
 }
 // <- punctuation.section.property-list.end.css
-//
 
 
+/*
   Nested properties
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#nested_properties
 */
@@ -260,9 +259,9 @@ selector-ish::before[data-type="text"]:not(:first-child),
 //              ^ punctuation.section.group - string
   }
 }
-//
 
 
+/*
 Support property values after a line break?
 */
 .grid {
@@ -295,9 +294,9 @@ color: format(
 @import "imports/somefile.sass"; // this should be a comment
 //                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.double-slash
 //                               ^^ punctuation.definition.comment
-//
 
 
+/*
   Import Statements
   http://sass-lang.com/documentation/file.SASS_REFERENCE.html#import
 */
@@ -318,8 +317,8 @@ color: format(
 #main {
   @import "example";
 }
-//
 
+/*
  CSS Modules
 
    Interoperable CSS: https://github.com/css-modules/icss#specification
@@ -351,8 +350,9 @@ color: format(
 //             ^^^^^^^^^^ string
 //                          ^ punctuation
 }
-/* CSS Modules
-   Composing selectors: https://github.com/css-modules/css-modules#css-modules
+/*
+  CSS Modules
+  Composing selectors: https://github.com/css-modules/css-modules#css-modules
 */
 .otherClassName {
   composes: className from "./style.css";  // from filename
@@ -363,8 +363,9 @@ color: format(
 //                          ^^^^ keyword.operator
 //                                     ^ punctuation
 }
-/* CSS Modules
-   Global vs. local scope: https://github.com/css-modules/css-modules#exceptions
+/*
+  CSS Modules
+  Global vs. local scope: https://github.com/css-modules/css-modules#exceptions
 */
 .localA :global .global-b .global-c :local(.localD.localE::before) .global-d
 //      ^^^^^^^ entity.other.pseudo-class.css-modules
@@ -384,9 +385,9 @@ color: format(
     color: green;
   }
 }
-//
 
 
+/*
   Strings, (un)quoted, operations and interpolation
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#sass-script-strings
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#interpolation_
@@ -534,10 +535,9 @@ color: format(
  test // this should also be a comment
    );
 // ^ punctuation.section.group.end.sass
-//
 
 
-
+/*
   Mixin Directives
   http://sass-lang.com/documentation/file.SASS_REFERENCE.html#mixins
   http://sass-lang.com/documentation/file.SASS_REFERENCE.html#mixin-arguments
@@ -575,8 +575,8 @@ h1 { @include sexy-border(blue, 2in); }
 //                              ^^^ constant.numeric
 //                               ^^ constant.numeric.suffix
 //                                  ^ punctuation.terminator.rule
-//
 
+/*
   Function Directives
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#function_directives
 */
@@ -602,9 +602,9 @@ h1 { @include sexy-border(blue, 2in); }
 //  ^ meta.function-call
   );
 }
-//
 
 
+/*
   Lists, Maps
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#maps
 */
@@ -747,9 +747,8 @@ $gutter-width: 10px;
 #sidebar { width: grid-width(5); }
 //                ^^^^^^^^^^^^^ meta.property-value.css meta.function-call.css
 //                ^^^^^^^^^^ support.function
-//
 
-
+/*
   Module system
   https://sass-lang.com/blog/the-module-system-is-launched
 */
@@ -842,9 +841,9 @@ $gutter-width: 10px;
 //                      ^ punctuation
 //                              ^ punctuation
 }
-//
 
 
+/*
   More @ features
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#if
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#debug
@@ -896,8 +895,8 @@ $gutter-width: 10px;
   @at-root (without: media) {
     color: red;
   }
-//
 
+/*
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#the_optional_flag
 */
   @extend .error !optional;
@@ -1185,7 +1184,7 @@ $gutter-width: 10px;
 //      ^^^^^ comment.block.css
 }
 
-    @supports not ( and ( top: 2px ) ) { }
+    @supports not ( and ( top: 2px ) ) {}
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.supports.css
 //  ^ punctuation.definition.keyword.css
 //   ^^^^^^^^ keyword.control.at-rule.supports.css
