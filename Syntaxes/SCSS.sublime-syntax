@@ -679,6 +679,7 @@ contexts:
         1: keyword.control.at-rule.content.sass
         2: punctuation.definition.keyword.sass
       push:
+        - include: terminator-pop
         - match: '\s*(?=$)'
           pop: 1
 
@@ -703,8 +704,29 @@ contexts:
               scope: punctuation.section.group.end.css
               pop: 1
             - include: quoted-strings
-        - match: '\s*(?=$)'
-          scope: punctuation.terminator.rule.sass
+        - match: '\s*(\{)'
+          captures:
+            1: punctuation.section.block.begin.css
+          push:
+            - meta_scope: meta.group.css-modules.css
+            - match: '\}'
+              scope: punctuation.section.block.end.css
+              pop: 1
+            - include: Sass.sublime-syntax#comments
+            - match: '([a-zA-Z0-9_-]+)\s*(:)'
+              captures:
+                1: meta.property-name.css-modules.css support.type.property-name.css-modules.css
+                2: punctuation.separator.key-value.css
+                3: variable.other.css-modules.css
+              push:
+                - match: '(;|\s*(?=$))'
+                  captures:
+                    1: punctuation.terminator.rule.css
+                  pop: 1
+                - include: Sass.sublime-syntax#quoted-strings
+                - match: '\b[^\s''"]+\b'
+                  scope: string.unquoted.css
+        - match: ''
           pop: 1
 
     - include: comments
@@ -713,6 +735,10 @@ contexts:
     - include: at-rules
     - include: rule-list-body
     - include: Sass.sublime-syntax#sass-interpolated-selectors
+    - match: \{
+      scope: punctuation.section.block.begin.css
+    - match: \}
+      scope: punctuation.section.block.end.css
 
 ###[ COMMENTS ]################################################################
 
@@ -1377,6 +1403,7 @@ contexts:
             - match: '\)'
               scope: punctuation.section.group.end.css
               pop: 1
+            - include: selectors
             - include: quoted-strings
         - match: ''
           pop: 1
@@ -1619,7 +1646,7 @@ contexts:
         0: support.type.property-name
       push:
         - meta_scope: meta.property-name.css
-        - include: sass-interpolation
+        - include: Sass.sublime-syntax#sass-interpolation
         - match: '[a-zA-Z0-9_-]*'
           captures:
             0: support.type.property-name

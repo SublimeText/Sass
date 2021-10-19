@@ -683,6 +683,7 @@ contexts:
         1: keyword.control.at-rule.content.sass
         2: punctuation.definition.keyword.sass
       push:
+        - include: terminator-pop
         - match: '\s*(?=$)'
           pop: 1
 
@@ -708,7 +709,6 @@ contexts:
               pop: 1
             - include: quoted-strings
         - match: '\s*(?=$)'
-          scope: punctuation.terminator.rule.sass
           pop: 1
 
     - include: comments
@@ -3441,17 +3441,18 @@ contexts:
       captures:
         1: keyword.operator.ampersand.sass
       push:
-        - meta_scope: meta.selector.css
+        # - meta_scope: meta.selector.css
         - match: '[-_]+'
           scope: entity.other.attribute-name.css
+
           push:
             - match: '{{ident}}'
               scope: entity.other.attribute-name.css
             - include: sass-interpolation
             - include: selectors
             - include: comments
-            - match: '(?=$)'
-              pop: 1
+            - match: '(?=$|{)'
+              pop: 2
         - include: selector-content
 
 ###[ SASS AT-RULE FUNCTIONS ]#########################################
@@ -3465,13 +3466,11 @@ contexts:
         - meta_scope: meta.at-rule.each.sass
         - include: sass-variables
         - include: comma-delimiters
-        - match: '(?=$)'
-          pop: 1
+        - include: terminator-pop
         - match: \b(in){{break}}
           scope: keyword.operator.sass
           push:
-            - match: '(?=$)'
-              pop: 1
+            - include: terminator-pop
             - include: comments
             - include: comma-delimiters
             - include: var-function
@@ -3482,8 +3481,7 @@ contexts:
         1: punctuation.definition.keyword.sass
       push:
         - meta_scope: meta.at-rule.sass
-        - match: '(?=$)'
-          pop: 1
+        - include: terminator-pop
         - include: sass-script-expression
     - match: '(@)(if|else if|else){{break}}'
       captures:
@@ -3491,8 +3489,7 @@ contexts:
         1: punctuation.definition.keyword.sass
       push:
         - meta_scope: meta.at-rule.sass
-        - match: '(?=$)'
-          pop: 1
+        - include: terminator-pop
         - include: sass-script-expression
     - match: '(@)(warn|error){{break}}'
       captures:
@@ -3500,8 +3497,7 @@ contexts:
         1: punctuation.definition.keyword.sass
       push:
         - meta_scope: meta.at-rule.sass
-        - match: '(?=$)'
-          pop: 1
+        - include: terminator-pop
         - include: sass-script-expression
     - match: '(@)(debug){{break}}'
       captures:
@@ -3509,8 +3505,7 @@ contexts:
         1: punctuation.definition.keyword.sass
       push:
         - meta_scope: meta.at-rule.sass
-        - match: '(?=$)'
-          pop: 1
+        - include: terminator-pop
         - include: sass-script-expression
     - match: '(@)(at-root){{break}}'
       captures:
@@ -3522,8 +3517,7 @@ contexts:
         1: punctuation.definition.keyword.sass
       push:
         - meta_scope: meta.at-rule.extend.sass
-        - match: '(?=$)'
-          pop: 1
+        - include: terminator-pop
         - match: \!\s*(default|global|optional){{break}}
           scope: keyword.other.sass
         - include: selectors
@@ -3534,8 +3528,7 @@ contexts:
         4: entity.name.function.sass
       push:
         - meta_scope: meta.function.declaration.sass
-        - match: '\s*(?=$)'
-          pop: 1
+        - include: terminator-pop
         - match: '\('
           scope: punctuation.section.group.begin.sass
           push:
@@ -3565,8 +3558,7 @@ contexts:
         7: variable.function.sass
       push:
         - meta_scope: meta.function-call.sass
-        - match: '\s*(?=$)'
-          pop: 1
+        - include: terminator-pop
         - match: '\('
           scope: punctuation.section.group.begin.sass
           push:
@@ -3591,8 +3583,7 @@ contexts:
         1: punctuation.definition.keyword.sass
       push:
         - meta_scope: meta.at-rule.sass
-        - match: '\s*(?=$)'
-          pop: 1
+        - include: terminator-pop
         - include: property-value-content
     - match: '\s*((@)(use|forward){{break}})\s*'
       captures:
@@ -3600,9 +3591,7 @@ contexts:
         2: punctuation.definition.keyword.sass
       push:
         - meta_scope: meta.at-rule.module.sass
-        - match: '\s*(?=$)'
-          scope: punctuation.terminator.rule.sass
-          pop: 1
+        - include: terminator-pop
         - match: '\b(as)\b\s+([a-zA-Z0-9_-]*(\*)?)'
           captures:
             1: keyword.control.as.sass
@@ -3611,8 +3600,7 @@ contexts:
         - match: '\b(show|hide)\b'
           scope: keyword.control.show-hide.sass
           push:
-            - match: '(?=$)'
-              pop: 1
+            - include: terminator-pop
             - include: comment-block
             - include: sass-variables
             - include: sass-functions
