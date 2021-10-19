@@ -1582,7 +1582,17 @@ contexts:
 
   # Highly modified from CSS because there is no strict separation
   # between selectors and properties in Sass,
-  # ie. there is no 'property list'
+  property-lists:
+    - match: \{
+      scope: punctuation.section.block.begin.css
+      push: property-list-content
+
+  property-list-content:
+    - meta_scope: meta.property-list.css meta.block.css
+    - match: \}
+      scope: punctuation.section.block.end.css
+      pop: 1
+    - include: rule-list-body
 
   rule-list-body:
     # Note: This context is used by HTML.sublime-syntax
@@ -3243,7 +3253,5 @@ contexts:
       pop: 1
 
   terminator-pop:
-    - match: '\s*(?=$)'
-      pop: 1
-    - match: (?=[;){}]|$)
+    - match: (?=[;){}])
       pop: 1
