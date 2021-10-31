@@ -1084,8 +1084,6 @@ contexts:
     - include: at-page-property-names
     - include: property-values
     - include: rule-terminators
-    - include: illegal-blocks
-    - include: illegal-groups
 
   at-page-property-names:
     - match: '{{page_property_names}}'
