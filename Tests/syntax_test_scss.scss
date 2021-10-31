@@ -372,7 +372,7 @@ color: format(
 .localA :global .global-b .global-c :local(.localD.localE::before) .global-d
 //      ^^^^^^^ entity.other.pseudo-class.css-modules
 //                                  ^^^^^^ entity.other.pseudo-class.css-modules
-//                                        ^ meta.function-callmeta.group.css punctuation.section.group.begin.css
+//                                        ^ meta.group.css punctuation.section.group.begin.css
 //                                         ^^^^^^^^^^^^^^^^^^^^^^ meta.selector
 //                                                               ^ punctuation.section.group.end.css
 :global {  // global blocks
@@ -528,7 +528,7 @@ color: format(
   ".header", /*a comment*/
  test // this should also be a comment
    );
-// ^ punctuation.section.group.end.sass
+// ^ punctuation.section.group.end
 
 
 /*
