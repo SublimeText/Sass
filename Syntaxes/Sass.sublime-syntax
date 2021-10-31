@@ -3601,7 +3601,7 @@ contexts:
           scope: keyword.control.show-hide.sass
           push:
             - include: terminator-pop
-            - include: comment-block
+            - include: comments
             - include: sass-variables
             - include: sass-functions
             - include: sass-operators
