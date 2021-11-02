@@ -1247,7 +1247,7 @@ contexts:
 
   selectors:
     - include: sass-interpolated-selectors
-    - match: (?=\s*{{svg_tags}})
+    - match: (?=\s*{{svg_tags}}(?!-|\s*:))
       push:
         - meta_scope: meta.selector.css
         - include: selector-content
