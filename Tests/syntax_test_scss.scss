@@ -644,10 +644,10 @@ $list: (top, bottom, right, position, height);
 .selector {
   color: nth(map.merge($map, $map2), 3);
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css meta.function-call.sass
-//       ^^^ support.function.sass
+//       ^^^ support.function
 //          ^ punctuation.section.group.begin
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments
-//           ^^^^^^^^^ support.function.sass
+//           ^^^^^^^^^ support.function
 //           ^^^ entity.name.namespace
 //              ^ punctuation
 //                    ^ punctuation.section.group.begin
@@ -687,19 +687,19 @@ $translucent-red: rgba(#E82C0C, 0.5);
 //                            ^ punctuation.separator.sequence.css
 $translucent-red: rgba(red, 0.5);
 //                ^^^^ support.function.color.css
-//                     ^^^ support.constant.color.w3c-standard-color-name.css
+//                     ^^^ support.constant.color
 //                        ^ punctuation.separator.sequence.css
 $translucent-red: hsla(240deg 100% 50% / 5%);
 //                ^^^^ support.function.color.css
 //                        ^^^ constant.numeric.suffix
 p {
   color: opacify($translucent-red, 0.3);
-//       ^^^^^^^ support.function.sass
+//       ^^^^^^^ support.function
 //              ^ punctuation.section.group.begin
 //                               ^ punctuation.separator.sequence.css
 //                                    ^ punctuation.section.group.end
   background-color: transparentize(#E82C0C, 0.25);
-//                  ^^^^^^^ support.function.sass
+//                  ^^^^^^^ support.function
 //                                 ^^^ constant.other.color.rgb-value.css
   background-color: color($mark, custom-function(unthemed));
 //                        ^ variable.other
@@ -714,14 +714,14 @@ p {
 $grid-width: 40px;
 $gutter-width: 10px;
 @function grid-width($n) {
-//<- meta.function.declaration.sass keyword.control.at-rule.sass
+//<- meta.function.declaration.sass keyword.control.directive
 // ^^^^^^^^^^^^^^^^^^^^^^ meta.function.declaration.sass
-// ^^^^^^ keyword.control.at-rule.sass
+// ^^^^^^ keyword.control.directive
 //        ^^^^^^^^^^ entity.name.function.sass
 //                  ^ meta.function.parameters.sass punctuation.section.group.begin.sass
   @return $n * $grid-width + ($n - 1) * $gutter-width;
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.sass
-// ^^^^^^ keyword.control.at-rule.return.sass
+// ^^^^^^ keyword.control.directive
 //        ^^ variable.other.sass
 //             ^^^^^^^^^^^ variable.other.sass
 //                            ^^ variable.other.sass
@@ -748,59 +748,59 @@ $gutter-width: 10px;
 */
 @use 'something else' as *;
 // <- punctuation.definition.keyword.sass
-// ^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
-// ^ keyword.control.at-rule.module.sass
+// ^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^ keyword.control.directive.module
 //    ^^^^^^^^^^^^^^ string.quoted
 //                    ^^ keyword.control
 //                       ^ constant.language.import-all
-//                        ^ punctuation.terminator.rule.sass
+//                        ^ punctuation.terminator.rule
 @use "src/corners";
 // <- punctuation.definition.keyword.sass
-// ^^^^^^^^^^^^^^^^ meta.at-rule.module
-// ^ keyword.control.at-rule.module.sass
+// ^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^ keyword.control.directive.module
 //    ^^^^^^^^^^^^ string.quoted
-//                ^ punctuation.terminator.rule.sass
+//                ^ punctuation.terminator.rule
 @use /*import bootstrap*/ "bootstrap" as b;
 // <- punctuation.definition.keyword.sass
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
 //                                    ^^ keyword.control
-// ^ keyword.control.at-rule.module.sass
+// ^ keyword.control.directive.module
 //                ^ comment
 @forward "functions";
 // <- punctuation.definition.keyword.sass
 // ^^^^^^^^^^^^^^^^ meta.at-rule.module
-// ^^^^^ keyword.control.at-rule.module.sass
+// ^^^^^ keyword.control.directive.module.sass
 //       ^^^^^^^^^^^ string.quoted
-//                  ^ punctuation.terminator.rule.sass
+//                  ^ punctuation.terminator.rule
 @forward "functions" show color-yiq;
 // <- punctuation.definition.keyword.sass
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
-// ^ keyword.control.at-rule.module.sass
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^ keyword.control.directive.module.sass
 //                   ^^^^ keyword.control
 //                        ^^^^^^^^^ meta.generic-name.sass
-//                                 ^ punctuation.terminator.rule.sass
+//                                 ^ punctuation.terminator.rule
 @forward "functions" hide assert-ascending, $some_variable;
 // <- punctuation.definition.keyword.sass
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
-// ^ keyword.control.at-rule.module.sass
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^ keyword.control.directive.module.sass
 //                   ^^^^ keyword.control
 //                        ^^^^^^^^^^^^^^^ meta.generic-name.sass
 //                                        ^ punctuation.separator.sequence.css
 //                                          ^ variable.other.sass
-//                                                        ^ punctuation.terminator.rule.sass
+//                                                        ^ punctuation.terminator.rule
 @forward "theme" as theme-*;
-// ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
 //                  ^^^^^^^ meta.generic-name.sass
 //                        ^ constant.language.import-all.sass
 @use 'opinionated' with ($black: #333);
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
 //                 ^^^^ keyword.control.with.sass
 //                       ^^^^ variable
 //                               ^^^^ constant
 //                             ^ punctuation
 //                      ^ punctuation.section.group.begin.sass
 //                                   ^ punctuation.section.group.end.sass
-//                                    ^ punctuation.terminator.rule.sass
+//                                    ^ punctuation.terminator.rule
 @forward "sass:meta" as meta with (
 // ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
 //                   ^^ keyword.control.as.sass
@@ -847,7 +847,7 @@ $gutter-width: 10px;
 //  ^ meta.at-rule constant.numeric
 //    ^ keyword.operator.arithmetic.sass
 //      ^ constant.numeric
-//             ^ punctuation.section.property-list.begin.css
+//             ^ punctuation.section.block.begin.css
 @if $scope == ie9 { border: 1px solid; }
 //              ^ - constant.numeric
 @if null       { border: 3px double; }
@@ -855,14 +855,16 @@ $gutter-width: 10px;
 @mixin adjust-location($x, $y) {
   @if unitless($x) {
 //    ^^^^^^^^^^^^ meta.function-call.sass
-//    ^^^^^^^^ support.function.sass
-//              ^ meta.group.css meta.function-call.arguments.css variable.other.sass
+//    ^^^^^^^^ support.function
+//              ^ meta.group.css
+//              ^ meta.function-call.arguments.css
+//              ^ variable.other.sass
     @debug 10em + 12em;
 //         ^^^^ constant.numeric
 //           ^ meta.at-rule constant.numeric
 //              ^ keyword.operator.arithmetic.sass
 //                ^^^^ constant.numeric
-//                    ^ punctuation.terminator.rule.sass
+//                    ^ punctuation.terminator.rule
     @warn "Assuming #{$x} to be in pixels";
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double.css
 //                  ^^^^^ meta.group.interpolation.sass
@@ -905,15 +907,15 @@ $gutter-width: 10px;
 @for $i from 1 through 3 {
   .item-#{$i} { width: 2em * $i; }
 }
-@each $animal in puma, sea-slug, egret, salamander {}
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.each.sass
+@each $animal in puma, 'sea-slug', $egret, 10px {}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.each.sass
 //                                                 ^ - meta.at-rule.each.sass
-//                                                 ^ punctuation.section.property-list.begin.css
+//                                              ^ punctuation.section.block.begin.css
 //    ^^^^^^^ variable.other.sass
 //            ^^ keyword.operator
-//               ^^^^ string.unquoted
-//                     ^^^^^^ string.unquoted
+//               ^^^^ constant.other
 //                   ^ punctuation.separator
+//                     ^^^^^^ string
 @each $header, $size in (h1: 2em, h2: 1.5em, h3: 1.2em) {
 //    ^^^^^^^ variable.other.sass
 //           ^ punctuation.separator
@@ -953,7 +955,7 @@ $gutter-width: 10px;
 }
 
 .test-punctuation {
-//                ^ punctuation.section.property-list.begin.css
+//                ^ punctuation.section.block.begin.css
     top: 1px;
 //     ^      punctuation.separator.key-value.css
 //          ^ punctuation.terminator.rule.css

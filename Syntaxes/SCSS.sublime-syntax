@@ -3289,7 +3289,6 @@ contexts:
 ###############################################################################
 
   sass-script-expression:
-    - include: sass-value-expression
     - include: builtin-values
     - match: '{{ident}}'
       scope: constant.other.sass
@@ -3303,6 +3302,11 @@ contexts:
     - include: sass-namespaced-functions
     - include: sass-operators
     - include: sass-interpolation
+    - include: color-values
+    - include: unicode-ranges
+    - include: numeric-constants
+    - include: common-constants
+    - include: generic-font-names
     - match: \b(true|false|null)\b
       scope: constant.language.sass
 
@@ -3504,7 +3508,7 @@ contexts:
             - include: comments
             - include: comma-delimiters
             - include: var-function
-            - include: sass-value-expression
+            - include: sass-script-expression
     - match: '(@)(for|while){{break}}'
       captures:
         0: keyword.control.flow.sass
