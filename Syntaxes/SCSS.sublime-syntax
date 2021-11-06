@@ -689,6 +689,7 @@ contexts:
       push:
         - include: push-to-value
         - include: terminator-pop
+        - include: immediately-pop
     - match: '\s*(:)(import|export)'
       scope: meta.selector.css entity.other.pseudo-class.css-modules.css
       captures:
@@ -710,8 +711,9 @@ contexts:
             - meta_scope: meta.group.css-modules.css
             - match: '\}'
               scope: punctuation.section.block.end.css
-              pop: 1
+              pop: 2
             - include: comments
+            - include: rule-terminators
             - match: '([a-zA-Z0-9_-]+)\s*(:)'
               captures:
                 1: meta.property-name.css-modules.css support.type.property-name.css-modules.css
