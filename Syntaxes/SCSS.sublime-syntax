@@ -1371,6 +1371,8 @@ contexts:
     - include: comma-delimiters
     - include: sass-ampersand
     - include: sass-interpolated-selectors
+    - match: '\!\s*(default|global|optional)\b'
+      scope: keyword.other.sass
 
     # Html Tags
     - match: '{{html_tags}}'
@@ -3544,8 +3546,6 @@ contexts:
       push:
         - meta_scope: meta.at-rule.extend.sass
         - include: terminator-pop
-        - match: \!\s*(default|global|optional){{break}}
-          scope: keyword.other.sass
         - include: selectors
     - match: '((@)(mixin|function))\s+([\w-]+)'
       captures:
