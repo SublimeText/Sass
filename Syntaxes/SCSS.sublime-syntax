@@ -3297,8 +3297,8 @@ contexts:
     - include: comma-delimiters
     - include: sass-maps
     - include: sass-variables
-    - include: sass-functions
-    - include: sass-custom-functions
+    - include: sass-builtin-functions
+    - include: sass-namespaced-functions
     - include: sass-operators
     - include: sass-interpolation
     - match: \b(true|false|null)\b
@@ -3334,10 +3334,10 @@ contexts:
         4: punctuation.definition.variable.sass
     - include: sass-interpolation
 
-  sass-functions:
+  sass-builtin-functions:
     - match: '\b(zip|variable-exists|unquote|unitless|unit|unique-id|type-of|transparentize|to-upper-case|to-lower-case|tan|str-slice|str-length|str-insert|str-index|sqrt|spin|softlight|sin|simple-selectors|set-nth|selector-unify|selector-replace|selector-parse|selector-nest|selector-extend|selector-append|screen|scale-color|saturation|saturate|round|rgba|rgb|replace|red|random|quote|pow|pi|percentage|overlay|opacify|nth|negation|multiply|mod|mixin-exists|mix|min|max|map-values|map-remove|map-merge|map-keys|map-has-key|map-get|luma|list-separator|lightness|lighten|length|keywords|join|isnumber|is-superselector|is-bracketed|invert|inspect|index|if|ie-hex-str|hue|hsvvalue|hsvsaturation|hsvhue|hsva|hsv|hsla|hsl|hardlight|greyscale|green|grayscale|global-variable-exists|get-function|function-exists|format|floor|feature-exists|fadeout|fadein|fade|extract|exclusion|escape|e|difference|desaturate|data-uri|darken|cos|convert|contrast|content-exists|complement|comparable|color|change-color|ceil|call|calc|blue|average|atan|asin|argb|append|alpha|adjust-hue|adjust-color|acos|abs)(?=\()'
       captures:
-        1: support.function.sass
+        1: support.function.builtin.sass
       push:
         - meta_scope: meta.function-call.sass
         - meta_include_prototype: false
@@ -3367,9 +3367,9 @@ contexts:
             - match: '{{ident}}'
               scope: constant.other.sass
 
-  sass-custom-functions:
+  sass-namespaced-functions:
     - match: '\b(?!var)(({{ident}})(\.))?([a-z_-]+)(?=\()'
-      scope: support.function.custom.sass
+      scope: support.function.sass
       captures:
         2: entity.name.namespace.sass
         3: punctuation.separator.namespace.sass
@@ -3575,13 +3575,13 @@ contexts:
                 - match: '\b(false|true|null)\b'
                   scope: constant.language.sass
                 - include: property-value-content
-    - match: '((@)(include))\s+(([a-z]+)(\.))?([\w-]+)'
+    - match: '((@)(include))\s+((([a-z]+)(\.))?([\w-]+))'
       captures:
         1: keyword.control.directive.sass
         2: punctuation.definition.keyword.sass
-        5: entity.name.namespace.sass
-        6: punctuation.separator.namespace.sass
-        7: variable.function.sass
+        4: variable.function.sass
+        6: entity.name.namespace.sass
+        7: punctuation.separator.namespace.sass
       push:
         - meta_scope: meta.function-call.sass
         - include: terminator-pop
@@ -3594,7 +3594,7 @@ contexts:
               pop: 1
             - include: comments
             - include: sass-variables
-            - include: sass-functions
+            - include: sass-builtin-functions
             - include: sass-operators
             - include: comma-delimiters
             - include: property-value-content
@@ -3629,7 +3629,7 @@ contexts:
             - include: terminator-pop
             - include: comments
             - include: sass-variables
-            - include: sass-functions
+            - include: sass-builtin-functions
             - include: sass-operators
             - include: comma-delimiters
             - match: '{{ident}}'
@@ -3646,7 +3646,7 @@ contexts:
               scope: punctuation.separator.key-value.css
             - include: comments
             - include: sass-variables
-            - include: sass-functions
+            - include: sass-builtin-functions
             - include: sass-operators
             - include: comma-delimiters
             - include: property-value-content
