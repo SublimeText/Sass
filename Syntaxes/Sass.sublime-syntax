@@ -943,7 +943,6 @@ contexts:
     - meta_scope: meta.block.css
     - include: block-end2
     - include: comments
-    - include: property-lists
     - include: at-keyframe-selectors
 
   at-keyframe-selectors:
