@@ -1911,6 +1911,7 @@ contexts:
     - include: terminator-pop
     - include: comments
     - include: var-functions
+    - include: builtin-values
     - include: sass-value-expression
 
 ###[ BUILTIN AT RULE FUNCTIONS ]###############################################
