@@ -34,7 +34,7 @@ jobs:
       - name: 'Move root dirs into "Data/Packages/" subdir'
         run: |
           mkdir -p Data/Packages/Sass/
-          find . -maxdepth 1 -mindepth 1 -type d -not -name 'Data' -exec mv '{}' Data/Packages/Sass/ ';'
+          find . -maxdepth 1 -mindepth 1 -type d -not -name 'Data' -not -name 'syntax_tests' -exec mv '{}' Data/Packages/Sass/ ';'
 
       - name: Run syntax tests
         run: ./syntax_tests
