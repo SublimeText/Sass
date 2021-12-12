@@ -1665,7 +1665,6 @@ contexts:
           pop: 1
 
   property-identifier-content:
-    - meta_scope: meta.property-name.css
     - include: comments
     - include: vendor-prefixes
     # specific properties with special treatment
