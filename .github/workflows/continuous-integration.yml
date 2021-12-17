@@ -3,38 +3,32 @@ name: continuous-integration
 on: [push]
 
 jobs:
-  run_syntax_tests:
-    name: Test on Build ${{ matrix.sublime-build }} (${{ matrix.sublime-channel }})
+  build:
+    name: Run syntax_tests
     runs-on: ubuntu-latest
-    timeout-minutes: 15 # default is 6 hours!
-    continue-on-error: ${{ matrix.optional }}
-    strategy:
-      max-parallel: 2
-      fail-fast: false
-      matrix:
-        include:
-          - sublime-channel: stable
-            sublime-build: 4121
-            optional: true
-          - sublime-channel: dev
-            sublime-build: 4122
-            optional: false
     steps:
-
-      - name: Git checkout
-        uses: actions/checkout@master
-
-      - name: Get binary for Build ${{ matrix.sublime-build }} (${{ matrix.sublime-channel }})
-        run: |
-          wget -O st_syntax_tests.tar.xz https://download.sublimetext.com/st_syntax_tests_build_${{ matrix.sublime-build }}_x64.tar.xz
-          tar xf st_syntax_tests.tar.xz
-          mv st_syntax_tests/* ./
-          rm -R st_syntax_tests st_syntax_tests.tar.xz
-
-      - name: 'Move root dirs into "Data/Packages/" subdir'
-        run: |
-          mkdir -p Data/Packages/Sass/
-          find . -maxdepth 1 -mindepth 1 -type d -not -name 'Data' -not -name 'syntax_tests' -exec mv '{}' Data/Packages/Sass/ ';'
-
+      - uses: actions/checkout@master
+      - name: Install OpenGL
+        run: sudo apt-get -y install libgl1-mesa-glx libglu1-mesa
+      - name: Download syntax_tests
+        run: wget --content-disposition https://download.sublimetext.com/st_syntax_tests_build_4073_x64.tar.bz2
+      - name: Extract syntax_tests
+        run: tar xf "$(ls st_syntax_tests_build_*_x64.tar.bz2)"
+      - name: Move syntax_tests
+        run: mv st_syntax_tests/syntax_tests ./
+      - name: Cleanup syntax_tests dir
+        run: rm -R st_syntax_tests*
+      - name: Cleanup git dir
+        run: rm -R .git*
+      - name: Setup 'Data/Packages/Sass'
+        run: mkdir -p 'Data/Packages/Sass'
+      - name: Move package into its own subdir within Data dir
+        run: >-
+          find .
+          -maxdepth 1
+          -mindepth 1
+          -not -name 'Data'
+          -not -name 'syntax_tests'
+          -exec mv -v '{}' 'Data/Packages/Sass/' \;
       - name: Run syntax tests
         run: ./syntax_tests
