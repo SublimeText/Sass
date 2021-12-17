@@ -1368,7 +1368,6 @@ contexts:
       scope: keyword.operator.combinator.css
 
   selector-content:
-    - meta_scope: meta.selector.css
     - include: selector-end
     - include: comma-delimiters
     - include: sass-ampersand
