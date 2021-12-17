@@ -1,9 +1,3 @@
-// SYNTAX TEST "Packages/Sass/Syntaxes/SCSS.sublime-syntax"
----
-# this ensures Jekyll reads the file to be transformed into CSS later
----
-//^ frontmatter.jekyll punctuation.section.frontmatter.end.jekyll
-
 /*
 Correctly differentiate between properties and selectors,
 especially with pseudo-stuff because of the :
