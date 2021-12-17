@@ -1642,18 +1642,19 @@ contexts:
     # http://sass-lang.com/documentation/file.SASS_REFERENCE.html#nested_properties
     - match: '[a-zA-Z0-9_-]*(?=#{)'
       captures:
-        0: support.type.property-name
+        0: meta.property-name.css support.type.property-name.css
       push:
         - meta_scope: meta.property-name.css
         - include: sass-interpolation
         - match: '[a-zA-Z0-9_-]*'
           captures:
-            0: support.type.property-name
+            0: meta.property-name.css support.type.property-name.css
         - include: push-to-value
         - include: terminator-pop
         - match: '\s*(?=$)'
           pop: 1
     - match: (?=({{vendor_prefix}})?{{property_names}}|{{custom_ident}}|\b(?i:counter-(increment|reset|set)){{break}}|\b(?i:font(-family)?){{break}})
+      scope: meta.property-name.css
       push: property-identifier-content
     - match: '\b(z|y|x|writing|wrap|word|will|width|white|weight|visibility|vertical|variant-position|variant-numeric|variant-ligatures|variant-east-asian|variant-caps|variant-alternates|variant|user|unicode|underline-position|underline|type|transition|transform|touch|top-width|top-style|top-right-radius|top-left-radius|top-color|top|timing-function|timing|threshold|text|template-rows|template-columns|template-areas|template|tap|table|tab|synthesis|symbols|style-type|style-position|style-image|style|stroke|stretch|stop|state|start|speak|span|spacing|space|source|smoothing|slice|sizing|size-adjust|size|side|shrink|shift|shape|shadow|settings|self|select|scrolling|scroll|rule-width|rule-style|rule-color|rule|rows|row-start|row-gap|row-end|row|right-width|right-style|right-radius|right-color|right|resolution|reset|repeat-y|repeat-x|repeat|rendering|range|radius|property|profile|preferred-size|preferred|positive|position-y|position-x|position|pointer|play-state|play|pitch|perspective|pause|path|paint|page|padding|pack|override|overflow|outside|outset|outline|origin-y|origin-x|origin|orientation|orient|ordinal-group|ordinal|order|opacity|offset|object|numeric|negative|nbsp|name|mode|mix|miterlimit|min|mid|max|mask|marker|margin|list|linejoin|linecap|line-pack|line|lighting|ligatures|letter|left-width|left-style|left-radius|left-color|left|layout|last|language-override|language|kerning|justify|iteration-count|iteration|items|item-align|item|interpolation-filters|interpolation|inside|index|indent|increment|image-width|image-threshold|image-source|image-slice|image-repeat|image-outset|image|highlight-color|highlight|height|grow|group|grid|gap|function|font|flow|flood|flex|fit|filters|fill-mode|fill-color|fill|feature-settings|feature|family|events|end|empty|emphasis-style|emphasis-position|emphasis-color|emphasis|duration|drag|dominant|display|direction|delay|decoration-style|decoration-line|decoration-color|decoration-break|decoration|dashoffset|dasharray|counter|count|content|contain|composite|columns|column-start|column-gap|column-end|column|color|collapse|clip|clamp|change|cells|caption|caps|break-inside|break-before|break-after|break|box-contain|box|bottom-width|bottom-style|bottom-color|bottom|border|blend-mode|blend|bidi|behavior|before|basis|baseline|background|backface|auto-rows|auto-flow|auto-columns|auto|attachment|as|areas|area|animation|anchor|alternates|alignment|align-last|align|after|adjust|additive|action)\b'
       scope: meta.property-name.css support.type.property-name.css
@@ -1664,6 +1665,7 @@ contexts:
           pop: 1
 
   property-identifier-content:
+    - meta_scope: meta.property-name.css
     - include: comments
     - include: vendor-prefixes
     # specific properties with special treatment
