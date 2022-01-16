@@ -1,3 +1,15 @@
+# 3.0 Beta release!
+
+This syntax package for Sass and SCSS has been [largely rewritten](https://github.com/braver/SublimeSass/pull/86). This brings it back in line with the default CSS package. To make sure the package is as good as it can be we're doing a beta period for the 3.0.0 release.
+
+Participate in the beta right now by editing your Package Control preferences and adding Sass to the "install_prereleases" key:  
+ ```json
+ "install_prereleases":
+ [
+   "Sass"
+ ]
+ ```
+
 # SCSS and Sass syntax for Sublime Text 3
 
 Includes completions for CSS properties and values, as well as relevant Sass functions.
