@@ -362,6 +362,8 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
 //                      ^ keyword.operator.arithmetic.sass
 //                        ^ constant.numeric.value.css
 //                          ^ punctuation.section.group.end.sass
+    padding: calc(#{spacer/2 - 5px})
+//                ^^^^^^^^^^^^^^^^^ meta.group.interpolation
     transform: #{translate + $axis + '(' + $span * $aim + ')'}
 //                           ^^^^^ variable.other
 //                           ^ punctuation.definition.variable

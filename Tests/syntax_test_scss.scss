@@ -462,6 +462,8 @@ color: format(
     content: "I ate #{$value} pies!";
 //                    ^^^^^^ variable.other.sass
 //                    ^ punctuation.definition.variable.sass
+    padding: calc(#{spacer/2 - 5px});
+//                ^^^^^^^^^^^^^^^^^ meta.group.interpolation
     @include breathe(somestring);
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.sass
 //  ^^^^^^^^ keyword.control.directive.sass

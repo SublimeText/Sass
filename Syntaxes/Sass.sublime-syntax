@@ -2745,6 +2745,7 @@ contexts:
       push: maybe-illegal-operator
     - match: '[-+*/]'
       scope: keyword.operator.arithmetic.css
+    - include: sass-value-expression
 
   toggle-functions:
     # toggle()
