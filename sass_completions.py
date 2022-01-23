@@ -5,7 +5,7 @@ import timeit
 
 from functools import cached_property, wraps
 
-__all__ = ['CSSCompletions']
+__all__ = ['SassCompletions']
 
 KIND_CSS_PROPERTY = (sublime.KIND_ID_KEYWORD, "p", "property")
 KIND_CSS_FUNCTION = (sublime.KIND_ID_FUNCTION, "f", "function")
@@ -796,7 +796,7 @@ def next_none_whitespace(view, pt):
             return ch
 
 
-class CSSCompletions(sublime_plugin.EventListener):
+class SassCompletions(sublime_plugin.EventListener):
 
     @cached_property
     def func_args(self):
@@ -823,6 +823,11 @@ class CSSCompletions(sublime_plugin.EventListener):
             return None
 
         pt = locations[0]
+
+        # completions are for properties, not selectors, only inside sass/scss files
+        if not match_selector(view, pt, 'source.sass - meta.selector.css, source.scss - meta.selector.css'):
+            return None
+
         if not match_selector(view, pt, ''):
             return None
 
