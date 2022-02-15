@@ -824,8 +824,8 @@ class SassCompletions(sublime_plugin.EventListener):
 
         pt = locations[0]
 
-        # completions are for properties, not selectors, only inside sass/scss files
-        if not match_selector(view, pt, 'source.sass - meta.selector.css, source.scss - meta.selector.css'):
+        # completions only inside sass/scss files
+        if not match_selector(view, pt, 'source.sass, source.scss'):
             return None
 
         if not match_selector(view, pt, ''):
