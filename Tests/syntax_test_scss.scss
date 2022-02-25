@@ -1,10 +1,6 @@
-// SYNTAX TEST "Packages/Sass/Syntaxes/SCSS.sublime-syntax"
----
-# this ensures Jekyll reads the file to be transformed into CSS later
----
-//^ frontmatter.jekyll punctuation.section.frontmatter.end.jekyll
-//
+/* SYNTAX TEST "Packages/Sass/Syntaxes/SCSS.sublime-syntax" */
 
+/*
 Correctly differentiate between properties and selectors,
 especially with pseudo-stuff because of the :
 */
@@ -56,14 +52,14 @@ selector-ish::before[data-type="text"]:not(:first-child),
   color: rgba(100, #aaa, 12deg, 95%);
   background: url($blue);
   testbackground-color: blue;
-//
+/*
 
 *
     *
-/*  ^ comment.block.css punctuation.definition.comment.css */
+/*  ^ comment.block.css punctuation.definition.comment.
 //
 
-
+/*
   CSS grids
 */
   grid-template-columns:
@@ -77,8 +73,7 @@ selector-ish::before[data-type="text"]:not(:first-child),
                          repeat(auto-fit, [linename3 first nav-start] 300px)
                          100px;
 }
-//
-
+/*
   Var function arguments
 */
 .test {
@@ -88,8 +83,8 @@ selector-ish::before[data-type="text"]:not(:first-child),
   content: translateX(calc(var(--progress)));
   content: fn(height-$width);
 }
-//
 
+/*
   Nested selectors and &
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#nested_rules
   Variables and !global etc
@@ -100,17 +95,17 @@ selector-ish::before[data-type="text"]:not(:first-child),
 */
 *,
 :root,
-// <- entity.other.pseudo-class.css punctuation.definition.entity.css
+// <- punctuation.definition.pseudo-class.css
 // ^^ entity.other.pseudo-class.css
 ::before, :hover,
 #main h1+.sub:not(.class) {
-//    ^^^^^^^^^^^^^^^^^^^^ meta.selector.css
-//    ^^ entity.name.tag.css
+//    ^^^^^^^^^^^^^^^^^^^ meta.selector.css
+//    ^^ entity.name.tag
 //     ^ - constant.numeric
-//      ^ punctuation.separator.combinator.css
-//           ^ punctuation.definition.entity.css
-//               ^ punctuation.definition.group.begin
-//                        ^ punctuation.section.property-list.begin
+//      ^ keyword.operator.combinator.css
+//           ^ punctuation.definition
+//               ^ punctuation.section.group.begin
+//                        ^ punctuation
   color: #00ff00;
   height: 97%;
   align-self : baseline;
@@ -146,7 +141,7 @@ selector-ish::before[data-type="text"]:not(:first-child),
   input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder),
 //                                       ^ entity.name
   :root,
-//^ entity.other.pseudo-class.css punctuation.definition.entity.css
+//^ punctuation.definition
 // ^^ entity.other.pseudo-class.css
   ::before, :hover,
   &:nth-child(even) a,
@@ -162,54 +157,56 @@ selector-ish::before[data-type="text"]:not(:first-child),
   main {
     input:-webkit-autofill,
 //  ^^^^^ entity.name.tag
-//        ^^^^^^^^^^^^^^^^ meta.selector.css entity.other.pseudo-class.css
 //        ^^^^^^^^ support.type.vendor-prefix.css
-//       ^ punctuation.definition.entity.css
+//                ^^^^^^^^ meta.selector.css entity.other.pseudo-class.css
+//       ^ punctuation.definition
     custom-input:-webkit-autofill:hover {}
 //  ^^^^^^^^^^^^ entity.name.tag
-//               ^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css entity.other.pseudo-class.css
+//                       ^^^^^^^^ meta.selector.css entity.other.pseudo-class.css
+//                                ^^^^^ meta.selector.css entity.other.pseudo-class.css
 //               ^^^^^^^^ support.type.vendor-prefix.css
-//              ^ punctuation.definition.entity.css
-//                               ^ punctuation.definition.entity.css
+//              ^ punctuation.definition
+//                               ^ punctuation.definition
 
 [type="submit"]:-moz-focusring {}
-//              ^^^^^^^^^^^^^^ meta.selector.css entity.other.pseudo-class.css
+//                   ^^^^^^^^^ meta.selector.css entity.other.pseudo-class.css
 //              ^^^^^ support.type.vendor-prefix.css
 
     -ms-text-size-adjust: 100%;
-//  ^^^^^^^^^^^^^^^^^^^^ meta.property-name.css
+//      ^^^^^^^^^^^^^^^^ meta.property-name.css
 //  ^^^^ support.type.vendor-prefix.css
   }
   span:hover { }
-// ^^^ entity.name.tag.css
+// ^^^ entity.name.tag
 
 
   & {}
-//^^ meta.selector.css
+//^ meta.selector.css
   &:hover { text-decoration: underline; }
-//^^^^^^^^ meta.selector.css
+//^^^^^^^ meta.selector.css
 //^ keyword.operator.ampersand.sass
-// ^ entity.other.pseudo-class.css punctuation.definition.entity.css
+// ^ punctuation.definition
+//  ^ entity.other.pseudo-class.css
   &:not(:first-child, :last-child) { text-decoration: underline; }
-//      ^^^^^^^^^^^^ entity.other.pseudo-class.css
-//      ^ punctuation.definition.entity.css
-//                  ^ punctuation.separator.css
-//                    ^^^^^^^^^^^ entity.other.pseudo-class.css
-//                    ^ punctuation.definition.entity.css
+//      ^ punctuation.definition
+//       ^^^^^^^^^^^ entity.other.pseudo-class.css
+//                  ^ punctuation.separator.sequence
+//                    ^ punctuation.definition
+//                     ^^^^^^^^^^ entity.other.pseudo-class.css
   +,
-//^ punctuation.separator.combinator
+//^ keyword.operator.combinator
   .test:first-child + & {}
-//                  ^ punctuation.separator.combinator
+//                  ^ keyword.operator.combinator
 //                    ^ keyword.operator.ampersand
   .test:not(.class) & {}
 //                  ^ keyword.operator.ampersand
 
   strong:not(:not(.strong)) {}
-//           ^^^^ entity.other.pseudo-class.css
+//            ^^^ entity.other.pseudo-class.css
 //                ^^^^^^^ entity.other.attribute-name.class.css
   body.firefox ~ & { font-weight: normal; }
-//^^^^^^^^^^^^^^^^^ meta.selector
-//             ^ punctuation.separator.combinator.css
+//^^^^^^^^^^^^^^^^ meta.selector
+//             ^ keyword.operator.combinator.css
 //               ^ keyword.operator.ampersand.sass
   &-bemish {  }
 //^ keyword.operator.ampersand.sass
@@ -223,18 +220,18 @@ selector-ish::before[data-type="text"]:not(:first-child),
 //     ^ meta.selector.css
   [data-type="text"]:hover,
 //^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector
-//                  ^^^^^^ entity.other.pseudo-class.css
-//                  ^ punctuation.definition.entity.css
-//                        ^ punctuation.separator.css
+//                  ^ punctuation.definition
+//                   ^^^^^ entity.other.pseudo-class.css
+//                        ^ punctuation.separator.sequence
   [data-type="text"]:active {}
-//^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector
-//                  ^^^^^^^ entity.other.pseudo-class.css
-//                  ^ punctuation.definition.entity.css
+//^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector
+//                  ^ punctuation.definition
+//                   ^^^^^^ entity.other.pseudo-class.css
 }
-// <- punctuation.section.property-list.end.css
-//
+// <- punctuation.section.block.end.css
 
 
+/*
   Nested properties
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#nested_properties
 */
@@ -242,7 +239,7 @@ selector-ish::before[data-type="text"]:not(:first-child),
   font: {
 //  ^ meta.property-name.css support.type.property-name.css
     family: fantasy;
-//                ^ meta.property-value.css support.constant.font-name.css
+//                ^ meta.property-value.css support.constant
 //  ^ meta.property-name.css support.type.property-name.css
     size: 1rem*$ratio;
 //  ^ meta.property-name.css support.type.property-name.css
@@ -250,19 +247,19 @@ selector-ish::before[data-type="text"]:not(:first-child),
 //  ^ meta.property-name.css support.type.property-name.css
   }
   font: 20px/24px fantasy {
-//                ^ meta.property-value.css support.constant.font-name.css
+//                ^ meta.property-value.css support.constant
 //  ^ meta.property-name.css support.type.property-name.css
     weight : bold;
 //  ^ meta.property-name.css support.type.property-name.css
 //            ^ support.constant.property-value.css
     width: calc((100px - 20px) / 2);
 //  ^ meta.property-name.css support.type.property-name.css
-//              ^ punctuation.definition.group - string
+//              ^ punctuation.section.group - string
   }
 }
-//
 
 
+/*
 Support property values after a line break?
 */
 .grid {
@@ -285,19 +282,19 @@ color: format(
   block comment contains #{ $variable }
   block comment contains #{ function($variable) + "escap\e" + -.5em }
 */
-// <- comment.block.css punctuation.definition.comment.css
+// <- comment.block.css punctuation.definition.comment
 
 // line comment
 // line comment contains #{ $variable }
 // line comment contains #{ function($variable) + "escap\e" + -.5em }
-// <- comment.line.double-slash.sass punctuation.definition.comment.css
+// <- comment.line.double-slash.sass punctuation.definition.comment
 
 @import "imports/somefile.sass"; // this should be a comment
 //                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.double-slash
 //                               ^^ punctuation.definition.comment
-//
 
 
+/*
   Import Statements
   http://sass-lang.com/documentation/file.SASS_REFERENCE.html#import
 */
@@ -308,18 +305,18 @@ color: format(
 @import url(foo);
 @import "rounded-corners", "text-shadow";
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.import
-//                       ^ punctuation.definition.arbitrary-repetition
+//                       ^ punctuation.separator.sequence
 //                                      ^ punctuation.terminator.rule
 @import "rounded-corners", // this is a line comment
-//                       ^ punctuation.definition.arbitrary-repetition
+//                       ^ punctuation.separator.sequence
 //                         ^^ comment.line
         "functions/filter";
 //      ^ meta.at-rule.import
 #main {
   @import "example";
 }
-//
 
+/*
  CSS Modules
 
    Interoperable CSS: https://github.com/css-modules/icss#specification
@@ -329,10 +326,10 @@ color: format(
 */
 :import("path/to/dep.css") {
 // ^^^^ entity.other.pseudo-class.css-modules.css
-//     ^ punctuation.definition.group.begin.css
+//     ^ punctuation.section.group.begin.css
 //      ^^^^ string
-//                       ^ punctuation.definition.group.end.css
-//                         ^ punctuation.section.property-list.begin.css
+//                       ^ punctuation.section.group.end.css
+//                         ^ punctuation.section.block.begin.css
   localAlias: keyFromDep;
 // ^^^^^^^^^ meta.property-name.css-modules.css
 //            ^^^^^^^^^^ string
@@ -351,8 +348,9 @@ color: format(
 //             ^^^^^^^^^^ string
 //                          ^ punctuation
 }
-/* CSS Modules
-   Composing selectors: https://github.com/css-modules/css-modules#css-modules
+/*
+  CSS Modules
+  Composing selectors: https://github.com/css-modules/css-modules#css-modules
 */
 .otherClassName {
   composes: className from "./style.css";  // from filename
@@ -363,30 +361,31 @@ color: format(
 //                          ^^^^ keyword.operator
 //                                     ^ punctuation
 }
-/* CSS Modules
-   Global vs. local scope: https://github.com/css-modules/css-modules#exceptions
+/*
+  CSS Modules
+  Global vs. local scope: https://github.com/css-modules/css-modules#exceptions
 */
 .localA :global .global-b .global-c :local(.localD.localE::before) .global-d
 //      ^^^^^^^ entity.other.pseudo-class.css-modules
 //                                  ^^^^^^ entity.other.pseudo-class.css-modules
-//                                        ^ meta.function-call.css meta.group.css punctuation.definition.group.begin.css
+//                                        ^ meta.group.css punctuation.section.group.begin.css
 //                                         ^^^^^^^^^^^^^^^^^^^^^^ meta.selector
-//                                                               ^ punctuation.definition.group.end.css
+//                                                               ^ punctuation.section.group.end.css
 :global {  // global blocks
-// ^^^^ entity.other.pseudo-class.css-modules
+// ^^^^ entity.other.pseudo-class
   .global-class-name {
     color: green;
   }
 }
 :local {  // local blocks
-// ^^^ entity.other.pseudo-class.css-modules
+// ^^^ entity.other.pseudo-class
   .global-class-name {
     color: green;
   }
 }
-//
 
 
+/*
   Strings, (un)quoted, operations and interpolation
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#sass-script-strings
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#interpolation_
@@ -396,34 +395,33 @@ color: format(
 @mixin firefox-message($selector) {
 // <- meta.function.declaration.sass punctuation.definition.keyword.sass
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.declaration.sass
-// ^ keyword.control.at-rule.sass
 //     ^^^^^^^^^^^^^^^ entity.name.function.sass
-//                    ^ meta.function.parameters.sass punctuation.definition.group.begin.sass
-//                              ^ meta.function.parameters.sass punctuation.definition.group.end.sass
+//                    ^ meta.function.parameters.sass punctuation.section.group.begin.sass
+//                              ^ meta.function.parameters.sass punctuation.section.group.end.sass
 //                     ^^ meta.function.parameters.sass variable.parameter.sass
 //                     ^ punctuation.definition.variable.sass
   #{$selector + "some string"}:not(.class),
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.interpolation.sass
 //^ punctuation.definition.variable.sass
-// ^ punctuation.definition.group.begin.sass
+// ^ punctuation.section.group.begin.sass
 //  ^^^^^^^^^ variable.other.sass
 //  ^ punctuation.definition.variable.sass
 //            ^ keyword.operator
 //              ^^^^^^^^^^^^^ string.quoted.double
-//                           ^ punctuation.definition.group.end.sass
-//                            ^ punctuation.definition.entity.css
+//                           ^ punctuation.section.group.end.sass
+//                            ^ punctuation.definition
 //                             ^ entity.other.pseudo-class.css
   body.firefox #{$selector} + a:hover,
   body.firefox #{$selector} :active,
   body.firefox #{$selector}:before {
 //             ^^^^^^^^^^^^ meta.group.interpolation.sass
 //             ^ punctuation.definition.variable.sass
-//              ^ punctuation.definition.group.begin.sass
+//              ^ punctuation.section.group.begin.sass
 //               ^^^^^^^^^ variable.other.sass
 //               ^ punctuation.definition.variable.sass
-//                        ^ punctuation.definition.group.end.sass
-//                         ^ punctuation.definition.entity.css
+//                        ^ punctuation.section.group.end.sass
+//                         ^ punctuation.definition
 //                          ^ entity.other.pseudo-element.css
 
     content: "Hi, Firefox users!";
@@ -438,30 +436,24 @@ color: format(
 //                  ^^^^^ string.unquoted.css
   }
   p::before; {
-    cursor: e + -resize;
-//          ^ string.unquoted
-//           ^ - string
-//            ^ keyword.operator.sass
-//             ^ - string
-//              ^^^^^ string.unquoted
     content: "Foo " + Bar;
 //               ^ string.quoted.double
-//                    ^ string.unquoted
+//                    ^ constant.other
 //                       ^ - string
-//                  ^ keyword.operator.sass
+//                  ^ keyword.operator
     font-family: sans- + "serif";
 //               ^^^^^ string.unquoted
 //                              ^ - string
-//                     ^ keyword.operator.sass
+//                     ^ keyword.operator
     content: "I ate #{5 + 10} pies!";
 //           ^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
 //                  ^^^^^^^^^ meta.group.interpolation.sass
 //                  ^ punctuation.definition.variable.sass
-//                   ^ punctuation.definition.group.begin.sass
+//                   ^ punctuation.section.group.begin.sass
 //                    ^ constant.numeric.value.css
 //                      ^ keyword.operator.arithmetic.sass
 //                        ^ constant.numeric.value.css
-//                          ^ punctuation.definition.group.end.sass
+//                          ^ punctuation.section.group.end.sass
     transform: #{translate + $axis + '(' + $span * $aim + ')'};
 //                           ^^^^^ variable.other
 //                           ^ punctuation.definition.variable
@@ -470,23 +462,24 @@ color: format(
     content: "I ate #{$value} pies!";
 //                    ^^^^^^ variable.other.sass
 //                    ^ punctuation.definition.variable.sass
+    padding: calc(#{spacer/2 - 5px});
+//                ^^^^^^^^^^^^^^^^^ meta.group.interpolation
     @include breathe(somestring);
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.sass
-//  ^^^^^^^^ keyword.control.at-rule.sass
+//  ^^^^^^^^ keyword.control.directive.sass
 //  ^ punctuation.definition.keyword.sass
 //           ^^^^^^^ variable.function.sass
 //                  ^^^^^^^^^^^^ meta.function-call.arguments.sass
-//                  ^ punctuation.definition.group.begin.sass
-//                             ^ punctuation.definition.group.end.sass
-//                   ^^^^^^^^^^ string.unquoted.css
-//                   ^ string.unquoted
+//                  ^ punctuation.section.group.begin.sass
+//                             ^ punctuation.section.group.end.sass
+//                   ^^^^^^^^^^ constant.other
 //                             ^ - string
     @include breathe(border-bottom-color);
 //           ^^^^^^^^^^^^^^^^^^^ meta.function-call.sass
 //           ^^^^^^^ variable.function.sass
 //                  ^^^^^^^^^^^^ meta.function-call.arguments.sass
-//                  ^ punctuation.definition.group.begin.sass
-//                                      ^ punctuation.definition.group.end.sass
+//                  ^ punctuation.section.group.begin.sass
+//                                      ^ punctuation.section.group.end.sass
 //                   ^^^^^^^^^^^^^^^^^^^ support.constant.property-value
     animation: progress-fade-in-animation .15s ease-in;
 //              ^ - meta.selector
@@ -495,10 +488,10 @@ color: format(
     #{$prop}: var(--#{$color}-primary, color(primary, unthemed));
 //  ^^^^^^^^ meta.group.interpolation.sass
 //  ^ punctuation.definition.variable.sass
-//   ^ punctuation.definition.group.begin.sass
+//   ^ punctuation.section.group.begin.sass
 //    ^^^^^ variable.other.sass
 //    ^ punctuation.definition.variable.sass
-//         ^ punctuation.definition.group.end.sass
+//         ^ punctuation.section.group.end.sass
 //          ^ punctuation.separator.key-value
   }
   p.#{$name} {
@@ -513,31 +506,30 @@ color: format(
   }
   &--#{$test}__123 a {}
 //^^^^^^^^^^^^^^^^^^ meta.selector
-//                   ^ punctuation.section.property-list.begin.css
+//                   ^ punctuation.section.block.begin.css
 }
 
 @include firefox-message(".header" + test);
-//  ^^^^ keyword.control.at-rule.sass
+//  ^^^^ keyword.control.directive.sass
 //<- punctuation.definition.keyword.sass
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.sass
 //           ^^^^^^^ variable.function.sass
 //                       ^^^^^^^^^ meta.function-call.arguments.sass string.quoted.double.css
 //                                 ^ keyword.operator.arithmetic.sass
-//                                   ^ string.unquoted
+//                                   ^ constant.other
 //                                       ^ - string
 
 @include firefox-message(
-//           ^^^^^^^^^^^^^^^^^^^ meta.function-call.sass
+//   ^^^^^^^^^^^^^^^^^^^ meta.function-call.sass
 //           ^^^^^^^ variable.function.sass
-//                      ^ punctuation.definition.group.begin.sass
+//                      ^ punctuation.section.group.begin.sass
   ".header", /*a comment*/
  test // this should also be a comment
    );
-// ^ punctuation.definition.group.end.sass
-//
+// ^ punctuation.section.group.end
 
 
-
+/*
   Mixin Directives
   http://sass-lang.com/documentation/file.SASS_REFERENCE.html#mixins
   http://sass-lang.com/documentation/file.SASS_REFERENCE.html#mixin-arguments
@@ -575,8 +567,8 @@ h1 { @include sexy-border(blue, 2in); }
 //                              ^^^ constant.numeric
 //                               ^^ constant.numeric.suffix
 //                                  ^ punctuation.terminator.rule
-//
 
+/*
   Function Directives
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#function_directives
 */
@@ -602,14 +594,14 @@ h1 { @include sexy-border(blue, 2in); }
 //  ^ meta.function-call
   );
 }
-//
 
 
+/*
   Lists, Maps
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#maps
 */
 $map: (
-//    ^ punctuation.definition.group.begin.sass
+//    ^ punctuation.section.group.begin.sass
   $key-1: #000,
 //      ^ punctuation.separator
 //            ^ punctuation.separator
@@ -625,7 +617,7 @@ $list: (top, bottom, right, position, height);
 //           ^^^ support.constant.property-value
 //                 ^ punctuation.separator.sequence.css
 //                   ^^^ support.constant.property-value
-//                          ^^^ string.unquoted
+//                          ^^^ constant.other
 //                                  ^ punctuation.separator.sequence.css
 @each $animal, $color, $cursor in (puma, black, default),
                                   (sea-slug, blue, pointer),
@@ -650,19 +642,19 @@ $list: (top, bottom, right, position, height);
 .selector {
   color: nth(map.merge($map, $map2), 3);
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css meta.function-call.sass
-//       ^^^ support.function.sass
-//          ^ punctuation.definition.group.begin
+//       ^^^ support.function
+//          ^ punctuation.section.group.begin
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments
-//           ^^^^^^^^^ support.function.sass
+//           ^^^^^^^^^ support.function
 //           ^^^ entity.name.namespace
 //              ^ punctuation
-//                    ^ punctuation.definition.group.begin
+//                    ^ punctuation.section.group.begin
 //                         ^ punctuation.separator.sequence.css
-//                                ^ punctuation.definition.group.end
+//                                ^ punctuation.section.group.end
 }
 //
 
-
+/*
   Operators
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#operations
 */
@@ -680,7 +672,7 @@ p {
 }
 //
 
-
+/*
   Color Operations
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#color_operations
 */
@@ -693,19 +685,19 @@ $translucent-red: rgba(#E82C0C, 0.5);
 //                            ^ punctuation.separator.sequence.css
 $translucent-red: rgba(red, 0.5);
 //                ^^^^ support.function.color.css
-//                     ^^^ support.constant.color.w3c-standard-color-name.css
+//                     ^^^ support.constant.color
 //                        ^ punctuation.separator.sequence.css
 $translucent-red: hsla(240deg 100% 50% / 5%);
 //                ^^^^ support.function.color.css
 //                        ^^^ constant.numeric.suffix
 p {
   color: opacify($translucent-red, 0.3);
-//       ^^^^^^^ support.function.sass
-//              ^ punctuation.definition.group.begin
+//       ^^^^^^^ support.function
+//              ^ punctuation.section.group.begin
 //                               ^ punctuation.separator.sequence.css
-//                                    ^ punctuation.definition.group.end
+//                                    ^ punctuation.section.group.end
   background-color: transparentize(#E82C0C, 0.25);
-//                  ^^^^^^^ support.function.sass
+//                  ^^^^^^^ support.function
 //                                 ^^^ constant.other.color.rgb-value.css
   background-color: color($mark, custom-function(unthemed));
 //                        ^ variable.other
@@ -713,21 +705,21 @@ p {
 }
 //
 
-
+/*
   Function directives
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#function_directives
 */
 $grid-width: 40px;
 $gutter-width: 10px;
 @function grid-width($n) {
-//<- meta.function.declaration.sass keyword.control.at-rule.sass
+//<- meta.function.declaration.sass keyword.control.directive
 // ^^^^^^^^^^^^^^^^^^^^^^ meta.function.declaration.sass
-// ^^^^^^ keyword.control.at-rule.sass
+// ^^^^^^ keyword.control.directive
 //        ^^^^^^^^^^ entity.name.function.sass
-//                  ^ meta.function.parameters.sass punctuation.definition.group.begin.sass
+//                  ^ meta.function.parameters.sass punctuation.section.group.begin.sass
   @return $n * $grid-width + ($n - 1) * $gutter-width;
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.sass
-// ^^^^^^ keyword.control.at-rule.return.sass
+// ^^^^^^ keyword.control.directive
 //        ^^ variable.other.sass
 //             ^^^^^^^^^^^ variable.other.sass
 //                            ^^ variable.other.sass
@@ -736,7 +728,7 @@ $gutter-width: 10px;
 //                               ^ keyword.operator.arithmetic.sass
 //                                    ^ keyword.operator.arithmetic.sass
   @return url("/images/#{$animal}.png");
-//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.css
+//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call
 //            ^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double.css
 //        ^^^ support.function.url.css
 //                     ^ punctuation.definition.variable.sass
@@ -745,75 +737,74 @@ $gutter-width: 10px;
   @return map.get(nth(map.get($config, 'radius'), 2), $namespace);
 }
 #sidebar { width: grid-width(5); }
-//                ^^^^^^^^^^^^^ meta.property-value.css meta.function-call.css
+//                ^^^^^^^^^^^^^ meta.property-value.css meta.function-call
 //                ^^^^^^^^^^ support.function
-//
 
-
+/*
   Module system
   https://sass-lang.com/blog/the-module-system-is-launched
 */
 @use 'something else' as *;
 // <- punctuation.definition.keyword.sass
-// ^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
-// ^ keyword.control.at-rule.module.sass
+// ^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^ keyword.control.directive.module
 //    ^^^^^^^^^^^^^^ string.quoted
 //                    ^^ keyword.control
 //                       ^ constant.language.import-all
-//                        ^ punctuation.terminator.rule.sass
+//                        ^ punctuation.terminator.rule
 @use "src/corners";
 // <- punctuation.definition.keyword.sass
-// ^^^^^^^^^^^^^^^^ meta.at-rule.module
-// ^ keyword.control.at-rule.module.sass
+// ^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^ keyword.control.directive.module
 //    ^^^^^^^^^^^^ string.quoted
-//                ^ punctuation.terminator.rule.sass
+//                ^ punctuation.terminator.rule
 @use /*import bootstrap*/ "bootstrap" as b;
 // <- punctuation.definition.keyword.sass
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
 //                                    ^^ keyword.control
-// ^ keyword.control.at-rule.module.sass
+// ^ keyword.control.directive.module
 //                ^ comment
 @forward "functions";
 // <- punctuation.definition.keyword.sass
 // ^^^^^^^^^^^^^^^^ meta.at-rule.module
-// ^^^^^ keyword.control.at-rule.module.sass
+// ^^^^^ keyword.control.directive.module.sass
 //       ^^^^^^^^^^^ string.quoted
-//                  ^ punctuation.terminator.rule.sass
+//                  ^ punctuation.terminator.rule
 @forward "functions" show color-yiq;
 // <- punctuation.definition.keyword.sass
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
-// ^ keyword.control.at-rule.module.sass
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^ keyword.control.directive.module.sass
 //                   ^^^^ keyword.control
 //                        ^^^^^^^^^ meta.generic-name.sass
-//                                 ^ punctuation.terminator.rule.sass
+//                                 ^ punctuation.terminator.rule
 @forward "functions" hide assert-ascending, $some_variable;
 // <- punctuation.definition.keyword.sass
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
-// ^ keyword.control.at-rule.module.sass
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^ keyword.control.directive.module.sass
 //                   ^^^^ keyword.control
 //                        ^^^^^^^^^^^^^^^ meta.generic-name.sass
 //                                        ^ punctuation.separator.sequence.css
 //                                          ^ variable.other.sass
-//                                                        ^ punctuation.terminator.rule.sass
+//                                                        ^ punctuation.terminator.rule
 @forward "theme" as theme-*;
-// ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
 //                  ^^^^^^^ meta.generic-name.sass
 //                        ^ constant.language.import-all.sass
 @use 'opinionated' with ($black: #333);
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
 //                 ^^^^ keyword.control.with.sass
 //                       ^^^^ variable
 //                               ^^^^ constant
 //                             ^ punctuation
-//                      ^ punctuation.definition.group.begin.sass
-//                                   ^ punctuation.definition.group.end.sass
-//                                    ^ punctuation.terminator.rule.sass
+//                      ^ punctuation.section.group.begin.sass
+//                                   ^ punctuation.section.group.end.sass
+//                                    ^ punctuation.terminator.rule
 @forward "sass:meta" as meta with (
 // ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
 //                   ^^ keyword.control.as.sass
 //                      ^^^^ meta.generic-name.sass
 //                           ^^^^ keyword.control.with.sass
-//                                ^ punctuation.definition.group.begin.sass
+//                                ^ punctuation.section.group.begin.sass
   // This sets bootstrap’s $paragraph-margin-bottom variable to 1.2rem before evaluating it.
   $paragraph-margin-bottom: 1.2rem,
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module
@@ -842,9 +833,9 @@ $gutter-width: 10px;
 //                      ^ punctuation
 //                              ^ punctuation
 }
-//
 
 
+/*
   More @ features
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#if
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#debug
@@ -854,7 +845,7 @@ $gutter-width: 10px;
 //  ^ meta.at-rule constant.numeric
 //    ^ keyword.operator.arithmetic.sass
 //      ^ constant.numeric
-//             ^ punctuation.section.property-list.begin.css
+//             ^ punctuation.section.block.begin.css
 @if $scope == ie9 { border: 1px solid; }
 //              ^ - constant.numeric
 @if null       { border: 3px double; }
@@ -862,14 +853,16 @@ $gutter-width: 10px;
 @mixin adjust-location($x, $y) {
   @if unitless($x) {
 //    ^^^^^^^^^^^^ meta.function-call.sass
-//    ^^^^^^^^ support.function.sass
-//              ^ meta.group.css meta.function-call.arguments.css variable.other.sass
+//    ^^^^^^^^ support.function
+//              ^ meta.group.css
+//              ^ meta.function-call.arguments.css
+//              ^ variable.other.sass
     @debug 10em + 12em;
 //         ^^^^ constant.numeric
 //           ^ meta.at-rule constant.numeric
 //              ^ keyword.operator.arithmetic.sass
 //                ^^^^ constant.numeric
-//                    ^ punctuation.terminator.rule.sass
+//                    ^ punctuation.terminator.rule
     @warn "Assuming #{$x} to be in pixels";
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double.css
 //                  ^^^^^ meta.group.interpolation.sass
@@ -896,8 +889,8 @@ $gutter-width: 10px;
   @at-root (without: media) {
     color: red;
   }
-//
 
+/*
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#the_optional_flag
 */
   @extend .error !optional;
@@ -912,15 +905,15 @@ $gutter-width: 10px;
 @for $i from 1 through 3 {
   .item-#{$i} { width: 2em * $i; }
 }
-@each $animal in puma, sea-slug, egret, salamander {}
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.each.sass
+@each $animal in puma, 'sea-slug', $egret, 10px {}
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.each.sass
 //                                                 ^ - meta.at-rule.each.sass
-//                                                 ^ punctuation.section.property-list.begin.css
+//                                              ^ punctuation.section.block.begin.css
 //    ^^^^^^^ variable.other.sass
 //            ^^ keyword.operator
-//               ^^^^ string.unquoted
-//                     ^^^^^^ string.unquoted
+//               ^^^^ constant.other
 //                   ^ punctuation.separator
+//                     ^^^^^^ string
 @each $header, $size in (h1: 2em, h2: 1.5em, h3: 1.2em) {
 //    ^^^^^^^ variable.other.sass
 //           ^ punctuation.separator
@@ -960,7 +953,7 @@ $gutter-width: 10px;
 }
 
 .test-punctuation {
-//                ^ punctuation.section.property-list.begin.css
+//                ^ punctuation.section.block.begin.css
     top: 1px;
 //     ^      punctuation.separator.key-value.css
 //          ^ punctuation.terminator.rule.css
@@ -975,142 +968,142 @@ $gutter-width: 10px;
 //                             ^ punctuation.separator.decimal.css
 
     top: url("image");
-//          ^         punctuation.definition.group.begin.css
-//                  ^ punctuation.definition.group.end.css
+//          ^         punctuation.section.group.begin.css
+//                  ^ punctuation.section.group.end.css
 }
 // < punctuation.section.property-list.css
 
     .classname {}
-//  ^^^^^^^^^^^ meta.selector.css
-//  ^          punctuation.definition.entity.css
+//  ^^^^^^^^^^ meta.selector.css
+//  ^          punctuation.definition
 //   ^^^^^^^^^ entity.other.attribute-name.class.css
 
     #id {}
-//  ^   punctuation.definition.entity.css
+//  ^   punctuation.definition
 //   ^^ entity.other.attribute-name.id.css
 
     html {}
-//  ^^^^ entity.name.tag.css
+//  ^^^^ entity.name.tag
 
     @charset "UTF-8";
-//  ^^^^^^^^^^^^^^^^ meta.at-rule.css
+//  ^^^^^^^^^^^^^^^^ meta.at-rule
 //  ^        punctuation.definition.keyword.css
-//   ^^^^^^^ keyword.control.at-rule.css
+//   ^^^^^^^ keyword.control.directive
 
     @import "x" print;
 //  ^^^^^^^^^^^^^^^^^ meta.at-rule.import.css
 //  ^                 punctuation.definition.keyword.css
-//   ^^^^^^           keyword.control.at-rule.import.css
+//   ^^^^^^           keyword.control.directive
 //              ^^^^^ support.constant.media.css
 
     @namespace svg "http://www.w3.org/1999/xhtml";
 //  ^^^^^^^^^^^^^^^^^ meta.at-rule.namespace.css
 //  ^              punctuation.definition.keyword.css
-//   ^^^^^^^^^     keyword.control.at-rule.namespace.css
+//   ^^^^^^^^^     keyword.control.directive
 //             ^^^ entity.other.namespace-prefix.css
 
     @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"); /* only needed once */
-//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.namespace.css
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.namespace.css
 //             ^^^ support.function.url.css
-//             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.css
-//                ^ meta.group.css punctuation.definition.group.begin.css
+//             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call
+//                ^ meta.group.css punctuation.section.group.begin.css
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.css string.quoted.double.css
-//                                                                                ^ meta.group.css punctuation.definition.group.end.css
+//                                                                                ^ meta.group.css punctuation.section.group.end.css
 
     @page :left {}
 //  ^^^^^^^^^^^^ meta.at-rule.page.css
 //  ^     punctuation.definition.keyword.css
-//   ^^^^ keyword.control.at-rule.page.css
+//   ^^^^ keyword.control.directive
 
     @media only screen //test comment {}
 //  ^^^^^^^^^^^^^^^^^^^ meta.at-rule.media.css
 //  ^                  punctuation.definition.keyword.css
-//   ^^^^^             keyword.control.at-rule.media.css
-//         ^^^^        keyword.operator.logic.media.css
+//   ^^^^^             keyword.control.directive
+//         ^^^^        keyword.operator.logic
 //              ^^^^^^ support.constant.media.css
 //                     ^ comment.line.double-slash
 {}
     @media (min-width: 700px) {}
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.media.css
 //  ^ punctuation.definition.keyword.css
-//   ^^^^^ keyword.control.at-rule.media.css
-//         ^ punctuation.definition.group.begin.css
-//          ^^^^^^^^^ support.type.property-name.media.css
+//   ^^^^^ keyword.control.directive
+//         ^ punctuation.section.group.begin.css
+//          ^^^^^^^^^ support.type.property-name
 //                     ^^^^^ constant.numeric
-//                          ^ punctuation.definition.group.end.css
+//                          ^ punctuation.section.group.end.css
 
     @media (min-width: 700px) and (max-width: 2000px) {}
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.media.css
 //  ^ punctuation.definition.keyword.css
-//   ^^^^^ keyword.control.at-rule.media.css
-//         ^ punctuation.definition.group.begin.css
-//          ^^^^^^^^^ support.type.property-name.media.css
+//   ^^^^^ keyword.control.directive
+//         ^ punctuation.section.group.begin.css
+//          ^^^^^^^^^ support.type.property-name
 //                     ^^^^^ constant.numeric
-//                          ^ punctuation.definition.group.end.css
+//                          ^ punctuation.section.group.end.css
 //                            ^^^ keyword.operator.logic
-//                                ^ punctuation.definition.group.begin.css
-//                                 ^^^^^^^^^ support.type.property-name.media.css
+//                                ^ punctuation.section.group.begin.css
+//                                 ^^^^^^^^^ support.type.property-name
 //                                            ^^^^^^ constant.numeric
-//                                                  ^ punctuation.definition.group.end.css
+//                                                  ^ punctuation.section.group.end.css
 
    @media only screen and (-webkit-min-device-pixel-ratio: /* comment */ 1.3),
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.media.css
 // ^ punctuation.definition.keyword.css
-//  ^^^^^ keyword.control.at-rule.media.css
-//        ^^^^ keyword.operator.logic.media.css
+//  ^^^^^ keyword.control.directive
+//        ^^^^ keyword.operator.logic
 //             ^^^^^^ support.constant.media.css
-//                    ^^^ keyword.operator.logic.media.css
-//                        ^ punctuation.definition.group.begin.css
-//                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ support.type.property-name.media.css
+//                    ^^^ keyword.operator.logic
+//                        ^ punctuation.section.group.begin.css
+//                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ support.type
 //                                                       ^ punctuation.separator.key-value.css
 //                                                         ^^^^^^^^^^^^^ comment.block.css
 //                                                                       ^^^ constant.numeric
-//                                                                          ^ punctuation.definition.group.end.css
-//                                                                           ^ punctuation.definition.arbitrary-repetition
+//                                                                          ^ punctuation.section.group.end.css
+//                                                                           ^ punctuation.separator.sequence
     only screen and (-o-min-device-pixel-ratio: 13/10),
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.media.css
-//  ^^^^ keyword.operator.logic.media.css
+//  ^^^^ keyword.operator.logic
 //       ^^^^^^ support.constant.media.css
-//              ^^^ keyword.operator.logic.media.css
-//                  ^ punctuation.definition.group.begin.css
-//                   ^^^^^^^^^^^^^^^^^^^^^^^^^ support.type.property-name.media.css
+//              ^^^ keyword.operator.logic
+//                  ^ punctuation.section.group.begin.css
+//                   ^^^^^^^^^^^^^^^^^^^^^^^^^ support.type
 //                                            ^ punctuation.separator.key-value.css
 //                                              ^^ constant.numeric
 //                                                ^ keyword.operator
 //                                                 ^^ constant.numeric
-//                                                   ^ punctuation.definition.group.end.css
-//                                                    ^ punctuation.definition.arbitrary-repetition
+//                                                   ^ punctuation.section.group.end.css
+//                                                    ^ punctuation.separator.sequence
     only screen and (min-resolution: 120dpi)
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.media.css
-//  ^^^^ keyword.operator.logic.media.css
+//  ^^^^ keyword.operator.logic
 //       ^^^^^^ support.constant.media.css
-//              ^^^ keyword.operator.logic.media.css
-//                  ^ punctuation.definition.group.begin.css
-//                   ^^^^^^^^^^^^^^ support.type.property-name.media.css
+//              ^^^ keyword.operator.logic
+//                  ^ punctuation.section.group.begin.css
+//                   ^^^^^^^^^^^^^^ support.type.property-name
 //                                 ^ punctuation.separator.key-value.css
 //                                   ^^^^^^ constant.numeric
-//                                         ^ punctuation.definition.group.end.css
+//                                         ^ punctuation.section.group.end.css
 {}
 
     @custom-media --a-b (width: 1px);
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.custom-media.css
 //  ^                          punctuation.definition.keyword.css
-//   ^^^^^^^^^^^^              keyword.control.at-rule.custom-media.css
-//                       ^^^^^ support.type.property-name.media.css
+//   ^^^^^^^^^^^^              keyword.control.directive
+//                       ^^^^^ support.type.property-name
 
     @keyframes beat, bounce {}
 //  ^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.keyframe.css
 //  ^                       punctuation.definition.keyword.css
-//   ^^^^^^^^^              keyword.control.at-rule.keyframe.css
+//   ^^^^^^^^^              keyword.control.directive
 //             ^^^^         entity.other.animation-name.css
-//                 ^        punctuation.definition.arbitrary-repetition.css
+//                 ^        punctuation.separator.sequence
 //                   ^^^^^^ entity.other.animation-name.css
 
 @keyframes test-keyframes-keywords {
     from, to {}
-//  ^^^^ keyword.keyframe-selector.css
+//  ^^^^ keyword
 //      ^ punctuation.separator.sequence.css
-//        ^^ keyword.keyframe-selector.css
+//        ^^ keyword
 
     0%, 100% {}
 //  ^^ constant.numeric
@@ -1132,13 +1125,13 @@ $gutter-width: 10px;
 //  ^^ constant.numeric
 //   ^ constant.numeric.suffix
 //    ^ punctuation.separator.sequence.css
-//      ^^ keyword.keyframe-selector.css
+//      ^^ keyword
 }
 
     @document url(http://) { }
 //  ^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.document.css
 //  ^ punctuation.definition.keyword.css
-//  ^^^^^^^^^ keyword.control.at-rule.document.css
+//  ^^^^^^^^^ keyword.control.directive
 //                         ^ punctuation
 //                           ^ punctuation
 
@@ -1164,9 +1157,9 @@ $gutter-width: 10px;
 }
 
     @font-face {
-//  ^^^^^^^^^^^ meta.at-rule.css
+//  ^^^^^^^^^^^ meta.at-rule
 //  ^          punctuation.definition.keyword.css
-//   ^^^^^^^^^ keyword.control.at-rule.css
+//   ^^^^^^^^^ keyword.control.directive
 
     src: local(Font);
 //
@@ -1174,34 +1167,34 @@ $gutter-width: 10px;
 }
 
     @font-face
-//  ^^^^^^^^^^^ meta.at-rule.css
+//  ^^^^^^^^^^^ meta.at-rule
 //  ^          punctuation.definition.keyword.css
-//   ^^^^^^^^^ keyword.control.at-rule.css
+//   ^^^^^^^^^ keyword.control.directive
 {
     font-family: monospace,
 //  ^^^^^^^^^^^ support.type.property-name.css
-//               ^^^^^^^^^ support.constant.font-name.css
+//               ^^^^^^^^^ support.constant.property-value
         /* */
 //      ^^^^^ comment.block.css
 }
 
-    @supports not ( and ( top: 2px ) ) { }
+    @supports not ( and ( top: 2px ) ) {}
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.supports.css
 //  ^ punctuation.definition.keyword.css
-//   ^^^^^^^^ keyword.control.at-rule.supports.css
-//            ^^^ keyword.operator.logic.css
-//                ^ meta.group.css punctuation.definition.group.begin.css
-//                  ^^^ keyword.operator.logic.css
-//                      ^ meta.group.css punctuation.definition.group.begin.css
+//   ^^^^^^^^ keyword.control.directive
+//            ^^^ keyword.operator.logical.css
+//                ^ meta.group.css punctuation.section.group.begin.css
+//                  ^^^ keyword.operator.logical.css
+//                      ^ meta.group.css punctuation.section.group.begin.css
 //                        ^^^ support.type.property-name.css
 //                           ^ punctuation.separator.key-value.css
 //                              ^^ constant.numeric
-//                                 ^ meta.group.css punctuation.definition.group.end.css
+//                                 ^ meta.group.css punctuation.section.group.end.css
 //                                     ^ punctuation
-//                                       ^ punctuation
+//                                      ^ punctuation
 
 @supports (--foo: green) {
-//         ^^^^^ support.type.custom-property.css
+//         ^^^^^ entity.other.custom-property.css
     .class {
 //  ^^^^^^ entity.other.attribute-name.class.css
         display: none;
@@ -1211,17 +1204,17 @@ $gutter-width: 10px;
 
     @counter-style {}
 //  ^          punctuation.definition.keyword.css
-//  ^^^^^^^^^^^^^^ keyword.control.at-rule.counter-style.css
+//  ^^^^^^^^^^^^^^ keyword.control.directive
 
 @counter-style none {}
-//             ^^^^ invalid.illegal.counter-style-name.css
+//             ^^^^ invalid.illegal
 
 @counter-style decimal {}
-//             ^^^^^^^ invalid.illegal.counter-style-name.css
+//             ^^^^^^^ invalid.illegal
 
     @counter-style name {
 //  ^          punctuation.definition.keyword.css
-//  ^^^^^^^^^^^^^^ keyword.control.at-rule.counter-style.css
+//  ^^^^^^^^^^^^^^ keyword.control.directive
 //                 ^^^^ entity.other.counter-style-name.css
     symbols: "‣";
 //  ^^^^^^^ support.type.property-name.css
@@ -1231,7 +1224,7 @@ $gutter-width: 10px;
 }
 
     @counter-style blacknwhite
-//  ^^^^^^^^^^^^^^ meta.at-rule.counter-style.css keyword.control.at-rule.counter-style.css
+//  ^^^^^^^^^^^^^^ meta.at-rule.counter-style.css keyword.control.directive
 //                 ^^^^^^^^^^^ entity.other.counter-style-name.css
 {
   system: cyclic;
@@ -1245,9 +1238,7 @@ $gutter-width: 10px;
 }
 
 .test-var { --test-var: arial; }
-//          ^^^^^^^^^^ support.type.custom-property.css
-//          ^^         punctuation.definition.custom-property
-//            ^^^^^^^^ support.type.custom-property.name.css
+//          ^^^^^^^^^^ entity.other.custom-property.css
 
 .test-types {
     top: 20;
@@ -1312,7 +1303,6 @@ $gutter-width: 10px;
 
           top: alpha(-1.5%);
 //             ^^^^^ support.function.color.css
-//                   ^ invalid.illegal.operator.css
 //                    ^^^ meta.number constant.numeric.value.css
 //                       ^ meta.number constant.numeric.suffix.css
 
@@ -1363,49 +1353,49 @@ $gutter-width: 10px;
 
 // Test Functional Pseudo Class Meta Scopes
 .test:nth-child(even) div .class {}
-//   ^^^^^^^^^^^^^^^^ meta.function-call.css
+//    ^^^^^^^^^^^^^^^ meta.function-call
 //             ^^^^^^ meta.group.css
-//             ^      punctuation.definition.group.begin.css
-//                  ^ punctuation.definition.group.end.css
-//                    ^^^ entity.name.tag.css
+//             ^      punctuation.section.group.begin.css
+//                  ^ punctuation.section.group.end.css
+//                    ^^^ entity.name.tag
 //                        ^^^ entity.other.attribute-name.class.css
 
 .test-pseudo-classes:nth-child(2):hover {}
 //                   ^^^^^^^^^          entity.other.pseudo-class.css
 //                             ^        constant.numeric
-//                               ^      punctuation.definition.entity.css
+//                               ^      punctuation.definition
 //                                ^^^^^ entity.other.pseudo-class.css
 
 .test-pseudo-class-numerics:last-of-type div .class {}
-//                         ^^^^^^^^^^^^^ entity.other.pseudo-class.css
-//                                       ^^^ entity.name.tag.css
+//                          ^^^^^^^^^^^^ entity.other.pseudo-class.css
+//                                       ^^^ entity.name.tag
 //                                           ^^^ entity.other.attribute-name.class.css
 
 .test-pseudo-class-keywords:nth-of-type(odd) {}
-//                         ^^^^^^^^^^^^ entity.other.pseudo-class.css
-//                                      ^^^ keyword.other.pseudo-class.css
+//                          ^^^^^^^^^^^ entity.other.pseudo-class.css
+//                                      ^^^ support.constant
 
 .test-pseudo-class-strings:dir(ltr) {}
-//                        ^^^^ entity.other.pseudo-class.css
-//                             ^^^ string.unquoted.css
+//                         ^^^ entity.other.pseudo-class.css
+//                             ^^^ support.constant
 
 .test-pseudo-class-tag:not(*) {}
-//                    ^^^^ entity.other.pseudo-class.css
-//                         ^ entity.name.tag.wildcard.css
+//                     ^^^ entity.other.pseudo-class.css
+//                         ^ variable.language.wildcard
 
 .test-pseudo-elements::before div .class {}
-//                   ^^ punctuation.definition.entity.css
-//                   ^^^^^^^^ entity.other.pseudo-element.css
-//                            ^^^ entity.name.tag.css
+//                   ^^ punctuation.definition
+//                     ^^^^^^ entity.other.pseudo-element.css
+//                            ^^^ entity.name.tag
 //                                ^^^ entity.other.attribute-name.class.css
 
 .test-pseudo-elements:after {}
-//                   ^ punctuation.definition.entity.css
-//                   ^^^^^^ entity.other.pseudo-element.css
+//                   ^ punctuation.definition
+//                    ^^^^^ entity.other.pseudo-element.css
 
 .test-pseudo-elements::-webkit-slider-runnable-track
-//                   ^^ punctuation.definition.entity.css
-//                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ entity.other.pseudo-element.css
+//                   ^^ punctuation.definition
+//                             ^^^^^^^^^^^^^^^^^^^^^ entity.other.pseudo-element.css
 
 
 .test-unicode { top: "\2764 \273e"; }
@@ -1414,13 +1404,10 @@ $gutter-width: 10px;
 
 .test-unicode-range {
     unicode-range: U+0025-00FF, U+4??;
-//                 ^^^^^^^^^^^        support.unicode-range.css
-//                 ^^                 support.constant.unicode-range.prefix.css
-//                   ^^^^^^^^^        constant.codepoint-range.css
-//                       ^            punctuation.section.range.css
-//                              ^^^^^ support.unicode-range.css
-//                              ^^    support.constant.unicode-range.prefix.css
-//                                ^^^ constant.codepoint-range.css
+//                 ^^^^^^^^^^^        meta.number.unicode-range
+//                 ^^                 constant
+//                              ^^^^^ meta.number.unicode-range
+//                              ^^    constant.numeric.prefix
 }
 
 .test-escape-character { top: "\nstring\n"; }
@@ -1429,55 +1416,55 @@ $gutter-width: 10px;
 
 .test-attribute-selectors[disabled][type=button] {}
 //                       ^^^^^^^^^^ meta.attribute-selector.css
-//                       ^ punctuation.definition.entity.css
+//                       ^ punctuation.section
 //                        ^^^^^^^^ entity.other.attribute-name.css
-//                                ^ punctuation.definition.entity.css
+//                                ^ punctuation.section
 //                                  ^^^^ entity.other.attribute-name.css
 //                                       ^^^^^^ string.unquoted.css
 
 .test-attribute-selectors-namespaces[n|a=""][*|a=""][|att] {}
 //                                   ^ entity.other.namespace-prefix.css
 //                                    ^ punctuation.separator.namespace.css
-//                                           ^ entity.name.namespace.wildcard.css
+//                                           ^ variable.language.wildcard
 //                                            ^ punctuation.separator.namespace.css
 //                                                   ^ punctuation.separator.namespace.css
 
 .test-attribute-selectors-operators[a=""][a~=""][a|=""][a^=""][a$=""][a*=""] {}
-//                                   ^ keyword.operator.attribute-selector.css
-//                                         ^^ keyword.operator.attribute-selector.css
-//                                                ^^ keyword.operator.attribute-selector.css
-//                                                       ^^ keyword.operator.attribute-selector.css
-//                                                              ^^ keyword.operator.attribute-selector.css
-//                                                                     ^^ keyword.operator.attribute-selector.css
+//                                   ^ keyword.operator
+//                                         ^^ keyword.operator
+//                                                ^^ keyword.operator
+//                                                       ^^ keyword.operator
+//                                                              ^^ keyword.operator
+//                                                                     ^^ keyword.operator
 
 .test-attribute-selectors-whitespace[a = ""] {}
 //                                   ^   entity.other.attribute-name.css
-//                                     ^ keyword.operator.attribute-selector.css
+//                                     ^ keyword.operator
 
 .test-attribute-selectors-flags[a="" i] {}
-//                                   ^ keyword.other.css
+//                                   ^ keyword.other
 
    *.test-universal-selector {}
-// ^ entity.name.tag.wildcard.css
+// ^ variable.language.wildcard
 
 .test-combinators >>> a >> a > a + b ~ a {}
-//                ^^^                  punctuation.separator.combinator.css
-//                      ^^             punctuation.separator.combinator.css
-//                           ^         punctuation.separator.combinator.css
-//                               ^     punctuation.separator.combinator.css
-//                                   ^ punctuation.separator.combinator.css
+//                ^^^                  keyword.operator.combinator.css
+//                      ^^             keyword.operator.combinator.css
+//                           ^         keyword.operator.combinator.css
+//                               ^     keyword.operator.combinator.css
+//                                   ^ keyword.operator.combinator.css
 
 .test-generic-font-families {
     font: serif;
-//        ^^^^^      support.constant.font-name.css
+//        ^^^^^      support.constant
     font: sans-serif;
-//        ^^^^^^^^^^ support.constant.font-name.css
+//        ^^^^^^^^^^ support.constant
     font: cursive;
-//        ^^^^^^^    support.constant.font-name.css
+//        ^^^^^^^    support.constant
     font: fantasy;
-//        ^^^^^^^    support.constant.font-name.css
+//        ^^^^^^^    support.constant
     font: monospace;
-//        ^^^^^^^^^  support.constant.font-name.css
+//        ^^^^^^^^^  support.constant
 }
 
 .test-unquoted-font-name {
@@ -1507,16 +1494,16 @@ $gutter-width: 10px;
 
 .test-color-values {
     color: aqua;
-//         ^^^^ support.constant.color.w3c-standard-color-name.css
+//         ^^^^ support.constant
 
     color: aliceblue;
-//         ^^^^^^^^^ support.constant.color.w3c-extended-color-keywords.css
+//         ^^^^^^^^^ support.constant
 
     color: currentColor;
-//         ^^^^^^^^^^^^ support.constant.color.w3c-special-color-keyword.css
+//         ^^^^^^^^^^^^ support.constant
 
     color: transparent;
-//         ^^^^^^^^^^^ support.constant.color.w3c-special-color-keyword.css
+//         ^^^^^^^^^^^ support.constant
 
     color: #b4da55;
 //         ^ punctuation.definition.constant.css
@@ -1538,7 +1525,7 @@ $gutter-width: 10px;
 
 .test-function-meta {
     top: filter(param1, 20px);
-//       ^^^^^^^^^^^^^^^^^^^^ meta.function-call.css
+//       ^^^^^^^^^^^^^^^^^^^^ meta.function-call
 //             ^^^^^^^^^^^^^^ meta.group.css
 }
 
@@ -1576,14 +1563,14 @@ $gutter-width: 10px;
 //                   ^^^ constant.numeric
 //                      ^ punctuation.separator.sequence.css
 //                        ^^ constant.numeric
-//                            ^^^ support.function.color.css
+//                            ^^^ support.function
 
   top: color(w(var()) s(var()));
-//     ^^^^^       support.function.color.css
-//           ^     support.function.color.css
-//             ^^^ support.function.var.css
-//                    ^ support.function.color.css
-//                      ^^^ support.function.var.css
+//     ^^^^^       support.function
+//           ^     support.function
+//             ^^^ support.function
+//                    ^ support.function
+//                      ^^^ support.function
   top: rect(var());
 //     ^^^^ support.function.shape.css
 //          ^^^ support.function.var.css
@@ -1610,7 +1597,7 @@ $gutter-width: 10px;
 
     top: blenda(red 50% hsl);
 //       ^^^^^^ support.function.color.css
-//              ^^^ support.constant.color.w3c-standard-color-name.css
+//              ^^^ support.constant.color
 //                  ^^^ constant.numeric
 //                      ^^^ keyword.other.color-space.css
 
@@ -1618,19 +1605,19 @@ $gutter-width: 10px;
 //  ^^^^^^^^^^^^^^^^ support.type.property-name.css
 //                  ^ punctuation.separator.key-value.css
 //                    ^^^^^ support.function.color.css
-//                         ^ punctuation.definition.group.begin.css
+//                         ^ punctuation.section.group.begin.css
 //                          ^^^ support.function.var.css
-//                             ^ punctuation.definition.group.begin.css
-//                              ^^^^^^^^^^^^ support.type.custom-property
-//                                          ^ punctuation.definition.group.end.css
-//                                            ^^^^^ support.function.color.css
-//                                                 ^ punctuation.definition.group.begin.css
+//                             ^ punctuation.section.group.begin.css
+//                              ^^^^^^^^^^^^ variable.other.custom-property
+//                                          ^ punctuation.section.group.end.css
+//                                            ^^^^^ support.function
+//                                                 ^ punctuation.section.group.begin.css
 //                                                  ^^^ support.function.var.css
-//                                                     ^ punctuation.definition.group.begin.css
-//                                                      ^^^^^^^^^^^^ support.type.custom-property.css
-//                                                                  ^ punctuation.definition.group.end.css
+//                                                     ^ punctuation.section.group.begin.css
+//                                                      ^^^^^^^^^^^^ variable.other.custom-property
+//                                                                  ^ punctuation.section.group.end.css
 //                                                                    ^^^ constant.numeric
-//                                                                       ^^ punctuation.definition.group.end.css
+//                                                                       ^^ punctuation.section.group.end.css
 //                                                                         ^ punctuation.terminator.rule.css
 }
 
@@ -1641,7 +1628,7 @@ $gutter-width: 10px;
 
     top: rotate(1)
 //       ^^^^^^ support.function.transform.css
-//              ^ - constant.numeric
+//               ^ - constant.numeric
 
     top: rotate3d(-1, 2deg);
 //       ^^^^^^^^ support.function.transform.css
@@ -1698,7 +1685,7 @@ $gutter-width: 10px;
     transform: translate(var(--center), 0) scale(var(--ripple-scale), 1);
 //             ^^^^^^^^^ support.function.transform
 //                       ^^^ support.function.var
-//                           ^^^^^^^^ support.type.custom-property
+//                           ^^^^^^^^ variable.other.custom-property
 //                                      ^ constant.numeric
 //                                               ^^^ support.function.var
 }
@@ -1711,25 +1698,25 @@ $gutter-width: 10px;
     top: steps(020, start);
 //       ^^^^^ support.function.timing.css
 //             ^^^ constant.numeric
-//                  ^^^^^ support.keyword.timing-direction.css
+//                  ^^^^^ keyword.other.timing.css
 
     top: steps(1, end);
-//                ^^^ support.keyword.timing-direction.css
+//                ^^^ keyword.other.timing
 
     top: steps(1, middle);
-//                ^^^^^^ support.keyword.timing-direction.css
+//                ^^^^^^ keyword.other.timing
 }
 
 .test-shape-functions {
     top: circle(at top 5.5e20em);
 //       ^^^^^^ support.function.shape.css
-//              ^^ keyword.other.css
+//              ^^ keyword.other
 //                 ^^^ support.constant.property-value.css
 //                     ^^^^^^^^ constant.numeric
 
     top: ellipse(at 0%);
 //       ^^^^^^^ support.function.shape.css
-//               ^^ keyword.other.css
+//               ^^ keyword.other
 //                  ^^ constant.numeric
 
     top: ellipse(closest-side);
@@ -1738,7 +1725,7 @@ $gutter-width: 10px;
     top: inset(1.1px round 50%);
 //       ^^^^^ support.function.shape.css
 //             ^^^^^ constant.numeric
-//                   ^^^^^ keyword.other.css
+//                   ^^^^^ keyword.other
 
     top: rect(auto);
 //       ^^^^ support.function.shape.css
@@ -1763,30 +1750,30 @@ $gutter-width: 10px;
 //                   ^ keyword.operator
 //                     ^^^^ support.function.calc.css
     top: calc(100% - (1 * 10px) / 1 - (1 * 10px) / 1 - (1 * 10px) / 1);
-//       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.css
+//       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call
 //       ^^^^ support.function.calc.css
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.css
-//           ^ punctuation.definition.group.begin.css
+//           ^ punctuation.section.group.begin.css
 //            ^^^ constant.numeric
 //                 ^ keyword.operator
-//                   ^ punctuation.definition.group.begin.css
+//                   ^ punctuation.section.group.begin.css
 //                   ^^^^^^^^^^ meta.group.css meta.group.css
-//                            ^ punctuation.definition.group.end.css
+//                            ^ punctuation.section.group.end.css
 //                              ^ keyword.operator
-//                                    ^ punctuation.definition.group.begin.css
+//                                    ^ punctuation.section.group.begin.css
 //                                         ^^ constant.numeric
 //                                           ^^ constant.numeric.suffix
-//                                             ^ punctuation.definition.group.end.css
+//                                             ^ punctuation.section.group.end.css
 //                                               ^ keyword.operator
 //                                                   ^ keyword.operator
-//                                                     ^ punctuation.definition.group.begin.css
+//                                                     ^ punctuation.section.group.begin.css
 //                                                      ^ constant.numeric
 //                                                        ^ keyword.operator
 //                                                          ^^ constant.numeric
-//                                                              ^ punctuation.definition.group.end.css
+//                                                              ^ punctuation.section.group.end.css
 //                                                                ^ keyword.operator
 //                                                                  ^ constant.numeric
-//                                                                   ^ punctuation.definition.group.end.css
+//                                                                   ^ punctuation.section.group.end.css
 //                                                                    ^ punctuation.terminator.rule.css - meta.group
 }
 
@@ -1794,14 +1781,14 @@ $gutter-width: 10px;
     top: toggle(5px red preserve-3d);
 //       ^^^^^^ support.function.toggle.css
 //              ^^^ constant.numeric
-//                  ^^^ support.constant.color.w3c-standard-color-name.css
+//                  ^^^ support.constant.color
 //                      ^^^^^^^^^^^ support.constant.property-value.css
 }
 
 .test-attr-function {
     top: attr(*|c);
 //       ^^^^ support.function.attr.css
-//            ^ entity.name.namespace.wildcard.css
+//            ^ variable.language.wildcard
 //             ^ punctuation.separator.namespace.css
 //              ^ entity.other.attribute-name.css
 
@@ -1811,7 +1798,7 @@ $gutter-width: 10px;
 
     top: attr(size px, auto);
 //            ^^^^ entity.other.attribute-name.css
-//                 ^^ constant.numeric.suffix
+//                 ^^ keyword.other.unit
 //                   ^ punctuation.separator.sequence.css
 //                     ^^^^ support.constant.property-value.css
 
@@ -1833,19 +1820,13 @@ $gutter-width: 10px;
 //       ^^^^^ support.function.image.css
 //             ^^^ string.quoted.double.css
 
-    top: image(a);
-//             ^ string.unquoted.css
-
     top: image("a", rgb(0, 0, 0));
 //                ^ punctuation.separator.sequence.css
 //                      ^ constant.numeric
 
     top: image-set("a" 1x, a 4dpi);
 //                 ^^^ string.quoted.double.css
-//                     ^^ constant.numeric
-//                      ^ constant.numeric.suffix
 //                       ^ punctuation.separator.sequence.css
-//                         ^ string.unquoted.css
 //                           ^^^^ constant.numeric
 
     top: cross-fade(50% "a", b);
@@ -1853,7 +1834,6 @@ $gutter-width: 10px;
 //                  ^^^ constant.numeric
 //                      ^^^ string.quoted.double.css
 //                         ^ punctuation.separator.sequence.css
-//                           ^ string.unquoted.css
 }
 
 .test-gradient-functions {
@@ -1863,10 +1843,10 @@ $gutter-width: 10px;
     top: linear-gradient(45deg, white);
 //                       ^^^^^ constant.numeric
 //                            ^ punctuation.separator.sequence.css
-//                              ^^^^^ support.constant.color.w3c-standard-color-name.css
+//                              ^^^^^ support.constant.color
 
     top: linear-gradient(to top left);
-//                       ^^ keyword.other.css
+//                       ^^ keyword.other
 //                          ^^^ support.constant.property-value.css
 //                              ^^^^ support.constant.property-value.css
 
@@ -1881,13 +1861,13 @@ $gutter-width: 10px;
 //       ^^^^^^^^^^^^^^^ support.function.gradient.css
 
     top: radial-gradient(circle at top left);
-//                       ^^^^^^ keyword.other.css
-//                              ^^ keyword.other.css
+//                       ^^^^^^ keyword.other
+//                              ^^ keyword.other
 //                                 ^^^ support.constant.property-value.css
 //                                     ^^^^ support.constant.property-value.css
 
     top: radial-gradient(red, blue);
-//                       ^^^ support.constant.color.w3c-standard-color-name.css
+//                       ^^^ support.constant.color
 //                          ^ punctuation.separator.sequence.css
 
     top: repeating-radial-gradient();
@@ -1904,23 +1884,23 @@ $gutter-width: 10px;
 .test-counter-functions {
     top: counter(name, decimal-leading-zero);
 //       ^^^^^^^ support.function.counter.css
-//               ^^^^ entity.other.counter-name.css string.unquoted.css
+//               ^^^^ entity.other.counter-name.css
 //                   ^ punctuation.separator.sequence.css
-//                     ^^^^^^^^^^^^^^^^^^^^ support.constant.property-value.counter-style.css
+//                     ^^^^^^^^^^^^^^^^^^^^ support.constant.counter-style-name
 
     top: counters(name, "str", none);
 //       ^^^^^^^^ support.function.counter.css
-//                ^^^^ entity.other.counter-name.css string.unquoted.css
+//                ^^^^ entity.other.counter-name
 //                    ^ punctuation.separator.sequence.css
 //                      ^^^^^ string.quoted.double.css
 //                           ^ punctuation.separator.sequence.css
-//                             ^^^^ support.constant.property-value.counter-style.css
+//                             ^^^^ support.constant
 
     top: symbols(fixed "\2020" url());
 //       ^^^^^^^ support.function.counter.css
-//               ^^^^^ support.constant.symbol-type.css
+//               ^^^^^ support.constant
 //                     ^^^^^^^ string.quoted.double.css
-//                             ^^^ support.function.url.css
+//                             ^^^ support.function
 }
 
 .test-grid-functions {
@@ -1930,10 +1910,10 @@ $gutter-width: 10px;
 //                     ^^^^^^^^^ support.constant.property-value.css
 
     top: repeat(auto-fit, 2fr minmax(auto) 5%);
-//              ^^^^^^^^ support.keyword.repetitions.css
+//              ^^^^^^^^ keyword.other.grid
 //                      ^ punctuation.separator.sequence.css
 //                        ^^^ constant.numeric
-//                            ^^^^^^ support.function.grid.css
+//                            ^^^^^^ support.function
 //                                   ^^^^ support.constant.property-value.css
 //                                         ^^ constant.numeric
 
@@ -1976,24 +1956,24 @@ $gutter-width: 10px;
 
     grid-template: repeat(2, var(--size)) / repeat(2, 50%);
 //                           ^^^ support.function.var.css
-//                               ^^^^^^ support.type.custom-property.css
-//                                     ^^ punctuation.definition.group.end.css
+//                               ^^^^^^ variable.other.custom-property
+//                                     ^^ punctuation.section.group.end.css
 //                                          ^^^^^^ support.function.grid.css
     grid-template-columns:
       [a-line-name] auto
-//    ^ punctuation.section.begin.css
+//    ^ punctuation.section
 //     ^^^^^^^^^^^ string.unquoted.line-name.css
-//                ^ punctuation.section.end.css
+//                ^ punctuation.section
       [b]     minmax(min-content, 1fr)
       [b c d] repeat(2, [e] 40px)
-//    ^ punctuation.section.begin.css
+//    ^ punctuation.section
 //     ^ string.unquoted.line-name.css
 //      ^ - string.unquoted.line-name.css
 //       ^ string.unquoted.line-name.css
-//          ^ punctuation.section.end.css
-//                      ^ punctuation.section.begin.css
+//          ^ punctuation.section
+//                      ^ punctuation.section
 //                       ^ string.unquoted.line-name.css
-//                        ^ punctuation.section.end.css
+//                        ^ punctuation.section
               repeat(5, auto);
 }
 
@@ -2054,14 +2034,13 @@ $gutter-width: 10px;
 .test-var-function {
     top: var(--name);
 //       ^^^         support.function.var.css
-//           ^^      punctuation.definition.custom-property.css
-//             ^^^^  support.type.custom-property.name.css
+//             ^^^^  variable.other.custom-property
 }
 
 .test-custom-tags > div > span + cust·m-tÀg > div-cøstom-tag ~ form-Çust😀m-tag.classname:last-child:hover {}
 //                ^ -entity.name.tag.custom.css
-//                  ^^^ entity.name.tag.css
-//                        ^^^^ entity.name.tag.css
+//                  ^^^ entity.name.tag
+//                        ^^^^ entity.name.tag
 //                             ^ -entity.name.tag.custom.css
 //                               ^^^^^^^^^^ entity.name.tag.custom.css
 //                                            ^^^^^^^^^^^^^^ entity.name.tag.custom.css
@@ -2090,6 +2069,10 @@ $gutter-width: 10px;
     grid-row: auto;
 //  ^^^^^^^^ support.type.property-name
 //          ^ punctuation.separator.key-value
+    place-items: center;
+//  ^^^^^^^^^^^ support.type.property-name
+//             ^ punctuation.separator.key-value
+//               ^^^^^^ support.constant.property-value.css
 }
 
 .test-meta-scopes-for-completions {
@@ -2106,14 +2089,14 @@ $gutter-width: 10px;
 .generic-font-family { font-family: my-serif, serif }
 //                                  ^^^^^^^^ string.unquoted
 //                                          ^ - string
-//                                            ^^^^^ support.constant.font-name
+//                                            ^^^^^ support.constant
 .generic-font-family2 { font-family: sans-serif , fantasy , system-ui; }
-//                                   ^^^^^^^^^^ support.constant.font-name
-//                                                ^^^^^^^ support.constant.font-name
-//                                                          ^^^^^^^^^ support.constant.font-name
+//                                   ^^^^^^^^^^ support.constant
+//                                                ^^^^^^^ support.constant
+//                                                          ^^^^^^^^^ support.constant
 .generic-font-family3 {
     font-family: cursive
-//               ^^^^^^^ support.constant.font-name
+//               ^^^^^^^ support.constant
 }
 .generic-font-family4 {
     font-family: droid serif;
@@ -2122,18 +2105,12 @@ $gutter-width: 10px;
 
 .variable-beginnings {
     --1x: url(data:image/png;base64,PNG);
-//  ^^^^ support.type.custom-property
-//  ^^ punctuation.definition.custom-property
-//    ^^ support.type.custom-property.name
+//  ^^^^ entity.other.custom-property
 //      ^ punctuation.separator.key-value
     background-image: var(--1x);
-//                        ^^^^ support.type.custom-property
-//                        ^^ punctuation.definition.custom-property
-//                          ^^ support.type.custom-property.name
+//                          ^^ variable.other.custom-property
     --\ff: 5px;
-//  ^^^^^ support.type.custom-property
-//  ^^ punctuation.definition.custom-property
-//    ^^^ support.type.custom-property.name
+//  ^^^^^ entity.other.custom-property
 //       ^ punctuation.separator.key-value
 }
 
@@ -2154,12 +2131,12 @@ $gutter-width: 10px;
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css
 //  ^^^^ support.type.property-name.css
 //      ^ punctuation.separator.key-value.css
-//        ^ punctuation.section.begin.css
+//        ^ punctuation.section
 //         ^^^^^^^^^ string.unquoted.line-name.css
-//                  ^ punctuation.section.end.css
+//                  ^ punctuation.section
 //                    ^^^ string.quoted.double.css
 //                        ^^^^^ meta.number
-//                              ^ punctuation.section.begin.css
+//                              ^ punctuation.section
 //                               ^^^^^^^^^ string.unquoted.line-name.css
 //                                        ^ punctuation
  }
