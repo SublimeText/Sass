@@ -1,0 +1,8 @@
+Sass 3.0 Is Here!
+
+This syntax package for Sass and SCSS has been largely rewritten.
+This brings it more in line with the default CSS package.
+
+If you're seeing differences in highlighting, that's probably why.
+If you see any problems, please report them and we'll sort them out ASAP!
+https://github.com/braver/SublimeSass
