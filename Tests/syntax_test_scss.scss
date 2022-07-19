@@ -1,9 +1,7 @@
-/* SYNTAX TEST "Packages/Sass/Syntaxes/SCSS.sublime-syntax" */
+// SYNTAX TEST "Packages/Sass/Syntaxes/SCSS.sublime-syntax"
 
-/*
-Correctly differentiate between properties and selectors,
-especially with pseudo-stuff because of the :
-*/
+// Correctly differentiate between properties and selectors,
+// especially with pseudo-stuff because of the :
 
 *,
 & + h1,
@@ -56,8 +54,7 @@ selector-ish::before[data-type="text"]:not(:first-child),
 
 *
     *
-/*  ^ comment.block.css punctuation.definition.comment.
-//
+//  ^ comment.block.css punctuation.definition.comment.
 
 /*
   CSS grids
@@ -1019,7 +1016,7 @@ $gutter-width: 10px;
 //  ^^^^^^^^^^^^^^^^^^^ meta.at-rule.media.css
 //  ^                  punctuation.definition.keyword.css
 //   ^^^^^             keyword.control.directive
-//         ^^^^        keyword.operator.logic
+//         ^^^^        keyword.operator.logical
 //              ^^^^^^ support.constant.media.css
 //                     ^ comment.line.double-slash
 {}
@@ -1040,7 +1037,7 @@ $gutter-width: 10px;
 //          ^^^^^^^^^ support.type.property-name
 //                     ^^^^^ constant.numeric
 //                          ^ punctuation.section.group.end.css
-//                            ^^^ keyword.operator.logic
+//                            ^^^ keyword.operator.logical
 //                                ^ punctuation.section.group.begin.css
 //                                 ^^^^^^^^^ support.type.property-name
 //                                            ^^^^^^ constant.numeric
@@ -1050,9 +1047,9 @@ $gutter-width: 10px;
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.media.css
 // ^ punctuation.definition.keyword.css
 //  ^^^^^ keyword.control.directive
-//        ^^^^ keyword.operator.logic
+//        ^^^^ keyword.operator.logical
 //             ^^^^^^ support.constant.media.css
-//                    ^^^ keyword.operator.logic
+//                    ^^^ keyword.operator.logical
 //                        ^ punctuation.section.group.begin.css
 //                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ support.type
 //                                                       ^ punctuation.separator.key-value.css
@@ -1062,9 +1059,9 @@ $gutter-width: 10px;
 //                                                                           ^ punctuation.separator.sequence
     only screen and (-o-min-device-pixel-ratio: 13/10),
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.media.css
-//  ^^^^ keyword.operator.logic
+//  ^^^^ keyword.operator.logical
 //       ^^^^^^ support.constant.media.css
-//              ^^^ keyword.operator.logic
+//              ^^^ keyword.operator.logical
 //                  ^ punctuation.section.group.begin.css
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^^ support.type
 //                                            ^ punctuation.separator.key-value.css
@@ -1075,9 +1072,9 @@ $gutter-width: 10px;
 //                                                    ^ punctuation.separator.sequence
     only screen and (min-resolution: 120dpi)
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.media.css
-//  ^^^^ keyword.operator.logic
+//  ^^^^ keyword.operator.logical
 //       ^^^^^^ support.constant.media.css
-//              ^^^ keyword.operator.logic
+//              ^^^ keyword.operator.logical
 //                  ^ punctuation.section.group.begin.css
 //                   ^^^^^^^^^^^^^^ support.type.property-name
 //                                 ^ punctuation.separator.key-value.css

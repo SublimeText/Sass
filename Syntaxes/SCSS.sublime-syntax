@@ -1373,7 +1373,6 @@ contexts:
     - include: rule-list-body
 
   rule-list-body:
-    # Note: This context is used by HTML.sublime-syntax
     - include: comments
     - include: property-identifiers
     - include: property-values
@@ -1421,7 +1420,9 @@ contexts:
     - include: custom-property
 
     - include: push-to-value
-    - include: immediately-pop
+    # - include: immediately-pop   # don't immeditaly pop back for scss, only pop after we see a property value or something
+    - match: '(?! :)'
+      pop: 1
 
   builtin-property:
     - match: '{{ident}}'
@@ -3206,6 +3207,8 @@ contexts:
       scope: constant.other.sass
 
   sass-value-expression:
+    - match: '[a-z]+://[a-zA-Z0-9_\-\.]*' # mostly to prevent the // to be matched as comment
+      scope: meta.path.url.css meta.string.css string.unquoted.css
     - include: comments
     - include: comma-delimiters
     - include: sass-maps
@@ -3217,7 +3220,7 @@ contexts:
     - include: color-values
     - include: unicode-ranges
     - include: numeric-constants
-    - include: other-constants
+    # - include: other-constants
     - include: generic-font-names
     - match: \b(true|false|null)\b
       scope: constant.language.sass
