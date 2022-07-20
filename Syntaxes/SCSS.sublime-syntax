@@ -2808,7 +2808,7 @@ contexts:
 
   other-constants:
     - match: '{{ident}}'
-      scope: support.constant.property-value.css
+      scope: constant.other.css
 
 ###[ NUMERIC CONSTANTS ]#######################################################
 
