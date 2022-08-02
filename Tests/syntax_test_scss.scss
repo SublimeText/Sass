@@ -314,7 +314,6 @@ color: format(
 }
 
 
-
 /*
   Strings, (un)quoted, operations and interpolation
   https://sass-lang.com/documentation/file.SASS_REFERENCE.html#sass-script-strings
@@ -368,11 +367,11 @@ color: format(
   p::before; {
     content: "Foo " + Bar;
 //               ^ string.quoted.double
-//                    ^ constant.other
+//                    ^ support.constant.property-value
 //                       ^ - string
 //                  ^ keyword.operator
     font-family: sans- + "serif";
-//               ^^^^^ string.unquoted
+//               ^^^^^ string
 //                              ^ - string
 //                     ^ keyword.operator
     content: "I ate #{5 + 10} pies!";
@@ -402,7 +401,7 @@ color: format(
 //                  ^^^^^^^^^^^^ meta.function-call.arguments.sass
 //                  ^ punctuation.section.group.begin.sass
 //                             ^ punctuation.section.group.end.sass
-//                   ^^^^^^^^^^ constant.other
+//                   ^^^^^^^^^^ support.constant.property-value
 //                             ^ - string
     @include breathe(border-bottom-color);
 //           ^^^^^^^^^^^^^^^^^^^ meta.function-call.sass
@@ -446,7 +445,7 @@ color: format(
 //           ^^^^^^^ variable.function.sass
 //                       ^^^^^^^^^ meta.function-call.arguments.sass string.quoted.double.css
 //                                 ^ keyword.operator.arithmetic.sass
-//                                   ^ constant.other
+//                                   ^ support.constant.property-value
 //                                       ^ - string
 
 @include firefox-message(
@@ -547,7 +546,7 @@ $list: (top, bottom, right, position, height);
 //           ^^^ support.constant.property-value
 //                 ^ punctuation.separator.sequence.css
 //                   ^^^ support.constant.property-value
-//                          ^^^ constant.other
+//                          ^^^ support.constant.property-value
 //                                  ^ punctuation.separator.sequence.css
 @each $animal, $color, $cursor in (puma, black, default),
                                   (sea-slug, blue, pointer),
@@ -1311,7 +1310,7 @@ $gutter-width: 10px;
 
 .test-pseudo-class-tag:not(*) {}
 //                     ^^^ entity.other.pseudo-class.css
-//                         ^ variable.language.wildcard
+//                      /* ^ variable.language.wildcard  --  doesn't work because it can't decide if sass math or selector */
 
 .test-pseudo-elements::before div .class {}
 //                   ^^ punctuation.definition
