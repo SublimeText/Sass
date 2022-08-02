@@ -391,49 +391,6 @@ contexts:
         - include: terminator-pop
         - include: immediately-pop
 
-    # CSS modules
-    - match: '\b(composes)\b'
-      scope: meta.property-name.css-modules.css support.type.property-name
-      push:
-        - include: push-to-value
-        - include: terminator-pop
-        - include: immediately-pop
-    - match: '\s*(:)(import|export)'
-      scope: meta.selector.css entity.other.pseudo-class.css-modules.css
-      captures:
-        1: punctuation.definition.entity.css
-      push:
-        - meta_scope: meta.selector.css meta.function-call.css
-        - match: '\('
-          scope: punctuation.section.group.begin.css
-          push:
-            - meta_scope: meta.group.css
-            - match: '\)'
-              scope: punctuation.section.group.end.css
-              pop: 1
-            - include: quoted-strings
-        - match: '\s*(\{)'
-          captures:
-            1: punctuation.section.block.begin.css
-          push:
-            - meta_scope: meta.group.css-modules.css
-            - match: '\}'
-              scope: punctuation.section.block.end.css
-              pop: 2
-            - include: comments
-            - include: rule-terminators
-            - match: '([a-zA-Z0-9_-]+)\s*(:)'
-              captures:
-                1: meta.property-name.css-modules.css support.type.property-name.css-modules.css
-                2: punctuation.separator.key-value.css
-                3: variable.other.css-modules.css
-              push:
-                - include: terminator-pop
-                - include: quoted-strings
-                - match: '\b[^\s''"]+\b'
-                  scope: string.unquoted.css
-        - match: ''
-          pop: 1
 
     - include: comments
     - include: sass-mixins
@@ -1140,28 +1097,6 @@ contexts:
     - match: '{{combinators}}{2,}|\|{3,}'
       scope: invalid.illegal.combinator.css
 
-    # CSS modules
-    - match: '\s*(:)(local|global)(?=\()'
-      scope: meta.selector.css entity.other.pseudo-class.css-modules.css
-      captures:
-        1: punctuation.definition.entity.css
-      push:
-        - meta_scope: meta.selector.css meta.function-call.css
-        - match: '\('
-          scope: punctuation.section.group.begin.css
-          push:
-            - meta_scope: meta.group.css
-            - match: '\)'
-              scope: punctuation.section.group.end.css
-              pop: 1
-            - include: selectors
-            - include: quoted-strings
-        - match: ''
-          pop: 1
-    - match: '\s*(:)(local|global)'
-      scope: meta.selector.css entity.other.pseudo-class.css-modules.css
-      captures:
-        1: punctuation.definition.entity.css
 
   selector-end:
     - match: (?=[;@(){}]) # or with \s added? (?=\s*[;@(){}])
