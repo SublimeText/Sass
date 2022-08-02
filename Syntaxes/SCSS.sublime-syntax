@@ -1352,7 +1352,7 @@ contexts:
     # common properties
     - include: custom-property
     - include: builtin-property
-    - include: other-property
+    # - include: other-property
 
     - include: push-to-value
     # - include: immediately-pop   # don't immeditaly pop back for scss, only pop after we see a property value or something
