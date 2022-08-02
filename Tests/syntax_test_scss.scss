@@ -125,13 +125,13 @@ selector-ish::before[data-type="text"]:not(:first-child),
 //       ^ punctuation.definition.variable.sass
 //             ^ punctuation.terminator.rule.css
   will-change: transform, scroll-position;
-//             ^ constant.other
+//             ^ support.constant.property-value.css
   background: url($blue);
 //                ^^^^^ variable
   background: url('../assets/photo1-blue.jpg') center/cover no-repeat;
-//                                             ^ constant.other
-//                                                    ^ constant.other
-//                                                          ^ constant.other
+//                                             ^ support.constant.property-value.css
+//                                                    ^ support.constant.property-value.css
+//                                                          ^ support.constant.property-value.css
   background: url(var(--input));
 //                    ^ - keyword.operator
 

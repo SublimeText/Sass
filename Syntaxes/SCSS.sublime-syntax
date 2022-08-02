@@ -2744,7 +2744,7 @@ contexts:
 
   other-constants:
     - match: '{{ident}}'
-      scope: constant.other.css
+      scope: support.constant.property-value.css
 
 ###[ NUMERIC CONSTANTS ]#######################################################
 
