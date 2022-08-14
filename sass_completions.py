@@ -816,16 +816,13 @@ class SassCompletions(sublime_plugin.EventListener):
 
     def on_query_completions(self, view, prefix, locations):
 
-        is_scss = view.match_selector(locations[0], "source.scss")
-        if is_scss and sublime.load_settings('SCSS.sublime-settings').get('disable_default_completions'):
-            return None
-        elif sublime.load_settings('Sass.sublime-settings').get('disable_default_completions'):
+        if sublime.load_settings('Sass.sublime-settings').get('disable_default_completions'):
             return None
 
         pt = locations[0]
 
         # completions only inside sass/scss files
-        if not match_selector(view, pt, 'source.sass, source.scss'):
+        if not match_selector(view, pt, 'source.sass'):
             return None
 
         if not match_selector(view, pt, ''):
@@ -834,20 +831,18 @@ class SassCompletions(sublime_plugin.EventListener):
         if match_selector(view, pt, "meta.property-value.css meta.function-call.arguments"):
             items = self.complete_function_argument(view, prefix, pt)
         elif match_selector(view, pt, "meta.property-value.css"):
-            items = self.complete_property_value(view, prefix, pt, is_scss)
+            items = self.complete_property_value(view, prefix, pt)
         else:
-            items = self.complete_property_name(view, prefix, pt, is_scss)
+            items = self.complete_property_name(view, prefix, pt)
 
         if items:
             return sublime.CompletionList(items, sublime.INHIBIT_WORD_COMPLETIONS)
         return None
 
-    def complete_property_name(self, view, prefix, pt, is_scss):
+    def complete_property_name(self, view, prefix, pt):
         if match_selector(view, pt, "meta.group"):
             # don't append semicolon in groups e.g.: `@media screen (prop: |)`
             suffix = ": $0"
-        elif is_scss:
-            suffix = ": $0;"
         else:
             suffix = ": $0"
         text = view.substr(sublime.Region(pt, view.line(pt).end()))
@@ -873,7 +868,7 @@ class SassCompletions(sublime_plugin.EventListener):
             ) for prop in self.props
         )
 
-    def complete_property_value(self, view, prefix, pt, is_scss):
+    def complete_property_value(self, view, prefix, pt):
         completions = [
             sublime.CompletionItem(
                 trigger="!important",
@@ -890,16 +885,6 @@ class SassCompletions(sublime_plugin.EventListener):
             if values:
                 details = f"<code>{prop}</code> property-value"
 
-                if match_selector(view, pt, "meta.group"):
-                    # don't append semicolon in groups e.g.: `@media screen (prop: val)`
-                    suffix = ""
-                elif not is_scss:
-                    suffix = ""
-                elif next_none_whitespace(view, pt) == ";":
-                    suffix = ""
-                else:
-                    suffix = "$0;"
-
                 for value in values:
                     if isinstance(value, list):
                         desc, snippet = value
@@ -911,7 +896,7 @@ class SassCompletions(sublime_plugin.EventListener):
 
                     completions.append(sublime.CompletionItem(
                         trigger=desc,
-                        completion=snippet + suffix,
+                        completion=snippet,
                         completion_format=sublime.COMPLETION_FORMAT_SNIPPET,
                         kind=kind,
                         details=details
