@@ -3136,8 +3136,8 @@ contexts:
 ###[ Sass ]####################################################################
 ###############################################################################
 
-  sass-script-expression:
-    - include: builtin-values
+  sass-values:
+    - include: builtin-values  # includes sass-value-expression
     - match: '{{ident}}'
       scope: constant.other.sass
 
@@ -3258,7 +3258,7 @@ contexts:
         - match: '(})'
           scope: punctuation.section.group.end.sass
           pop: 1
-        - include: sass-script-expression
+        - include: sass-values
 
   sass-operators:
     - match: /|\*|\-\-|\-|\+\+|\+|~
@@ -3358,7 +3358,7 @@ contexts:
             - include: comments
             - include: comma-delimiters
             - include: var-function
-            - include: sass-script-expression
+            - include: sass-values
     - match: '(@)(for|while){{break}}'
       captures:
         0: keyword.control.flow.sass
@@ -3369,7 +3369,7 @@ contexts:
         - match: (?:\s*)\b(from|to|through)(?=\s)
           captures:
             1: keyword.operator.sass
-        - include: sass-script-expression
+        - include: sass-values
     - match: '(@)(if|else if|else){{break}}'
       captures:
         0: keyword.control.flow.conditional.sass
@@ -3377,7 +3377,7 @@ contexts:
       push:
         - meta_scope: meta.at-rule.sass
         - include: terminator-pop
-        - include: sass-script-expression
+        - include: sass-values
     - match: '(@)(warn|error){{break}}'
       captures:
         0: keyword.control.at-rule.warn.sass
@@ -3385,7 +3385,7 @@ contexts:
       push:
         - meta_scope: meta.at-rule.sass
         - include: terminator-pop
-        - include: sass-script-expression
+        - include: sass-values
     - match: '(@)(debug){{break}}'
       captures:
         0: keyword.control.at-rule.debugger.sass
@@ -3393,7 +3393,7 @@ contexts:
       push:
         - meta_scope: meta.at-rule.sass
         - include: terminator-pop
-        - include: sass-script-expression
+        - include: sass-values
     - match: '(@)(at-root){{break}}'
       captures:
         0: keyword.control.directive.at-root.sass
@@ -3521,7 +3521,7 @@ contexts:
         - match: '(})'
           scope: punctuation.section.group.end.sass
           pop: 2
-        - include: sass-script-expression
+        - include: sass-values
 
   sass-interpolated-selectors:
     - match: '\s*(#)(?={.*}{{pseudo_elements}})'
