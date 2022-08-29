@@ -1576,7 +1576,6 @@ contexts:
     - include: global-constants
     - include: generic-font-names
     - include: font-family-names
-    - include: sass-value-expression
 
 ###[ FONT PROPERTY ]###########################################################
 
@@ -2898,6 +2897,7 @@ contexts:
   # Font Family Names
   # https://drafts.csswg.org/css-fonts-3/#family-name-value
   font-family-names:
+    - include: sass-value-expression
     - match: '{{ident}}(?:\s+{{ident}}(?!\())*'
       scope: meta.string.css string.unquoted.css
 
