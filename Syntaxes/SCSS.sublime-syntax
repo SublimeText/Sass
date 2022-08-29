@@ -3150,6 +3150,7 @@ contexts:
     - include: unicode-ranges
     - include: numeric-constants
     - include: generic-font-names
+    - include: quoted-strings
     - include: sass-maps
     - include: sass-variables
     - include: sass-builtin-functions
