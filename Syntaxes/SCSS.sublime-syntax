@@ -378,9 +378,8 @@ contexts:
         1: punctuation.definition.variable.sass
       push:
         - include: comments
-        - include: push-to-value
         - include: terminator-pop
-        - include: immediately-pop
+        - include: push-to-value
 
     # Sass content at-rule
     - match: '((@)content){{break}}'

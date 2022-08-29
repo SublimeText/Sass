@@ -116,6 +116,24 @@ selector-ish::before[data-type="text"]:not(:first-child),
 //^^^^^^ variable.declaration.sass
 //^ punctuation.definition.variable.sass
 //            ^^^^^^^ keyword.other.sass
+$color1: red;
+//^^^^^ variable.declaration.sass
+//<- punctuation.definition.variable.sass
+//     ^ punctuation
+//       ^^^ support.constant
+//          ^ punctuation
+$color2 : red;
+//^^^^^ variable.declaration.sass
+//<- punctuation.definition.variable.sass
+//      ^ punctuation
+//        ^^^ support.constant
+//           ^ punctuation
+$color3     : red;
+//^^^^^ variable.declaration.sass
+//<- punctuation.definition.variable.sass
+//          ^ punctuation
+//            ^^^ support.constant
+//               ^ punctuation
   width: $width;
 //^^^^^ meta.property-name.css
 // ^ support.type.property-name.css
