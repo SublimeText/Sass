@@ -1035,7 +1035,7 @@ contexts:
       push:
         - meta_scope: entity.other.attribute-name.placeholder.sass
         - include: sass-interpolation
-        - match: '[a-z_-]+'
+        - match: '{{nmchar}}'
           scope: entity.name.tag.custom.sass
         - match: '{{generic_ident}}'
           pop: 1

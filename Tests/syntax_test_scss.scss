@@ -155,6 +155,8 @@ $color3     : red;
 
   input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder),
 //                                       ^ entity.name
+  %test-123-test.blue:hover,
+// ^^^^^^^^^^^^^ meta.selector.css entity.other.attribute-name.placeholder.sass
   :root,
 //^ punctuation.definition
 // ^^ entity.other.pseudo-class.css
