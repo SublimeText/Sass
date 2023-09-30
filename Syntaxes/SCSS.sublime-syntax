@@ -3,7 +3,9 @@
 # http://www.sublimetext.com/docs/3/syntax.html
 name: SCSS
 scope: source.scss
-# version: 2
+version: 2
+
+extends: Packages/CSS/CSS.sublime-syntax
 
 file_extensions:
   - scss
@@ -374,8 +376,8 @@ contexts:
     # Sass variable declarations
     - match: '(\$)([a-zA-Z0-9_-][\w-]*)'
       captures:
-        0: variable.declaration.sass
-        1: punctuation.definition.variable.sass
+        0: variable.declaration.scss
+        1: punctuation.definition.variable.scss
       push:
         - include: comments
         - include: terminator-pop
@@ -384,8 +386,8 @@ contexts:
     # Sass content at-rule
     - match: '((@)content){{break}}'
       captures:
-        1: keyword.control.at-rule.content.sass
-        2: punctuation.definition.keyword.sass
+        1: keyword.control.at-rule.content.scss
+        2: punctuation.definition.keyword.scss
       push:
         - include: terminator-pop
         - include: immediately-pop
@@ -432,7 +434,7 @@ contexts:
     - match: //
       scope: punctuation.definition.comment.css
       push:
-        - meta_scope: comment.line.double-slash.sass
+        - meta_scope: comment.line.double-slash.scss
         - match: \n
           pop: 1
 
@@ -1031,12 +1033,12 @@ contexts:
         - include: immediately-pop
     # sass extend-only selectors
     - match: \%(?={{nmchar}})
-      scope: punctuation.definition.entity.sass
+      scope: punctuation.definition.entity.scss
       push:
-        - meta_scope: entity.other.attribute-name.placeholder.sass
+        - meta_scope: entity.other.attribute-name.placeholder.scss
         - include: sass-interpolation
         - match: '{{nmchar}}'
-          scope: entity.name.tag.custom.sass
+          scope: entity.name.tag.custom.scss
         - match: '{{generic_ident}}'
           pop: 1
         - include: immediately-pop
@@ -1080,7 +1082,7 @@ contexts:
     - include: sass-ampersand
     - include: sass-interpolated-selectors
     - match: '\!\s*(default|global|optional)\b'
-      scope: keyword.other.sass
+      scope: keyword.other.scss
 
     # Html Tags
     - match: '{{html_tags}}'
@@ -1322,7 +1324,7 @@ contexts:
   property-identifiers:
     # Sass nested property names
     # Partial property names, split at "-"
-    # http://sass-lang.com/documentation/file.SASS_REFERENCE.html#nested_properties
+    # http://sass-lang.com/documentation/file.scss_REFERENCE.html#nested_properties
     - match: '[a-zA-Z0-9_-]*(?=#{)'
       captures:
         0: meta.property-name.css support.type.property-name.css
@@ -1396,7 +1398,7 @@ contexts:
   property-value-content:
     - meta_content_scope: meta.property-value.css
     - match: '\!\s*(default|global|optional)\b'
-      scope: keyword.other.sass
+      scope: keyword.other.scss
     - include: terminator-pop
     - include: comments
     - include: comma-delimiters
@@ -3138,7 +3140,7 @@ contexts:
   sass-values:
     - include: builtin-values  # includes sass-value-expression
     - match: '{{ident}}'
-      scope: constant.other.sass
+      scope: constant.other.scss
 
   sass-value-expression:
     - match: '[a-z]+://[a-zA-Z0-9_\-\.]*' # mostly to prevent the // to be matched as comment
@@ -3158,53 +3160,53 @@ contexts:
     - include: sass-operators
     - include: sass-interpolation
     - match: \b(true|false|null)\b
-      scope: constant.language.sass
+      scope: constant.language.scss
 
   sass-maps:
     - match: '\('
       captures:
-        0: punctuation.section.group.begin.sass
+        0: punctuation.section.group.begin.scss
       push:
-        - meta_scope: meta.group.css meta.map.arguments.sass
+        - meta_scope: meta.group.css meta.map.arguments.scss
         - match: '\)'
           captures:
-            0: punctuation.section.group.end.sass
+            0: punctuation.section.group.end.scss
           pop: 1
         - match: '(\$)([a-zA-Z0-9_-][\w-]*)\s*(:)'
           captures:
-            0: variable.other.sass
-            1: punctuation.definition.variable.sass
+            0: variable.other.scss
+            1: punctuation.definition.variable.scss
             3: punctuation.separator.key-value.css
         - match: '({{ident}})\s*(:)'
           captures:
-            1: variable.parameter.sass
+            1: variable.parameter.scss
             2: punctuation.separator.key-value.css
         - include: property-value-content
 
   sass-variables:
     - match: '(({{ident}})(\.))?(\$)([a-zA-Z0-9_-][\w-]*)'
-      scope: variable.other.sass
+      scope: variable.other.scss
       captures:
-        2: entity.name.namespace.sass
-        3: punctuation.separator.namespace.sass
-        4: punctuation.definition.variable.sass
+        2: entity.name.namespace.scss
+        3: punctuation.separator.namespace.scss
+        4: punctuation.definition.variable.scss
     - include: sass-interpolation
 
   sass-builtin-functions:
     - match: '\b(zip|variable-exists|unquote|unitless|unit|unique-id|type-of|transparentize|to-upper-case|to-lower-case|tan|str-slice|str-length|str-insert|str-index|sqrt|spin|softlight|sin|simple-selectors|set-nth|selector-unify|selector-replace|selector-parse|selector-nest|selector-extend|selector-append|screen|scale-color|saturation|saturate|round|replace|red|random|quote|pow|pi|percentage|overlay|opacify|nth|negation|multiply|mod|mixin-exists|mix|min|max|map-values|map-remove|map-merge|map-keys|map-has-key|map-get|luma|list-separator|lightness|lighten|length|keywords|join|isnumber|is-superselector|is-bracketed|invert|inspect|index|if|ie-hex-str|hue|hsvvalue|hsvsaturation|hsvhue|hsva|hsv|hsla|hsl|hardlight|greyscale|green|grayscale|global-variable-exists|get-function|function-exists|format|floor|feature-exists|fadeout|fadein|fade|extract|exclusion|escape|e|difference|desaturate|data-uri|darken|cos|convert|contrast|content-exists|complement|comparable|color|change-color|ceil|call|calc|blue|average|atan|asin|argb|append|alpha|adjust-hue|adjust-color|acos|abs)(?=\()'
       captures:
-        1: support.function.builtin.sass
+        1: support.function.builtin.scss
       push:
-        - meta_scope: meta.function-call.sass
+        - meta_scope: meta.function-call.scss
         - meta_include_prototype: false
         - match: \(
           scope: punctuation.section.group.begin.css
           set:
-            - meta_scope: meta.function-call.sass meta.function-call.arguments.css meta.group.css
+            - meta_scope: meta.function-call.scss meta.function-call.arguments.css meta.group.css
             - match: (\$)([a-zA-Z0-9_-][\w-]*)(?=:)
-              scope: variable.other.sass
+              scope: variable.other.scss
               captures:
-                1: punctuation.definition.variable.sass
+                1: punctuation.definition.variable.scss
               push:
                 - match: ':'
                   scope: punctuation.separator.key-value.css
@@ -3221,21 +3223,21 @@ contexts:
             - include: generic-font-names
             - include: numeric-constants
             - match: '{{ident}}'
-              scope: constant.other.sass
+              scope: constant.other.scss
 
   sass-namespaced-functions:
     - match: '\b(?!var)(({{ident}})(\.))?([a-z_-]+)(?=\()'
-      scope: support.function.sass
+      scope: support.function.scss
       captures:
-        2: entity.name.namespace.sass
-        3: punctuation.separator.namespace.sass
+        2: entity.name.namespace.scss
+        3: punctuation.separator.namespace.scss
       push:
-        - meta_scope: meta.function-call.sass
+        - meta_scope: meta.function-call.scss
         - meta_include_prototype: false
         - match: \(
           scope: punctuation.section.group.begin.css
           set:
-            - meta_scope: meta.function-call.sass meta.function-call.arguments.css meta.group.css
+            - meta_scope: meta.function-call.scss meta.function-call.arguments.css meta.group.css
             - include: function-arguments-common
             - include: color-values
             - include: percentage-constants
@@ -3246,49 +3248,49 @@ contexts:
             - include: generic-font-names
             - include: numeric-constants
             - match: '{{ident}}'
-              scope: constant.other.sass
+              scope: constant.other.scss
 
   sass-interpolation:
     - match: '(#)({)'
       captures:
-        1: punctuation.definition.variable.sass
-        2: punctuation.section.group.begin.sass
+        1: punctuation.definition.variable.scss
+        2: punctuation.section.group.begin.scss
       push:
-        - meta_scope: meta.group.interpolation.sass
+        - meta_scope: meta.group.interpolation.scss
         - match: '(})'
-          scope: punctuation.section.group.end.sass
+          scope: punctuation.section.group.end.scss
           pop: 1
         - include: sass-values
 
   sass-operators:
     - match: /|\*|\-\-|\-|\+\+|\+|~
-      scope: keyword.operator.arithmetic.sass
+      scope: keyword.operator.arithmetic.scss
     - match: $|%|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|%=|\+=|\-=|&=|\bnot\b|\bor\b|\band\b|\bwhen\b
-      scope: keyword.operator.sass
+      scope: keyword.operator.scss
     - match: (?:\s*)\b(not|or|and)(?=\s)
       captures:
-        1: keyword.operator.sass
+        1: keyword.operator.scss
 
   sass-mixins:
     - match: '\s*((\=)([\w-]+))'
       captures:
-        2: keyword.control.directive.sass
-        3: entity.name.function.sass
+        2: keyword.control.directive.scss
+        3: entity.name.function.scss
       push:
-        - meta_scope: meta.function.declaration.sass
+        - meta_scope: meta.function.declaration.scss
         - include: terminator-pop
         - match: '\('
-          scope: punctuation.section.group.begin.sass
+          scope: punctuation.section.group.begin.scss
           push:
-            - meta_scope: meta.function.parameters.sass
+            - meta_scope: meta.function.parameters.scss
             - match: '\)'
-              scope: punctuation.section.group.end.sass
+              scope: punctuation.section.group.end.scss
               pop: 1
             - include: comma-delimiters
             - match: '(\$)([a-zA-Z0-9_-][\w-]*)'
-              scope: variable.parameter.sass
+              scope: variable.parameter.scss
               captures:
-                1: punctuation.definition.variable.sass
+                1: punctuation.definition.variable.scss
               push:
                 - match: '(?=[,\)])'
                   pop: 1
@@ -3297,17 +3299,17 @@ contexts:
                 - include: property-value-content
     - match: '\s*((\+)([\w-]+))'
       captures:
-        2: keyword.control.directive.sass
-        3: variable.function.sass
+        2: keyword.control.directive.scss
+        3: variable.function.scss
       push:
-        - meta_scope: meta.function-call.sass
+        - meta_scope: meta.function-call.scss
         - include: terminator-pop
         - match: '\('
-          scope: punctuation.section.group.begin.sass
+          scope: punctuation.section.group.begin.scss
           push:
-            - meta_scope: meta.function-call.arguments.sass
+            - meta_scope: meta.function-call.arguments.scss
             - match: '\)'
-              scope: punctuation.section.group.end.sass
+              scope: punctuation.section.group.end.scss
               pop: 1
             - include: sass-value-expression
             - include: comma-delimiters
@@ -3316,14 +3318,14 @@ contexts:
             - include: sass-ampersand
             - include: prefixed-selectors
             - match: '{{ident}}'
-              scope: constant.other.sass
+              scope: constant.other.scss
 
 ###[ SASS AMPERSAND ]#########################################
 
   sass-ampersand:
     - match: '\s*(&)'
       captures:
-        1: keyword.operator.ampersand.sass
+        1: keyword.operator.ampersand.scss
       push:
         # - meta_scope: meta.selector.css
         - match: '[-_]+'
@@ -3344,15 +3346,15 @@ contexts:
   sass-at-rules:
     - match: '(@)(each){{break}}'
       captures:
-        0: keyword.control.flow.sass
-        1: punctuation.definition.keyword.sass
+        0: keyword.control.flow.scss
+        1: punctuation.definition.keyword.scss
       push:
-        - meta_scope: meta.at-rule.each.sass
+        - meta_scope: meta.at-rule.each.scss
         - include: sass-variables
         - include: comma-delimiters
         - include: terminator-pop
         - match: \b(in){{break}}
-          scope: keyword.operator.sass
+          scope: keyword.operator.scss
           push:
             - include: terminator-pop
             - include: comments
@@ -3361,95 +3363,95 @@ contexts:
             - include: sass-values
     - match: '(@)(for|while){{break}}'
       captures:
-        0: keyword.control.flow.sass
-        1: punctuation.definition.keyword.sass
+        0: keyword.control.flow.scss
+        1: punctuation.definition.keyword.scss
       push:
-        - meta_scope: meta.at-rule.sass
+        - meta_scope: meta.at-rule.scss
         - include: terminator-pop
         - match: (?:\s*)\b(from|to|through)(?=\s)
           captures:
-            1: keyword.operator.sass
+            1: keyword.operator.scss
         - include: sass-values
     - match: '(@)(if|else if|else){{break}}'
       captures:
-        0: keyword.control.flow.conditional.sass
-        1: punctuation.definition.keyword.sass
+        0: keyword.control.flow.conditional.scss
+        1: punctuation.definition.keyword.scss
       push:
-        - meta_scope: meta.at-rule.sass
+        - meta_scope: meta.at-rule.scss
         - include: terminator-pop
         - include: sass-values
     - match: '(@)(warn|error){{break}}'
       captures:
-        0: keyword.control.at-rule.warn.sass
-        1: punctuation.definition.keyword.sass
+        0: keyword.control.at-rule.warn.scss
+        1: punctuation.definition.keyword.scss
       push:
-        - meta_scope: meta.at-rule.sass
+        - meta_scope: meta.at-rule.scss
         - include: terminator-pop
         - include: sass-values
     - match: '(@)(debug){{break}}'
       captures:
-        0: keyword.control.at-rule.debugger.sass
-        1: punctuation.definition.keyword.sass
+        0: keyword.control.at-rule.debugger.scss
+        1: punctuation.definition.keyword.scss
       push:
-        - meta_scope: meta.at-rule.sass
+        - meta_scope: meta.at-rule.scss
         - include: terminator-pop
         - include: sass-values
     - match: '(@)(at-root){{break}}'
       captures:
-        0: keyword.control.directive.at-root.sass
-        1: punctuation.definition.keyword.sass
+        0: keyword.control.directive.at-root.scss
+        1: punctuation.definition.keyword.scss
     - match: '(@)(extend){{break}}'
       captures:
-        0: keyword.control.directive.extend.sass
-        1: punctuation.definition.keyword.sass
+        0: keyword.control.directive.extend.scss
+        1: punctuation.definition.keyword.scss
       push:
-        - meta_scope: meta.at-rule.extend.sass
+        - meta_scope: meta.at-rule.extend.scss
         - include: terminator-pop
         - include: selectors
     - match: '((@)(mixin|function))\s+([\w-]+)'
       captures:
-        1: keyword.control.directive.sass
-        2: punctuation.definition.keyword.sass
-        4: entity.name.function.sass
+        1: keyword.control.directive.scss
+        2: punctuation.definition.keyword.scss
+        4: entity.name.function.scss
       push:
-        - meta_scope: meta.function.declaration.sass
+        - meta_scope: meta.function.declaration.scss
         - include: terminator-pop
         - match: '\('
-          scope: punctuation.section.group.begin.sass
+          scope: punctuation.section.group.begin.scss
           push:
-            - meta_scope: meta.function.parameters.sass
+            - meta_scope: meta.function.parameters.scss
             - match: '\)'
-              scope: punctuation.section.group.end.sass
+              scope: punctuation.section.group.end.scss
               pop: 1
             - include: comma-delimiters
             - match: '(\$)([a-zA-Z0-9_-][\w-]*)'
-              scope: variable.parameter.sass
+              scope: variable.parameter.scss
               captures:
-                1: punctuation.definition.variable.sass
+                1: punctuation.definition.variable.scss
               push:
                 - match: '(?=[,\)])'
                   pop: 1
                 - match: ':'
                   scope: punctuation.separator.key-value.css
                 - match: '\b(false|true|null)\b'
-                  scope: constant.language.sass
+                  scope: constant.language.scss
                 - include: property-value-content
     - match: '((@)(include))\s+((([a-z]+)(\.))?([\w-]+))'
       captures:
-        1: keyword.control.directive.sass
-        2: punctuation.definition.keyword.sass
-        4: variable.function.sass
-        6: entity.name.namespace.sass
-        7: punctuation.separator.namespace.sass
+        1: keyword.control.directive.scss
+        2: punctuation.definition.keyword.scss
+        4: variable.function.scss
+        6: entity.name.namespace.scss
+        7: punctuation.separator.namespace.scss
       push:
-        - meta_scope: meta.function-call.sass
+        - meta_scope: meta.function-call.scss
         - include: terminator-pop
         - match: '\('
-          scope: punctuation.section.group.begin.sass
+          scope: punctuation.section.group.begin.scss
           push:
-            - meta_scope: meta.function-call.arguments.sass
+            - meta_scope: meta.function-call.arguments.scss
             - match: '\)'
-              scope: punctuation.section.group.end.sass
+              scope: punctuation.section.group.end.scss
               pop: 1
             - include: comments
             - include: sass-variables
@@ -3461,29 +3463,29 @@ contexts:
             - include: sass-ampersand
             - include: prefixed-selectors
             - match: '{{ident}}'
-              scope: constant.other.sass
+              scope: constant.other.scss
     - match: '(@)(return){{break}}'
       captures:
-        0: keyword.control.directive.return.sass
-        1: punctuation.definition.keyword.sass
+        0: keyword.control.directive.return.scss
+        1: punctuation.definition.keyword.scss
       push:
-        - meta_scope: meta.at-rule.sass
+        - meta_scope: meta.at-rule.scss
         - include: terminator-pop
         - include: property-value-content
     - match: '\s*((@)(use|forward){{break}})\s*'
       captures:
-        1: keyword.control.directive.module.sass
-        2: punctuation.definition.keyword.sass
+        1: keyword.control.directive.module.scss
+        2: punctuation.definition.keyword.scss
       push:
-        - meta_scope: meta.at-rule.module.sass
+        - meta_scope: meta.at-rule.module.scss
         - include: terminator-pop
         - match: '\b(as)\b\s+([a-zA-Z0-9_-]*(\*)?)'
           captures:
-            1: keyword.control.as.sass
-            2: meta.generic-name.sass
-            3: constant.language.import-all.sass
+            1: keyword.control.as.scss
+            2: meta.generic-name.scss
+            3: constant.language.import-all.scss
         - match: '\b(show|hide)\b'
-          scope: keyword.control.show-hide.sass
+          scope: keyword.control.show-hide.scss
           push:
             - include: terminator-pop
             - include: comments
@@ -3492,14 +3494,14 @@ contexts:
             - include: sass-operators
             - include: comma-delimiters
             - match: '{{ident}}'
-              scope: meta.generic-name.sass
+              scope: meta.generic-name.scss
         - match: '(with)\s+(\()'
           captures:
-            1: keyword.control.with.sass
-            2: punctuation.section.group.begin.sass
+            1: keyword.control.with.scss
+            2: punctuation.section.group.begin.scss
           push:
             - match: '\)'
-              scope: punctuation.section.group.end.sass
+              scope: punctuation.section.group.end.scss
               pop: 1
             - match: ':'
               scope: punctuation.separator.key-value.css
@@ -3516,41 +3518,41 @@ contexts:
 
   sass-interpolated-selector-body:
     - match: '({)'
-      scope: punctuation.section.group.begin.sass
+      scope: punctuation.section.group.begin.scss
       push:
         - match: '(})'
-          scope: punctuation.section.group.end.sass
+          scope: punctuation.section.group.end.scss
           pop: 2
         - include: sass-values
 
   sass-interpolated-selectors:
     - match: '\s*(#)(?={.*}{{pseudo_elements}})'
       captures:
-        1: punctuation.definition.variable.sass
+        1: punctuation.definition.variable.scss
       push:
-        - meta_scope: meta.selector.css meta.group.interpolation.sass
+        - meta_scope: meta.selector.css meta.group.interpolation.scss
         - include: sass-interpolated-selector-body
     - match: '\s*(#)(?={.*}:{{regular_pseudo_classes}})'
       captures:
-        1: punctuation.definition.variable.sass
+        1: punctuation.definition.variable.scss
       push:
-        - meta_scope: meta.selector.css meta.group.interpolation.sass
+        - meta_scope: meta.selector.css meta.group.interpolation.scss
         - include: sass-interpolated-selector-body
     - match: '\s*(#)(?={.*}:({{functional_pseudo_classes}})\()'
       captures:
-        1: punctuation.definition.variable.sass
+        1: punctuation.definition.variable.scss
       push:
-        - meta_scope: meta.selector.css meta.group.interpolation.sass
+        - meta_scope: meta.selector.css meta.group.interpolation.scss
         - include: sass-interpolated-selector-body
     - match: '\s*(#)(?={.*}:(-(moz|ms|webkit)-){{ident}})'
       captures:
-        1: punctuation.definition.variable.sass
+        1: punctuation.definition.variable.scss
       push:
-        - meta_scope: meta.selector.css meta.group.interpolation.sass
+        - meta_scope: meta.selector.css meta.group.interpolation.scss
         - include: sass-interpolated-selector-body
     - match: '\s*(#)(?={.*}(?![-:]))'
       captures:
-        1: punctuation.definition.variable.sass
+        1: punctuation.definition.variable.scss
       push:
-        - meta_scope: meta.selector.css meta.group.interpolation.sass
+        - meta_scope: meta.selector.css meta.group.interpolation.scss
         - include: sass-interpolated-selector-body

@@ -1,22 +1,52 @@
-# SCSS and Sass syntax for Sublime Text 3
+# Sass and SCSS
 
-Includes completions for CSS properties and values, as well as relevant Sass functions.
+[Sass](https://sass-lang.com) syntax definitions for [Sublime Text](https://www.sublimetext.com) based on its CSS syntax.
 
-Highlights code using up to date specifications for properties and values to help you catch typos.
+Highlights `.sass` or `.scss` files, and provides
 
-Syntax highlighting should be very similar to [CSS](https://github.com/sublimehq/Packages/tree/master/CSS). We're on a different release schedule from the default CSS package, so sometimes we're a bit ahead, sometimes we're behind.
-
-Notes: The Sass syntax is currently frozen as it has various [open issues](https://github.com/sass/sass/issues/216) and limitations compared to the SCSS syntax, and the Sass team itself doesn't seem overly concerned with supporting it.
-
+- snippets
+- completions
+- symbols
 
 ## Installation
 
-This package is available through [Package Control](https://packagecontrol.io).
+### Package Control
 
-## Key Bindings
+The easiest way to install is using [Package Control](https://packagecontrol.io). It's listed as `Sass`.
 
-Previous versions of this package came with key bindings. Improved completions and ST's default behaviour should make this unnecessary. Bring them back by [adding them to your key binding settings](https://github.com/braver/SublimeSass/blob/2.4.1/Default.sublime-keymap).
+1. Open `Command Palette` using <kbd>ctrl+shift+P</kbd> or menu item `Tools → Command Palette...`
+2. Choose `Package Control: Install Package`
+3. Find `Sass` and hit <kbd>Enter</kbd>
 
+### Manual Install
+
+1. Download appropriate [Sass.sublime-package](https://github.com/braver/SublimeSaass/releases) for your Sublime Text build.
+   _A suffix (e.g. `-st4xxx`) denotes the least required ST build for the sublime-package to work._
+2. Rename it to _Sass.sublime-package_
+3. Copy it into _Installed Packages_ directory
+
+> **Note**
+>
+> To find _Installed Packages_...
+>
+> 1. call _Menu > Preferences > Browse Packages.._
+> 2. Navigate to parent folder
+
+> **Warning**
+>
+> Manually installed packages are not automatically updated by Package Control.
+
+## Troubleshooting
+
+Less extends Sublime Text's CSS syntax definition as of ST4149.
+
+If Less syntax highlighting doesn't work and console displays syntax errors in _Less.sublime-syntax_, please make sure to remove any out-dated syntax override.
+
+Steps:
+
+1. call _Menu > Preferences > Browse Packages.._
+2. Look for _CSS_ folder
+3. Remove it or at least delete any _CSS.sublime-syntax_ in it
 
 ## Buy me a coffee
 
