@@ -38,13 +38,32 @@ contexts:
 
   comments:
     - meta_append: true
+    - include: sassdoc-comments
     - include: scss-line-comments
 
+
+###[ SassDoc COMMENTS ]###########################################################
+
+  sassdoc-comments:
+    - match: /{3}
+      scope: punctuation.definition.comment.sassdoc.scss
+      push: sassdoc-comments-body
+
+  sassdoc-comments-body:
+    - meta_scope: comment.line.double-slash.scss comment.line.documentation.sassdoc.scss
+    - include: Packages/Markdown/Markdown.sublime-syntax#bold
+    - include: Packages/Markdown/Markdown.sublime-syntax#italic
+    - include: Packages/Markdown/Markdown.sublime-syntax#code-spans
+    # @TODO maybe consider markdown inline links, images
+    - match: \@\w+(?=\s|$)
+      scope: entity.name.tag.documentation.sassdoc.scss
+    - match: \n
+      pop: 1
 
 ###[ SCSS COMMENTS ]###########################################################
 
   scss-line-comments:
-    - match: //+
+    - match: /{2}
       scope: punctuation.definition.comment.scss
       push: scss-line-comments-body
 
