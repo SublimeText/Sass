@@ -12,7 +12,18 @@ file_extensions:
 
 ###############################################################################
 
-# variables:
+variables:
+
+  # CSS overrides
+
+  ident_start: (?:{{nmstart}}|@+{)
+
+  selector_begin: (?={{selector_start}}|&|#{)
+  selector_end: (?=[;{}])
+
+  tag_name_begin: (?=[[:alpha:]]|@+{)
+
+  property_or_selector_begin: (?={{selector_start}}|[-&]|{{ident_start}})
 
 ###############################################################################
 
@@ -23,7 +34,7 @@ contexts:
   stylesheet:
     - include: header
     - include: comments
-    # - include: properties-or-selectors
+    - include: properties-or-selectors
 
 ###[ Yekyll front matter ]#####################################################
 
@@ -72,4 +83,26 @@ contexts:
   scss-line-comments-body:
     - meta_scope: comment.line.double-slash.scss
     - match: \n
+      pop: 1
+
+###[ CSS PROPERTIES OR SELECTORS ]#############################################
+
+  properties-or-selectors:
+    - match: '{{property_or_selector_begin}}'
+      branch_point: property-or-selector
+      branch:
+        - maybe-property
+        - selector-body
+
+  maybe-property:
+    - include: comments
+    - include: property-end
+    - include: property-identifiers
+    # otherwise it is part of a selector
+    - match: ''
+      fail: property-or-selector
+
+  property-end:
+    # property mixins or values are followed/terminated by one of ; ) }
+    - match: (?=[;)}])
       pop: 1
