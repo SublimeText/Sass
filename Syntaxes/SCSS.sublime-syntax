@@ -21,18 +21,20 @@ contexts:
 ###[ CSS ]#####################################################################
 
   stylesheet:
+    - include: header
     - include: comments
+    # - include: properties-or-selectors
 
 ###[ Yekyll front matter ]#####################################################
 
   header:
     - match: '^---$'
-      scope: frontmatter.jekyll punctuation.section.frontmatter.begin.jekyll
+      scope: meta.frontmatter.jekyll punctuation.section.frontmatter.begin.jekyll
       embed: scope:source.yaml
-      embed_scope: frontmatter.jekyll
+      embed_scope: meta.frontmatter.jekyll source.yaml
       escape: '^---$'
       escape_captures:
-        0: frontmatter.jekyll punctuation.section.frontmatter.end.jekyll
+        0: meta.frontmatter.jekyll punctuation.section.frontmatter.end.jekyll
 
 ###[ CSS COMMENTS ]############################################################
 
