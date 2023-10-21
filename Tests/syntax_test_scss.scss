@@ -91,8 +91,8 @@ title: Blogging Like a Hacker
 //                                                          ^^^^^^^^^^^^^^^^^ markup.italic
 //                                                                           ^ - markup.italic
 /// Computes an exponent.
-// <- comment.line.triple-slash.scss punctuation.definition.comment.scss
-//^^^^^^^^^^^^^^^^^^^^^^^ comment.line.triple-slash.scss comment.line.documentation.sassdoc.scss
+// <- comment.line.double-slash.scss punctuation.definition.comment.sassdoc.scss
+//^^^^^^^^^^^^^^^^^^^^^^^ comment.line.double-slash.scss comment.line.documentation.sassdoc.scss
 /// @param {number} $base
 ///   The number to multiply by itself.
 /// @param {integer (unitless)} $exponent
