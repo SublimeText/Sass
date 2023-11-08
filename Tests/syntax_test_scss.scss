@@ -96,7 +96,37 @@ title: Blogging Like a Hacker
 /// @param {number} $base
 ///   The number to multiply by itself.
 /// @param {integer (unitless)} $exponent
+//  ^^^^^^ source.scss comment comment.line.documentation.sassdoc.scss entity.name.tag.documentation.sassdoc.scss
 ///   The number of `$base`s to multiply together.
 //                  ^^^^^^^ markup.raw.inline
 //                         ^ - markup.raw.inline
 /// @return {number} `$base` to the power of `$exponent`.
+//  ^^^^^^^ source.scss comment comment.line.documentation.sassdoc.scss entity.name.tag.documentation.sassdoc.scss
+
+//=============================================================================
+// Special Functions: url()
+// https://sass-lang.com/documentation/syntax/special-functions/
+// - element() is experimental and not yet implemented in any browser.
+// - expression() and functions beginning with progid: are legacy Internet Explorer features and not implemented here.
+//=============================================================================
+@font-face {
+    // This is parsed as a normal function call that takes a quoted string.
+    src: url("#{$roboto-font-path}/Roboto-Thin.woff2") format("woff2");
+//            ^^^^^^^^^^^^^^^^^^^^ meta.interpolation.scss
+//                                ^ - meta.interpolation.scss
+//              ^^^^^^^^^^^^^^^^^ variable.other.scss
+//              ^ punctuation.definition.variable.scss
+//                                ^ meta.string.css
+    // This is parsed as a normal function call that takes an arithmetic expression.
+    src: url($roboto-font-path + "/Roboto-Light.woff2") format("woff2");
+    // This is parsed as an interpolated special function.
+/* @TODO: unsure how this should be handled, */
+    src: url(#{$roboto-font-path}/Roboto-Regular.woff2) format("woff2");
+//           ^^^^^^^^^^^^^^^^^^^^ meta.interpolation.scss
+//                               ^ -meta.interpolation.scss
+//             ^^^^^^^^^^^^^^^^^ variable.other.scss
+//             ^ punctuation.definition.variable.scss
+//                               ^ meta.string.css
+}
+
+

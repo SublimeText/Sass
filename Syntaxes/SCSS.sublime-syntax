@@ -36,6 +36,7 @@ contexts:
     - include: comments
     - include: properties-or-selectors
     - include: property-lists
+    - include: at-rules
 
 ###[ Yekyll front matter ]#####################################################
 
@@ -123,8 +124,40 @@ contexts:
   scss-interpolation-body:
     - clear_scopes: true
     - meta_scope: meta.interpolation.scss
+    - include: scss-expression
     - match: '(})'
       scope: punctuation.section.interpolation.end.scss
       pop: 1
-    # - include: scss-expression  @TODO: handle the expression inside the interpolation
 
+###[ SCSS EXPRESSIONS ]########################################################
+
+  scss-expression:
+    - include: scss-variables
+
+###[ SCSS STRINGS w/ INTERPOLATION ]###########################################
+
+  single-quoted-string-body:
+    - meta_prepend: true
+    - include: scss-interpolation
+  double-quoted-string-body:
+    - meta_prepend: true
+    - include: scss-interpolation
+  single-quoted-url-body:
+    - meta_prepend: true
+    - include: scss-interpolation
+  double-quoted-url-body:
+    - meta_prepend: true
+    - include: scss-interpolation
+  unquoted-urls:
+    - meta_prepend: true
+    - include: scss-interpolation
+
+###[ SCSS VARS ]###############################################################
+
+  scss-variables:
+    - match: '(({{ident}})(\.))?(\$)([a-zA-Z0-9_-][\w-]*)'
+      scope: variable.other.scss
+      captures:
+        2: entity.name.namespace.scss
+        3: punctuation.separator.namespace.scss
+        4: punctuation.definition.variable.scss
