@@ -32,7 +32,8 @@ title: Blogging Like a Hacker
 
  * It can also contain interpolation:
  * 1 + 1 = #{1 + 1}
- //        ^^^^^^^^ meta.interpolation.scss - comment
+//         ^^^^^^^^ meta.interpolation.scss - comment
+//             ^ keyword.operator
 
  * { item_description }
  // <- comment.block.css punctuation.definition.comment.css
@@ -129,4 +130,27 @@ title: Blogging Like a Hacker
 //                               ^ meta.string.css
 }
 
-
+//=============================================================================
+// Property Declarations
+// https://sass-lang.com/documentation/style-rules/declarations/
+//=============================================================================
+.circle {
+  $size: 100px;
+  width: $size;
+// ^^^^^^^^^^^^ meta.property-list
+//       ^^^^^ meta.property-value
+// ^^^^ meta.property-name
+//     ^ punctuation.separator.key-value.css
+//       ^^^^^ variable.other.scss
+//            ^ punctuation.terminator
+  height: $size;
+  border-radius: $size * 0.5;
+// ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list
+// ^^^^^^^^^^^^ meta.property-name
+//              ^^^^^^^^^^^^ meta.property-value
+//             ^ punctuation.separator.key-value.css
+//               ^^^^^ variable.other.scss
+//                     ^ keyword.operator.arithmetic
+//                       ^ meta.number.float.decimal.css constant.numeric.value.css
+//                          ^ punctuation.terminator
+}

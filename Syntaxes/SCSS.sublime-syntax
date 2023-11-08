@@ -112,6 +112,12 @@ contexts:
     - match: (?=[;)}])
       pop: 1
 
+###[ CSS VALUE EXPRESSIONS ]###################################################
+
+  values:
+    - meta_append: true
+    - include: scss-expression
+
 ###[ SCSS INTERPOLATION ]######################################################
 
   scss-interpolation:
@@ -133,6 +139,7 @@ contexts:
 
   scss-expression:
     - include: scss-variables
+    - include: scss-operators
 
 ###[ SCSS STRINGS w/ INTERPOLATION ]###########################################
 
@@ -161,3 +168,14 @@ contexts:
         2: entity.name.namespace.scss
         3: punctuation.separator.namespace.scss
         4: punctuation.definition.variable.scss
+
+###[ SCSS OPERATORS ]##########################################################
+
+  scss-operators:
+    - match: /|\*|\-\-|\-|\+\+|\+|~
+      scope: keyword.operator.arithmetic.scss
+    - match: $|%|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|%=|\+=|\-=|&=|\bnot\b|\bor\b|\band\b|\bwhen\b
+      scope: keyword.operator.scss
+    - match: (?:\s*)\b(not|or|and)(?=\s)
+      captures:
+        1: keyword.operator.scss
