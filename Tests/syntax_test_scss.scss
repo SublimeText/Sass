@@ -242,3 +242,53 @@ $warn: #dfa612;
   // evaluated.
   --consumed-by-js: $primary;
 }
+
+//=============================================================================
+// Parent Selector
+// https://sass-lang.com/documentation/style-rules/parent-selector/
+//=============================================================================
+.alert {
+  // The parent selector can be used to add pseudo-classes to the outer
+  // selector.
+  &:hover {
+//^ variable.language.parent.css
+    font-weight: bold;
+  }
+
+  // It can also be used to style the outer selector in a certain context, such
+  // as a body set to use a right-to-left language.
+  [dir=rtl] & {
+//          ^ variable.language.parent.css
+    margin-left: 0;
+    margin-right: 10px;
+  }
+
+  // You can even use it as an argument to pseudo-class selectors.
+  :not(&) {
+//     ^ variable.language.parent.css
+    opacity: 0.8;
+  }
+}
+
+.accordion {
+  max-width: 600px;
+  margin: 4rem auto;
+  width: 90%;
+  font-family: "Raleway", sans-serif;
+  background: #f4f4f4;
+
+  &__copy {
+//^ variable.language.parent.css
+    display: none;
+    padding: 1rem 1.5rem 2rem 1.5rem;
+    color: gray;
+    line-height: 1.6;
+    font-size: 14px;
+    font-weight: 500;
+
+    &--open {
+      display: block;
+    }
+  }
+}
+
