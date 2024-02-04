@@ -24,6 +24,7 @@ variables:
   tag_name_begin: (?=[[:alpha:]]|@+{)
 
   property_or_selector_begin: (?={{selector_start}}|[-&]|{{ident_start}})
+  nested_selector_start: '[%.:#&*\[{{combinator_char}}]'
 
 ###############################################################################
 
@@ -117,6 +118,10 @@ contexts:
     - match: (?=[;)}])
       pop: 1
 
+  selector-body:
+    - meta_append: true
+    - include: scss-placeholder-selector
+
 ###[ CSS PROPERTY LISTS ]######################################################
 
   property-list-body:
@@ -129,6 +134,14 @@ contexts:
   values:
     - meta_append: true
     - include: scss-expression
+
+###[ SCSS PLACEHOLDER SELECTOR ]###############################################
+
+  scss-placeholder-selector:
+    - match: \%
+      scope: entity.other.attribute-name.class.css punctuation.definition.entity.placeholder.scss
+      # has same basic properties as a classname
+      push: selector-class-identifier
 
 ###[ SCSS EXPRESSIONS ]########################################################
 

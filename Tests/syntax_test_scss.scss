@@ -292,3 +292,36 @@ $warn: #dfa612;
   }
 }
 
+//=============================================================================
+// Placeholder Selectors
+// https://sass-lang.com/documentation/style-rules/placeholder-selectors/
+//=============================================================================
+.alert:hover, %strong-alert {
+//            ^^^^^^^^^^^^^ entity.other.attribute-name.class.css
+//            ^             punctuation.definition.entity.placeholder.scss
+  font-weight: bold;
+}
+
+%strong-alert:hover {
+//^^^^^^^^^^^ entity.other.attribute-name.class.css
+//<-          punctuation.definition.entity.placeholder.scss
+  color: red;
+}
+
+%toolbelt {
+//^^^^^^^ entity.other.attribute-name.class.css
+//<-      punctuation.definition.entity.placeholder.scss
+  box-sizing: border-box;
+  border-top: 1px rgba(#000, .12) solid;
+  padding: 16px 0;
+  width: 100%;
+
+  &:hover { border: 2px rgba(#000, .5) solid; }
+}
+
+.action-buttons {
+  @extend %toolbelt;
+//        ^^^^^^^^^ entity.other.attribute-name.class.css
+//        ^         punctuation.definition.entity.placeholder.scss
+  color: #4285f4;
+}
