@@ -176,3 +176,27 @@ title: Blogging Like a Hacker
 .gray {
   @include prefix(filter, grayscale(50%), moz webkit);
 }
+
+//=============================================================================
+// Nesting
+// TODO: this is currently unimplemented,
+// as it would explode the complexity of the selector/property branching.
+// https://sass-lang.com/documentation/style-rules/declarations/#nesting
+//=============================================================================
+.enlarge {
+  font-size: 14px;
+  transition: {
+    property: font-size;
+    duration: 4s;
+    delay: 2s;
+  }
+
+  &:hover { font-size: 36px; }
+}
+
+.info-page {
+  margin: auto {
+    bottom: 10px;
+    top: 2px;
+  }
+}
