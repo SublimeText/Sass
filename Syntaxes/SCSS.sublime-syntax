@@ -140,6 +140,10 @@ contexts:
     - include: scss-default-operators
     - include: scss-global-operators
 
+  at-keyframe-identifier:
+    - meta_prepend: true
+    - include: scss-interpolation
+
 ###[ SCSS DEFAULT/GLOBAL VALUES ]###############################################
 
   scss-default-operators:

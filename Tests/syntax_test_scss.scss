@@ -366,11 +366,44 @@ code {
 // Shadowing (Global Values)
 // https://sass-lang.com/documentation/variables/#shadowing
 //=============================================================================
-
 $variable: first global value;
 
 .content {
   $variable: second global value !global;
 //                               ^^^^^^^ keyword.other.global.scss
   value: $variable;
+}
+
+//=============================================================================
+// Interpolation
+// https://sass-lang.com/documentation/interpolation/
+//=============================================================================
+@mixin corner-icon($name, $top-or-bottom, $left-or-right) {
+  .icon-#{$name} {
+    background-image: url("/icons/#{$name}.svg");
+//                                ^^^^^^^^ meta.interpolation.scss
+    position: absolute;
+    #{$top-or-bottom}: 0;
+//  ^^^^^^^^^^^^^^^^^ meta.interpolation.scss
+    #{$left-or-right}: 0;
+//  ^^^^^^^^^^^^^^^^^ meta.interpolation.scss
+  }
+}
+
+@mixin inline-animation($duration) {
+  $name: inline-#{unique-id()};
+//              ^^^^^^^^^^^^^^ meta.interpolation.scss
+
+// FYI: meta.at-rule.keyframe.css does not apply to the interpolated bit due to clear_scopes
+  @keyframes #{$name} {
+// ^^^^^^^^^^          meta.at-rule.keyframe.css
+//                   ^ meta.at-rule.keyframe.css
+// ^^^^^^^^^           keyword.control.directive.css
+//           ^^^^^^^^  meta.interpolation.scss
+    @content;
+  }
+
+  animation-name: $name;
+  animation-duration: $duration;
+  animation-iteration-count: infinite;
 }
