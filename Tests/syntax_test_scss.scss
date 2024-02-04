@@ -169,8 +169,26 @@ title: Blogging Like a Hacker
 @mixin prefix($property, $value, $prefixes) {
   @each $prefix in $prefixes {
     -#{$prefix}-#{$property}: $value;
+//   ^^^^^^^^^^ meta.interpolation.scss
+//             ^ - meta.interpolation.scss
+//   ^ punctuation.definition.variable.scss
+//    ^ punctuation.section.interpolation.begin.scss
+//            ^ punctuation.section.interpolation.end.scss
+//     ^^^^^^^ variable.other.scss
+//              ^^^^^^^^^^^^ meta.interpolation.scss
+//                          ^ - meta.interpolation.scss
+//              ^ punctuation.definition.variable.scss
+//               ^ punctuation.section.interpolation.begin.scss
+//                         ^ punctuation.section.interpolation.end.scss
+//                ^^^^^^^^^ variable.other.scss
   }
   #{$property}: $value;
+//^^^^^^^^^^^^ meta.interpolation.scss
+//            ^ - meta.interpolation.scss
+//^ punctuation.definition.variable.scss
+// ^ punctuation.section.interpolation.begin.scss
+//           ^ punctuation.section.interpolation.end.scss
+//  ^^^^^^^^^ variable.other.scss
 }
 
 .gray {
@@ -199,4 +217,28 @@ title: Blogging Like a Hacker
     bottom: 10px;
     top: 2px;
   }
+}
+
+//=============================================================================
+// Custom Properties
+// https://sass-lang.com/documentation/style-rules/declarations/#custom-properties
+//=============================================================================
+$primary: #81899b;
+$accent: #302e24;
+$warn: #dfa612;
+
+:root {
+  --primary: #{$primary};
+//^^^^^^^^^ meta.property-name.css entity.other.custom-property.css
+  --accent: #{$accent};
+  --warn: #{$warn};
+//        ^^^^^^^^ meta.interpolation.scss
+//                ^ - meta.interpolation.scss
+//        ^ punctuation.definition.variable.scss
+//         ^ punctuation.section.interpolation.begin.scss
+//               ^ punctuation.section.interpolation.end.scss
+//          ^^^^^ variable.other.scss
+  // Even though this looks like a Sass variable, it's valid CSS so it's not
+  // evaluated.
+  --consumed-by-js: $primary;
 }

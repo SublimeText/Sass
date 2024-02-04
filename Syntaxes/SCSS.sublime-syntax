@@ -106,6 +106,8 @@ contexts:
     - include: comments
     - include: property-end
     - include: property-identifiers
+    - include: scss-interpolated-property
+
     # otherwise it is part of a selector
     - match: ''
       fail: property-or-selector
@@ -135,6 +137,19 @@ contexts:
     - include: scss-operators
 
 ###[ SCSS INTERPOLATION ]######################################################
+
+  scss-interpolated-property:
+    - match: '-?(?=#{)'
+      push:
+      - match: ''
+        pop: 1
+      - match: '(#)({)'
+        captures:
+          1: punctuation.definition.variable.scss
+          2: punctuation.section.interpolation.begin.scss
+        push:
+          - property-value
+          - scss-interpolation-body
 
   scss-interpolation:
     - match: '(#)({)'
@@ -178,6 +193,7 @@ contexts:
         2: entity.name.namespace.scss
         3: punctuation.separator.namespace.scss
         4: punctuation.definition.variable.scss
+    - include: scss-interpolation
 
 ###[ SCSS DECLARATIONS ]#######################################################
 
