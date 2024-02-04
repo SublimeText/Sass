@@ -397,6 +397,7 @@ contexts:
           push:
             - include: terminator-pop
             - include: comments
+            - include: comma-delimiters
             - include: scss-expression
             - match: '{{ident}}'
               scope: meta.generic-name.scss
@@ -408,9 +409,9 @@ contexts:
             - match: '\)'
               scope: punctuation.section.group.end.scss
               pop: 1
-            - match: ':'
-              scope: punctuation.separator.key-value.css
             - include: comments
+            - include: comma-delimiters
+            - include: scss-declaration
             - include: scss-expression
         - include: comments
         - include: quoted-strings

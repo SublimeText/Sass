@@ -407,3 +407,79 @@ $variable: first global value;
   animation-duration: $duration;
   animation-iteration-count: infinite;
 }
+
+//=============================================================================
+// At-Rules: use
+// https://sass-lang.com/documentation/at-rules/use/
+//=============================================================================
+@use 'foundation/code';
+@use 'foundation/lists';
+//^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module.scss
+//^^                    keyword.control.directive.module.scss
+//<-                    punctuation.definition.keyword.scss
+//.  ^^^^^^^^^^^^^^^^^  meta.string.css
+
+// https://sass-lang.com/documentation/at-rules/use/#choosing-a-namespace
+@use "src/corners" as c;
+//^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module.scss
+//^^                    keyword.control.directive.module.scss
+//<-                    punctuation.definition.keyword.scss
+//                 ^^   keyword.control.as.scss
+//                    ^ meta.generic-name.scss
+
+// https://sass-lang.com/documentation/at-rules/use/#configuration
+@use 'library' with (
+//^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module.scss
+//^^                   keyword.control.directive.module.scss
+//<-                   punctuation.definition.keyword.scss
+//             ^^^^    keyword.control.with.scss
+//                  ^  punctuation.section.group.begin.scss
+  $black: #222,
+//^^^^^^        variable.declaration.scss
+//        ^^^^  constant.other.color
+//            ^ punctuation.separator.sequence.css
+
+// TODO: $border-radius should be a declaration?
+// maybe everything in () should be considered a map? or args?
+  $border-radius: 0.1rem,
+  $border-radius: 0.1rem
+//^^^^^^^^^^^^^^ variable
+);
+
+//=============================================================================
+// At-Rules: forward
+// https://sass-lang.com/documentation/at-rules/forward/
+//=============================================================================
+@forward "src/list";
+//^^^^^^^^^^^^^^^^^ meta.at-rule.module.scss
+//^^^^^^            keyword.control.directive.module.scss
+//<-                punctuation.definition.keyword.scss
+
+// https://sass-lang.com/documentation/at-rules/forward/#adding-a-prefix
+@forward "src/list" as list-*;
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module.scss
+//^^^^^^                      keyword.control.directive.module.scss
+//<-                          punctuation.definition.keyword.scss
+//                  ^^        keyword.control.as.scss
+//                     ^^     meta.generic-name.scss
+//                          ^ constant.language.import-all.scss
+//                           ^ punctuation.terminator.rule.css
+
+// https://sass-lang.com/documentation/at-rules/forward/#controlling-visibility
+@forward "src/list" hide list-reset, $horizontal-list-gap;
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module.scss
+//^^^^^^                                                  keyword.control.directive.module.scss
+//<-                                                      punctuation.definition.keyword.scss
+//                  ^^^^                                  keyword.control.show-hide.scss
+//                       ^^^^^^^^^^                       meta.generic-name.scss
+//                                 ^                      punctuation.separator.sequence.css
+//                                   ^^^^^^^^^^^^^^^^^^^^ variable.other.scss
+//                                                       ^ punctuation.terminator.rule.css
+
+// https://sass-lang.com/documentation/at-rules/forward/#configuring-modules
+@forward 'library' with (
+  $black: #222 !default,
+//             ^^^^^^^^ keyword.other.default.scss
+//                     ^ punctuation.separator.sequence.css
+  $border-radius: 0.1rem !default
+);
