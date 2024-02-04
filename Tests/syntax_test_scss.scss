@@ -121,13 +121,12 @@ title: Blogging Like a Hacker
     // This is parsed as a normal function call that takes an arithmetic expression.
     src: url($roboto-font-path + "/Roboto-Light.woff2") format("woff2");
     // This is parsed as an interpolated special function.
-/* @TODO: unsure how this should be handled, */
+/* TODO: unsure how this should be handled, */
     src: url(#{$roboto-font-path}/Roboto-Regular.woff2) format("woff2");
 //           ^^^^^^^^^^^^^^^^^^^^ meta.interpolation.scss
 //                               ^ -meta.interpolation.scss
 //             ^^^^^^^^^^^^^^^^^ variable.other.scss
 //             ^ punctuation.definition.variable.scss
-//                               ^ meta.string.css
 }
 
 //=============================================================================
@@ -324,4 +323,54 @@ $warn: #dfa612;
 //        ^^^^^^^^^ entity.other.attribute-name.class.css
 //        ^         punctuation.definition.entity.placeholder.scss
   color: #4285f4;
+}
+
+//=============================================================================
+// Variables
+// https://sass-lang.com/documentation/variables/
+//=============================================================================
+$base-color: #c6538c;
+// ^^^^^^^^ variable.declaration.scss
+//         ^ - variable.declaration.scss
+//<-        punctuation.definition.variable.scss
+$border-dark: rgba($base-color, 0.88);
+// ^^^^^^^^^ variable.declaration.scss
+//          ^ - variable.other.scss
+//<-         punctuation.definition.variable.scss
+//                 ^^^^^^^^^^^ variable.other.scss
+//                            ^ - variable.other.scss
+//                 ^           punctuation.definition.variable.scss
+
+.alert {
+  border: 1px solid $border-dark;
+}
+
+//=============================================================================
+// Default Values
+// https://sass-lang.com/documentation/variables/#default-values
+//=============================================================================
+$black: #000 !important;
+//           ^^^^^^^^^^ keyword.other.important.css
+$black: #000 !default;
+//           ^^^^^^^^ keyword.other.default.scss
+$border-radius: 0.25rem !default;
+//                      ^^^^^^^^ keyword.other.default.scss
+$box-shadow: 0 0.5rem 1rem rgba($black, 0.15) !default;
+
+code {
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+}
+
+//=============================================================================
+// Shadowing (Global Values)
+// https://sass-lang.com/documentation/variables/#shadowing
+//=============================================================================
+
+$variable: first global value;
+
+.content {
+  $variable: second global value !global;
+//                               ^^^^^^^ keyword.other.global.scss
+  value: $variable;
 }

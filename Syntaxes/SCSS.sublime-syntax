@@ -135,6 +135,27 @@ contexts:
     - meta_append: true
     - include: scss-expression
 
+  value-prototype:
+    - meta_append: true
+    - include: scss-default-operators
+    - include: scss-global-operators
+
+###[ SCSS DEFAULT/GLOBAL VALUES ]###############################################
+
+  scss-default-operators:
+    - match: \!\s*(?i:default){{break}}
+      scope: keyword.other.default.scss
+
+  scss-global-operators:
+    - match: \!\s*(?i:global){{break}}
+      scope: keyword.other.global.scss
+
+###[ CSS FUNCTION ARGUMENTS ]##################################################
+
+  function-arguments-prototype:
+    - meta_append: true
+    - include: scss-expression
+
 ###[ SCSS PLACEHOLDER SELECTOR ]###############################################
 
   scss-placeholder-selector:
