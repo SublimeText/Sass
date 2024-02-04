@@ -483,3 +483,52 @@ $variable: first global value;
 //                     ^ punctuation.separator.sequence.css
   $border-radius: 0.1rem !default
 );
+
+//=============================================================================
+// At-Rules: import
+// Deprecated, thus left unimplemented (CSS highlightling still applies)
+// https://sass-lang.com/documentation/at-rules/import/
+//=============================================================================
+@import 'foundation/code', 'foundation/lists';
+
+//=============================================================================
+// At-Rules: mixin and include
+// https://sass-lang.com/documentation/at-rules/mixin/
+//=============================================================================
+@mixin reset-list {
+//^^^^^^^^^^^^^^^^ meta.function.declaration.scss
+//^^^^             keyword.control.directive.scss
+//     ^^^^^^^^^^  entity.name.function.scss
+//<-               punctuation.definition.keyword.scss
+//                ^ meta.property-list.css meta.block.css punctuation.section.block.begin.css
+  margin: 0;
+// ^^^^^^^^^ meta.property-list.css meta.block.css
+// ^^^^^     meta.property-name.css support.type.property-name.css
+  padding: 0;
+  list-style: none;
+}
+//<- meta.property-list.css meta.block.css punctuation.section.block.end.css
+
+@mixin horizontal-list {
+  @include reset-list;
+//^^^^^^^^^^^^^^^^^^^ meta.function-call.scss
+//^^^^^^^^            keyword.control.directive.scss
+//^                   punctuation.definition.keyword.scss
+//         ^^^^^^^^^^ variable.function.scss
+  li {
+    display: inline-block;
+    margin: {
+      left: -2px;
+      right: 2em;
+    }
+  }
+}
+
+nav ul {
+  @include horizontal-list;
+//^^^^^^^^^^^^^^^^^^^ meta.function-call.scss
+//^^^^^^^^            keyword.control.directive.scss
+//^                   punctuation.definition.keyword.scss
+//         ^^^^^^^^^^ variable.function.scss
+}
+
