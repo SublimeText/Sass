@@ -5,4 +5,4 @@ This brings it more in line with the default CSS package.
 
 If you're seeing differences in highlighting, that's probably why.
 If you see any problems, please report them and we'll sort them out ASAP!
-https://github.com/braver/SublimeSass
+https://github.com/braver/Sass
