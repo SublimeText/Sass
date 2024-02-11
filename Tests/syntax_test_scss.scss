@@ -769,6 +769,15 @@ nav ul {
 // https://sass-lang.com/documentation/at-rules/function/
 //=============================================================================
 @function fibonacci($n) {
+//^^^^^^^^^^^^^^^^^^^^^^ meta.function.declaration.scss
+//^^^^^^^                keyword.control.directive.scss
+//<-                     punctuation.definition.keyword.scss
+//        ^^^^^^^^^      entity.name.function.scss
+//                 ^^^^  meta.function.parameters.scss
+//                 ^     punctuation.section.group.begin.scss
+//                  ^^   variable.parameter.scss
+//                    ^  punctuation.section.group.end.scss
+//                      ^ punctuation.section.block.begin.css
   $sequence: 0 1;
   @for $_ from 1 through $n {
     $new: nth($sequence, length($sequence)) + nth($sequence, length($sequence) - 1);
