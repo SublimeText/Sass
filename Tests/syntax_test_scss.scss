@@ -532,3 +532,235 @@ nav ul {
 //         ^^^^^^^^^^ variable.function.scss
 }
 
+//=============================================================================
+// At-Rules: mixin arguments
+// https://sass-lang.com/documentation/at-rules/mixin/#arguments
+//=============================================================================
+@mixin rtl($property, $ltr-value, $rtl-value) {
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.declaration.scss
+//                                            ^ - meta.function.declaration.scss
+//^^^^                                        keyword.control.directive.scss
+//     ^^^                                    entity.name.function.scss
+//<-                                          punctuation.definition.keyword.scss
+//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  meta.function.parameters.scss
+//        ^                                   punctuation.section.group.begin.scss
+//                                          ^ punctuation.section.group.end.scss
+//         ^^^^^^^^^                          variable.parameter.scss
+//                  ^                         punctuation.separator.sequence.css
+//                    ^^^^^^^^^^              variable.parameter.scss
+//                              ^             punctuation.separator.sequence.css
+  #{$property}: $ltr-value;
+//^^^^^^^^^^^^             meta.interpolation.scss
+//            ^            punctuation.separator.key-value.css
+//              ^^^^^^^^^^ variable.other.scss
+//                        ^ punctuation.terminator.rule.css
+
+  [dir=rtl] & {
+    #{$property}: $rtl-value;
+  }
+}
+
+.sidebar {
+  @include rtl(float, left, right);
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.scss
+//                                ^ - meta.function-call.scss
+//^^^^^^^^                         keyword.control.directive.scss
+//^                                punctuation.definition.keyword.scss
+//         ^^^                     variable.function.scss
+//            ^                    punctuation.section.group.begin.scss
+//             ^^^^^^^^^^^^^^^^^^  meta.function-call.arguments.scss
+//             ^^^^^               support.constant.property-value.css
+//                  ^              punctuation.separator.sequence.css
+//                    ^^^^         support.constant.property-value.css
+//                        ^        punctuation.separator.sequence.css
+//                               ^ punctuation.section.group.end.scss
+}
+
+//=============================================================================
+// At-Rules: mixin optional arguments
+// https://sass-lang.com/documentation/at-rules/mixin/#optional-arguments
+//=============================================================================
+@mixin replace-text($image, $x: 50%, $y: 50%) {
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.declaration.scss
+//                                            ^ - meta.function.declaration.scss
+//^^^^                                        keyword.control.directive.scss
+//     ^^^^^^^^^^^^                           entity.name.function.scss
+//<-                                          punctuation.definition.keyword.scss
+//                  ^^^^^^^^^^^^^^^^^^^^^^^^  meta.function.parameters.scss
+//                 ^                          punctuation.section.group.begin.scss
+//                                          ^ punctuation.section.group.end.scss
+//                  ^^^^^^                    variable.parameter.scss
+//                        ^                   punctuation.separator.sequence.css
+//                          ^^                variable.parameter.scss
+//                            ^               punctuation.separator.key-value.css
+//                              ^^^           constant.numeric
+//                                 ^          punctuation.separator.sequence.css
+
+  text-indent: -99999em;
+  overflow: hidden;
+  text-align: left;
+
+  background: {
+    image: $image;
+    repeat: no-repeat;
+    position: $x $y;
+  }
+}
+
+.mail-icon {
+  @include replace-text(url("/images/mail.svg"), 0);
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.scss
+//                                                 ^ - meta.function-call.scss
+//^^^^^^^^                                          keyword.control.directive.scss
+//^                                                 punctuation.definition.keyword.scss
+//         ^^^^^^^^^^^^                             variable.function.scss
+//                     ^                            punctuation.section.group.begin.scss
+//                      ^^^^^^^^^^^^^^^^^^^^^^^^^^  meta.function-call.arguments.scss
+//                      ^^^                         support.function.url.css
+//                           ^^^^^^^^^^^^^^^^       meta.path.url.css
+//                                             ^    punctuation.separator.sequence.css
+//                                               ^  constant.numeric.value.css
+//                                                ^ punctuation.section.group.end.scss
+
+}
+
+//=============================================================================
+// At-Rules: mixin keyword arguments
+// https://sass-lang.com/documentation/at-rules/mixin/#keyword-arguments
+//=============================================================================
+@mixin square($size, $radius: 0) {
+  width: $size;
+  height: $size;
+
+  @if $radius != 0 {
+    border-radius: $radius;
+  }
+}
+
+.avatar {
+  @include square(100px, $radius: 4px);
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.scss
+//                                    ^ - meta.function-call.scss
+//^^^^^^^^                             keyword.control.directive.scss
+//^                                    punctuation.definition.keyword.scss
+//         ^^^^^^                      variable.function.scss
+//               ^                     punctuation.section.group.begin.scss
+//                ^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.scss
+//                ^^^^^                constant.numeric
+//                     ^               punctuation.separator.sequence.css
+//                       ^^^^^^^       variable.other.scss
+//                              ^      punctuation.separator.key-value.css
+//                                ^^^  constant.numeric
+//                                   ^ punctuation.section.group.end.scss
+}
+
+//=============================================================================
+// At-Rules: mixin arbitrary arguments
+// https://sass-lang.com/documentation/at-rules/mixin/#taking-arbitrary-arguments
+//=============================================================================
+@mixin order($height, $selectors...) {
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.declaration.scss
+//           ^^^^^^^^^^^^^^^^^^^^^^  meta.function.parameters.scss
+//          ^                        punctuation.section.group.begin.scss
+//                                 ^ punctuation.section.group.end.scss
+//           ^^^^^^                  variable.parameter.scss
+//                  ^                punctuation.separator.sequence.css
+//                    ^^^^^^^^^^     variable.parameter.scss
+//                              ^^^  keyword.operator.spread.scss
+
+  @for $i from 0 to length($selectors) {
+    #{nth($selectors, $i + 1)} {
+      position: absolute;
+      height: $height;
+      margin-top: $i * $height;
+    }
+  }
+}
+
+@include order(150px, "input.name", "input.address", "input.zip");
+
+// https://sass-lang.com/documentation/at-rules/mixin/#taking-arbitrary-keyword-arguments
+@use "sass:meta";
+
+@mixin syntax-colors($args...) {
+//                        ^^^  keyword.operator.spread.scss
+
+@include syntax-colors(
+  $string: #080,
+//^^^^^^^^^^^^^^ meta.function-call.arguments.scss
+//^^^^^^^        variable.other.scss
+//       ^       punctuation.separator.key-value.css
+//         ^^^^  constant.other.color
+//             ^ punctuation.separator.sequence
+  $comment: #800,
+//^^^^^^^^^^^^^^ meta.function-call.arguments.scss
+//^^^^^^^^        variable.other.scss
+//        ^       punctuation.separator.key-value.css
+//          ^^^^  constant.other.color
+//              ^ punctuation.separator.sequence
+  $variable: #60b,
+//               ^ punctuation.separator.sequence
+)   //
+// ^ - meta.function-call
+//  ^ comment
+
+// https://sass-lang.com/documentation/at-rules/mixin/#passing-arbitrary-arguments
+@include order(150px, $form-selectors...);
+//                                   ^^^  keyword.operator.spread.scss
+
+//=============================================================================
+// At-Rules: mixin content blocks
+// https://sass-lang.com/documentation/at-rules/mixin/#content-blocks
+//=============================================================================
+@mixin hover {
+  &:not([disabled]):hover {
+    @content;
+// ^^^^^^^^^^^ meta.property-list
+//  ^^^^^^^^   meta.at-rule.scss
+//          ^  - meta.at-rule.scss
+//          ^  punctuation.terminator.rule.css
+//  ^^^^^^^^   keyword.control.directive.content.scss
+//  ^          punctuation.definition.keyword.scss
+  }
+}
+
+.button {
+  border: 1px solid black;
+  @include hover {
+    border-width: 2px;
+// ^^^^^^^^^^^^^^^^^^^ meta.property-list
+//  ^^^^^^^^^^^^       support.type.property-name.css
+//                ^^^  constant.numeric
+//                   ^ punctuation.terminator.rule.css
+  }
+}
+
+// https://sass-lang.com/documentation/at-rules/mixin/#passing-arguments-to-content-blocks
+@mixin media($types...) {
+  @each $type in $types {
+    @media #{$type} {
+      @content($type);
+// ^^^^^^^^^^^^^^^^^^^ meta.property-list
+//    ^^^^^^^^^^^^^^^  meta.at-rule.scss
+//            ^        punctuation.section.group.begin.scss
+//                  ^ punctuation.section.group.end.scss
+//             ^^^^^   meta.function-call.arguments
+//             ^^^^^   variable.other.scss
+//                   ^ - meta.at-rule.scss
+//                   ^ punctuation.terminator.rule.css
+//    ^^^^^^^^         keyword.control.directive.content.scss
+//    ^                punctuation.definition.keyword.scss
+
+    }
+  }
+}
+
+@include media(screen, print) using ($type) {
+  h1 {
+    font-size: 40px;
+    @if $type == print {
+      font-family: Calluna;
+    }
+  }
+}
+

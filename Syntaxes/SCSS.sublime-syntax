@@ -346,6 +346,8 @@ contexts:
               push:
                 - match: '(?=[,\)])'
                   pop: 1
+                - match: '[.]{3}'
+                  scope: keyword.operator.spread.scss
                 - match: ':'
                   scope: punctuation.separator.key-value.css
                 - match: '\b(false|true|null)\b'
@@ -367,11 +369,16 @@ contexts:
             - meta_scope: meta.function-call.arguments.scss
             - match: '\)'
               scope: punctuation.section.group.end.scss
-              pop: 1
+              pop: 2
             - include: comments
-            - include: scss-expression
+            - include: comma-delimiters
+            - match: '[.]{3}'
+              scope: keyword.operator.spread.scss
+            - match: ':'
+              scope: punctuation.separator.key-value.css
+            - include: values
             - match: '{{ident}}'
-              scope: constant.other.scss
+              scope: meta.generic-name.scss
     - match: '(@)(return){{break}}'
       captures:
         0: keyword.control.directive.return.scss
@@ -380,6 +387,29 @@ contexts:
         - meta_scope: meta.at-rule.scss
         - include: terminator-pop
         - include: property-value-content
+    - match: '(@)(content){{break}}'
+      captures:
+        0: keyword.control.directive.content.scss
+        1: punctuation.definition.keyword.scss
+      push:
+        - meta_scope: meta.at-rule.scss
+        - include: terminator-pop
+        - match: '\('
+          scope: punctuation.section.group.begin.scss
+          push:
+            - meta_scope: meta.function-call.arguments.scss
+            - match: '\)'
+              scope: punctuation.section.group.end.scss
+              pop: 2
+            - include: comments
+            - include: comma-delimiters
+            - match: '[.]{3}'
+              scope: keyword.operator.spread.scss
+            - match: ':'
+              scope: punctuation.separator.key-value.css
+            - include: values
+            - match: '{{ident}}'
+              scope: meta.generic-name.scss
     - match: '\s*((@)(use|forward){{break}})\s*'
       captures:
         1: keyword.control.directive.module.scss
