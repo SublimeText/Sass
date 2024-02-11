@@ -1,34 +1,41 @@
-name: continuous-integration
+name: CI Syntax Tests
 
-on: [push]
+on:
+  push:
+    push:
+      - '**'
+    paths:
+      - '.github/workflows/ci-syntax-tests.yml'
+      - '**.sublime-syntax'
+      - '**/syntax_test_*'
+      - '**.tmPreferences'
+  pull_request:
+    branches:
+      - '**'
+    paths:
+      - '.github/workflows/ci-syntax-tests.yml'
+      - '**.sublime-syntax'
+      - '**/syntax_test_*'
+      - '**.tmPreferences'
+  workflow_dispatch:
 
 jobs:
-  build:
-    name: Run syntax_tests
+  syntax_tests:
+    name: Sublime Text ${{ matrix.build }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15   # default is 6 hours!
+    strategy:
+      matrix:
+        include:
+          - build: 4149   # first supported ST build
+            default_packages: v4149
+          - build: latest # latest available ST build
+            default_packages: master
     steps:
-      - uses: actions/checkout@master
-      - name: Install OpenGL
-        run: sudo apt-get -y install libgl1-mesa-glx libglu1-mesa
-      - name: Download syntax_tests
-        run: wget --content-disposition https://download.sublimetext.com/st_syntax_tests_build_4121_x64.tar.xz
-      - name: Extract syntax_tests
-        run: tar xf "$(ls st_syntax_tests_build_*_x64.tar.xz)"
-      - name: Move syntax_tests
-        run: mv st_syntax_tests/syntax_tests ./
-      - name: Cleanup syntax_tests dir
-        run: rm -R st_syntax_tests*
-      - name: Cleanup git dir
-        run: rm -R .git*
-      - name: Setup 'Data/Packages/Sass'
-        run: mkdir -p 'Data/Packages/Sass'
-      - name: Move package into its own subdir within Data dir
-        run: >-
-          find .
-          -maxdepth 1
-          -mindepth 1
-          -not -name 'Data'
-          -not -name 'syntax_tests'
-          -exec mv -v '{}' 'Data/Packages/Sass/' \;
-      - name: Run syntax tests
-        run: ./syntax_tests
+      - name: Checkout ${{ env.package_name }}
+        uses: actions/checkout@v3
+      - name: Run Syntax Tests for Sublime Text ${{ matrix.build }}
+        uses: SublimeText/syntax-test-action@v2
+        with:
+          build: ${{ matrix.build }}
+          default_packages: ${{ matrix.default_packages }}
