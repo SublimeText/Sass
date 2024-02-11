@@ -67,7 +67,7 @@
     . ()
 /*  ^ meta.selector.css entity.other.attribute-name.class.css punctuation.definition.entity.css */
 /*   ^ meta.selector.css - entity - invalid - punctuation */
-/*    ^^ meta.selector.parameters.css meta.group.less */
+/*    ^^ meta.selector.parameters.css meta.group */
 
     . {}
 /*^^^^ meta.selector.css */
@@ -1932,12 +1932,12 @@
 /*                                   ^^^ constant.numeric.suffix.css */
 
     top: max(5*6, min(10 + 5, calc(var(--size) / 5)));
-/*       ^^^ support.function.less */
+/*       ^^^ support.function */
 /*           ^ constant.numeric.value.css */
 /*            ^ keyword.operator.arithmetic */
 /*             ^ constant.numeric.value.css */
 /*              ^ punctuation.separator.sequence.css */
-/*                ^^^ support.function.less */
+/*                ^^^ support.function */
 /*                    ^^ constant.numeric.value.css */
 /*                       ^ keyword.operator.arithmetic */
 /*                         ^ constant.numeric.value.css */
@@ -2236,9 +2236,9 @@
 /*                                    ^^^^^^ meta.string.css string.unquoted.css */
 
 .test-attribute-selectors-incomplete[ ;
-/*                                  ^^ meta.mixin.item-access.less meta.brackets.less */
+/*                                  ^^ meta.mixin.item-access meta.brackets */
 /*                                    ^ - meta.property-list - meta.selector */
-/*                                  ^ punctuation.section.brackets.begin.less */
+/*                                  ^ punctuation.section.brackets.begin */
 /*                                    ^ punctuation.terminator.rule.css */
 
 .test-attribute-selectors-namespaces[n|a=""][*|a=""][|att][*|*] {}
@@ -2714,11 +2714,11 @@
     /* note: we can't distinguish operators from alpha-separator; */
     color: hwb(0 100% 50% / 1.0);
 /*         ^^^ support.function.color.css */
-/*                        ^ keyword.operator.arithmetic.less */
+/*                        ^ keyword.operator.arithmetic */
 
     color: lab(0% 0 0 / 1.0);
 /*         ^^^ support.function.color.css */
-/*                    ^ keyword.operator.arithmetic.less */
+/*                    ^ keyword.operator.arithmetic */
 
     color: lch(0% 0.0 0.0 / 1.0);
 /*         ^^^ support.function.color.css */
@@ -2726,7 +2726,7 @@
 /*             ^ constant.numeric.value.css */
 /*                ^^^ meta.number.float.decimal.css constant.numeric.value.css */
 /*                    ^^^ meta.number.float.decimal.css constant.numeric.value.css */
-/*                        ^ keyword.operator.arithmetic.less */
+/*                        ^ keyword.operator.arithmetic */
 /*                          ^^^ meta.number.float.decimal.css constant.numeric.value.css */
 
     color: lch(20% 10% 20grad / 100%);
@@ -2740,7 +2740,7 @@
 /*                     ^^^^^^ meta.number.integer.decimal.css */
 /*                     ^^ constant.numeric.value.css */
 /*                       ^^^^ constant.numeric.suffix.css */
-/*                            ^ keyword.operator.arithmetic.less */
+/*                            ^ keyword.operator.arithmetic */
 /*                              ^^^^ meta.number.integer.decimal.css */
 /*                              ^^^ constant.numeric.value.css */
 /*                                 ^ constant.numeric.suffix.css */
@@ -2758,24 +2758,24 @@
 /*                        ^^^ support.function.var.css */
 /*                           ^ punctuation.section.group.begin.css */
 /*                            ^^ punctuation.section.group.end.css */
-/*                               ^^ meta.group.less */
+/*                               ^^ meta.group */
 /*                                  ^ punctuation.section.group.end.css */
 /*                                   ^ invalid.illegal.unexpected-token.css */
 
     top: h(+ 1.5deg);
 /*       ^ support.function.color.css */
-/*         ^ keyword.operator.arithmetic.less */
+/*         ^ keyword.operator.arithmetic */
 /*           ^^^ meta.number.float.decimal.css constant.numeric.value.css */
 /*              ^^^ meta.number.float.decimal.css constant.numeric.suffix.css */
 
     top: w(* 1.5%);
 /*       ^ support.function.color.css */
-/*         ^ keyword.operator.arithmetic.less */
+/*         ^ keyword.operator.arithmetic */
 /*           ^^^ meta.number.float.decimal.css constant.numeric.value.css */
 /*              ^ meta.number.float.decimal.css constant.numeric.suffix.css */
 
     top: shade(1.5%);
-/*       ^^^^^ support.function.less */
+/*       ^^^^^ support.function */
 /*             ^^^ meta.number.float.decimal.css constant.numeric.value.css */
 /*                ^ meta.number.float.decimal.css constant.numeric.suffix.css */
 
