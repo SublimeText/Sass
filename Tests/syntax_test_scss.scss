@@ -1076,3 +1076,66 @@ $accent: #e1d7d2;
     }
   }
 }
+
+//=============================================================================
+// If, else
+// https://sass-lang.com/documentation/at-rules/control/if/
+//=============================================================================
+@mixin avatar($size, $circle: false) {
+  width: $size;
+  height: $size;
+
+  @if $circle {
+//^^^^^^^^^^^ meta.at-rule.scss
+//^^^         keyword.control.flow.conditional.scss
+//^           punctuation.definition.keyword.scss
+//    ^^^^^^^ variable.other
+    border-radius: math.div($size, 2);
+  }
+}
+
+// https://sass-lang.com/documentation/at-rules/control/if/#else
+@mixin theme-colors($light-theme: true) {
+  @if $light-theme {
+//^^^^^^^^^^^ meta.at-rule.scss
+//^^^         keyword.control.flow.conditional.scss
+//^           punctuation.definition.keyword.scss
+//    ^^^^^^^ variable.other
+
+    background-color: $light-background;
+    color: $light-text;
+  } @else {
+//  ^^^^^^ meta.at-rule.scss
+//  ^^^^^         keyword.control.flow.conditional.scss
+//  ^           punctuation.definition.keyword.scss
+    background-color: $dark-background;
+    color: $dark-text;
+  }
+}
+
+// https://sass-lang.com/documentation/at-rules/control/if/#else-if
+@mixin triangle($size, $color, $direction) {
+  height: 0;
+  width: 0;
+
+  border-color: transparent;
+  border-style: solid;
+  border-width: math.div($size, 2);
+
+  @if $direction == up {
+    border-bottom-color: $color;
+  } @else if $direction == right {
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.scss
+//  ^^^^^^^^                     keyword.control.flow.conditional.scss
+//  ^                            punctuation.definition.keyword.scss
+//           ^                   variable.other
+//                      ^        keyword.operator
+    border-left-color: $color;
+  } @else if $direction == down {
+    border-top-color: $color;
+  } @else if $direction == left {
+    border-right-color: $color;
+  } @else {
+    @error "Unknown direction #{$direction}.";
+  }
+}
