@@ -138,7 +138,7 @@ title: Blogging Like a Hacker
 //^^^^^ variable.declaration.scss
 //^ punctuation.definition.variable.scss
 //     ^ punctuation.separator.key-value.css
-//       ^^^^^ meta.property-value.css meta.number.integer.decimal.css
+//       ^^^^^ meta.number.integer.decimal.css
 //       ^^^ constant.numeric.value.css
 //          ^^ constant.numeric.suffix.css
 //            ^ punctuation.terminator
@@ -648,7 +648,7 @@ nav ul {
 //                ^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.scss
 //                ^^^^^                constant.numeric
 //                     ^               punctuation.separator.sequence.css
-//                       ^^^^^^^       variable.other.scss
+//                       ^^^^^^^       variable.declaration.scss
 //                              ^      punctuation.separator.key-value.css
 //                                ^^^  constant.numeric
 //                                   ^ punctuation.section.group.end.scss
@@ -688,13 +688,13 @@ nav ul {
 @include syntax-colors(
   $string: #080,
 //^^^^^^^^^^^^^^ meta.function-call.arguments.scss
-//^^^^^^^        variable.other.scss
+//^^^^^^^        variable.declaration.scss
 //       ^       punctuation.separator.key-value.css
 //         ^^^^  constant.other.color
 //             ^ punctuation.separator.sequence
   $comment: #800,
 //^^^^^^^^^^^^^^ meta.function-call.arguments.scss
-//^^^^^^^^        variable.other.scss
+//^^^^^^^^        variable.declaration.scss
 //        ^       punctuation.separator.key-value.css
 //          ^^^^  constant.other.color
 //              ^ punctuation.separator.sequence
@@ -743,7 +743,7 @@ nav ul {
 // ^^^^^^^^^^^^^^^^^^^ meta.property-list
 //    ^^^^^^^^^^^^^^^  meta.at-rule.scss
 //            ^        punctuation.section.group.begin.scss
-//                  ^ punctuation.section.group.end.scss
+//                  ^  punctuation.section.group.end.scss
 //             ^^^^^   meta.function-call.arguments
 //             ^^^^^   variable.other.scss
 //                   ^ - meta.at-rule.scss
@@ -789,4 +789,138 @@ nav ul {
 .sidebar {
   float: left;
   margin-left: fibonacci(4) * 1px;
+//             ^^^^^^^^^^^^ meta.property-value.css
+//             ^^^^^^^^^    meta.function-call.identifier.css variable.function.css
+//                      ^^^ meta.function-call.arguments
+//                      ^   punctuation.section.group.begin
+//                       ^  constant.numeric
+//                        ^ punctuation.section.group.end
 }
+
+// https://sass-lang.com/documentation/at-rules/function/#optional-arguments
+@function invert($color, $amount: 100%) {
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.declaration.scss
+//^^^^^^^                                keyword.control.directive.scss
+//<-                                     punctuation.definition.keyword.scss
+//        ^^^^^^                         entity.name.function.scss
+//              ^^^^^^^^^^^^^^^^^^^^^^^  meta.function.parameters.scss
+//              ^                        punctuation.section.group.begin.scss
+//               ^^^^^                   variable.parameter.scss
+//               ^                       punctuation.definition.variable.scss
+//                     ^                 punctuation.separator.sequence
+//                       ^^^^^           variable.parameter.scss
+//                       ^               punctuation.definition.variable.scss
+//                       ^^^^^^^^        meta.function.declaration.scss
+//                              ^        punctuation.separator.key-value.css
+//                                ^^^^   constant.numeric
+//                                    ^  punctuation.section.group.end.scss
+//                                      ^ punctuation.section.block.begin.css
+  $inverse: change-color($color, $hue: hue($color) + 180);
+  @return mix($inverse, $color, $amount);
+}
+
+$primary-color: #036;
+.header {
+  background-color: invert($primary-color, 80%);
+}
+
+// https://sass-lang.com/documentation/at-rules/function/#keyword-arguments
+$primary-color: #036;
+.banner {
+  background-color: $primary-color;
+  color: scale-color($primary-color, $lightness: +40%);
+//       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css
+//       ^^^^^^^^^^^                                   meta.function-call.identifier.css variable.function.css
+//                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments
+//                                                    ^ punctuation.terminator.rule.css
+//                  ^   punctuation.section.group.begin
+//                                                   ^ punctuation.section.group.end
+//                    ^^^^^^^^^^^^                     variable.other.scss
+//                   ^                                 punctuation.definition.variable.scss
+//                                 ^                   punctuation.separator.sequence
+//                                    ^^^^^^^^^        variable.declaration.scss
+//                                   ^                 punctuation.definition.variable.scss
+//                                             ^       punctuation.separator.key-value.css
+//                                               ^^^^  meta.number
+//                                               ^     keyword.operator
+//                                                ^^^  constant.numeric
+}
+
+// https://sass-lang.com/documentation/at-rules/function/#taking-arbitrary-arguments
+@function sum($numbers...) {
+//                    ^^^ keyword.operator.spread.scss
+  $sum: 0;
+  @each $number in $numbers {
+    $sum: $sum + $number;
+  }
+  @return $sum;
+}
+
+.micro {
+  width: sum(50px, 30px, 100px);
+}
+
+// https://sass-lang.com/documentation/at-rules/function/#passing-arbitrary-arguments
+$widths: 50px, 30px, 100px;
+.micro {
+  width: min($widths...);
+//                  ^^^ keyword.operator.spread.scss
+}
+
+//=============================================================================
+// Function: return
+// https://sass-lang.com/documentation/at-rules/function/#return
+//=============================================================================
+@use "sass:string";
+
+@function str-insert($string, $insert, $index) {
+  // Avoid making new strings if we don't need to.
+  @if string.length($string) == 0 {
+//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^   meta.at-rule.scss
+//                                ^ - meta.at-rule.scss
+//    ^^^^^^^^^^^^^                 meta.function-call.identifier.css
+//    ^^^^^^^^^^^^^                 variable.function.css support.function.scss
+//    ^^^^^^                        entity.name.namespace.scss
+//          ^                       punctuation.separator.namespace.scss
+//                 ^                meta.function-call.arguments.css punctuation.section.group.begin.css
+//                           ^^     keyword.operator
+//                              ^   constant.numeric
+//                                ^ punctuation.section.block.begin.css
+    @return $insert;
+//  ^^^^^^^          meta.at-rule.scss keyword.control.directive.return.scss
+//          ^^^^^^^  variable.other.scss
+//                 ^ punctuation.terminator.rule.css
+  }
+
+  $before: string.slice($string, 0, $index);
+//         ^^^^^^^^^^^^               meta.function-call.identifier.css
+//         ^^^^^^^^^^^^               variable.function.css support.function.scss
+//         ^^^^^^                     entity.name.namespace.scss
+//               ^                    punctuation.separator.namespace.scss
+//                     ^              meta.function-call.arguments.css punctuation.section.group.begin.css
+//                      ^^^^^^^       variable.other.scss
+
+  $after: string.slice($string, $index);
+  @return $before + $insert + $after;
+}
+
+
+//=============================================================================
+// Other Functions
+// https://sass-lang.com/documentation/at-rules/function/#other-functions
+//=============================================================================
+@debug var(--main-bg-color); // var(--main-bg-color)
+// ^^^                         meta.at-rule.scss keyword.control.at-rule.debugger.scss
+//<-                           punctuation.definition.keyword.scss
+//     ^^^                     support.function.var.css
+//                         ^   punctuation.terminator.rule.css
+//                           ^ comment
+$primary: #f2ece4;
+$accent: #e1d7d2;
+@debug radial-gradient($primary, $accent); // radial-gradient(#f2ece4, #e1d7d2)
+// ^^^                                      meta.at-rule.scss keyword.control.at-rule.debugger.scss
+//<-                                        punctuation.definition.keyword.scss
+//     ^^^^^^^^^^^^^^^                      support.function.gradient.css
+//                    ^                     punctuation.section.group.begin.css
+//                             ^            punctuation.separator.sequence.css
+//                                       ^  punctuation.terminator.rule.css

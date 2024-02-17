@@ -132,8 +132,21 @@ contexts:
 ###[ CSS VALUE EXPRESSIONS ]###################################################
 
   values:
-    - meta_append: true
-    - include: scss-expression
+    - include: value-prototype
+    - include: comma-delimiters
+    - include: arithmetic-operators
+    - include: important-operators
+    - include: vendor-prefixes
+    - include: builtin-functions
+    - include: color-values
+    - include: line-name-lists
+    - include: unicode-ranges
+    - include: numeric-constants
+    - include: quoted-strings
+    - include: none-constants
+    - include: scss-expression ## handle scss expressions before native functions etc.
+    - include: constants-or-functions
+    - include: illegal-groups
 
   value-prototype:
     - meta_append: true
@@ -171,8 +184,10 @@ contexts:
 ###[ SCSS EXPRESSIONS ]########################################################
 
   scss-expression:
+    - include: scss-declaration
     - include: scss-variables
     - include: scss-operators
+    - include: sass-namespaced-functions
 
 ###[ SCSS INTERPOLATION ]######################################################
 
@@ -236,14 +251,34 @@ contexts:
 ###[ SCSS DECLARATIONS ]#######################################################
 
   scss-declaration:
-    - match: '(\$)([a-zA-Z0-9_-][\w-]*)'
+    - match: '(\$)([a-zA-Z0-9_-][\w-]*)(?=:)'
       captures:
         0: variable.declaration.scss
         1: punctuation.definition.variable.scss
       push:
-        - include: comments
         - include: terminator-pop
-        - include: property-values
+        - match: ':'
+          scope: punctuation.separator.key-value.css
+          push:
+            - include: comments
+            - include: terminator-pop
+            - include: values
+
+###[ SCSS FUNCTIONS ]##########################################################
+
+  sass-namespaced-functions:
+    - match: '\b(?!var)(({{ident}})(\.))?([a-z_-]+)(?=\()'
+      scope: support.function.scss
+      captures:
+        2: entity.name.namespace.scss
+        3: punctuation.separator.namespace.scss
+      push:
+        - meta_scope: meta.function-call.identifier.css variable.function.css
+        - match: (?=\()
+          set:
+            - other-function-arguments-list-body
+            - function-arguments-list-begin
+
 
 ###[ SCSS OPERATORS ]##########################################################
 
@@ -252,6 +287,8 @@ contexts:
       scope: keyword.operator.arithmetic.scss
     - match: $|%|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|%=|\+=|\-=|&=|\bnot\b|\bor\b|\band\b|\bwhen\b
       scope: keyword.operator.scss
+    - match: '[.]{3}'
+      scope: keyword.operator.spread.scss
     - match: (?:\s*)\b(not|or|and)(?=\s)
       captures:
         1: keyword.operator.scss
@@ -294,7 +331,7 @@ contexts:
       push:
         - meta_scope: meta.at-rule.scss
         - include: terminator-pop
-        - include: scss-expression
+        - include: values
     - match: '(@)(warn|error){{break}}'
       captures:
         0: keyword.control.at-rule.warn.scss
@@ -310,7 +347,7 @@ contexts:
       push:
         - meta_scope: meta.at-rule.scss
         - include: terminator-pop
-        - include: scss-expression
+        - include: values
     - match: '(@)(at-root){{break}}'
       captures:
         0: keyword.control.directive.at-root.scss
@@ -346,8 +383,6 @@ contexts:
               push:
                 - match: '(?=[,\)])'
                   pop: 1
-                - match: '[.]{3}'
-                  scope: keyword.operator.spread.scss
                 - match: ':'
                   scope: punctuation.separator.key-value.css
                 - match: '\b(false|true|null)\b'
@@ -372,8 +407,6 @@ contexts:
               pop: 2
             - include: comments
             - include: comma-delimiters
-            - match: '[.]{3}'
-              scope: keyword.operator.spread.scss
             - match: ':'
               scope: punctuation.separator.key-value.css
             - include: values
