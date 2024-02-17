@@ -909,7 +909,6 @@ $widths: 50px, 30px, 100px;
   @return $before + $insert + $after;
 }
 
-
 //=============================================================================
 // Other Functions
 // https://sass-lang.com/documentation/at-rules/function/#other-functions
@@ -929,3 +928,54 @@ $accent: #e1d7d2;
 //                    ^                     punctuation.section.group.begin.css
 //                             ^            punctuation.separator.sequence.css
 //                                       ^  punctuation.terminator.rule.css
+
+//=============================================================================
+// Extend
+// https://sass-lang.com/documentation/at-rules/extend/
+//=============================================================================
+.error {
+  border: 1px #f00;
+  background-color: #fdd;
+
+  &--serious {
+//^^^^^^^^^^ meta.selector.css
+//^          variable.language.parent.css
+// ^^^^^^^^^ entity.other.attribute-name.css
+    @extend .error;
+//  ^^^^^^^^^^^^^^ meta.at-rule.extend.scss
+//  ^^^^^^^        keyword.control.directive.extend.scss
+//          ^^^^^^ meta.selector.css
+//  ^              punctuation.definition.keyword.scss
+//                ^ punctuation.terminator.rule.css
+    border-width: 3px;
+  }
+}
+
+// https://sass-lang.com/documentation/at-rules/extend/#placeholder-selectors
+.alert:hover, %strong-alert {
+//            ^^^^^^^^^^^^^ entity.other.attribute-name.class.css
+//            ^             punctuation.definition.entity.placeholder.scss
+  font-weight: bold;
+}
+
+%strong-alert:hover {
+//^^^^^^^^^^^^^^^^^ meta.selector.css
+//^^^^^^^^^^^       entity.other.attribute-name.class.css
+//           ^      punctuation.definition.pseudo-class.css
+//            ^^^^^ entity.other.pseudo-class.css
+//<-                punctuation.definition.entity.placeholder.scss
+  color: red;
+}
+
+// https://sass-lang.com/documentation/at-rules/extend/#extend-in-media
+@media screen and (max-width: 600px) {
+  .error--serious {
+    @extend .error;
+//  ^^^^^^^^^^^^^^ meta.at-rule.extend.scss
+//  ^^^^^^^        keyword.control.directive.extend.scss
+//          ^^^^^^ meta.selector.css
+//  ^              punctuation.definition.keyword.scss
+//                ^ punctuation.terminator.rule.css
+
+  }
+}

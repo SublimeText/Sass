@@ -122,6 +122,11 @@ contexts:
     - meta_prepend: true
     - include: scss-interpolation
     - include: scss-placeholder-selector
+    - match: (\&)([-_]+{{ident}})
+      # &--bem_ish selectors
+      captures:
+        1: variable.language.parent.css
+        2: entity.other.attribute-name.css
 
 ###[ CSS PROPERTY LISTS ]######################################################
 
@@ -279,7 +284,6 @@ contexts:
           set:
             - other-function-arguments-list-body
             - function-arguments-list-begin
-
 
 ###[ SCSS OPERATORS ]##########################################################
 
