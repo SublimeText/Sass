@@ -119,7 +119,8 @@ contexts:
       pop: 1
 
   selector-body:
-    - meta_append: true
+    - meta_prepend: true
+    - include: scss-interpolation
     - include: scss-placeholder-selector
 
 ###[ CSS PROPERTY LISTS ]######################################################

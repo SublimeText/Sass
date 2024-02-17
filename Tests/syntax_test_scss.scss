@@ -380,6 +380,9 @@ $variable: first global value;
 //=============================================================================
 @mixin corner-icon($name, $top-or-bottom, $left-or-right) {
   .icon-#{$name} {
+//^^^^^^         entity.other.attribute-name.class.css
+//       ^^^^^^^ meta.interpolation.scss
+//        ^^^^^  variable.other.scss
     background-image: url("/icons/#{$name}.svg");
 //                                ^^^^^^^^ meta.interpolation.scss
     position: absolute;
@@ -670,6 +673,8 @@ nav ul {
 
   @for $i from 0 to length($selectors) {
     #{nth($selectors, $i + 1)} {
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.interpolation.scss
+//                            ^ meta.selector
       position: absolute;
       height: $height;
       margin-top: $i * $height;
