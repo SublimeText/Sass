@@ -1042,3 +1042,37 @@ $accent: #e1d7d2;
   margin-left: $divider-offset;
   width: calc(100% - #{$divider-offset});
 }
+
+//=============================================================================
+// At-root
+// https://sass-lang.com/documentation/at-rules/at-root/
+//=============================================================================
+@mixin unify-parent($child) {
+  @at-root #{selector.unify(&, $child)} {
+//^^^^^^^^    keyword.control.directive.at-root.scss
+//^           punctuation.definition.keyword.scss
+//         ^^ meta.interpolation
+    @content;
+//  ^^^^^^^^    keyword.control.directive.content.scss
+//  ^           punctuation.definition.keyword.scss
+  }
+}
+
+// https://sass-lang.com/documentation/at-rules/at-root/#beyond-style-rules
+@media print {
+  .page {
+    width: 8in;
+
+    @at-root (without: media) {
+//  ^^^^^^^^           keyword.control.directive.at-root.scss
+//  ^                  punctuation.definition.keyword.scss
+//                   ^ punctuation.separator.key-value.css
+
+      color: #111;
+    }
+
+    @at-root (with: rule) {
+      font-size: 1.2em;
+    }
+  }
+}
