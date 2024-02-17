@@ -979,3 +979,66 @@ $accent: #e1d7d2;
 
   }
 }
+
+//=============================================================================
+// Error
+// https://sass-lang.com/documentation/at-rules/error/
+//=============================================================================
+@mixin reflexive-position($property, $value) {
+  @if $property != left and $property != right {
+    @error "Property #{$property} must be either left or right.";
+//  ^^^^^^^^^^^^^^^^^                   meta.at-rule.scss
+//                               ^^^^^^ meta.at-rule.scss
+//  ^^^^^^                              keyword.control.at-rule.error.scss
+//  ^                                   punctuation.definition.keyword.scss
+//         ^^^^^^^^^^                   string.quoted
+//                   ^^^^^^^^^^         meta.interpolation
+//                               ^^^^^^ string.quoted
+
+  }
+
+  $left-value: if($property == right, initial, $value);
+  $right-value: if($property == right, $value, initial);
+
+  left: $left-value;
+  right: $right-value;
+  [dir=rtl] & {
+    left: $right-value;
+    right: $left-value;
+  }
+}
+
+//=============================================================================
+// Warn
+// https://sass-lang.com/documentation/at-rules/warn/
+//=============================================================================
+@mixin prefix($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    @if not index($known-prefixes, $prefix) {
+      @warn "Unknown prefix #{$prefix}.";
+//    ^^^^^                      meta.at-rule.scss keyword.control.at-rule.warn.scss
+//    ^                          punctuation.definition.keyword.scss
+//          ^^^^^^^^^^           string.quoted
+//                          ^^^^ meta.interpolation
+    }
+
+    -#{$prefix}-#{$property}: $value;
+  }
+  #{$property}: $value;
+}
+
+//=============================================================================
+// Debug
+// https://sass-lang.com/documentation/at-rules/debug/
+//=============================================================================
+@mixin inset-divider-offset($offset, $padding) {
+  $divider-offset: (2 * $padding) + $offset;
+  @debug "divider offset: #{$divider-offset}";
+//^^^^^^                     meta.at-rule.scss keyword.control.at-rule.debugger.scss
+//^                          punctuation.definition.keyword.scss
+//       ^^^^^^^^^^          string.quoted
+//                        ^^ meta.interpolation
+
+  margin-left: $divider-offset;
+  width: calc(100% - #{$divider-offset});
+}

@@ -337,7 +337,16 @@ contexts:
         - meta_scope: meta.at-rule.scss
         - include: terminator-pop
         - include: values
-    - match: '(@)(warn|error){{break}}'
+    - match: '(@)(error){{break}}'
+      captures:
+        0: keyword.control.at-rule.error.scss
+        1: punctuation.definition.keyword.scss
+      push:
+        - meta_scope: meta.at-rule.scss
+        - include: terminator-pop
+        - include: scss-expression
+        - include: quoted-strings
+    - match: '(@)(warn){{break}}'
       captures:
         0: keyword.control.at-rule.warn.scss
         1: punctuation.definition.keyword.scss
@@ -345,6 +354,7 @@ contexts:
         - meta_scope: meta.at-rule.scss
         - include: terminator-pop
         - include: scss-expression
+        - include: quoted-strings
     - match: '(@)(debug){{break}}'
       captures:
         0: keyword.control.at-rule.debugger.scss
