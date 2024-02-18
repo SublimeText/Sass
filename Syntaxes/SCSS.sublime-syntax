@@ -342,6 +342,12 @@ contexts:
     - match: (?:\s*)\b(not|or|and)(?=\s)
       captures:
         1: keyword.operator.scss
+    - match: \btrue\b
+      scope: constant.language.boolean.true.scss
+    - match: \bfalse\b
+      scope: constant.language.boolean.false.scss
+    - match: \bnull\b
+      scope: constant.language.null.scss
 
 ###[ SCSS @ Rules ]############################################################
 

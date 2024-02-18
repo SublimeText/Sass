@@ -1319,3 +1319,20 @@ $transition-speed: math.div(1s, 50px);
 .slider {
   @include move(10px, 120px);
 }
+
+//=============================================================================
+// Operators
+// https://sass-lang.com/documentation/operators/
+//=============================================================================
+@debug 1 + 2 * 3 == 1 + (2 * 3); // true
+@debug true or false and false == true or (false and false); // true
+//     ^^^^                                                constant.language.boolean.true.scss
+//          ^^                                             keyword.operator.scss
+//             ^^^^^                                       constant.language.boolean.false.scss
+//                    ^^                                   keyword.operator.scss
+//                                        ^^^^^^^^^^^^^^^^ meta.group.scss
+//                                         ^^^^            constant.language.boolean.false.scss
+//                                               ^^^       keyword.operator.scss
+//                                                   ^^^^^ constant.language.boolean.false.scss
+@debug (1 + 2) * 3; // 9
+@debug ((1 + 2) * 3 + 4) * 5; // 65
