@@ -4,7 +4,6 @@
 // Yekyll front matter
 // https://jekyllrb.com/docs/front-matter/
 //=============================================================================
-
 ---
 # <- meta.frontmatter.jekyll punctuation.section.frontmatter.begin.jekyll
 #^^  meta.frontmatter.jekyll punctuation.section.frontmatter.begin.jekyll
@@ -19,7 +18,6 @@ title: Blogging Like a Hacker
 // Comments
 // https://sass-lang.com/documentation/syntax/comments/
 //=============================================================================
-
 // This comment won't be included in the CSS
 // <- comment.line.double-slash.scss punctuation.definition.comment.scss
  // <- comment.line.double-slash.scss punctuation.definition.comment.scss
@@ -85,7 +83,6 @@ title: Blogging Like a Hacker
 // SassDoc Comments
 // https://sass-lang.com/documentation/syntax/comments/#documentation-comments
 //=============================================================================
-
 /// SassDoc comments are **Markdown**, we only support some _mininal styling_
 //                       ^^^^^^^^^^^^ markup.bold
 //                                   ^ - markup.bold
@@ -1248,13 +1245,50 @@ $base-color: #036;
 //^                      punctuation.definition.keyword.scss
 //       ^^^^^^          variable.other.scss
 //              ^        keyword.operator.scss
-//                ^^^^^^ variable.other.scss
+//                ^^^^^  variable.other.scss
     $value: math.div($value, $ratio);
   }
   @return $value;
 }
 
+//=============================================================================
+// CSS At-Rules
+// https://sass-lang.com/documentation/at-rules/css/
+//=============================================================================
 $normal-font-size: 16px;
 sup {
   font-size: scale-below(20px, 16px);
+}
+
+.print-only {
+  display: none;
+
+  @media print { display: block; }
+//^^^^^^^^^^^^^ meta.at-rule.media.css
+}
+
+// https://sass-lang.com/documentation/at-rules/css/#media
+$layout-breakpoint-small: 960px;
+
+@media (min-width: $layout-breakpoint-small) {
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.media.css
+//                 ^^^^^^^^^^^^^^^^^^^^^^^^   variable.other.scss
+  .hide-extra-small {
+    display: none;
+  }
+}
+
+// https://sass-lang.com/documentation/at-rules/css/#supports
+$position: sticky;
+@mixin sticky-position {
+  position: fixed;
+  @supports (position: $position) {
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.supports.css
+//                     ^^^^^^^^^   variable.other.scss
+    position: sticky;
+  }
+}
+
+.banner {
+  @include sticky-position;
 }

@@ -135,6 +135,12 @@ contexts:
     - include: block-end
     - include: stylesheet
 
+###[ CSS MEDIA QUERIES ]#######################################################
+
+  media-query-group-body:
+    - meta_append: true
+    - include: scss-expression
+
 ###[ CSS VALUE EXPRESSIONS ]###################################################
 
   values:
