@@ -471,7 +471,7 @@ $variable: first global value;
 //^^^^^^                                                  keyword.control.directive.module.scss
 //<-                                                      punctuation.definition.keyword.scss
 //                  ^^^^                                  keyword.control.show-hide.scss
-//                       ^^^^^^^^^^                       meta.generic-name.scss
+//                       ^^^^^^^^^^                       support.constant.property-value
 //                                 ^                      punctuation.separator.sequence.css
 //                                   ^^^^^^^^^^^^^^^^^^^^ variable.other.scss
 //                                                       ^ punctuation.terminator.rule.css
@@ -617,7 +617,7 @@ nav ul {
 //                     ^                            punctuation.section.group.begin.scss
 //                      ^^^^^^^^^^^^^^^^^^^^^^^^^^  meta.function-call.arguments.scss
 //                      ^^^                         support.function.url.css
-//                           ^^^^^^^^^^^^^^^^       meta.path.url.css
+//                           ^^^^^^^^^^^^^^^^       meta.string.css
 //                                             ^    punctuation.separator.sequence.css
 //                                               ^  constant.numeric.value.css
 //                                                ^ punctuation.section.group.end.scss
@@ -1325,6 +1325,10 @@ $transition-speed: math.div(1s, 50px);
 // https://sass-lang.com/documentation/operators/
 //=============================================================================
 @debug 1 + 2 * 3 == 1 + (2 * 3); // true
+//                      ^^^^^^^ meta.group.scss
+//                       ^      constant.numeric
+//                         ^    keyword.operator
+//                           ^  constant.numeric
 @debug true or false and false == true or (false and false); // true
 //     ^^^^                                                constant.language.boolean.true.scss
 //          ^^                                             keyword.operator.scss

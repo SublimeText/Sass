@@ -202,6 +202,21 @@ contexts:
     - include: scss-operators
     - include: sass-namespaced-functions
 
+    # and most normal css values
+    # - include: comma-delimiters
+    # - include: arithmetic-operators
+    # - include: important-operators
+    # - include: vendor-prefixes
+    - include: builtin-functions
+    - include: color-values
+    - include: line-name-lists
+    - include: unicode-ranges
+    - include: numeric-constants
+    - include: quoted-strings
+    - include: none-constants
+    - include: constants-or-functions
+    # - include: illegal-groups
+
   scss-expression-block:
     - match: '\((?!.*:)'  # if there is an : in it, assume it's a map
       captures:
