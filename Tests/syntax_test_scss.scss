@@ -1213,3 +1213,48 @@ $icons:
     font-size: $size;
   }
 }
+
+//=============================================================================
+// For
+// https://sass-lang.com/documentation/at-rules/control/for/
+//=============================================================================
+$base-color: #036;
+
+@for $i from 1 through 3 {
+//^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.for.scss
+//^^                      keyword.control.flow.scss
+//<-                      punctuation.definition.keyword.scss
+//   ^^                   variable.other.scss
+//      ^^^^              keyword.operator.scss
+//           ^            constant.numeric
+//             ^^^^^^     keyword.operator.scss
+//                     ^  constant.numeric
+  ul:nth-child(3n + #{$i}) {
+    background-color: lighten($base-color, $i * 5%);
+  }
+}
+
+@use "sass:math";
+
+//=============================================================================
+// While
+// https://sass-lang.com/documentation/at-rules/control/for/
+//=============================================================================
+/// Divides `$value` by `$ratio` until it's below `$base`.
+@function scale-below($value, $base, $ratio: 1.618) {
+  @while $value > $base {
+//^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.while.scss
+//^^^^^^                 keyword.control.flow.scss
+//^                      punctuation.definition.keyword.scss
+//       ^^^^^^          variable.other.scss
+//              ^        keyword.operator.scss
+//                ^^^^^^ variable.other.scss
+    $value: math.div($value, $ratio);
+  }
+  @return $value;
+}
+
+$normal-font-size: 16px;
+sup {
+  font-size: scale-below(20px, 16px);
+}

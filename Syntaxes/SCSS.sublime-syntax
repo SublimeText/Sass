@@ -345,17 +345,25 @@ contexts:
             - include: comma-delimiters
             - include: var-function
             - include: scss-expression
-    - match: '(@)(for|while){{break}}'
+    - match: '(@)(for){{break}}'
       captures:
         0: keyword.control.flow.scss
         1: punctuation.definition.keyword.scss
       push:
-        - meta_scope: meta.at-rule.scss
+        - meta_scope: meta.at-rule.for.scss
+        - include: values
         - include: terminator-pop
         - match: (?:\s*)\b(from|to|through)(?=\s)
           captures:
             1: keyword.operator.scss
+    - match: '(@)(while){{break}}'
+      captures:
+        0: keyword.control.flow.scss
+        1: punctuation.definition.keyword.scss
+      push:
+        - meta_scope: meta.at-rule.while.scss
         - include: scss-expression
+        - include: terminator-pop
     - match: '(@)(if|else if|else){{break}}'
       captures:
         0: keyword.control.flow.conditional.scss
