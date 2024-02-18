@@ -196,10 +196,22 @@ contexts:
 ###[ SCSS EXPRESSIONS ]########################################################
 
   scss-expression:
+    - include: scss-expression-block
     - include: scss-declaration
     - include: scss-variables
     - include: scss-operators
     - include: sass-namespaced-functions
+
+  scss-expression-block:
+    - match: '\((?!.*:)'  # if there is an : in it, assume it's a map
+      captures:
+        0: punctuation.section.group.begin.scss
+      push:
+        - meta_scope: meta.group.scss
+        - include: scss-expression
+        - match: '\)'
+          scope: punctuation.section.group.end.scss
+          pop: 1
 
 ###[ SCSS INTERPOLATION ]######################################################
 
@@ -264,7 +276,7 @@ contexts:
 ###[ SCSS MAPS ]###############################################################
 
   scss-maps:
-    - match: '\('
+    - match: '\((?=.*:)'
       captures:
         0: punctuation.section.group.begin.scss
       push:

@@ -1292,3 +1292,30 @@ $position: sticky;
 .banner {
   @include sticky-position;
 }
+
+//=============================================================================
+// Numbers
+// https://sass-lang.com/documentation/values/numbers/
+//=============================================================================
+@use 'sass:math';
+
+$transition-speed: math.div(1s, 50px);
+
+@mixin move($left-start, $left-stop) {
+  position: absolute;
+  left: $left-start;
+  transition: left ($left-stop - $left-start) * $transition-speed;
+//                 ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.scss
+//                 ^                          punctuation.section.group.begin.scss
+//                  ^^^^^^^^^^                variable.other.scss
+//                             ^              keyword.operator.arithmetic.scss
+//                               ^^^^^^^^^^   variable.other.scss
+//                                          ^ punctuation.section.group.end.scss
+  &:hover {
+    left: $left-stop;
+  }
+}
+
+.slider {
+  @include move(10px, 120px);
+}
