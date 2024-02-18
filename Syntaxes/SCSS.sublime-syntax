@@ -253,6 +253,33 @@ contexts:
         3: punctuation.separator.namespace.scss
         4: punctuation.definition.variable.scss
     - include: scss-interpolation
+    - include: scss-maps
+
+###[ SCSS MAPS ]###############################################################
+
+  scss-maps:
+    - match: '\('
+      captures:
+        0: punctuation.section.group.begin.scss
+      push:
+        - meta_scope: meta.group.css meta.map.arguments.scss
+        - include: scss-variables
+        - include: quoted-strings
+        - match: '\)'
+          scope: punctuation.section.group.end.scss
+          pop: 1
+        - match: '({{ident}})'
+          captures:
+            1: variable.parameter.scss
+        - match: ':'
+          scope: punctuation.separator.key-value.css
+          push:
+            - match: ','
+              scope: punctuation.separator.sequence.css
+              pop: 1
+            - include: comments
+            - include: terminator-pop
+            - include: values
 
 ###[ SCSS DECLARATIONS ]#######################################################
 
@@ -334,7 +361,7 @@ contexts:
         0: keyword.control.flow.conditional.scss
         1: punctuation.definition.keyword.scss
       push:
-        - meta_scope: meta.at-rule.scss
+        - meta_scope: meta.at-rule.conditional.scss
         - include: terminator-pop
         - include: values
     - match: '(@)(error){{break}}'

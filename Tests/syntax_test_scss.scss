@@ -881,7 +881,7 @@ $widths: 50px, 30px, 100px;
 @function str-insert($string, $insert, $index) {
   // Avoid making new strings if we don't need to.
   @if string.length($string) == 0 {
-//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^   meta.at-rule.scss
+//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^   meta.at-rule.conditional.scss
 //                                ^ - meta.at-rule.scss
 //    ^^^^^^^^^^^^^                 meta.function-call.identifier.css
 //    ^^^^^^^^^^^^^                 variable.function.css support.function.scss
@@ -1086,7 +1086,7 @@ $accent: #e1d7d2;
   height: $size;
 
   @if $circle {
-//^^^^^^^^^^^ meta.at-rule.scss
+//^^^^^^^^^^^ meta.at-rule.conditional.scss
 //^^^         keyword.control.flow.conditional.scss
 //^           punctuation.definition.keyword.scss
 //    ^^^^^^^ variable.other
@@ -1097,7 +1097,7 @@ $accent: #e1d7d2;
 // https://sass-lang.com/documentation/at-rules/control/if/#else
 @mixin theme-colors($light-theme: true) {
   @if $light-theme {
-//^^^^^^^^^^^ meta.at-rule.scss
+//^^^^^^^^^^^ meta.at-rule.conditional.scss
 //^^^         keyword.control.flow.conditional.scss
 //^           punctuation.definition.keyword.scss
 //    ^^^^^^^ variable.other
@@ -1105,7 +1105,7 @@ $accent: #e1d7d2;
     background-color: $light-background;
     color: $light-text;
   } @else {
-//  ^^^^^^ meta.at-rule.scss
+//  ^^^^^^ meta.at-rule.conditional.scss
 //  ^^^^^         keyword.control.flow.conditional.scss
 //  ^           punctuation.definition.keyword.scss
     background-color: $dark-background;
@@ -1125,7 +1125,7 @@ $accent: #e1d7d2;
   @if $direction == up {
     border-bottom-color: $color;
   } @else if $direction == right {
-//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.scss
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.conditional.scss
 //  ^^^^^^^^                     keyword.control.flow.conditional.scss
 //  ^                            punctuation.definition.keyword.scss
 //           ^                   variable.other
@@ -1137,5 +1137,79 @@ $accent: #e1d7d2;
     border-right-color: $color;
   } @else {
     @error "Unknown direction #{$direction}.";
+  }
+}
+
+//=============================================================================
+// Each
+// https://sass-lang.com/documentation/at-rules/control/each/
+//=============================================================================
+$sizes: 40px, 50px, 80px;
+
+@each $size in $sizes {
+//^^^^^^^^^^^^^^^^^^^^ meta.at-rule.each.scss
+//^^^                  keyword.control.flow.scss
+//<-                   punctuation.definition.keyword.scss
+//    ^^^^^            variable.other.scss
+//          ^^         keyword.operator.scss
+//             ^^^^^   variable.other.scss
+  .icon-#{$size} {
+    font-size: $size;
+    height: $size;
+    width: $size;
+  }
+}
+
+// https://sass-lang.com/documentation/at-rules/control/each/#with-maps
+$icons: ("eye": "\f112", "start": "\f12e", "stop": "\f12f");
+// ^^^                                                      variable.declaration.scss
+//    ^                                                     punctuation.separator.key-value.css
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.css meta.map.arguments.scss
+//      ^                                                   punctuation.section.group.begin.scss
+//       ^^^^^                                              meta.string
+//            ^                                             punctuation.separator.key-value.css
+//              ^^^^^^^                                     meta.string
+//                     ^                                    punctuation.separator.sequence.css
+//                              ^                           punctuation.separator.key-value.css
+//                                       ^                  punctuation.separator.sequence.css
+//                                               ^          punctuation.separator.key-value.css
+//                                                        ^ punctuation.section.group.end.scss
+//                                                         ^ punctuation.terminator.rule.css
+@each $name, $glyph in $icons {
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.each.scss
+//^^^                          keyword.control.flow.scss
+//<-                           punctuation.definition.keyword.scss
+//    ^^^^^                    variable.other.scss
+//         ^                   punctuation.separator.sequence.css
+//           ^^^^^             variable.other.scss
+//                  ^^         keyword.operator.scss
+//                     ^^^^^^  variable.other.scss
+  .icon-#{$name}:before {
+    display: inline-block;
+    font-family: "Icon Font";
+    content: $glyph;
+  }
+}
+
+https://sass-lang.com/documentation/at-rules/control/each/#destructuring
+$icons:
+  "eye" "\f112" 12px,
+  "start" "\f12e" 16px,
+  "stop" "\f12f" 10px;
+
+@each $name, $glyph, $size in $icons {
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.each.scss
+//^^^                                 keyword.control.flow.scss
+//<-                                  punctuation.definition.keyword.scss
+//    ^^^^^                           variable.other.scss
+//                 ^                  punctuation.separator.sequence.css
+//                   ^^^^^            variable.other.scss
+//                         ^^         keyword.operator.scss
+//                            ^^^^^^  variable.other.scss
+  .icon-#{$name}:before {
+    display: inline-block;
+    font-family: "Icon Font";
+    content: $glyph;
+    font-size: $size;
   }
 }
