@@ -327,13 +327,14 @@ contexts:
   scss-declaration:
     - match: '(\$)([a-zA-Z0-9_-][\w-]*)(?=:)'
       captures:
-        0: variable.declaration.scss
+        0: meta.declaration.identifier.scss variable.other.scss
         1: punctuation.definition.variable.scss
       push:
         - include: terminator-pop
         - match: ':'
           scope: punctuation.separator.key-value.css
           push:
+            - meta_scope: meta.declaration.value.scss
             - include: comments
             - include: terminator-pop
             - include: values

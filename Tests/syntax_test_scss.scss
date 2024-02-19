@@ -132,9 +132,11 @@ title: Blogging Like a Hacker
 //=============================================================================
 .circle {
   $size: 100px;
-//^^^^^ variable.declaration.scss
+//^^^^^ variable.other.scss
 //^ punctuation.definition.variable.scss
 //     ^ punctuation.separator.key-value.css
+//       ^^^^^ meta.declaration.value.scss
+//            ^ - meta.declaration.value.scss
 //       ^^^^^ meta.number.integer.decimal.css
 //       ^^^ constant.numeric.value.css
 //          ^^ constant.numeric.suffix.css
@@ -327,11 +329,13 @@ $warn: #dfa612;
 // https://sass-lang.com/documentation/variables/
 //=============================================================================
 $base-color: #c6538c;
-// ^^^^^^^^ variable.declaration.scss
-//         ^ - variable.declaration.scss
+// ^^^^^^^^ meta.declaration.identifier.scss variable.other.scss
+//         ^ - variable.other.scss
 //<-        punctuation.definition.variable.scss
 $border-dark: rgba($base-color, 0.88);
-// ^^^^^^^^^ variable.declaration.scss
+// ^^^^^^^^^ meta.declaration.identifier.scss variable.other.scss
+//            ^^^^^^^^^^^^^^^^^^^^^^^ meta.declaration.value.scss
+//                                   ^ - meta.declaration.value.scss
 //          ^ - variable.other.scss
 //<-         punctuation.definition.variable.scss
 //                 ^^^^^^^^^^^ variable.other.scss
@@ -435,7 +439,7 @@ $variable: first global value;
 //             ^^^^    keyword.control.with.scss
 //                  ^  punctuation.section.group.begin.scss
   $black: #222,
-//^^^^^^        variable.declaration.scss
+//^^^^^^        meta.declaration.identifier.scss variable.other.scss
 //        ^^^^  constant.other.color
 //            ^ punctuation.separator.sequence.css
 
@@ -648,7 +652,7 @@ nav ul {
 //                ^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.scss
 //                ^^^^^                constant.numeric
 //                     ^               punctuation.separator.sequence.css
-//                       ^^^^^^^       variable.declaration.scss
+//                       ^^^^^^^       variable.other.scss
 //                              ^      punctuation.separator.key-value.css
 //                                ^^^  constant.numeric
 //                                   ^ punctuation.section.group.end.scss
@@ -690,13 +694,13 @@ nav ul {
 @include syntax-colors(
   $string: #080,
 //^^^^^^^^^^^^^^ meta.function-call.arguments.scss
-//^^^^^^^        variable.declaration.scss
+//^^^^^^^        meta.declaration.identifier.scss variable.other.scss
 //       ^       punctuation.separator.key-value.css
 //         ^^^^  constant.other.color
 //             ^ punctuation.separator.sequence
   $comment: #800,
-//^^^^^^^^^^^^^^ meta.function-call.arguments.scss
-//^^^^^^^^        variable.declaration.scss
+//^^^^^^^^^^^^^^  meta.function-call.arguments.scss
+//^^^^^^^^        meta.declaration.identifier.scss variable.other.scss
 //        ^       punctuation.separator.key-value.css
 //          ^^^^  constant.other.color
 //              ^ punctuation.separator.sequence
@@ -840,7 +844,7 @@ $primary-color: #036;
 //                    ^^^^^^^^^^^^                     variable.other.scss
 //                   ^                                 punctuation.definition.variable.scss
 //                                 ^                   punctuation.separator.sequence
-//                                    ^^^^^^^^^        variable.declaration.scss
+//                                    ^^^^^^^^^        variable.other.scss
 //                                   ^                 punctuation.definition.variable.scss
 //                                             ^       punctuation.separator.key-value.css
 //                                               ^^^^  meta.number
@@ -1159,7 +1163,7 @@ $sizes: 40px, 50px, 80px;
 
 // https://sass-lang.com/documentation/at-rules/control/each/#with-maps
 $icons: ("eye": "\f112", "start": "\f12e", "stop": "\f12f");
-// ^^^                                                      variable.declaration.scss
+// ^^^                                                      meta.declaration.identifier.scss variable.other.scss
 //    ^                                                     punctuation.separator.key-value.css
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.css meta.map.arguments.scss
 //      ^                                                   punctuation.section.group.begin.scss
