@@ -18,7 +18,7 @@ variables:
 
   ident_start: (?:{{nmstart}}|@+{)
 
-  selector_begin: (?={{selector_start}}|&|#{)
+  selector_begin: (?={{selector_start}}|%|&|#{)
   selector_end: (?=[;{}])
 
   tag_name_begin: (?=[[:alpha:]]|@+{)
