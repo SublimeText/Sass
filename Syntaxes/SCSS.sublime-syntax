@@ -169,6 +169,14 @@ contexts:
     - meta_prepend: true
     - include: scss-interpolation
 
+  font-family-value-content:
+    - meta_prepend: true
+    - include: scss-expression
+
+  font-property-value-content:
+    - meta_prepend: true
+    - include: scss-expression
+
 ###[ SCSS DEFAULT/GLOBAL VALUES ]###############################################
 
   scss-default-operators:

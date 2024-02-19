@@ -1340,3 +1340,23 @@ $transition-speed: math.div(1s, 50px);
 //                                                   ^^^^^ constant.language.boolean.false.scss
 @debug (1 + 2) * 3; // 9
 @debug ((1 + 2) * 3 + 4) * 5; // 65
+
+
+//===========================================================================//
+//                          Various other tests                              //
+//===========================================================================//
+
+
+//=============================================================================
+// Expressions in font values
+//=============================================================================
+h2 {
+  font-family: create_family($default, sans-serif, Times New Roman);
+//             ^^^^^^^^^^^^^           support.function.scss
+//                           ^^^^^^^^  variable.other.scss
+//                                   ^ punctuation.separator.sequence.css
+ font-weight: 20px + ($large * 2);
+//                   ^^^^^^^^^^^^ meta.group.scss
+//                    ^^^^^^      variable.other.scss
+//                           ^    keyword.operator
+}
