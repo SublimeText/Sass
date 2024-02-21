@@ -401,7 +401,6 @@ $variable: first global value;
 // FYI: meta.at-rule.keyframe.css does not apply to the interpolated bit due to clear_scopes
   @keyframes #{$name} {
 // ^^^^^^^^^^          meta.at-rule.keyframe.css
-//                   ^ meta.at-rule.keyframe.css
 // ^^^^^^^^^           keyword.control.directive.css
 //           ^^^^^^^^  meta.interpolation.scss
     @content;
@@ -475,7 +474,7 @@ $variable: first global value;
 //^^^^^^                                                  keyword.control.directive.module.scss
 //<-                                                      punctuation.definition.keyword.scss
 //                  ^^^^                                  keyword.control.show-hide.scss
-//                       ^^^^^^^^^^                       support.constant.property-value
+//                       ^^^^^^^^^^                       meta.generic-name.scss
 //                                 ^                      punctuation.separator.sequence.css
 //                                   ^^^^^^^^^^^^^^^^^^^^ variable.other.scss
 //                                                       ^ punctuation.terminator.rule.css
@@ -1248,7 +1247,7 @@ $base-color: #036;
 //^^^^^^                 keyword.control.flow.scss
 //^                      punctuation.definition.keyword.scss
 //       ^^^^^^          variable.other.scss
-//              ^        keyword.operator.scss
+//              ^        keyword.operator.comparison.scss
 //                ^^^^^  variable.other.scss
     $value: math.div($value, $ratio);
   }
@@ -1335,12 +1334,12 @@ $transition-speed: math.div(1s, 50px);
 //                           ^  constant.numeric
 @debug true or false and false == true or (false and false); // true
 //     ^^^^                                                constant.language.boolean.true.scss
-//          ^^                                             keyword.operator.scss
+//          ^^                                             keyword.operator.logical.scss
 //             ^^^^^                                       constant.language.boolean.false.scss
-//                    ^^                                   keyword.operator.scss
+//                    ^^                                   keyword.operator.logical.scss
 //                                        ^^^^^^^^^^^^^^^^ meta.group.scss
 //                                         ^^^^            constant.language.boolean.false.scss
-//                                               ^^^       keyword.operator.scss
+//                                               ^^^       keyword.operator.logical.scss
 //                                                   ^^^^^ constant.language.boolean.false.scss
 @debug (1 + 2) * 3; // 9
 @debug ((1 + 2) * 3 + 4) * 5; // 65

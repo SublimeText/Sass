@@ -156,7 +156,7 @@ contexts:
     - include: numeric-constants
     - include: quoted-strings
     - include: none-constants
-    - include: scss-expression ## handle scss expressions before native functions etc.
+    - include: scss-expression-basic ## handle scss expressions before native functions etc.
     - include: constants-or-functions
     - include: illegal-groups
 
@@ -171,11 +171,17 @@ contexts:
 
   font-family-value-content:
     - meta_prepend: true
-    - include: scss-expression
+    - include: scss-expression-basic
 
   font-property-value-content:
     - meta_prepend: true
-    - include: scss-expression
+    - include: scss-expression-basic
+
+###[ CSS FUNCTION ARGUMENTS ]##################################################
+
+  function-arguments-prototype:
+    - meta_append: true
+    - include: scss-expression-basic
 
 ###[ SCSS DEFAULT/GLOBAL VALUES ]###############################################
 
@@ -187,12 +193,6 @@ contexts:
     - match: \!\s*(?i:global){{break}}
       scope: keyword.other.global.scss
 
-###[ CSS FUNCTION ARGUMENTS ]##################################################
-
-  function-arguments-prototype:
-    - meta_append: true
-    - include: scss-expression
-
 ###[ SCSS PLACEHOLDER SELECTOR ]###############################################
 
   scss-placeholder-selector:
@@ -203,27 +203,38 @@ contexts:
 
 ###[ SCSS EXPRESSIONS ]########################################################
 
-  scss-expression:
+  scss-expression-basic:
+    # for use in CSS contexts
+    - include: comments
+    - include: important-operators
     - include: scss-expression-block
     - include: scss-declaration
     - include: scss-variables
     - include: scss-operators
     - include: sass-namespaced-functions
 
+  scss-expression:
+    # for use in SCSS contexts where we try to "guess" more types of values
+    - include: scss-expression-basic
+
     # and most normal css values
     # - include: comma-delimiters
     # - include: arithmetic-operators
-    # - include: important-operators
     # - include: vendor-prefixes
     - include: builtin-functions
     - include: color-values
-    - include: line-name-lists
+    # - include: line-name-lists
     - include: unicode-ranges
     - include: numeric-constants
     - include: quoted-strings
-    - include: none-constants
-    - include: constants-or-functions
+    # - include: none-constants
+    # - include: constants-or-functions
     # - include: illegal-groups
+
+    # other values only mean something after compiling to css,
+    # we can't always predict what just based on what it looks like
+    - match: '{{ident}}'
+      scope: meta.generic-name.scss
 
   scss-expression-block:
     - match: '\((?!.*:)'  # if there is an : in it, assume it's a map
@@ -359,13 +370,15 @@ contexts:
   scss-operators:
     - match: /|\*|\-\-|\-|\+\+|\+|~
       scope: keyword.operator.arithmetic.scss
-    - match: $|%|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|%=|\+=|\-=|&=|\bnot\b|\bor\b|\band\b|\bwhen\b
-      scope: keyword.operator.scss
-    - match: '[.]{3}'
-      scope: keyword.operator.spread.scss
+    - match: $|%|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|%=|\+=|\-=|&=
+      scope: keyword.operator.comparison.scss
+    - match: \bnot\b|\bor\b|\band\b|\bwhen\b
+      scope: keyword.operator.logical.scss
     - match: (?:\s*)\b(not|or|and)(?=\s)
       captures:
-        1: keyword.operator.scss
+        1: keyword.operator.logical.scss
+    - match: '[.]{3}'
+      scope: keyword.operator.spread.scss
     - match: \btrue\b
       scope: constant.language.boolean.true.scss
     - match: \bfalse\b
