@@ -27,7 +27,6 @@ jobs:
       strategy:
         matrix:
           include:
-            - build: latest
             - build: 4170
               packages: v4170
       steps:
