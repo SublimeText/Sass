@@ -18,29 +18,11 @@ The easiest way to install is using [Package Control](https://packagecontrol.io)
 2. Choose `Package Control: Install Package`
 3. Find `Sass` and hit <kbd>Enter</kbd>
 
-### Manual Install
-
-1. Download appropriate [Sass.sublime-package](https://github.com/braver/SublimeSaass/releases) for your Sublime Text build.
-   _A suffix (e.g. `-st4xxx`) denotes the least required ST build for the sublime-package to work._
-2. Rename it to _Sass.sublime-package_
-3. Copy it into _Installed Packages_ directory
-
-> **Note**
->
-> To find _Installed Packages_...
->
-> 1. call _Menu > Preferences > Browse Packages.._
-> 2. Navigate to parent folder
-
-> **Warning**
->
-> Manually installed packages are not automatically updated by Package Control.
-
 ## Troubleshooting
 
-Less extends Sublime Text's CSS syntax definition as of ST4149.
+SCSS extends Sublime Text's CSS syntax definition as of ST4149.
 
-If Less syntax highlighting doesn't work and console displays syntax errors in _Less.sublime-syntax_, please make sure to remove any out-dated syntax override.
+If SCSS syntax highlighting doesn't work and console displays syntax errors, please make sure to remove any out-dated syntax override.
 
 Steps:
 
@@ -53,3 +35,8 @@ Steps:
 ☕️👌🏻
 
 If you enjoy this package, feel free to make a little [donation via PayPal](https://paypal.me/koenlageveen) towards the coffee that keeps this project running. It's much appreciated!
+
+## Notes
+
+Development on the Sass syntax is currently frozen. It's too high maintenance since it's so different from CSS. Furthermore, the Sass language doesn't support various features that SCSS does: it's not left behind by the Sass team per se, but SCSS is the primary language right now. 
+That being said, if you want to improve the Sass syntax, contributions are more than welcome.
