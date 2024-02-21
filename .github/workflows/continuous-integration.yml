@@ -28,7 +28,8 @@ jobs:
         matrix:
           include:
             - build: latest
-              packages: master
+            - build: 4170
+              packages: v4170
       steps:
         - uses: actions/checkout@v3
         - uses: SublimeText/syntax-test-action@v2
