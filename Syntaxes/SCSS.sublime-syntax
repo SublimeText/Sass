@@ -207,11 +207,11 @@ contexts:
     # for use in CSS contexts
     - include: comments
     - include: important-operators
-    - include: scss-expression-block
     - include: scss-declaration
     - include: scss-variables
     - include: scss-operators
     - include: sass-namespaced-functions
+    - include: scss-expression-or-map
 
   scss-expression:
     # for use in SCSS contexts where we try to "guess" more types of values
@@ -235,17 +235,6 @@ contexts:
     # we can't always predict what just based on what it looks like
     - match: '{{ident}}'
       scope: meta.generic-name.scss
-
-  scss-expression-block:
-    - match: '\((?!.*:)'  # if there is an : in it, assume it's a map
-      captures:
-        0: punctuation.section.group.begin.scss
-      push:
-        - meta_scope: meta.group.scss
-        - include: scss-expression
-        - match: '\)'
-          scope: punctuation.section.group.end.scss
-          pop: 1
 
 ###[ SCSS INTERPOLATION ]######################################################
 
@@ -305,21 +294,38 @@ contexts:
         3: punctuation.separator.namespace.scss
         4: punctuation.definition.variable.scss
     - include: scss-interpolation
-    - include: scss-maps
 
-###[ SCSS MAPS ]###############################################################
+###[ SCSS MAPS OR GROUPS ]#####################################################
 
-  scss-maps:
-    - match: '\((?=.*:)'
+  scss-expression-or-map:
+    - match: '(?=\()'
+      branch_point: expression-or-map
+      branch:
+        - scss-expression-group
+        - scss-map
+
+  scss-expression-group:
+    - match: '\('
       captures:
         0: punctuation.section.group.begin.scss
       push:
-        - meta_scope: meta.group.css meta.map.arguments.scss
-        - include: scss-variables
-        - include: quoted-strings
+        - meta_scope: meta.group.expression.scss
         - match: '\)'
           scope: punctuation.section.group.end.scss
-          pop: 1
+          pop: 2
+        - match: (?=:)
+          fail: expression-or-map
+        - include: scss-expression
+
+  scss-map:
+    - match: '\('
+      captures:
+        0: punctuation.section.group.begin.scss
+      push:
+        - meta_scope: meta.group.scss meta.map.arguments.scss
+        - match: '\)'
+          scope: punctuation.section.group.end.scss
+          pop: 2
         - match: '({{ident}})'
           captures:
             1: variable.parameter.scss
@@ -332,6 +338,8 @@ contexts:
             - include: comments
             - include: terminator-pop
             - include: values
+        - include: scss-variables
+        - include: quoted-strings
 
 ###[ SCSS DECLARATIONS ]#######################################################
 

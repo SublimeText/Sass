@@ -1033,6 +1033,12 @@ $accent: #e1d7d2;
 //=============================================================================
 @mixin inset-divider-offset($offset, $padding) {
   $divider-offset: (2 * $padding) + $offset;
+//                 ^^^^^^^^^^^^^^ meta.declaration.value.scss meta.group.expression.scss
+//                 ^              punctuation
+//                              ^ punctuation
+//                    ^           keyword.operator.arithmetic.scss
+//                      ^^^^^^^^  variable.other
+
   @debug "divider offset: #{$divider-offset}";
 //^^^^^^                     meta.at-rule.scss keyword.control.at-rule.debugger.scss
 //^                          punctuation.definition.keyword.scss
@@ -1164,7 +1170,7 @@ $sizes: 40px, 50px, 80px;
 $icons: ("eye": "\f112", "start": "\f12e", "stop": "\f12f");
 // ^^^                                                      meta.declaration.identifier.scss variable.other.scss
 //    ^                                                     punctuation.separator.key-value.css
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.css meta.map.arguments.scss
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.scss meta.map.arguments.scss
 //      ^                                                   punctuation.section.group.begin.scss
 //       ^^^^^                                              meta.string
 //            ^                                             punctuation.separator.key-value.css
@@ -1185,6 +1191,7 @@ $icons: ("eye": "\f112", "start": "\f12e", "stop": "\f12f");
 //                  ^^         keyword.operator.scss
 //                     ^^^^^^  variable.other.scss
   .icon-#{$name}:before {
+//               ^^^^^^ entity.other.pseudo-element.css
     display: inline-block;
     font-family: "Icon Font";
     content: $glyph;
@@ -1308,7 +1315,7 @@ $transition-speed: math.div(1s, 50px);
   position: absolute;
   left: $left-start;
   transition: left ($left-stop - $left-start) * $transition-speed;
-//                 ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.scss
+//                 ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.expression.scss
 //                 ^                          punctuation.section.group.begin.scss
 //                  ^^^^^^^^^^                variable.other.scss
 //                             ^              keyword.operator.arithmetic.scss
@@ -1328,7 +1335,7 @@ $transition-speed: math.div(1s, 50px);
 // https://sass-lang.com/documentation/operators/
 //=============================================================================
 @debug 1 + 2 * 3 == 1 + (2 * 3); // true
-//                      ^^^^^^^ meta.group.scss
+//                      ^^^^^^^ meta.group.expression.scss
 //                       ^      constant.numeric
 //                         ^    keyword.operator
 //                           ^  constant.numeric
@@ -1337,7 +1344,7 @@ $transition-speed: math.div(1s, 50px);
 //          ^^                                             keyword.operator.logical.scss
 //             ^^^^^                                       constant.language.boolean.false.scss
 //                    ^^                                   keyword.operator.logical.scss
-//                                        ^^^^^^^^^^^^^^^^ meta.group.scss
+//                                        ^^^^^^^^^^^^^^^^ meta.group.expression.scss
 //                                         ^^^^            constant.language.boolean.false.scss
 //                                               ^^^       keyword.operator.logical.scss
 //                                                   ^^^^^ constant.language.boolean.false.scss
@@ -1359,7 +1366,7 @@ h2 {
 //                           ^^^^^^^^  variable.other.scss
 //                                   ^ punctuation.separator.sequence.css
  font-weight: 20px + ($large * 2);
-//                   ^^^^^^^^^^^^ meta.group.scss
+//                   ^^^^^^^^^^^^ meta.group.expression.scss
 //                    ^^^^^^      variable.other.scss
 //                           ^    keyword.operator
 }
