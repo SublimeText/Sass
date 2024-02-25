@@ -122,11 +122,7 @@ contexts:
     - meta_prepend: true
     - include: scss-interpolation
     - include: scss-placeholder-selector
-    - match: (\&)([-_]+{{ident}})
-      # &--bem_ish selectors
-      captures:
-        1: variable.language.parent.css
-        2: entity.other.attribute-name.css
+    - include: scss-bem-selector
 
 ###[ CSS PROPERTY LISTS ]######################################################
 
@@ -183,7 +179,7 @@ contexts:
     - meta_append: true
     - include: scss-expression-basic
 
-###[ SCSS DEFAULT/GLOBAL VALUES ]###############################################
+###[ SCSS DEFAULT/GLOBAL VALUES ]##############################################
 
   scss-default-operators:
     - match: \!\s*(?i:default){{break}}
@@ -193,13 +189,20 @@ contexts:
     - match: \!\s*(?i:global){{break}}
       scope: keyword.other.global.scss
 
-###[ SCSS PLACEHOLDER SELECTOR ]###############################################
+###[ SCSS SELECTORS ]##########################################################
 
   scss-placeholder-selector:
     - match: \%
       scope: entity.other.attribute-name.class.css punctuation.definition.entity.placeholder.scss
       # has same basic properties as a classname
       push: selector-class-identifier
+
+  scss-bem-selector:
+    - match: (\&)([-_]+{{ident}})
+      # &--bem_ish selectors
+      captures:
+        1: variable.language.parent.css
+        2: entity.other.attribute-name.css
 
 ###[ SCSS EXPRESSIONS ]########################################################
 
