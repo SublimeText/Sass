@@ -5,7 +5,8 @@ import timeit
 
 from functools import cached_property, wraps
 
-from . import completions
+from .function_args import get_func_args
+from .properties import get_properties
 
 __all__ = ['ScssCompletions']
 
@@ -47,11 +48,11 @@ class ScssCompletions(sublime_plugin.EventListener):
 
     @cached_property
     def func_args(self):
-        return completions.get_func_args()
+        return get_func_args()
 
     @cached_property
     def props(self):
-        return completions.get_properties()
+        return get_properties()
 
     @cached_property
     def re_name(self):
@@ -63,20 +64,19 @@ class ScssCompletions(sublime_plugin.EventListener):
 
     @timing
     def on_query_completions(self, view, prefix, locations):
+
         settings = sublime.load_settings('SCSS.sublime-settings')
         if settings.get('disable_default_completions'):
             return None
 
-        pt = locations[0]
-
-        # completions only inside sass/scss files
-        if not match_selector(view, pt, 'source.scss'):
+        selector = settings.get('default_completions_selector')
+        if not selector:
             return None
 
-        selector = settings.get('default_completions_selector', '')
         if isinstance(selector, list):
             selector = ''.join(selector)
 
+        pt = locations[0]
         if not match_selector(view, pt, selector):
             return None
 
@@ -84,14 +84,14 @@ class ScssCompletions(sublime_plugin.EventListener):
             items = self.complete_function_argument(view, prefix, pt)
         elif view.match_selector(pt - 1, "meta.property-value.css, punctuation.separator.key-value"):
             items = self.complete_property_value(view, prefix, pt)
-        elif view.match_selector(pt - 1, "meta.property-name.css, - meta.selector"):
+        elif view.match_selector(pt - 1, "meta.property-name.css, meta.property-list.css - meta.selector"):
             items = self.complete_property_name(view, prefix, pt)
         else:
             # TODO: provide selectors, at-rules
             items = None
 
         if items:
-            return sublime.CompletionList(items, sublime.INHIBIT_WORD_COMPLETIONS)
+            return sublime.CompletionList(items)
         return None
 
     def complete_property_name(self, view, prefix, pt):
