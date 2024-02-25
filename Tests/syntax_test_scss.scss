@@ -1370,3 +1370,14 @@ h2 {
 //                    ^^^^^^      variable.other.scss
 //                           ^    keyword.operator
 }
+
+//=============================================================================
+// Spaces in declarations
+// https://github.com/braver/Sass/issues/99
+//=============================================================================
+$color1: #f00;
+// ^^^^ meta.declaration.identifier.scss
+$color2 : #f00;
+// ^^^^ meta.declaration.identifier.scss
+$color3     : #f00;
+// ^^^^ meta.declaration.identifier.scss

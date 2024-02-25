@@ -347,7 +347,7 @@ contexts:
 ###[ SCSS DECLARATIONS ]#######################################################
 
   scss-declaration:
-    - match: '(\$)([a-zA-Z0-9_-][\w-]*)(?=:)'
+    - match: '(\$)([a-zA-Z0-9_-][\w-]*)\s*(?=:)'
       captures:
         0: meta.declaration.identifier.scss variable.other.scss
         1: punctuation.definition.variable.scss
