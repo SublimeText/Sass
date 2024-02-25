@@ -198,7 +198,7 @@ contexts:
       push: selector-class-identifier
 
   scss-bem-selector:
-    - match: (\&)([-_]+{{ident}})
+    - match: (\&)([-_]+({{ident}}|(?=#{)))
       # &--bem_ish selectors
       captures:
         1: variable.language.parent.css

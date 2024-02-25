@@ -1381,3 +1381,16 @@ $color2 : #f00;
 // ^^^^ meta.declaration.identifier.scss
 $color3     : #f00;
 // ^^^^ meta.declaration.identifier.scss
+
+//=============================================================================
+// Bem-ish selectors with interpolation
+// https://github.com/braver/Sass/issues/45
+//=============================================================================
+&--test {}
+//^^^^^ meta.selector.css entity.other.attribute-name.css
+&--#{$test} {}
+//^ meta.selector.css entity.other.attribute-name.css
+.test & {}
+//    ^ meta.selector.css variable.language.parent.css
+.test:not() & {}
+//          ^ meta.selector.css variable.language.parent.css
