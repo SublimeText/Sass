@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plist version="1.0">
+<dict>
+	<key>scope</key>
+	<string>
+		source.scss meta.declaration.identifier variable.other - source.scss variable.other punctuation.definition.variable,
+		source.scss meta.function.parameters.scss variable.parameter - source.scss variable.parameter punctuation.definition.variable,
+		source.scss entity.other.custom-property
+	</string>
+	<key>settings</key>
+	<dict>
+		<key>showInIndexedSymbolList</key>
+		<integer>1</integer>
+	</dict>
+</dict>
+</plist>
