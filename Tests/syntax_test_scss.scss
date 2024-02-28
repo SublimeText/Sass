@@ -454,75 +454,238 @@ $variable: first global value;
 //=============================================================================
 @use 'foundation/code';
 @use 'foundation/lists';
-//^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module.scss
-//^^                    keyword.control.directive.module.scss
-//<-                    punctuation.definition.keyword.scss
-//.  ^^^^^^^^^^^^^^^^^  meta.string.css
+// <- meta.at-rule.use.scss keyword.control.directive.use.scss punctuation.definition.keyword.scss
+//^^ meta.at-rule.use.scss - meta.module
+//  ^^^^^^^^^^^^^^^^^^^ meta.at-rule.use.scss meta.module.scss
+//                     ^ - meta.at-rule - meta.module
+//^^ keyword.control.directive.use.scss
+//   ^^^^^^^^^^^^^^^^^^ meta.string.css string.quoted.single.css
+//                     ^ punctuation.terminator.rule.css
 
 // https://sass-lang.com/documentation/at-rules/use/#choosing-a-namespace
 @use "src/corners" as c;
-//^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module.scss
-//^^                    keyword.control.directive.module.scss
-//<-                    punctuation.definition.keyword.scss
-//                 ^^   keyword.control.as.scss
+// <- meta.at-rule.use.scss keyword.control.directive.use.scss punctuation.definition.keyword.scss
+//^^ meta.at-rule.use.scss - meta.module
+//  ^^^^^^^^^^^^^^^ meta.at-rule.use.scss meta.module.scss
+//                 ^^^^ meta.at-rule.use.scss meta.module.alias.scss
+//                     ^ - meta.at-rule - meta.module
+//^^ keyword.control.directive.use.scss
+//   ^^^^^^^^^^^^^ meta.string.css string.quoted.double.css
+//                 ^^ keyword.operator.assignment.as.scss
 //                    ^ meta.generic-name.scss
+//                     ^ punctuation.terminator.rule.css
 
 // https://sass-lang.com/documentation/at-rules/use/#configuration
 @use 'library' with (
-//^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module.scss
-//^^                   keyword.control.directive.module.scss
-//<-                   punctuation.definition.keyword.scss
-//             ^^^^    keyword.control.with.scss
-//                  ^  punctuation.section.group.begin.scss
+// <- meta.at-rule.use.scss keyword.control.directive.use.scss punctuation.definition.keyword.scss
+//^^ meta.at-rule.use.scss - meta.module
+//  ^^^^^^^^^^^^^^^^ meta.at-rule.use.scss meta.module.scss
+//                  ^^ meta.at-rule.use.scss meta.module.arguments.scss meta.group.scss
+//^^ keyword.control.directive.use.scss
+//   ^^^^^^^^^ meta.string.css string.quoted.single.css
+//             ^^^^ keyword.control.with.scss
+//                  ^ punctuation.section.group.begin.scss
   $black: #222,
-//^^^^^^        meta.declaration.identifier.scss variable.other.scss
-//        ^^^^  constant.other.color
+//^^^^^^^^^^^^^^ meta.at-rule.use.scss meta.module.arguments.scss meta.group.scss
+//^^^^^^ meta.argument.identifier.scss
+//      ^ meta.argument.scss
+//       ^^^^^ meta.argument.value.scss
+//            ^ - meta.argument
+//^^^^^^ variable.parameter.scss
+//      ^ punctuation.separator.key-value.css
+//        ^^^^ constant.other.color
 //            ^ punctuation.separator.sequence.css
 
-// TODO: $border-radius should be a declaration?
-// maybe everything in () should be considered a map? or args?
   $border-radius: 0.1rem,
+//^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.use.scss meta.module.arguments.scss meta.group.scss
+//^^^^^^^^^^^^^^ meta.argument.identifier.scss variable.parameter.scss
+//              ^ meta.argument.scss punctuation.separator.key-value.css
+//               ^^^^^^^ meta.argument.value.scss
+//                      ^ - meta.argument
+
   $border-radius: 0.1rem
-//^^^^^^^^^^^^^^ variable
+//^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.use.scss meta.module.arguments.scss meta.group.scss
+//^^^^^^^^^^^^^^ meta.argument.identifier.scss variable.parameter.scss
+//              ^ meta.argument.scss punctuation.separator.key-value.css
+//               ^^^^^^^^ meta.argument.value.scss
 );
+// <- meta.at-rule.use.scss meta.module.arguments.scss meta.group.scss punctuation.section.group.end.scss
+ // <- punctuation.terminator.rule.css - meta.at-rule
+
+@use 'library' with  ;
+//^^^^^^^^^^^^^^^^^^^ meta.at-rule.use.scss
+//                   ^ punctuation.terminator.rule.css - meta.at-rule
+
+@use 'library' with ( ;
+//^^^^^^^^^^^^^^^^^^^^ meta.at-rule.use.scss
+//                    ^ punctuation.terminator.rule.css - meta.at-rule
+
+@use 'library' with ) ;
+//^^^^^^^^^^^^^^^^^^ meta.at-rule.use.scss
+//                  ^^^ - meta.at-rule
 
 //=============================================================================
 // At-Rules: forward
 // https://sass-lang.com/documentation/at-rules/forward/
 //=============================================================================
+@forward
+// <- meta.at-rule.forward.scss keyword.control.directive.forward.scss punctuation.definition.keyword.scss
+//^^^^^^^ meta.at-rule.forward.scss
+//^^^^^^ keyword.control.directive.forward.scss
+
 @forward "src/list";
-//^^^^^^^^^^^^^^^^^ meta.at-rule.module.scss
-//^^^^^^            keyword.control.directive.module.scss
-//<-                punctuation.definition.keyword.scss
+// <- meta.at-rule.forward.scss keyword.control.directive.forward.scss punctuation.definition.keyword.scss
+//^^^^^^ meta.at-rule.forward.scss - meta.module
+//      ^ meta.at-rule.forward.scss meta.module.scss - meta.string - string - keyword
+//       ^^^^^^^^^^ meta.at-rule.forward.scss meta.module.scss meta.string.css string.quoted.double.css
+//                 ^ - meta.at-rule - meta.module
+//^^^^^^ keyword.control.directive.forward.scss
+//       ^ punctuation.definition.string.begin.css
+//           ^ punctuation.separator.path.css
+//                ^ punctuation.definition.string.end.css
+//                 ^ punctuation.terminator.rule.css
 
 // https://sass-lang.com/documentation/at-rules/forward/#adding-a-prefix
 @forward "src/list" as list-*;
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module.scss
-//^^^^^^                      keyword.control.directive.module.scss
-//<-                          punctuation.definition.keyword.scss
-//                  ^^        keyword.control.as.scss
-//                     ^^     meta.generic-name.scss
-//                          ^ constant.language.import-all.scss
+// <- meta.at-rule.forward.scss keyword.control.directive.forward.scss punctuation.definition.keyword.scss
+//^^^^^^ meta.at-rule.forward.scss - meta.module
+//      ^^^^^^^^^^^^ meta.at-rule.forward.scss meta.module.scss
+//                  ^^^^^^^^^ meta.at-rule.forward.scss meta.module.alias.scss
+//                           ^ - meta.at-rule - meta.module
+//^^^^^^ keyword.control.directive.forward.scss
+//       ^^^^^^^^^^ meta.string.css string.quoted.double.css
+//                  ^^ keyword.operator.assignment.as.scss
+//                     ^^^^^^ meta.generic-name.scss
+//                          ^ constant.other.wildcard.asterisk.scss
 //                           ^ punctuation.terminator.rule.css
 
+@forward "src/list" as *;
+// <- meta.at-rule.forward.scss keyword.control.directive.forward.scss punctuation.definition.keyword.scss
+//^^^^^^ meta.at-rule.forward.scss - meta.module
+//      ^^^^^^^^^^^^ meta.at-rule.forward.scss meta.module.scss
+//                  ^^^^ meta.at-rule.forward.scss meta.module.alias.scss
+//                      ^ - meta.at-rule - meta.module
+//^^^^^^ keyword.control.directive.forward.scss
+//       ^^^^^^^^^^ meta.string.css string.quoted.double.css
+//                  ^^ keyword.operator.assignment.as.scss
+//                     ^ constant.other.wildcard.asterisk.scss
+//                      ^ punctuation.terminator.rule.css
+
 // https://sass-lang.com/documentation/at-rules/forward/#controlling-visibility
-@forward "src/list" hide list-reset, $horizontal-list-gap;
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.module.scss
-//^^^^^^                                                  keyword.control.directive.module.scss
-//<-                                                      punctuation.definition.keyword.scss
-//                  ^^^^                                  keyword.control.show-hide.scss
-//                       ^^^^^^^^^^                       meta.generic-name.scss
-//                                 ^                      punctuation.separator.sequence.css
+@forward "src/list" hide list-reset, $horizontal-list-gap show other;
+// <- meta.at-rule.forward.scss keyword.control.directive.forward.scss punctuation.definition.keyword.scss
+//^^^^^^ meta.at-rule.forward.scss - meta.module
+//      ^^^^^^^^^^^^ meta.at-rule.forward.scss meta.module.scss
+//                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.forward.scss meta.module.visibility.scss
+//                                                                  ^ - meta.at-rule - meta.module
+//^^^^^^ keyword.control.directive.forward.scss
+//       ^^^^^^^^^^ meta.string.css string.quoted.double.css
+//                  ^^^^ keyword.control.visibility.hide.scss
+//                       ^^^^^^^^^^ meta.generic-name.scss
+//                                 ^ punctuation.separator.sequence.css
 //                                   ^^^^^^^^^^^^^^^^^^^^ variable.other.scss
-//                                                       ^ punctuation.terminator.rule.css
+//                                                        ^^^^ keyword.control.visibility.show.scss
+//                                                             ^^^^^ meta.generic-name.scss
+//                                                                  ^ punctuation.terminator.rule.css
 
 // https://sass-lang.com/documentation/at-rules/forward/#configuring-modules
 @forward 'library' with (
+// <- meta.at-rule.forward.scss keyword.control.directive.forward.scss punctuation.definition.keyword.scss
+//^^^^^^^^^^^^^^^^^^^^^^^^ - meta.at-rule meta.at-rule - meta.module meta.module
+//^^^^^^ meta.at-rule.forward.scss
+//      ^^^^^^^^^^^^^^^^ meta.at-rule.forward.scss meta.module.scss
+//                      ^^ meta.at-rule.forward.scss meta.module.arguments.scss
+//^^^^^^ keyword.control.directive.forward.scss
+//       ^^^^^^^^^ string.quoted.single.css
+//                 ^^^^ keyword.control.with.scss
+//                      ^ punctuation.section.group.begin.scss
+
   $black: #222 !default,
+// <- meta.at-rule.forward.scss meta.module.arguments.scss meta.group.scss
+//^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.forward.scss meta.module.arguments.scss meta.group.scss
+//^^^^^^ meta.argument.identifier.scss variable.parameter.scss
+//      ^ meta.argument.scss punctuation.separator.key-value.css
+//       ^^^^^^^^^^^^^^ meta.argument.value.scss
+//        ^^^^ constant.other.color.rgb-value.css
 //             ^^^^^^^^ keyword.other.default.scss
 //                     ^ punctuation.separator.sequence.css
+
   $border-radius: 0.1rem !default
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.forward.scss meta.module.arguments.scss meta.group.scss
+// <- meta.at-rule.forward.scss meta.module.arguments.scss meta.group.scss
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.forward.scss meta.module.arguments.scss meta.group.scss
+//^^^^^^^^^^^^^^ meta.argument.identifier.scss variable.parameter.scss
+//              ^ meta.argument.scss punctuation.separator.key-value.css
+//               ^^^^^^^^^^^^^^^^^ meta.argument.value.scss
+//                ^^^^^^ meta.number.float.decimal.css
+//                       ^^^^^^^^ keyword.other.default.scss
 );
+// <- meta.at-rule.forward.scss meta.module.arguments.scss meta.group.scss punctuation.section.group.end.scss
+ // <- punctuation.terminator.rule.css - meta.at-rule - meta.module
+
+@forward 'library' with  ;
+//^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.forward.scss
+//                       ^ punctuation.terminator.rule.css - meta.at-rule
+
+@forward 'library' with ( ;
+//^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.forward.scss
+//                        ^ punctuation.terminator.rule.css - meta.at-rule
+
+@forward 'library' with ) ;
+//^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.forward.scss
+//                      ^^^ - meta.at-rule
+
+@forward "src/list" as list-* hide foo, $bar show baz with ($color: red);
+// <- meta.at-rule.forward.scss keyword.control.directive.forward.scss punctuation.definition.keyword.scss
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - meta.at-rule meta.at-rule - meta.module meta.module
+//^^^^^^ meta.at-rule.forward.scss
+//      ^^^^^^^^^^^^ meta.at-rule.forward.scss meta.module.scss
+//                  ^^^^^^^^^ meta.at-rule.forward.scss meta.module.alias.scss
+//                            ^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.forward.scss meta.module.visibility.scss
+//                                                    ^^^^^ meta.at-rule.forward.scss meta.module.scss
+//                                                         ^^^^^^^^^^^^^ meta.at-rule.forward.scss meta.module.arguments.scss
+//^^^^^^ keyword.control.directive.forward.scss
+//       ^^^^^^^^^^ string.quoted.double.css
+//                  ^^ keyword.operator.assignment.as.scss
+//                     ^^^^^^ meta.generic-name.scss
+//                            ^^^^ keyword.control.visibility.hide.scss
+//                                 ^^^ meta.generic-name.scss
+//                                    ^ punctuation.separator.sequence.css
+//                                      ^^^^ variable.other.scss
+//                                           ^^^^ keyword.control.visibility.show.scss
+//                                                ^^^ meta.generic-name.scss
+//                                                    ^^^^ keyword.control.with.scss
+//                                                         ^ punctuation.section.group.begin.scss
+//                                                          ^^^^^^ variable.parameter.scss
+//                                                                ^ punctuation.separator.key-value.css
+//                                                                  ^^^ support.constant.color.w3c.standard.css
+//                                                                     ^ punctuation.section.group.end.scss
+//                                                                      ^ punctuation.terminator.rule.css
+
+// with (...) is the very last expression
+// trailing `hide` and `show` expressions are illegal scss syntax,
+// but they are scoped as meta.selector to resume after incomplete statements
+@forward "src/list" as list-* with ($color: red) hide foo, $bar show baz;
+// <- meta.at-rule.forward.scss keyword.control.directive.forward.scss punctuation.definition.keyword.scss
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - meta.at-rule meta.at-rule - meta.module meta.module
+//                                               ^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css - meta.at-rule - module
+//^^^^^^ meta.at-rule.forward.scss
+//      ^^^^^^^^^^^^ meta.at-rule.forward.scss meta.module.scss
+//                  ^^^^^^^^^ meta.at-rule.forward.scss meta.module.alias.scss
+//                           ^^^^^^ meta.at-rule.forward.scss meta.module.scss
+//                                 ^^^^^^^^^^^^^ meta.at-rule.forward.scss meta.module.arguments.scss
+//^^^^^^ keyword.control.directive.forward.scss
+//       ^^^^^^^^^^ string.quoted.double.css
+//                  ^^ keyword.operator.assignment.as.scss
+//                     ^^^^^^ meta.generic-name.scss
+//                            ^^^^ keyword.control.with.scss
+//                                 ^ punctuation.section.group.begin.scss
+//                                  ^^^^^^ variable.parameter.scss
+//                                        ^ punctuation.separator.key-value.css
+//                                          ^^^ support.constant.color.w3c.standard.css
+//                                             ^ punctuation.section.group.end.scss
+//                                               ^^^^ entity.name.tag.other.css
+//                                                    ^^^^ entity.name.tag.other.css
 
 //=============================================================================
 // At-Rules: import
