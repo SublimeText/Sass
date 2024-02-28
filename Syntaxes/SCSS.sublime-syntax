@@ -16,14 +16,14 @@ variables:
 
   # CSS overrides
 
-  ident_start: (?:{{nmstart}}|@+{)
+  ident_start: (?:{{nmstart}}|#{)
 
   property_or_selector_begin: (?={{ident_begin}}|{{selector_start}})
 
   selector_start: '[[:alpha:].:#%&*\[{{combinator_char}}]'
   selector_end: (?=[;{}])
 
-  tag_name_begin: (?=[[:alpha:]]|@+{)
+  tag_name_begin: (?=[[:alpha:]]|#{)
 
 ###############################################################################
 
@@ -61,7 +61,7 @@ contexts:
 
   block-comment-body:
     - meta_append: true
-    - include: scss-interpolation
+    - include: scss-string-interpolation
 
 ###[ SassDoc COMMENTS ]###########################################################
 
@@ -106,7 +106,6 @@ contexts:
     - include: comments
     - include: property-end
     - include: property-identifiers
-    - include: scss-interpolated-property
 
     # otherwise it is part of a selector
     - match: ''
@@ -178,6 +177,34 @@ contexts:
     - meta_append: true
     - include: scss-expression-basic
 
+###[ CSS IDENTIFIERS ]#########################################################
+
+  identifier-content:
+    - meta_prepend: true
+    - include: scss-interpolation
+
+###[ CSS STRINGS WITH INTERPOLATION ]##########################################
+
+  single-quoted-string-body:
+    - meta_prepend: true
+    - include: scss-string-interpolation
+
+  double-quoted-string-body:
+    - meta_prepend: true
+    - include: scss-string-interpolation
+
+  single-quoted-url-body:
+    - meta_prepend: true
+    - include: scss-string-interpolation
+
+  double-quoted-url-body:
+    - meta_prepend: true
+    - include: scss-string-interpolation
+
+  unquoted-urls:
+    - meta_prepend: true
+    - include: scss-string-interpolation
+
 ###[ SCSS DEFAULT/GLOBAL VALUES ]##############################################
 
   scss-default-operators:
@@ -240,51 +267,34 @@ contexts:
 
 ###[ SCSS INTERPOLATION ]######################################################
 
-  scss-interpolated-property:
-    - match: '-?(?=#{)'
-      push:
-      - match: ''
-        pop: 1
-      - match: '(#)({)'
-        captures:
-          1: punctuation.definition.variable.scss
-          2: punctuation.section.interpolation.begin.scss
-        push:
-          - property-value
-          - scss-interpolation-body
-
   scss-interpolation:
-    - match: '(#)({)'
+    - match: (#)({)
       captures:
         1: punctuation.definition.variable.scss
         2: punctuation.section.interpolation.begin.scss
       push: scss-interpolation-body
 
   scss-interpolation-body:
-    - clear_scopes: true
     - meta_scope: meta.interpolation.scss
-    - include: scss-expression
-    - match: '(})'
+    - match: \}
       scope: punctuation.section.interpolation.end.scss
       pop: 1
+    - include: scss-expression
 
-###[ SCSS STRINGS w/ INTERPOLATION ]###########################################
+  scss-string-interpolation:
+    - match: (#)({)
+      captures:
+        1: punctuation.definition.variable.scss
+        2: punctuation.section.interpolation.begin.scss
+      push: scss-string-interpolation-body
 
-  single-quoted-string-body:
-    - meta_prepend: true
-    - include: scss-interpolation
-  double-quoted-string-body:
-    - meta_prepend: true
-    - include: scss-interpolation
-  single-quoted-url-body:
-    - meta_prepend: true
-    - include: scss-interpolation
-  double-quoted-url-body:
-    - meta_prepend: true
-    - include: scss-interpolation
-  unquoted-urls:
-    - meta_prepend: true
-    - include: scss-interpolation
+  scss-string-interpolation-body:
+    - clear_scopes: 1
+    - meta_scope: meta.interpolation.scss
+    - match: \}
+      scope: punctuation.section.interpolation.end.scss
+      pop: 1
+    - include: scss-expression
 
 ###[ SCSS VARS ]###############################################################
 
