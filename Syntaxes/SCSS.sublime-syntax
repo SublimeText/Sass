@@ -18,13 +18,12 @@ variables:
 
   ident_start: (?:{{nmstart}}|@+{)
 
-  selector_begin: (?={{selector_start}}|%|&|#{)
+  property_or_selector_begin: (?={{ident_begin}}|{{selector_start}})
+
+  selector_start: '[[:alpha:].:#%&*\[{{combinator_char}}]'
   selector_end: (?=[;{}])
 
   tag_name_begin: (?=[[:alpha:]]|@+{)
-
-  property_or_selector_begin: (?={{selector_start}}|[-&]|{{ident_start}})
-  nested_selector_start: '[%.:#&*\[{{combinator_char}}]'
 
 ###############################################################################
 
