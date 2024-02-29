@@ -728,7 +728,7 @@ nav ul {
 //           ^^^^^^                  variable.parameter.scss
 //                  ^                punctuation.separator.sequence.css
 //                    ^^^^^^^^^^     variable.parameter.scss
-//                              ^^^  keyword.operator.spread.scss
+//                              ^^^  keyword.operator.variadic.scss
 
   @for $i from 0 to length($selectors) {
     #{nth($selectors, $i + 1)} {
@@ -770,7 +770,7 @@ nav ul {
 @use "sass:meta";
 
 @mixin syntax-colors($args...) {
-//                        ^^^  keyword.operator.spread.scss
+//                        ^^^  keyword.operator.variadic.scss
 
 @include syntax-colors(
   $string: #080,
@@ -793,7 +793,7 @@ nav ul {
 
 // https://sass-lang.com/documentation/at-rules/mixin/#passing-arbitrary-arguments
 @include order(150px, $form-selectors...);
-//                                   ^^^  keyword.operator.spread.scss
+//                                   ^^^  keyword.operator.variadic.scss
 
 //=============================================================================
 // At-Rules: mixin content blocks
@@ -935,7 +935,7 @@ $primary-color: #036;
 
 // https://sass-lang.com/documentation/at-rules/function/#taking-arbitrary-arguments
 @function sum($numbers...) {
-//                    ^^^ keyword.operator.spread.scss
+//                    ^^^ keyword.operator.variadic.scss
   $sum: 0;
   @each $number in $numbers {
     $sum: $sum + $number;
@@ -951,7 +951,7 @@ $primary-color: #036;
 $widths: 50px, 30px, 100px;
 .micro {
   width: min($widths...);
-//                  ^^^ keyword.operator.spread.scss
+//                  ^^^ keyword.operator.variadic.scss
 }
 
 //=============================================================================

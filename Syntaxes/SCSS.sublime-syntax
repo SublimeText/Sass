@@ -399,8 +399,8 @@ contexts:
     - match: (?:\s*)\b(not|or|and)(?=\s)
       captures:
         1: keyword.operator.logical.scss
-    - match: '[.]{3}'
-      scope: keyword.operator.spread.scss
+    - match: \.{3}
+      scope: keyword.operator.variadic.scss
     - match: \btrue\b
       scope: constant.language.boolean.true.scss
     - match: \bfalse\b
