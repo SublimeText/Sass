@@ -553,31 +553,44 @@ contexts:
         - meta_scope: meta.at-rule.scss
         - include: terminator-pop
         - include: property-value-content
-    - match: '(@)(content){{break}}'
-      captures:
-        0: keyword.control.directive.content.scss
-        1: punctuation.definition.keyword.scss
-      push:
-        - meta_scope: meta.at-rule.scss
-        - include: terminator-pop
-        - match: '\('
-          scope: punctuation.section.group.begin.scss
-          push:
-            - meta_scope: meta.function-call.arguments.scss
-            - match: '\)'
-              scope: punctuation.section.group.end.scss
-              pop: 2
-            - include: comments
-            - include: comma-delimiters
-            - match: '[.]{3}'
-              scope: keyword.operator.spread.scss
-            - match: ':'
-              scope: punctuation.separator.key-value.css
-            - include: values
-            - match: '{{ident}}'
-              scope: meta.generic-name.scss
+    - include: scss-at-content
     - include: scss-at-forward
     - include: scss-at-use
+
+###[ SCSS CONTENT AT-RULE ]####################################################
+
+  scss-at-content:
+    # https://sass-lang.com/documentation/at-rules/mixin/#content-blocks
+    - match: (@)content{{break}}
+      scope: meta.placeholder.scss keyword.control.directive.content.scss
+      captures:
+        1: punctuation.definition.keyword.scss
+      push:
+        - scss-at-content-meta
+        - scss-at-content-argument-list
+
+  scss-at-content-meta:
+    - meta_include_prototype: false
+    - meta_scope: meta.at-rule.content.scss
+    - include: immediately-pop
+
+  scss-at-content-argument-list:
+    - meta_include_prototype: false
+    - meta_content_scope: meta.placeholder.scss
+    - match: \(
+      scope: punctuation.section.group.begin.scss
+      set: scss-at-content-argument-list-body
+    - include: else-pop
+
+  scss-at-content-argument-list-body:
+    - meta_scope: meta.placeholder.arguments.scss meta.group.scss
+    - match: \)
+      scope: punctuation.section.group.end.scss
+      pop: 1
+    - match: \.{3}
+      scope: keyword.operator.variadic.scss
+    - include: scss-arguments
+    - include: values
 
 ###[ SCSS FORWARD/USE AT-RULE ]################################################
 

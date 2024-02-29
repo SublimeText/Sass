@@ -966,11 +966,11 @@ nav ul {
   &:not([disabled]):hover {
     @content;
 // ^^^^^^^^^^^ meta.property-list
-//  ^^^^^^^^   meta.at-rule.scss
-//          ^  - meta.at-rule.scss
-//          ^  punctuation.terminator.rule.css
-//  ^^^^^^^^   keyword.control.directive.content.scss
-//  ^          punctuation.definition.keyword.scss
+//  ^^^^^^^^ meta.at-rule.content.scss meta.placeholder.scss
+//          ^ - meta.at-rule - meta.placeholder
+//  ^^^^^^^^ keyword.control.directive.content.scss
+//  ^ punctuation.definition.keyword.scss
+//          ^ punctuation.terminator.rule.css
   }
 }
 
@@ -989,18 +989,37 @@ nav ul {
 @mixin media($types...) {
   @each $type in $types {
     @media #{$type} {
-      @content($type);
-// ^^^^^^^^^^^^^^^^^^^ meta.property-list
-//    ^^^^^^^^^^^^^^^  meta.at-rule.scss
-//            ^        punctuation.section.group.begin.scss
-//                  ^  punctuation.section.group.end.scss
-//             ^^^^^   meta.function-call.arguments
-//             ^^^^^   variable.other.scss
-//                   ^ - meta.at-rule.scss
-//                   ^ punctuation.terminator.rule.css
-//    ^^^^^^^^         keyword.control.directive.content.scss
-//    ^                punctuation.definition.keyword.scss
+      @content($type, value);
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list
+//    ^^^^^^^^ meta.at-rule.content.scss meta.placeholder.scss - meta.placeholder.arguments
+//            ^^^^^^^^^^^^^^ meta.at-rule.content.scss meta.placeholder.arguments.scss
+//                          ^ - meta.at-rule - meta.placeholder
+//    ^ punctuation.definition.keyword.scss
+//    ^^^^^^^^ keyword.control.directive.content.scss
+//            ^ punctuation.section.group.begin.scss
+//             ^^^^^ variable.other.scss
+//                  ^ punctuation.separator.sequence.css
+//                    ^^^^^ support.constant.property-value.css
+//                         ^ punctuation.section.group.end.scss
+//                          ^ punctuation.terminator.rule.css
 
+      @content($type: $type, $arg2: value);
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list
+//    ^^^^^^^^ meta.at-rule.content.scss meta.placeholder.scss - meta.placeholder.arguments
+//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.content.scss meta.placeholder.arguments.scss
+//                                        ^ - meta.at-rule - meta.placeholder
+//    ^ punctuation.definition.keyword.scss
+//    ^^^^^^^^ keyword.control.directive.content.scss
+//            ^ punctuation.section.group.begin.scss
+//             ^^^^^ variable.parameter.scss
+//                  ^ punctuation.separator.key-value.css
+//                    ^^^^^ variable.other.scss
+//                         ^ punctuation.separator.sequence.css
+//                           ^^^^^ variable.parameter.scss
+//                                ^ punctuation.separator.key-value.css
+//                                  ^^^^^ support.constant.property-value.css
+//                                       ^ punctuation.section.group.end.scss
+//                                        ^ punctuation.terminator.rule.css
     }
   }
 }
