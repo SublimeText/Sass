@@ -42,4 +42,4 @@ node_modules/*
 
 # IDE #
 #######
-*.sublime-*
+/*.sublime-*
