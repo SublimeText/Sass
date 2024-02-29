@@ -25,6 +25,10 @@ variables:
 
   tag_name_begin: (?=[[:alpha:]]|#{)
 
+  # SCSS variables
+
+  scss_ident: '[[:alnum:]_-][\w-]*'
+
 ###############################################################################
 
 contexts:
@@ -36,7 +40,7 @@ contexts:
     - include: comments
     - include: properties-or-selectors
     - include: property-lists
-    - include: scss-declaration
+    - include: scss-declarations
     - include: scss-at-rules
     - include: at-rules
     - include: rule-terminators
@@ -236,7 +240,7 @@ contexts:
     # for use in CSS contexts
     - include: comments
     - include: important-operators
-    - include: scss-declaration
+    - include: scss-declarations
     - include: scss-variables
     - include: scss-operators
     - include: sass-namespaced-functions
@@ -355,20 +359,18 @@ contexts:
 
 ###[ SCSS DECLARATIONS ]#######################################################
 
-  scss-declaration:
-    - match: '(\$)([a-zA-Z0-9_-][\w-]*)\s*(?=:)'
+  scss-declarations:
+    - match: (((\$){{scss_ident}})\s*)(:)
       captures:
-        0: meta.declaration.identifier.scss variable.other.scss
-        1: punctuation.definition.variable.scss
-      push:
-        - include: terminator-pop
-        - match: ':'
-          scope: punctuation.separator.key-value.css
-          push:
-            - meta_scope: meta.declaration.value.scss
-            - include: comments
-            - include: terminator-pop
-            - include: values
+        1: meta.declaration.identifier.scss
+        2: variable.other.scss
+        3: punctuation.definition.variable.scss
+        4: meta.declaration.scss punctuation.separator.key-value.css
+      push: scss-declaration-value
+
+  scss-declaration-value:
+    - meta_content_scope: meta.declaration.value.scss
+    - include: values
 
 ###[ SCSS FUNCTIONS ]##########################################################
 
