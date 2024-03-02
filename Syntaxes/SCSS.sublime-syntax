@@ -545,16 +545,9 @@ contexts:
             - include: values
             - match: '{{ident}}'
               scope: meta.generic-name.scss
-    - match: '(@)(return){{break}}'
-      captures:
-        0: keyword.control.directive.return.scss
-        1: punctuation.definition.keyword.scss
-      push:
-        - meta_scope: meta.at-rule.scss
-        - include: terminator-pop
-        - include: property-value-content
     - include: scss-at-content
     - include: scss-at-forward
+    - include: scss-at-return
     - include: scss-at-use
 
 ###[ SCSS CONTENT AT-RULE ]####################################################
@@ -590,6 +583,19 @@ contexts:
     - match: \.{3}
       scope: keyword.operator.variadic.scss
     - include: scss-arguments
+    - include: values
+
+###[ SCSS CONTROL FLOW AT-RULE ]###############################################
+
+  scss-at-return:
+    - match: (@)return{{break}}
+      scope: keyword.control.flow.return.scss
+      captures:
+        1: punctuation.definition.keyword.scss
+      push: scss-at-return-value
+
+  scss-at-return-value:
+    - meta_scope: meta.at-rule.return.scss
     - include: values
 
 ###[ SCSS FORWARD/USE AT-RULE ]################################################

@@ -1156,8 +1156,11 @@ $widths: 50px, 30px, 100px;
 //                              ^   constant.numeric
 //                                ^ punctuation.section.block.begin.css
     @return $insert;
-//  ^^^^^^^          meta.at-rule.scss keyword.control.directive.return.scss
-//          ^^^^^^^  variable.other.scss
+//  ^^^^^^^^^^^^^^^ meta.at-rule.return.scss
+//  ^^^^^^^ keyword.control.flow.return.scss
+//  ^ punctuation.definition.keyword.scss
+//          ^^^^^^^ variable.other.scss
+//          ^ punctuation.definition.variable.scss
 //                 ^ punctuation.terminator.rule.css
   }
 
