@@ -714,10 +714,11 @@ $variable: first global value;
 
 @mixin horizontal-list {
   @include reset-list;
-//^^^^^^^^^^^^^^^^^^^ meta.function-call.scss
-//^^^^^^^^            keyword.control.directive.scss
-//^                   punctuation.definition.keyword.scss
-//         ^^^^^^^^^^ variable.function.scss
+//^^^^^^^^^ meta.at-rule.include.scss - meta.mixin
+//         ^^^^^^^^^^ meta.at-rule.include.scss meta.mixin.scss
+//^ punctuation.definition.keyword.scss
+//^^^^^^^^ keyword.control.directive.include.scss
+//         ^^^^^^^^^^ variable.other.mixin.scss
   li {
     display: inline-block;
     margin: {
@@ -729,10 +730,11 @@ $variable: first global value;
 
 nav ul {
   @include horizontal-list;
-//^^^^^^^^^^^^^^^^^^^ meta.function-call.scss
-//^^^^^^^^            keyword.control.directive.scss
-//^                   punctuation.definition.keyword.scss
-//         ^^^^^^^^^^ variable.function.scss
+//^^^^^^^^^ meta.at-rule.include.scss - meta.mixin
+//         ^^^^^^^^^^^^^^^ meta.at-rule.include.scss meta.mixin.scss
+//^ punctuation.definition.keyword.scss
+//^^^^^^^^ keyword.control.directive.include.scss
+//         ^^^^^^^^^^^^^^^ variable.other.mixin.scss
 }
 
 //=============================================================================
@@ -787,17 +789,18 @@ nav ul {
 
 .sidebar {
   @include rtl(float, left, right);
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.scss
-//                                ^ - meta.function-call.scss
-//^^^^^^^^                         keyword.control.directive.scss
-//^                                punctuation.definition.keyword.scss
-//         ^^^                     variable.function.scss
-//            ^                    punctuation.section.group.begin.scss
-//             ^^^^^^^^^^^^^^^^^^  meta.function-call.arguments.scss
-//             ^^^^^               support.constant.property-value.css
-//                  ^              punctuation.separator.sequence.css
-//                    ^^^^         support.constant.property-value.css
-//                        ^        punctuation.separator.sequence.css
+//^^^^^^^^^ meta.at-rule.include.scss - meta.mixin
+//         ^^^ meta.at-rule.include.scss meta.mixin.scss
+//            ^^^^^^^^^^^^^^^^^^^^ meta.at-rule.include.scss meta.mixin.arguments.scss meta.group.scss
+//                                ^ - meta.at-rule - meta.mixin - meta.group
+//^ punctuation.definition.keyword.scss
+//^^^^^^^^ keyword.control.directive.include.scss
+//         ^^^ variable.other.mixin.scss
+//            ^ punctuation.section.group.begin.scss
+//             ^^^^^ support.constant.property-value.css
+//                  ^ punctuation.separator.sequence.css
+//                    ^^^^ support.constant.property-value.css
+//                        ^ punctuation.separator.sequence.css
 //                               ^ punctuation.section.group.end.scss
 }
 
@@ -834,19 +837,25 @@ nav ul {
 
 .mail-icon {
   @include replace-text(url("/images/mail.svg"), 0);
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.scss
-//                                                 ^ - meta.function-call.scss
-//^^^^^^^^                                          keyword.control.directive.scss
-//^                                                 punctuation.definition.keyword.scss
-//         ^^^^^^^^^^^^                             variable.function.scss
-//                     ^                            punctuation.section.group.begin.scss
-//                      ^^^^^^^^^^^^^^^^^^^^^^^^^^  meta.function-call.arguments.scss
-//                      ^^^                         support.function.url.css
-//                           ^^^^^^^^^^^^^^^^       meta.string.css
-//                                             ^    punctuation.separator.sequence.css
-//                                               ^  constant.numeric.value.css
+//^^^^^^^^^ meta.at-rule.include.scss - meta.mixin
+//         ^^^^^^^^^^^^ meta.at-rule.include.scss meta.mixin.scss
+//                     ^ meta.at-rule.include.scss meta.mixin.arguments.scss meta.group.scss
+//                      ^^^ meta.at-rule.include.scss meta.mixin.arguments.scss meta.group.scss meta.function-call.identifier.css
+//                         ^^^^^^^^^^^^^^^^^^^^ meta.at-rule.include.scss meta.mixin.arguments.scss meta.group.scss meta.function-call.arguments.css meta.group.css
+//                                             ^^^^ meta.at-rule.include.scss meta.mixin.arguments.scss meta.group.scss
+//                                                 ^ - meta.at-rule - meta.mixin - meta.group
+//^ punctuation.definition.keyword.scss
+//^^^^^^^^ keyword.control.directive.include.scss
+//         ^^^^^^^^^^^^ variable.other.mixin.scss
+//                     ^ punctuation.section.group.begin.scss
+//                      ^^^ support.function.url.css
+//                         ^ punctuation.section.group.begin.css
+//                          ^^^^^^^^^^^^^^^^^^ meta.string.css string.quoted.double.css
+//                                            ^ punctuation.section.group.end.css
+//                                             ^ punctuation.separator.sequence.css
+//                                               ^ meta.number.integer.decimal.css constant.numeric.value.css
 //                                                ^ punctuation.section.group.end.scss
-
+//                                                 ^ punctuation.terminator.rule.css
 }
 
 //=============================================================================
@@ -864,19 +873,21 @@ nav ul {
 
 .avatar {
   @include square(100px, $radius: 4px);
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.scss
-//                                    ^ - meta.function-call.scss
-//^^^^^^^^                             keyword.control.directive.scss
-//^                                    punctuation.definition.keyword.scss
-//         ^^^^^^                      variable.function.scss
-//               ^                     punctuation.section.group.begin.scss
-//                ^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.scss
-//                ^^^^^                constant.numeric
-//                     ^               punctuation.separator.sequence.css
-//                       ^^^^^^^       variable.other.scss
-//                              ^      punctuation.separator.key-value.css
-//                                ^^^  constant.numeric
+//^^^^^^^^^ meta.at-rule.include.scss
+//         ^^^^^^ meta.at-rule.include.scss meta.mixin.scss
+//               ^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.include.scss meta.mixin.arguments.scss meta.group.scss
+//                                    ^ - meta.at-rule - meta.mixin - meta.group
+//^ punctuation.definition.keyword.scss
+//^^^^^^^^ keyword.control.directive.include.scss
+//         ^^^^^^ variable.other.mixin.scss
+//               ^ punctuation.section.group.begin.scss
+//                ^^^^^ meta.number.integer.decimal.css constant.numeric
+//                     ^ punctuation.separator.sequence.css
+//                       ^^^^^^^ variable.parameter.scss
+//                              ^ punctuation.separator.key-value.css
+//                                ^^^ meta.number.integer.decimal.css constant.numeric
 //                                   ^ punctuation.section.group.end.scss
+//                                    ^ punctuation.terminator.rule.css
 }
 
 //=============================================================================
@@ -937,26 +948,32 @@ nav ul {
 
 @include syntax-colors(
   $string: #080,
-//^^^^^^^^^^^^^^ meta.function-call.arguments.scss
-//^^^^^^^        meta.declaration.identifier.scss variable.other.scss
-//       ^       punctuation.separator.key-value.css
-//         ^^^^  constant.other.color
-//             ^ punctuation.separator.sequence
+//^^^^^^^^^^^^^^^ meta.at-rule.include.scss meta.mixin.arguments.scss meta.group.scss
+//^^^^^^^ variable.parameter.scss
+//       ^ punctuation.separator.key-value.css
+//         ^^^^ constant.other.color.rgb-value.css
+//             ^ punctuation.separator.sequence.css
   $comment: #800,
-//^^^^^^^^^^^^^^  meta.function-call.arguments.scss
-//^^^^^^^^        meta.declaration.identifier.scss variable.other.scss
-//        ^       punctuation.separator.key-value.css
-//          ^^^^  constant.other.color
-//              ^ punctuation.separator.sequence
+//^^^^^^^^^^^^^^^ meta.at-rule.include.scss meta.mixin.arguments.scss meta.group.scss
+//^^^^^^^^ variable.parameter.scss
+//        ^ punctuation.separator.key-value.css
+//          ^^^^ constant.other.color.rgb-value.css
+//              ^ punctuation.separator.sequence.css
   $variable: #60b,
-//               ^ punctuation.separator.sequence
-)   //
-// ^ - meta.function-call
-//  ^ comment
+//^^^^^^^^^^^^^^^^ meta.at-rule.include.scss meta.mixin.arguments.scss meta.group.scss
+//^^^^^^^^^ variable.parameter.scss
+//         ^ punctuation.separator.key-value.css
+//           ^^^^ constant.other.color.rgb-value.css
+//               ^ punctuation.separator.sequence.css
+)   // comment
+// <- meta.at-rule.include.scss meta.mixin.arguments.scss meta.group.scss punctuation.section.group.end.scss
+//^^^^^^^^^^^^^ meta.at-rule.include.scss
+//  ^^^^^^^^^^^ meta.block.css meta.at-rule.include.scss comment.line.double-slash.scss
 
 // https://sass-lang.com/documentation/at-rules/mixin/#passing-arbitrary-arguments
 @include order(150px, $form-selectors...);
 //                                   ^^^  keyword.operator.variadic.scss
+}
 
 //=============================================================================
 // At-Rules: mixin content blocks
@@ -1025,13 +1042,40 @@ nav ul {
 }
 
 @include media(screen, print) using ($type) {
+// <- meta.at-rule.include.scss keyword.control.directive.include.scss punctuation.definition.keyword.scss
+//^^^^^^^ meta.at-rule.include.scss - meta.mixin
+//       ^^^^^ meta.at-rule.include.scss meta.mixin.scss
+//            ^^^^^^^^^^^^^^^ meta.at-rule.include.scss meta.mixin.arguments.scss meta.group.scss
+//                           ^ meta.at-rule.include.scss
+//                            ^^^^^^ meta.at-rule.include.scss meta.using.scss
+//                                  ^^^^^^^ meta.using.parameters.scss meta.group.scss
+//                                         ^ meta.at-rule.include.scss - meta.at-rule meta.property-list
+//                                          ^^ meta.at-rule.include.scss meta.property-list.css meta.block.css
+//^^^^^^ keyword.control.directive.include.scss
+//       ^^^^^ variable.other.mixin.scss
+//            ^ punctuation.section.group.begin.scss
+//             ^^^^^^ support.constant.property-value.css
+//                   ^ punctuation.separator.sequence.css
+//                     ^^^^^ support.constant.property-value.css
+//                          ^ punctuation.section.group.end.scss
+//                            ^^^^^ keyword.control.using.scss
+//                                  ^ punctuation.section.group.begin.scss
+//                                   ^^^^^ variable.parameter.scss
+//                                        ^ punctuation.section.group.end.scss
+//                                          ^ punctuation.section.block.begin.css
+
   h1 {
     font-size: 40px;
     @if $type == print {
+// ^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.include.scss meta.property-list.css meta.block.css meta.property-list.css meta.block.css
+//  ^^^ keyword.control.flow.conditional.scss
+//      ^^^^^ variable.other.scss
       font-family: Calluna;
     }
   }
 }
+// <- meta.at-rule.include.scss meta.property-list.css meta.block.css punctuation.section.block.end.css
+ // <- - meta.at-rule - meta.property-list - meta.block
 
 //=============================================================================
 // Function

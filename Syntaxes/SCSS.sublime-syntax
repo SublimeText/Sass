@@ -521,32 +521,9 @@ contexts:
                 - match: '\b(false|true|null)\b'
                   scope: constant.language.scss
                 - include: property-value-content
-    - match: '((@)(include))\s+((([a-z]+)(\.))?([\w-]+))'
-      captures:
-        1: keyword.control.directive.scss
-        2: punctuation.definition.keyword.scss
-        4: variable.function.scss
-        6: entity.name.namespace.scss
-        7: punctuation.separator.namespace.scss
-      push:
-        - meta_scope: meta.function-call.scss
-        - include: terminator-pop
-        - match: '\('
-          scope: punctuation.section.group.begin.scss
-          push:
-            - meta_scope: meta.function-call.arguments.scss
-            - match: '\)'
-              scope: punctuation.section.group.end.scss
-              pop: 2
-            - include: comments
-            - include: comma-delimiters
-            - match: ':'
-              scope: punctuation.separator.key-value.css
-            - include: values
-            - match: '{{ident}}'
-              scope: meta.generic-name.scss
     - include: scss-at-content
     - include: scss-at-forward
+    - include: scss-at-include
     - include: scss-at-return
     - include: scss-at-use
 
@@ -705,9 +682,84 @@ contexts:
     - include: scss-arguments
     - include: values
 
+###[ SCSS INCLUDE AT-RULE ]####################################################
+
+  scss-at-include:
+    # https://sass-lang.com/documentation/at-rules/mixin/
+    - match: (@)include{{break}}
+      scope: keyword.control.directive.include.scss
+      captures:
+        1: punctuation.definition.keyword.scss
+      push:
+        - scss-at-include-meta
+        - maybe-property-list
+        - scss-at-include-using
+        - scss-at-include-mixin
+
+  scss-at-include-meta:
+    - meta_include_prototype: false
+    - meta_scope: meta.at-rule.include.scss
+    - include: immediately-pop
+
+  scss-at-include-mixin:
+    - match: ({{scss_ident}})(\.)
+      scope: meta.mixin.scss
+      captures:
+        1: variable.namespace.scss
+        2: punctuation.accessor.dot.scss
+    - match: '{{scss_ident}}'
+      scope: meta.mixin.scss variable.other.mixin.scss
+      set: scss-mixin-argument-list
+    - include: comments
+    - include: else-pop
+
+  scss-mixin-argument-list:
+    - meta_include_prototype: false
+    - meta_content_scope: meta.mixin.scss
+    - match: \(
+      scope: punctuation.section.group.begin.scss
+      set: scss-mixin-argument-list-body
+    - include: else-pop
+
+  scss-mixin-argument-list-body:
+    - meta_scope: meta.mixin.arguments.scss meta.group.scss
+    - match: \)
+      scope: punctuation.section.group.end.scss
+      pop: 1
+    - match: \.{3}
+      scope: keyword.operator.variadic.scss
+    - include: scss-arguments
+    - include: values
+
+  scss-at-include-using:
+    # https://sass-lang.com/documentation/at-rules/mixin/#passing-arguments-to-content-blocks
+    - match: using{{break}}
+      scope: meta.using.scss keyword.control.using.scss
+      set: scss-at-include-using-parameter-list
+    - include: comments
+    - include: else-pop
+
+  scss-at-include-using-parameter-list:
+    - meta_include_prototype: false
+    - meta_content_scope: meta.using.scss
+    - match: \(
+      scope: punctuation.section.group.begin.scss
+      set: scss-at-include-using-parameter-list-body
+    - include: comments
+    - include: else-pop
+
+  scss-at-include-using-parameter-list-body:
+    - meta_scope: meta.using.parameters.scss meta.group.scss
+    - match: \)
+      scope: punctuation.section.group.end.scss
+      pop: 1
+    - include: comma-delimiters
+    - include: scss-parameters
+
 ###[ SCSS ARGUMENTS ]##########################################################
 
   scss-arguments:
+    # mixin argument assignments
     - match: (((\$){{scss_ident}})\s*)(:)
       captures:
         1: meta.argument.identifier.scss
@@ -718,6 +770,25 @@ contexts:
 
   scss-argument-value:
     - meta_content_scope: meta.argument.value.scss
+    - match: ','
+      scope: punctuation.separator.sequence.css
+      pop: 1
+    - include: values
+
+###[ SCSS PARAMETERS ]#########################################################
+
+  scss-parameters:
+    # mixin parameter declarations
+    - match: (\$){{scss_ident}}
+      scope: meta.parameter.identifier.scss variable.parameter.scss
+      captures:
+        1: punctuation.definition.variable.scss
+    - match: ':'
+      scope: meta.parameter.scss punctuation.separator.key-value.css
+      push: scss-parameter-value
+
+  scss-parameter-value:
+    - meta_content_scope: meta.parameter.value.scss
     - match: ','
       scope: punctuation.separator.sequence.css
       pop: 1
