@@ -485,15 +485,8 @@ contexts:
       captures:
         0: keyword.control.directive.at-root.scss
         1: punctuation.definition.keyword.scss
-    - match: '(@)(extend){{break}}'
-      captures:
-        0: keyword.control.directive.extend.scss
-        1: punctuation.definition.keyword.scss
-      push:
-        - meta_scope: meta.at-rule.extend.scss
-        - include: terminator-pop
-        - include: selectors
     - include: scss-at-content
+    - include: scss-at-extend
     - include: scss-at-forward
     - include: scss-at-functions
     - include: scss-at-mixins
@@ -548,6 +541,20 @@ contexts:
   scss-at-return-value:
     - meta_scope: meta.at-rule.return.scss
     - include: values
+
+###[ SCSS EXTEND AT-RULE ]#####################################################
+
+  scss-at-extend:
+    - match: (@)extend{{break}}
+      scope: keyword.control.directive.extend.scss
+      captures:
+        1: punctuation.definition.keyword.scss
+      push: scss-at-extend-body
+
+  scss-at-extend-body:
+    - meta_scope: meta.at-rule.extend.scss
+    - meta_content_scope: meta.selector.css
+    - include: selector-body
 
 ###[ SCSS FORWARD/USE AT-RULE ]################################################
 
