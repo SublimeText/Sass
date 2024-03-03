@@ -699,18 +699,24 @@ $variable: first global value;
 // https://sass-lang.com/documentation/at-rules/mixin/
 //=============================================================================
 @mixin reset-list {
-//^^^^^^^^^^^^^^^^ meta.function.declaration.scss
-//^^^^             keyword.control.directive.scss
-//     ^^^^^^^^^^  entity.name.function.scss
-//<-               punctuation.definition.keyword.scss
-//                ^ meta.property-list.css meta.block.css punctuation.section.block.begin.css
+// <- meta.at-rule.mixin.scss meta.mixin.scss keyword.control.directive.mixin.scss punctuation.definition.keyword.scss
+//^^^^^ meta.at-rule.mixin.scss meta.mixin.scss
+//     ^^^^^^^^^^^ meta.at-rule.mixin.scss meta.mixin.identifier.scss
+//                ^^ meta.at-rule.mixin.scss meta.property-list.css meta.block.css
+//^^^^ keyword.control.directive.mixin.scss
+//     ^^^^^^^^^^ entity.name.mixin.scss
+//                ^ punctuation.section.block.begin.css
+
   margin: 0;
-// ^^^^^^^^^ meta.property-list.css meta.block.css
-// ^^^^^     meta.property-name.css support.type.property-name.css
+// <- meta.at-rule.mixin.scss meta.property-list.css meta.block.css
+//^^^^^^^^^^^ meta.at-rule.mixin.scss meta.property-list.css meta.block.css
+//^^^^^^ meta.block.css meta.property-name.css
+//       ^^ meta.property-value.css
   padding: 0;
   list-style: none;
 }
-//<- meta.property-list.css meta.block.css punctuation.section.block.end.css
+// <- meta.at-rule.mixin.scss meta.property-list.css meta.block.css punctuation.section.block.end.css
+ // <- - meta.at-rule - meta.property-list - meta.block
 
 @mixin horizontal-list {
   @include reset-list;
@@ -742,20 +748,25 @@ nav ul {
 // https://sass-lang.com/documentation/at-rules/mixin/#arguments
 //=============================================================================
 @mixin rtl($property, $ltr-value, $rtl-value) {
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.declaration.scss
-//                                            ^ - meta.function.declaration.scss
-//^^^^                                        keyword.control.directive.scss
-//     ^^^                                    entity.name.function.scss
-//<-                                          punctuation.definition.keyword.scss
-//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  meta.function.parameters.scss
-//        ^                                   punctuation.section.group.begin.scss
+// <- meta.at-rule.mixin.scss meta.mixin.scss keyword.control.directive.mixin.scss punctuation.definition.keyword.scss
+//^^^^^ meta.at-rule.mixin.scss meta.mixin.scss
+//     ^^^ meta.at-rule.mixin.scss meta.mixin.identifier.scss
+//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.mixin.scss meta.mixin.parameters.scss meta.group.scss
+//                                           ^ meta.at-rule.mixin.scss - meta.block
+//                                            ^^ meta.at-rule.mixin.scss meta.property-list.css meta.block.css
+//^^^^ keyword.control.directive.mixin.scss
+//     ^^^ entity.name.mixin.scss
+//        ^ punctuation.section.group.begin.scss
+//         ^^^^^^^^^ variable.parameter.scss
+//                  ^ punctuation.separator.sequence.css
+//                    ^^^^^^^^^^ variable.parameter.scss
+//                              ^ punctuation.separator.sequence.css
+//                                ^^^^^^^^^^ variable.parameter.scss
 //                                          ^ punctuation.section.group.end.scss
-//         ^^^^^^^^^                          variable.parameter.scss
-//                  ^                         punctuation.separator.sequence.css
-//                    ^^^^^^^^^^              variable.parameter.scss
-//                              ^             punctuation.separator.sequence.css
+//                                            ^ punctuation.section.block.begin.css
   #{$property}: $ltr-value;
-//^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css
+// <- meta.at-rule.mixin.scss meta.property-list.css meta.block.css
+//^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.mixin.scss meta.property-list.css meta.block.css
 //^^^^^^^^^^^^ meta.property-name.css support.type.property-name.css meta.interpolation.scss
 //            ^ - meta.property-name - meta.interpolation - meta.property-value
 //             ^^^^^^^^^^^ meta.property-value.css
@@ -771,7 +782,8 @@ nav ul {
 
   [dir=rtl] & {
     #{$property}: $rtl-value;
-//  ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css
+// <- meta.at-rule.mixin.scss meta.property-list.css meta.block.css
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.mixin.scss meta.property-list.css meta.block.css meta.property-list.css meta.block.css
 //  ^^^^^^^^^^^^ meta.property-name.css support.type.property-name.css meta.interpolation.scss
 //              ^ - meta.property-name - meta.interpolation - meta.property-value
 //               ^^^^^^^^^^^ meta.property-value.css
@@ -809,20 +821,26 @@ nav ul {
 // https://sass-lang.com/documentation/at-rules/mixin/#optional-arguments
 //=============================================================================
 @mixin replace-text($image, $x: 50%, $y: 50%) {
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.declaration.scss
-//                                            ^ - meta.function.declaration.scss
-//^^^^                                        keyword.control.directive.scss
-//     ^^^^^^^^^^^^                           entity.name.function.scss
-//<-                                          punctuation.definition.keyword.scss
-//                  ^^^^^^^^^^^^^^^^^^^^^^^^  meta.function.parameters.scss
-//                 ^                          punctuation.section.group.begin.scss
+// <- meta.at-rule.mixin.scss meta.mixin.scss keyword.control.directive.mixin.scss punctuation.definition.keyword.scss
+//^^^^^ meta.at-rule.mixin.scss meta.mixin.scss
+//     ^^^^^^^^^^^^ meta.at-rule.mixin.scss meta.mixin.identifier.scss
+//                 ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.mixin.scss meta.mixin.parameters.scss meta.group.scss
+//                                           ^ meta.at-rule.mixin.scss - meta.block
+//                                            ^^ meta.at-rule.mixin.scss meta.property-list.css meta.block.css
+//^^^^ keyword.control.directive.mixin.scss
+//     ^^^^^^^^^^^^ entity.name.mixin.scss
+//                 ^ punctuation.section.group.begin.scss
+//                  ^^^^^^ variable.parameter.scss
+//                        ^ punctuation.separator.sequence.css
+//                          ^^ variable.parameter.scss
+//                            ^ punctuation.separator.key-value.css
+//                              ^^^ meta.number.integer.decimal.css constant.numeric
+//                                 ^ punctuation.separator.sequence.css
+//                                   ^^ variable.parameter.scss
+//                                     ^ punctuation.separator.key-value.css
+//                                       ^^^ meta.number.integer.decimal.css constant.numeric
 //                                          ^ punctuation.section.group.end.scss
-//                  ^^^^^^                    variable.parameter.scss
-//                        ^                   punctuation.separator.sequence.css
-//                          ^^                variable.parameter.scss
-//                            ^               punctuation.separator.key-value.css
-//                              ^^^           constant.numeric
-//                                 ^          punctuation.separator.sequence.css
+//                                            ^ punctuation.section.block.begin.css
 
   text-indent: -99999em;
   overflow: hidden;
@@ -895,14 +913,21 @@ nav ul {
 // https://sass-lang.com/documentation/at-rules/mixin/#taking-arbitrary-arguments
 //=============================================================================
 @mixin order($height, $selectors...) {
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.declaration.scss
-//           ^^^^^^^^^^^^^^^^^^^^^^  meta.function.parameters.scss
-//          ^                        punctuation.section.group.begin.scss
+// <- meta.at-rule.mixin.scss meta.mixin.scss keyword.control.directive.mixin.scss punctuation.definition.keyword.scss
+//^^^^^ meta.at-rule.mixin.scss meta.mixin.scss
+//     ^^^^^ meta.at-rule.mixin.scss meta.mixin.identifier.scss
+//          ^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.mixin.scss meta.mixin.parameters.scss meta.group.scss
+//                                  ^ meta.at-rule.mixin.scss - meta.block
+//                                   ^^ meta.at-rule.mixin.scss meta.property-list.css meta.block.css
+//^^^^ keyword.control.directive.mixin.scss
+//     ^^^^^ entity.name.mixin.scss
+//          ^ punctuation.section.group.begin.scss
+//           ^^^^^^^ variable.parameter.scss
+//                  ^ punctuation.separator.sequence.css
+//                    ^^^^^^^^^^ variable.parameter.scss
+//                              ^^^ keyword.operator.variadic.scss
 //                                 ^ punctuation.section.group.end.scss
-//           ^^^^^^                  variable.parameter.scss
-//                  ^                punctuation.separator.sequence.css
-//                    ^^^^^^^^^^     variable.parameter.scss
-//                              ^^^  keyword.operator.variadic.scss
+//                                   ^ punctuation.section.block.begin.css
 
   @for $i from 0 to length($selectors) {
     #{nth($selectors, $i + 1)} {
@@ -982,9 +1007,9 @@ nav ul {
 @mixin hover {
   &:not([disabled]):hover {
     @content;
-// ^^^^^^^^^^^ meta.property-list
+// ^^^^^^^^^^^ meta.at-rule.mixin.scss meta.property-list.css meta.block.css meta.property-list.css meta.block.css
 //  ^^^^^^^^ meta.at-rule.content.scss meta.placeholder.scss
-//          ^ - meta.at-rule - meta.placeholder
+//          ^ - meta.at-rule.content - meta.placeholder
 //  ^^^^^^^^ keyword.control.directive.content.scss
 //  ^ punctuation.definition.keyword.scss
 //          ^ punctuation.terminator.rule.css
@@ -1007,10 +1032,10 @@ nav ul {
   @each $type in $types {
     @media #{$type} {
       @content($type, value);
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.mixin.scss meta.property-list.css meta.block.css meta.property-list.css meta.block.css meta.property-list.css meta.block.css
 //    ^^^^^^^^ meta.at-rule.content.scss meta.placeholder.scss - meta.placeholder.arguments
 //            ^^^^^^^^^^^^^^ meta.at-rule.content.scss meta.placeholder.arguments.scss
-//                          ^ - meta.at-rule - meta.placeholder
+//                          ^ - meta.at-rule.content - meta.placeholder
 //    ^ punctuation.definition.keyword.scss
 //    ^^^^^^^^ keyword.control.directive.content.scss
 //            ^ punctuation.section.group.begin.scss
@@ -1024,7 +1049,7 @@ nav ul {
 // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list
 //    ^^^^^^^^ meta.at-rule.content.scss meta.placeholder.scss - meta.placeholder.arguments
 //            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.content.scss meta.placeholder.arguments.scss
-//                                        ^ - meta.at-rule - meta.placeholder
+//                                        ^ - meta.at-rule.content - meta.placeholder
 //    ^ punctuation.definition.keyword.scss
 //    ^^^^^^^^ keyword.control.directive.content.scss
 //            ^ punctuation.section.group.begin.scss
@@ -1082,14 +1107,17 @@ nav ul {
 // https://sass-lang.com/documentation/at-rules/function/
 //=============================================================================
 @function fibonacci($n) {
-//^^^^^^^^^^^^^^^^^^^^^^ meta.function.declaration.scss
-//^^^^^^^                keyword.control.directive.scss
-//<-                     punctuation.definition.keyword.scss
-//        ^^^^^^^^^      entity.name.function.scss
-//                 ^^^^  meta.function.parameters.scss
-//                 ^     punctuation.section.group.begin.scss
-//                  ^^   variable.parameter.scss
-//                    ^  punctuation.section.group.end.scss
+// <- meta.at-rule.function.scss meta.function.scss keyword.control.directive.function.scss punctuation.definition.keyword.scss
+//^^^^^^^^ meta.at-rule.function.scss meta.function.scss
+//        ^^^^^^^^^ meta.at-rule.function.scss meta.function.identifier.scss
+//                 ^^^^ meta.at-rule.function.scss meta.function.parameters.scss meta.group.scss
+//                     ^ meta.at-rule.function.scss - meta.block
+//                      ^^ meta.at-rule.function.scss meta.property-list.css meta.block.css
+//^^^^^^^ keyword.control.directive.function.scss
+//        ^^^^^^^^^ entity.name.function.scss
+//                 ^ punctuation.section.group.begin.scss
+//                  ^^ variable.parameter.scss
+//                    ^ punctuation.section.group.end.scss
 //                      ^ punctuation.section.block.begin.css
   $sequence: 0 1;
   @for $_ from 1 through $n {
@@ -1112,21 +1140,21 @@ nav ul {
 
 // https://sass-lang.com/documentation/at-rules/function/#optional-arguments
 @function invert($color, $amount: 100%) {
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.declaration.scss
-//^^^^^^^                                keyword.control.directive.scss
-//<-                                     punctuation.definition.keyword.scss
-//        ^^^^^^                         entity.name.function.scss
-//              ^^^^^^^^^^^^^^^^^^^^^^^  meta.function.parameters.scss
-//              ^                        punctuation.section.group.begin.scss
-//               ^^^^^                   variable.parameter.scss
-//               ^                       punctuation.definition.variable.scss
-//                     ^                 punctuation.separator.sequence
-//                       ^^^^^           variable.parameter.scss
-//                       ^               punctuation.definition.variable.scss
-//                       ^^^^^^^^        meta.function.declaration.scss
-//                              ^        punctuation.separator.key-value.css
-//                                ^^^^   constant.numeric
-//                                    ^  punctuation.section.group.end.scss
+// <- meta.at-rule.function.scss meta.function.scss keyword.control.directive.function.scss punctuation.definition.keyword.scss
+//^^^^^^^^ meta.at-rule.function.scss meta.function.scss
+//        ^^^^^^ meta.at-rule.function.scss meta.function.identifier.scss
+//              ^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.function.scss meta.function.parameters.scss meta.group.scss
+//                                     ^ meta.at-rule.function.scss - meta.block
+//                                      ^^ meta.at-rule.function.scss meta.property-list.css meta.block.css
+//^^^^^^^ keyword.control.directive.function.scss
+//        ^^^^^^ entity.name.function.scss
+//              ^ punctuation.section.group.begin.scss
+//               ^^^^^^ variable.parameter.scss
+//                     ^ punctuation.separator.sequence.css
+//                       ^^^^^^^ variable.parameter.scss
+//                              ^ punctuation.separator.key-value.css
+//                                ^^^^ meta.number.integer.decimal.css constant.numeric
+//                                    ^ punctuation.section.group.end.scss
 //                                      ^ punctuation.section.block.begin.css
   $inverse: change-color($color, $hue: hue($color) + 180);
   @return mix($inverse, $color, $amount);

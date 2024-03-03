@@ -493,36 +493,10 @@ contexts:
         - meta_scope: meta.at-rule.extend.scss
         - include: terminator-pop
         - include: selectors
-    - match: '((@)(mixin|function))\s+([\w-]+)'
-      captures:
-        1: keyword.control.directive.scss
-        2: punctuation.definition.keyword.scss
-        4: entity.name.function.scss
-      push:
-        - meta_scope: meta.function.declaration.scss
-        - include: terminator-pop
-        - match: '\('
-          scope: punctuation.section.group.begin.scss
-          push:
-            - meta_scope: meta.function.parameters.scss
-            - match: '\)'
-              scope: punctuation.section.group.end.scss
-              pop: 1
-            - include: comma-delimiters
-            - match: '(\$)([a-zA-Z0-9_-][\w-]*)'
-              scope: variable.parameter.scss
-              captures:
-                1: punctuation.definition.variable.scss
-              push:
-                - match: '(?=[,\)])'
-                  pop: 1
-                - match: ':'
-                  scope: punctuation.separator.key-value.css
-                - match: '\b(false|true|null)\b'
-                  scope: constant.language.scss
-                - include: property-value-content
     - include: scss-at-content
     - include: scss-at-forward
+    - include: scss-at-functions
+    - include: scss-at-mixins
     - include: scss-at-include
     - include: scss-at-return
     - include: scss-at-use
@@ -682,6 +656,94 @@ contexts:
     - include: scss-arguments
     - include: values
 
+###[ SCSS FUNCTION AT-RULE ]###################################################
+
+  scss-at-functions:
+    - match: (@)function{{break}}
+      scope: meta.function.scss keyword.control.directive.function.scss
+      captures:
+        1: punctuation.definition.keyword.scss
+      push:
+        - scss-at-function-meta
+        - maybe-property-list
+        - scss-at-function-name
+
+  scss-at-function-meta:
+    - meta_include_prototype: false
+    - meta_scope: meta.at-rule.function.scss
+    - include: immediately-pop
+
+  scss-at-function-name:
+    - meta_content_scope: meta.function.scss
+    - match: '{{scss_ident}}'
+      scope: meta.function.identifier.scss entity.name.function.scss
+      set: scss-at-function-parameter-list
+    - include: comments
+    - include: else-pop
+
+  scss-at-function-parameter-list:
+    - meta_include_prototype: false
+    - meta_content_scope: meta.function.identifier.scss
+    - match: \(
+      scope: punctuation.section.group.begin.scss
+      set: scss-at-function-parameter-list-body
+    - include: comments
+    - include: else-pop
+
+  scss-at-function-parameter-list-body:
+    - meta_scope: meta.function.parameters.scss meta.group.scss
+    - match: \)
+      scope: punctuation.section.group.end.scss
+      pop: 1
+    - match: \.{3}
+      scope: keyword.operator.variadic.scss
+    - include: comma-delimiters
+    - include: scss-parameters
+
+###[ SCSS MIXIN AT-RULE ]######################################################
+
+  scss-at-mixins:
+    - match: (@)mixin{{break}}
+      scope: meta.mixin.scss keyword.control.directive.mixin.scss
+      captures:
+        1: punctuation.definition.keyword.scss
+      push:
+        - scss-at-mixin-meta
+        - maybe-property-list
+        - scss-at-mixin-name
+
+  scss-at-mixin-meta:
+    - meta_include_prototype: false
+    - meta_scope: meta.at-rule.mixin.scss
+    - include: immediately-pop
+
+  scss-at-mixin-name:
+    - meta_content_scope: meta.mixin.scss
+    - match: '{{scss_ident}}'
+      scope: meta.mixin.identifier.scss entity.name.mixin.scss
+      set: scss-at-mixin-parameter-list
+    - include: comments
+    - include: else-pop
+
+  scss-at-mixin-parameter-list:
+    - meta_include_prototype: false
+    - meta_content_scope: meta.mixin.identifier.scss
+    - match: \(
+      scope: punctuation.section.group.begin.scss
+      set: scss-at-mixin-parameter-list-body
+    - include: comments
+    - include: else-pop
+
+  scss-at-mixin-parameter-list-body:
+    - meta_scope: meta.mixin.parameters.scss meta.group.scss
+    - match: \)
+      scope: punctuation.section.group.end.scss
+      pop: 1
+    - match: \.{3}
+      scope: keyword.operator.variadic.scss
+    - include: comma-delimiters
+    - include: scss-parameters
+
 ###[ SCSS INCLUDE AT-RULE ]####################################################
 
   scss-at-include:
@@ -753,6 +815,8 @@ contexts:
     - match: \)
       scope: punctuation.section.group.end.scss
       pop: 1
+    - match: \.{3}
+      scope: keyword.operator.variadic.scss
     - include: comma-delimiters
     - include: scss-parameters
 
