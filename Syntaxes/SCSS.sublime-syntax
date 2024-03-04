@@ -224,16 +224,6 @@ contexts:
     - meta_prepend: true
     - include: scss-string-interpolation
 
-###[ SCSS DEFAULT/GLOBAL VALUES ]##############################################
-
-  scss-default-operators:
-    - match: \!\s*(?i:default){{break}}
-      scope: keyword.other.default.scss
-
-  scss-global-operators:
-    - match: \!\s*(?i:global){{break}}
-      scope: keyword.other.global.scss
-
 ###[ SCSS SELECTORS ]##########################################################
 
   scss-placeholder-selector:
@@ -256,8 +246,10 @@ contexts:
     - include: comments
     - include: important-operators
     - include: scss-declarations
+    - include: scss-constants
     - include: scss-variables
     - include: scss-operators
+    - include: scss-variadics
     - include: sass-namespaced-functions
     - include: scss-expression-or-map
 
@@ -402,27 +394,6 @@ contexts:
             - other-function-arguments-list-body
             - function-arguments-list-begin
 
-###[ SCSS OPERATORS ]##########################################################
-
-  scss-operators:
-    - match: /|\*|\-\-|\-|\+\+|\+|~
-      scope: keyword.operator.arithmetic.scss
-    - match: $|%|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|%=|\+=|\-=|&=
-      scope: keyword.operator.comparison.scss
-    - match: \bnot\b|\bor\b|\band\b|\bwhen\b
-      scope: keyword.operator.logical.scss
-    - match: (?:\s*)\b(not|or|and)(?=\s)
-      captures:
-        1: keyword.operator.logical.scss
-    - match: \.{3}
-      scope: keyword.operator.variadic.scss
-    - match: \btrue\b
-      scope: constant.language.boolean.true.scss
-    - match: \bfalse\b
-      scope: constant.language.boolean.false.scss
-    - match: \bnull\b
-      scope: constant.language.null.scss
-
 ###[ SCSS CONTENT AT-RULE ]####################################################
 
   scss-at-content:
@@ -453,8 +424,6 @@ contexts:
     - match: \)
       scope: punctuation.section.group.end.scss
       pop: 1
-    - match: \.{3}
-      scope: keyword.operator.variadic.scss
     - include: scss-arguments
     - include: values
 
@@ -675,8 +644,6 @@ contexts:
     - match: \)
       scope: punctuation.section.group.end.scss
       pop: 1
-    - match: \.{3}
-      scope: keyword.operator.variadic.scss
     - include: scss-arguments
     - include: values
 
@@ -719,9 +686,8 @@ contexts:
     - match: \)
       scope: punctuation.section.group.end.scss
       pop: 1
-    - match: \.{3}
-      scope: keyword.operator.variadic.scss
     - include: comma-delimiters
+    - include: scss-variadics
     - include: scss-parameters
 
 ###[ SCSS MIXIN AT-RULE ]######################################################
@@ -763,9 +729,8 @@ contexts:
     - match: \)
       scope: punctuation.section.group.end.scss
       pop: 1
-    - match: \.{3}
-      scope: keyword.operator.variadic.scss
     - include: comma-delimiters
+    - include: scss-variadics
     - include: scss-parameters
 
 ###[ SCSS INCLUDE AT-RULE ]####################################################
@@ -812,8 +777,6 @@ contexts:
     - match: \)
       scope: punctuation.section.group.end.scss
       pop: 1
-    - match: \.{3}
-      scope: keyword.operator.variadic.scss
     - include: scss-arguments
     - include: values
 
@@ -839,9 +802,8 @@ contexts:
     - match: \)
       scope: punctuation.section.group.end.scss
       pop: 1
-    - match: \.{3}
-      scope: keyword.operator.variadic.scss
     - include: comma-delimiters
+    - include: scss-variadics
     - include: scss-parameters
 
 ###[ SCSS ROOT AT-RULE ]#######################################################
@@ -925,3 +887,33 @@ contexts:
       set: single-quoted-url-body
     - include: comments
     - include: else-pop
+
+  scss-constants:
+    - match: true{{break}}
+      scope: constant.language.boolean.true.scss
+    - match: false{{break}}
+      scope: constant.language.boolean.false.scss
+    - match: null{{break}}
+      scope: constant.language.null.scss
+
+###[ SCSS OPERATORS ]##########################################################
+
+  scss-default-operators:
+    - match: \!\s*(?i:default){{break}}
+      scope: keyword.other.default.scss
+
+  scss-global-operators:
+    - match: \!\s*(?i:global){{break}}
+      scope: keyword.other.global.scss
+
+  scss-operators:
+    - match: /|\*|\-\-|\-|\+\+|\+|~
+      scope: keyword.operator.arithmetic.scss
+    - match: \$|%|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|%=|\+=|\-=|&=
+      scope: keyword.operator.comparison.scss
+    - match: (?:and|not|or|when){{break}}
+      scope: keyword.operator.logical.scss
+
+  scss-variadics:
+    - match: \.{3}
+      scope: keyword.operator.variadic.scss
