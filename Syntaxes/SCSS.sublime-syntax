@@ -80,7 +80,7 @@ contexts:
 
   block-comment-body:
     - meta_append: true
-    - include: scss-string-interpolation
+    - include: scss-string-interpolations
 
 ###[ SassDoc COMMENTS ]###########################################################
 
@@ -137,7 +137,7 @@ contexts:
 
   selector-body:
     - meta_prepend: true
-    - include: scss-interpolation
+    - include: scss-interpolations
     - include: scss-placeholder-selector
     - include: scss-bem-selector
 
@@ -180,7 +180,7 @@ contexts:
 
   at-keyframe-identifier:
     - meta_prepend: true
-    - include: scss-interpolation
+    - include: scss-interpolations
 
   font-family-value-content:
     - meta_prepend: true
@@ -200,29 +200,29 @@ contexts:
 
   identifier-content:
     - meta_prepend: true
-    - include: scss-interpolation
+    - include: scss-interpolations
 
 ###[ CSS STRINGS WITH INTERPOLATION ]##########################################
 
   single-quoted-string-body:
     - meta_prepend: true
-    - include: scss-string-interpolation
+    - include: scss-string-interpolations
 
   double-quoted-string-body:
     - meta_prepend: true
-    - include: scss-string-interpolation
+    - include: scss-string-interpolations
 
   single-quoted-url-body:
     - meta_prepend: true
-    - include: scss-string-interpolation
+    - include: scss-string-interpolations
 
   double-quoted-url-body:
     - meta_prepend: true
-    - include: scss-string-interpolation
+    - include: scss-string-interpolations
 
   unquoted-urls:
     - meta_prepend: true
-    - include: scss-string-interpolation
+    - include: scss-string-interpolations
 
 ###[ SCSS SELECTORS ]##########################################################
 
@@ -247,7 +247,7 @@ contexts:
     - include: important-operators
     - include: scss-declarations
     - include: scss-constants
-    - include: scss-interpolation
+    - include: scss-interpolations
     - include: scss-variables
     - include: scss-operators
     - include: scss-variadics
@@ -279,7 +279,7 @@ contexts:
 
 ###[ SCSS INTERPOLATION ]######################################################
 
-  scss-interpolation:
+  scss-interpolations:
     - match: (#)({)
       captures:
         1: punctuation.definition.variable.scss
@@ -293,7 +293,7 @@ contexts:
       pop: 1
     - include: scss-expression
 
-  scss-string-interpolation:
+  scss-string-interpolations:
     - match: (#)({)
       captures:
         1: punctuation.definition.variable.scss
@@ -351,7 +351,7 @@ contexts:
             - include: comments
             - include: terminator-pop
             - include: values
-        - include: scss-interpolation
+        - include: scss-interpolations
         - include: scss-variables
         - include: quoted-strings
 
@@ -449,7 +449,7 @@ contexts:
       scope: keyword.operator.iteration.scss
       push: scss-at-each-in-body
     - include: comma-delimiters
-    - include: scss-interpolation
+    - include: scss-interpolations
     - include: scss-variables
     - include: terminator-pop
 
