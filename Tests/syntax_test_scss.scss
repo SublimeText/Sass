@@ -1092,9 +1092,14 @@ nav ul {
   h1 {
     font-size: 40px;
     @if $type == print {
-// ^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.include.scss meta.property-list.css meta.block.css meta.property-list.css meta.block.css
-//  ^^^ keyword.control.flow.conditional.scss
+// ^ meta.at-rule.include.scss meta.property-list.css meta.block.css meta.property-list.css meta.block.css
+//  ^^^^^^^^^^^^^^^^^^^ meta.at-rule.include.scss meta.property-list.css meta.block.css meta.property-list.css meta.block.css meta.at-rule.conditional.scss
+//                     ^^ meta.at-rule.include.scss meta.property-list.css meta.block.css meta.property-list.css meta.block.css meta.property-list.css meta.block.css
+//  ^^^ keyword.control.conditional.if.scss
 //      ^^^^^ variable.other.scss
+//            ^^ keyword.operator.comparison.scss
+//               ^^^^^ support.constant.property-value.css
+//                     ^ punctuation.section.block.begin.css
       font-family: Calluna;
     }
   }
@@ -1426,9 +1431,9 @@ $accent: #e1d7d2;
   height: $size;
 
   @if $circle {
-//^^^^^^^^^^^ meta.at-rule.conditional.scss
-//^^^         keyword.control.flow.conditional.scss
-//^           punctuation.definition.keyword.scss
+//^^^^^^^^^^^^ meta.at-rule.mixin.scss meta.property-list.css meta.block.css meta.at-rule.conditional.scss
+//^^^ keyword.control.conditional.if.scss
+//^ punctuation.definition.keyword.scss
 //    ^^^^^^^ variable.other
     border-radius: math.div($size, 2);
   }
@@ -1437,17 +1442,17 @@ $accent: #e1d7d2;
 // https://sass-lang.com/documentation/at-rules/control/if/#else
 @mixin theme-colors($light-theme: true) {
   @if $light-theme {
-//^^^^^^^^^^^ meta.at-rule.conditional.scss
-//^^^         keyword.control.flow.conditional.scss
-//^           punctuation.definition.keyword.scss
-//    ^^^^^^^ variable.other
+//^^^^^^^^^^^^^^^^^ meta.at-rule.mixin.scss meta.property-list.css meta.block.css meta.at-rule.conditional.scss
+//^^^ keyword.control.conditional.if.scss
+//^ punctuation.definition.keyword.scss
+//    ^^^^^^^^^^^^ variable.other
 
     background-color: $light-background;
     color: $light-text;
   } @else {
-//  ^^^^^^ meta.at-rule.conditional.scss
-//  ^^^^^         keyword.control.flow.conditional.scss
-//  ^           punctuation.definition.keyword.scss
+//  ^^^^^ meta.at-rule.conditional.scss keyword.control.conditional.else.scss
+//  ^ punctuation.definition.keyword.scss
+//       ^ meta.at-rule.conditional.scss - keyword
     background-color: $dark-background;
     color: $dark-text;
   }
@@ -1455,27 +1460,60 @@ $accent: #e1d7d2;
 
 // https://sass-lang.com/documentation/at-rules/control/if/#else-if
 @mixin triangle($size, $color, $direction) {
-  height: 0;
-  width: 0;
-
-  border-color: transparent;
-  border-style: solid;
-  border-width: math.div($size, 2);
 
   @if $direction == up {
+//^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.mixin.scss meta.property-list.css meta.block.css meta.at-rule.conditional.scss
+//^^^ keyword.control.conditional.if.scss
+//^ punctuation.definition.keyword.scss
+//    ^^^^^^^^^^ variable.other
+//               ^^ keyword.operator.comparison.scss
+//                  ^^ support.constant.property-value.css
+//                     ^ punctuation.section.block.begin.css
     border-bottom-color: $color;
   } @else if $direction == right {
-//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.conditional.scss
-//  ^^^^^^^^                     keyword.control.flow.conditional.scss
-//  ^                            punctuation.definition.keyword.scss
-//           ^                   variable.other
-//                      ^        keyword.operator
+//^^ - meta.at-rule.conditional
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.conditional.scss
+//                               ^^ - meta.at-rule.conditional
+//^ punctuation.section.block.end.css
+//  ^^^^^^^^ keyword.control.conditional.elseif.scss
+//  ^ punctuation.definition.keyword.scss
+//           ^^^^^^^^^^ variable.other.scss
+//                      ^^ keyword.operator.comparison.scss
+//                         ^^^^^ support.constant.property-value.css
+//                               ^ punctuation.section.block.begin.css
     border-left-color: $color;
   } @else if $direction == down {
+//^^ - meta.at-rule.conditional
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.conditional.scss
+//                              ^^ - meta.at-rule.conditional
+//^ punctuation.section.block.end.css
+//  ^^^^^^^^ keyword.control.conditional.elseif.scss
+//  ^ punctuation.definition.keyword.scss
+//           ^^^^^^^^^^ variable.other.scss
+//                      ^^ keyword.operator.comparison.scss
+//                         ^^^^ support.constant.property-value.css
+//                              ^ punctuation.section.block.begin.css
     border-top-color: $color;
   } @else if $direction == left {
+//^^ - meta.at-rule.conditional
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.conditional.scss
+//                              ^^ - meta.at-rule.conditional
+//^ punctuation.section.block.end.css
+//  ^^^^^^^^ keyword.control.conditional.elseif.scss
+//  ^ punctuation.definition.keyword.scss
+//           ^^^^^^^^^^ variable.other.scss
+//                      ^^ keyword.operator.comparison.scss
+//                         ^^^^ support.constant.property-value.css
+//                              ^ punctuation.section.block.begin.css
     border-right-color: $color;
   } @else {
+//^^ - meta.at-rule.conditional
+//  ^^^^^^ meta.at-rule.conditional.scss
+//        ^^ - meta.at-rule.conditional
+//^ punctuation.section.block.end.css
+//  ^ punctuation.definition.keyword.scss
+//  ^^^^^ keyword.control.conditional.else.scss
+//        ^ punctuation.section.block.begin.css
     @error "Unknown direction #{$direction}.";
   }
 }
@@ -1487,12 +1525,12 @@ $accent: #e1d7d2;
 $sizes: 40px, 50px, 80px;
 
 @each $size in $sizes {
+// <- meta.at-rule.each.scss keyword.control.loop.each.scss punctuation.definition.keyword.scss
 //^^^^^^^^^^^^^^^^^^^^ meta.at-rule.each.scss
-//^^^                  keyword.control.flow.scss
-//<-                   punctuation.definition.keyword.scss
-//    ^^^^^            variable.other.scss
-//          ^^         keyword.operator.scss
-//             ^^^^^   variable.other.scss
+//^^^ keyword.control.loop.each.scss
+//    ^^^^^ variable.other.scss
+//          ^^ keyword.operator.iteration.scss
+//             ^^^^^ variable.other.scss
   .icon-#{$size} {
     font-size: $size;
     height: $size;
@@ -1517,13 +1555,12 @@ $icons: ("eye": "\f112", "start": "\f12e", "stop": "\f12f");
 //                                                         ^ punctuation.terminator.rule.css
 @each $name, $glyph in $icons {
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.each.scss
-//^^^                          keyword.control.flow.scss
-//<-                           punctuation.definition.keyword.scss
-//    ^^^^^                    variable.other.scss
-//         ^                   punctuation.separator.sequence.css
-//           ^^^^^             variable.other.scss
-//                  ^^         keyword.operator.scss
-//                     ^^^^^^  variable.other.scss
+//^^^ keyword.control.loop.each.scss
+//    ^^^^^ variable.other.scss
+//         ^ punctuation.separator.sequence.css
+//           ^^^^^ variable.other.scss
+//                  ^^ keyword.operator.iteration.scss
+//                     ^^^^^^ variable.other.scss
   .icon-#{$name}:before {
 //               ^^^^^^ entity.other.pseudo-element.css
     display: inline-block;
@@ -1539,14 +1576,16 @@ $icons:
   "stop" "\f12f" 10px;
 
 @each $name, $glyph, $size in $icons {
+// <- meta.at-rule.each.scss keyword.control.loop.each.scss punctuation.definition.keyword.scss
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.each.scss
-//^^^                                 keyword.control.flow.scss
-//<-                                  punctuation.definition.keyword.scss
-//    ^^^^^                           variable.other.scss
-//                 ^                  punctuation.separator.sequence.css
-//                   ^^^^^            variable.other.scss
-//                         ^^         keyword.operator.scss
-//                            ^^^^^^  variable.other.scss
+//^^^ keyword.control.loop.each.scss
+//    ^^^^^ variable.other.scss
+//         ^ punctuation.separator.sequence.css
+//           ^^^^^^ variable.other.scss
+//                 ^ punctuation.separator.sequence.css
+//                   ^^^^^ variable.other.scss
+//                         ^^ keyword.operator.iteration.scss
+//                            ^^^^^^ variable.other.scss
   .icon-#{$name}:before {
     display: inline-block;
     font-family: "Icon Font";
@@ -1562,14 +1601,14 @@ $icons:
 $base-color: #036;
 
 @for $i from 1 through 3 {
+// <- meta.at-rule.for.scss keyword.control.loop.for.scss punctuation.definition.keyword.scss
 //^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.for.scss
-//^^                      keyword.control.flow.scss
-//<-                      punctuation.definition.keyword.scss
-//   ^^                   variable.other.scss
-//      ^^^^              keyword.operator.scss
-//           ^            constant.numeric
-//             ^^^^^^     keyword.operator.scss
-//                     ^  constant.numeric
+//^^ keyword.control.loop.for.scss
+//   ^^ variable.other.scss
+//      ^^^^ keyword.operator.iteration.scss
+//           ^ constant.numeric
+//             ^^^^^^^ keyword.operator.iteration.scss
+//                     ^ constant.numeric
   ul:nth-child(3n + #{$i}) {
     background-color: lighten($base-color, $i * 5%);
   }
@@ -1585,11 +1624,11 @@ $base-color: #036;
 @function scale-below($value, $base, $ratio: 1.618) {
   @while $value > $base {
 //^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.while.scss
-//^^^^^^                 keyword.control.flow.scss
-//^                      punctuation.definition.keyword.scss
-//       ^^^^^^          variable.other.scss
-//              ^        keyword.operator.comparison.scss
-//                ^^^^^  variable.other.scss
+//^ punctuation.definition.keyword.scss
+//^^^^^^ keyword.control.loop.while.scss
+//       ^^^^^^ variable.other.scss
+//              ^ keyword.operator.comparison.scss
+//                ^^^^^ variable.other.scss
     $value: math.div($value, $ratio);
   }
   @return $value;

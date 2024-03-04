@@ -411,55 +411,12 @@ contexts:
 ###[ SCSS @ Rules ]############################################################
 
   scss-at-rules:
-    - match: '(@)(each){{break}}'
-      captures:
-        0: keyword.control.flow.scss
-        1: punctuation.definition.keyword.scss
-      push:
-        - meta_scope: meta.at-rule.each.scss
-        - include: scss-variables
-        - include: comma-delimiters
-        - include: terminator-pop
-        - match: \b(in){{break}}
-          scope: keyword.operator.scss
-          push:
-            - include: terminator-pop
-            - include: comments
-            - include: comma-delimiters
-            - include: var-function
-            - include: scss-expression
-    - match: '(@)(for){{break}}'
-      captures:
-        0: keyword.control.flow.scss
-        1: punctuation.definition.keyword.scss
-      push:
-        - meta_scope: meta.at-rule.for.scss
-        - include: values
-        - include: terminator-pop
-        - match: (?:\s*)\b(from|to|through)(?=\s)
-          captures:
-            1: keyword.operator.scss
-    - match: '(@)(while){{break}}'
-      captures:
-        0: keyword.control.flow.scss
-        1: punctuation.definition.keyword.scss
-      push:
-        - meta_scope: meta.at-rule.while.scss
-        - include: scss-expression
-        - include: terminator-pop
-    - match: '(@)(if|else if|else){{break}}'
-      captures:
-        0: keyword.control.flow.conditional.scss
-        1: punctuation.definition.keyword.scss
-      push:
-        - meta_scope: meta.at-rule.conditional.scss
-        - include: terminator-pop
-        - include: values
     - match: '(@)(at-root){{break}}'
       captures:
         0: keyword.control.directive.at-root.scss
         1: punctuation.definition.keyword.scss
     - include: scss-at-content
+    - include: scss-at-control
     - include: scss-at-extend
     - include: scss-at-forward
     - include: scss-at-functions
@@ -505,6 +462,71 @@ contexts:
     - include: values
 
 ###[ SCSS CONTROL FLOW AT-RULE ]###############################################
+
+  scss-at-control:
+    # conditional
+    - match: (@)if{{break}}
+      scope: keyword.control.conditional.if.scss
+      captures:
+        1: punctuation.definition.keyword.scss
+      push: scss-at-coditional-body
+    - match: (@)else if{{break}}
+      scope: keyword.control.conditional.elseif.scss
+      captures:
+        1: punctuation.definition.keyword.scss
+      push: scss-at-coditional-body
+    - match: (@)else{{break}}
+      scope: keyword.control.conditional.else.scss
+      captures:
+        1: punctuation.definition.keyword.scss
+      push: scss-at-coditional-body
+    # loops
+    - match: (@)each{{break}}
+      scope: keyword.control.loop.each.scss
+      captures:
+        1: punctuation.definition.keyword.scss
+      push: scss-at-each-body
+    - match: (@)for{{break}}
+      scope: keyword.control.loop.for.scss
+      captures:
+        1: punctuation.definition.keyword.scss
+      push: scss-at-for-body
+    - match: (@)while{{break}}
+      scope: keyword.control.loop.while.scss
+      captures:
+        1: punctuation.definition.keyword.scss
+      push: scss-at-while-body
+
+  scss-at-coditional-body:
+    - meta_scope: meta.at-rule.conditional.scss
+    - include: values
+
+  scss-at-each-body:
+    - meta_scope: meta.at-rule.each.scss
+    - include: scss-variables
+    - include: comma-delimiters
+    - include: terminator-pop
+    - match: in{{break}}
+      scope: keyword.operator.iteration.scss
+      push: scss-at-each-in-body
+
+  scss-at-each-in-body:
+    - include: terminator-pop
+    - include: comments
+    - include: comma-delimiters
+    - include: var-function
+    - include: scss-expression
+
+  scss-at-for-body:
+    - meta_scope: meta.at-rule.for.scss
+    - match: (?:from|to|through){{break}}
+      scope: keyword.operator.iteration.scss
+    - include: values
+
+  scss-at-while-body:
+    - meta_scope: meta.at-rule.while.scss
+    - include: scss-expression
+    - include: terminator-pop
 
   scss-at-return:
     - match: (@)return{{break}}
