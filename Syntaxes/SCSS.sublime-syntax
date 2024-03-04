@@ -247,6 +247,7 @@ contexts:
     - include: important-operators
     - include: scss-declarations
     - include: scss-constants
+    - include: scss-interpolation
     - include: scss-variables
     - include: scss-operators
     - include: scss-variadics
@@ -307,17 +308,6 @@ contexts:
       pop: 1
     - include: scss-expression
 
-###[ SCSS VARS ]###############################################################
-
-  scss-variables:
-    - match: '(({{ident}})(\.))?(\$)([a-zA-Z0-9_-][\w-]*)'
-      scope: variable.other.scss
-      captures:
-        2: entity.name.namespace.scss
-        3: punctuation.separator.namespace.scss
-        4: punctuation.definition.variable.scss
-    - include: scss-interpolation
-
 ###[ SCSS MAPS OR GROUPS ]#####################################################
 
   scss-expression-or-map:
@@ -361,6 +351,7 @@ contexts:
             - include: comments
             - include: terminator-pop
             - include: values
+        - include: scss-interpolation
         - include: scss-variables
         - include: quoted-strings
 
@@ -454,12 +445,13 @@ contexts:
 
   scss-at-each-body:
     - meta_scope: meta.at-rule.each.scss
-    - include: scss-variables
-    - include: comma-delimiters
-    - include: terminator-pop
     - match: in{{break}}
       scope: keyword.operator.iteration.scss
       push: scss-at-each-in-body
+    - include: comma-delimiters
+    - include: scss-interpolation
+    - include: scss-variables
+    - include: terminator-pop
 
   scss-at-each-in-body:
     - include: terminator-pop
@@ -917,3 +909,13 @@ contexts:
   scss-variadics:
     - match: \.{3}
       scope: keyword.operator.variadic.scss
+
+###[ SCSS VARIABLES ]##########################################################
+
+  scss-variables:
+    - match: (?:({{ident}})(\.))?((\$){{scss_ident}})
+      captures:
+        1: variable.namespace.scss
+        2: punctuation.accessor.dot.scss
+        3: variable.other.scss
+        4: punctuation.definition.variable.scss
