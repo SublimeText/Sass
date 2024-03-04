@@ -41,9 +41,24 @@ contexts:
     - include: properties-or-selectors
     - include: property-lists
     - include: scss-declarations
-    - include: scss-at-rules
     - include: at-rules
     - include: rule-terminators
+
+###[ CSS AT-RULES ]############################################################
+
+  at-other:
+    - meta_prepend: true
+    - include: scss-at-content
+    - include: scss-at-control
+    - include: scss-at-extend
+    - include: scss-at-forward
+    - include: scss-at-functions
+    - include: scss-at-include
+    - include: scss-at-messages
+    - include: scss-at-mixins
+    - include: scss-at-return
+    - include: scss-at-root
+    - include: scss-at-use
 
 ###[ Yekyll front matter ]#####################################################
 
@@ -407,21 +422,6 @@ contexts:
       scope: constant.language.boolean.false.scss
     - match: \bnull\b
       scope: constant.language.null.scss
-
-###[ SCSS @ Rules ]############################################################
-
-  scss-at-rules:
-    - include: scss-at-content
-    - include: scss-at-control
-    - include: scss-at-extend
-    - include: scss-at-forward
-    - include: scss-at-functions
-    - include: scss-at-messages
-    - include: scss-at-mixins
-    - include: scss-at-include
-    - include: scss-at-return
-    - include: scss-at-root
-    - include: scss-at-use
 
 ###[ SCSS CONTENT AT-RULE ]####################################################
 
