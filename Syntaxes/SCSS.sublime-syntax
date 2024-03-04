@@ -364,21 +364,6 @@ contexts:
         - include: scss-variables
         - include: quoted-strings
 
-###[ SCSS DECLARATIONS ]#######################################################
-
-  scss-declarations:
-    - match: (((\$){{scss_ident}})\s*)(:)
-      captures:
-        1: meta.declaration.identifier.scss
-        2: variable.other.scss
-        3: punctuation.definition.variable.scss
-        4: meta.declaration.scss punctuation.separator.key-value.css
-      push: scss-declaration-value
-
-  scss-declaration-value:
-    - meta_content_scope: meta.declaration.value.scss
-    - include: values
-
 ###[ SCSS FUNCTIONS ]##########################################################
 
   sass-namespaced-functions:
@@ -851,6 +836,21 @@ contexts:
     - match: ','
       scope: punctuation.separator.sequence.css
       pop: 1
+    - include: values
+
+###[ SCSS DECLARATIONS ]#######################################################
+
+  scss-declarations:
+    - match: (((\$){{scss_ident}})\s*)(:)
+      captures:
+        1: meta.declaration.identifier.scss
+        2: variable.other.scss
+        3: punctuation.definition.variable.scss
+        4: meta.declaration.scss punctuation.separator.key-value.css
+      push: scss-declaration-value
+
+  scss-declaration-value:
+    - meta_content_scope: meta.declaration.value.scss
     - include: values
 
 ###[ SCSS PARAMETERS ]#########################################################
