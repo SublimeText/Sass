@@ -455,32 +455,6 @@ contexts:
         - meta_scope: meta.at-rule.conditional.scss
         - include: terminator-pop
         - include: values
-    - match: '(@)(error){{break}}'
-      captures:
-        0: keyword.control.at-rule.error.scss
-        1: punctuation.definition.keyword.scss
-      push:
-        - meta_scope: meta.at-rule.scss
-        - include: terminator-pop
-        - include: scss-expression
-        - include: quoted-strings
-    - match: '(@)(warn){{break}}'
-      captures:
-        0: keyword.control.at-rule.warn.scss
-        1: punctuation.definition.keyword.scss
-      push:
-        - meta_scope: meta.at-rule.scss
-        - include: terminator-pop
-        - include: scss-expression
-        - include: quoted-strings
-    - match: '(@)(debug){{break}}'
-      captures:
-        0: keyword.control.at-rule.debugger.scss
-        1: punctuation.definition.keyword.scss
-      push:
-        - meta_scope: meta.at-rule.scss
-        - include: terminator-pop
-        - include: values
     - match: '(@)(at-root){{break}}'
       captures:
         0: keyword.control.directive.at-root.scss
@@ -489,6 +463,7 @@ contexts:
     - include: scss-at-extend
     - include: scss-at-forward
     - include: scss-at-functions
+    - include: scss-at-messages
     - include: scss-at-mixins
     - include: scss-at-include
     - include: scss-at-return
@@ -540,6 +515,29 @@ contexts:
 
   scss-at-return-value:
     - meta_scope: meta.at-rule.return.scss
+    - include: values
+
+###[ SCSS DEBUG/ERROR/WARN AT-RULE ]###########################################
+
+  scss-at-messages:
+    - match: (@)debug{{break}}
+      scope: keyword.control.at-rule.debug.scss
+      captures:
+        1: punctuation.definition.keyword.scss
+      push: scss-at-message-body
+    - match: (@)error{{break}}
+      scope: keyword.control.at-rule.error.scss
+      captures:
+        1: punctuation.definition.keyword.scss
+      push: scss-at-message-body
+    - match: (@)warn{{break}}
+      scope: keyword.control.at-rule.warn.scss
+      captures:
+        1: punctuation.definition.keyword.scss
+      push: scss-at-message-body
+
+  scss-at-message-body:
+    - meta_scope: meta.at-rule.message.scss
     - include: values
 
 ###[ SCSS EXTEND AT-RULE ]#####################################################

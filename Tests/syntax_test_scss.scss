@@ -1253,20 +1253,32 @@ $widths: 50px, 30px, 100px;
 // https://sass-lang.com/documentation/at-rules/function/#other-functions
 //=============================================================================
 @debug var(--main-bg-color); // var(--main-bg-color)
-// ^^^                         meta.at-rule.scss keyword.control.at-rule.debugger.scss
-//<-                           punctuation.definition.keyword.scss
-//     ^^^                     support.function.var.css
-//                         ^   punctuation.terminator.rule.css
-//                           ^ comment
+// <- meta.at-rule.message.scss keyword.control.at-rule.debug.scss punctuation.definition.keyword.scss
+//^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.message.scss
+//     ^^^ meta.function-call.identifier.css
+//        ^^^^^^^^^^^^^^^^^ meta.function-call.arguments.css meta.group.css
+//^^^^ keyword.control.at-rule.debug.scss
+//     ^^^ support.function.var.css
+//        ^ punctuation.section.group.begin.css
+//         ^^^^^^^^^^^^^^^ variable.other.custom-property.css
+//                        ^ punctuation.section.group.end.css
+//                         ^ punctuation.terminator.rule.css
+
 $primary: #f2ece4;
 $accent: #e1d7d2;
 @debug radial-gradient($primary, $accent); // radial-gradient(#f2ece4, #e1d7d2)
-// ^^^                                      meta.at-rule.scss keyword.control.at-rule.debugger.scss
-//<-                                        punctuation.definition.keyword.scss
-//     ^^^^^^^^^^^^^^^                      support.function.gradient.css
-//                    ^                     punctuation.section.group.begin.css
-//                             ^            punctuation.separator.sequence.css
-//                                       ^  punctuation.terminator.rule.css
+// <- meta.at-rule.message.scss keyword.control.at-rule.debug.scss punctuation.definition.keyword.scss
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.message.scss
+//     ^^^^^^^^^^^^^^^ meta.function-call.identifier.css
+//                    ^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.css meta.group.css
+//^^^^ keyword.control.at-rule.debug.scss
+//     ^^^^^^^^^^^^^^^ support.function.gradient.css
+//                    ^ punctuation.section.group.begin.css
+//                     ^^^^^^^^ variable.other.scss
+//                             ^ punctuation.separator.sequence.css
+//                               ^^^^^^^ variable.other.scss
+//                                      ^ punctuation.section.group.end.css
+//                                       ^ punctuation.terminator.rule.css
 
 //=============================================================================
 // Extend
@@ -1326,24 +1338,11 @@ $accent: #e1d7d2;
 @mixin reflexive-position($property, $value) {
   @if $property != left and $property != right {
     @error "Property #{$property} must be either left or right.";
-//  ^^^^^^^^^^^^^^^^^                   meta.at-rule.scss
-//                               ^^^^^^ meta.at-rule.scss
-//  ^^^^^^                              keyword.control.at-rule.error.scss
-//  ^                                   punctuation.definition.keyword.scss
-//         ^^^^^^^^^^                   string.quoted
-//                   ^^^^^^^^^^         meta.interpolation
-//                               ^^^^^^ string.quoted
-
-  }
-
-  $left-value: if($property == right, initial, $value);
-  $right-value: if($property == right, $value, initial);
-
-  left: $left-value;
-  right: $right-value;
-  [dir=rtl] & {
-    left: $right-value;
-    right: $left-value;
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.message.scss
+//  ^^^^^^ keyword.control.at-rule.error.scss
+//         ^^^^^^^^^^ meta.string.css string.quoted.double.css
+//                   ^^^^^^^^^^^^ meta.string.css meta.interpolation.scss
+//                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.css string.quoted.double.css
   }
 }
 
@@ -1355,15 +1354,13 @@ $accent: #e1d7d2;
   @each $prefix in $prefixes {
     @if not index($known-prefixes, $prefix) {
       @warn "Unknown prefix #{$prefix}.";
-//    ^^^^^                      meta.at-rule.scss keyword.control.at-rule.warn.scss
-//    ^                          punctuation.definition.keyword.scss
-//          ^^^^^^^^^^           string.quoted
-//                          ^^^^ meta.interpolation
+//    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.message.scss
+//    ^^^^^ keyword.control.at-rule.warn.scss
+//          ^^^^^^^^^^^^^^^^ meta.string.css string.quoted.double.css
+//                          ^^^^^^^^^^ meta.string.css meta.interpolation.scss
+//                                    ^^ meta.string.css string.quoted.double.css
     }
-
-    -#{$prefix}-#{$property}: $value;
   }
-  #{$property}: $value;
 }
 
 //=============================================================================
@@ -1379,13 +1376,11 @@ $accent: #e1d7d2;
 //                      ^^^^^^^^  variable.other
 
   @debug "divider offset: #{$divider-offset}";
-//^^^^^^                     meta.at-rule.scss keyword.control.at-rule.debugger.scss
-//^                          punctuation.definition.keyword.scss
-//       ^^^^^^^^^^          string.quoted
-//                        ^^ meta.interpolation
-
-  margin-left: $divider-offset;
-  width: calc(100% - #{$divider-offset});
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.message.scss
+//^^^^^^ keyword.control.at-rule.debug.scss
+//       ^^^^^^^^^^^^^^^^^ meta.string.css string.quoted.double.css
+//                        ^^^^^^^^^^^^^^^^^^ meta.string.css meta.interpolation.scss
+//                                          ^ meta.string.css string.quoted.double.css
 }
 
 //=============================================================================
