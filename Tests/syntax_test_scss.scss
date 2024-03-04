@@ -1394,12 +1394,25 @@ $accent: #e1d7d2;
 //=============================================================================
 @mixin unify-parent($child) {
   @at-root #{selector.unify(&, $child)} {
-//^^^^^^^^    keyword.control.directive.at-root.scss
-//^           punctuation.definition.keyword.scss
-//         ^^ meta.interpolation
+//^^^^^^^^ meta.at-rule.root.scss
+//        ^ meta.at-rule.root.scss meta.selector.css - meta.interpolation
+//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.root.scss meta.selector.css meta.interpolation.scss
+//                                     ^ meta.at-rule.root.scss meta.selector.css - meta.interpolation
+//^ punctuation.definition.keyword.scss
+// ^^^^^^^ keyword.control.directive.root.scss
+//         ^ punctuation.definition.variable.scss
+//          ^ punctuation.section.interpolation.begin.scss
+//           ^^^^^^^^ entity.name.namespace.scss
+//                   ^ punctuation.separator.namespace.scss
+//                    ^^^^^ support.function.scss
+//                         ^ punctuation.section.group.begin.css
+//                           ^ punctuation.separator.sequence.css
+//                             ^^^^^^ variable.other.scss
+//                                   ^ punctuation.section.group.end.css
+//                                    ^ punctuation.section.interpolation.end.scss
     @content;
-//  ^^^^^^^^    keyword.control.directive.content.scss
-//  ^           punctuation.definition.keyword.scss
+//  ^^^^^^^^ keyword.control.directive.content.scss
+//  ^ punctuation.definition.keyword.scss
   }
 }
 
@@ -1409,14 +1422,32 @@ $accent: #e1d7d2;
     width: 8in;
 
     @at-root (without: media) {
-//  ^^^^^^^^           keyword.control.directive.at-root.scss
-//  ^                  punctuation.definition.keyword.scss
+//  ^^^^^^^^  meta.at-rule.root.scss - meta.selector
+//          ^ meta.at-rule.media.css meta.selector.css - meta.group
+//           ^^^^^^^^^^^^^^^^ meta.at-rule.root.scss meta.selector.css meta.group.scss
+//                           ^ meta.at-rule.media.css meta.selector.css - meta.group
+//  ^ punctuation.definition.keyword.scss
+//  ^^^^^^^^ keyword.control.directive.root.scss
+//           ^ punctuation.section.group.begin.scss
+//            ^^^^^^^ keyword.control.scss
 //                   ^ punctuation.separator.key-value.css
-
+//                     ^^^^^ support.constant.property-value.css
+//                          ^ punctuation.section.group.end.scss
       color: #111;
     }
 
     @at-root (with: rule) {
+//  ^^^^^^^^  meta.at-rule.root.scss - meta.selector
+//          ^ meta.at-rule.media.css meta.selector.css - meta.group
+//           ^^^^^^^^^^^^ meta.at-rule.root.scss meta.selector.css meta.group.scss
+//                       ^ meta.at-rule.media.css meta.selector.css - meta.group
+//  ^ punctuation.definition.keyword.scss
+//  ^^^^^^^^ keyword.control.directive.root.scss
+//           ^ punctuation.section.group.begin.scss
+//            ^^^^ keyword.control.scss
+//                ^ punctuation.separator.key-value.css
+//                  ^^^^ support.constant.property-value.css
+//                      ^ punctuation.section.group.end.scss
       font-size: 1.2em;
     }
   }

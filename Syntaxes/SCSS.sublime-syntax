@@ -411,10 +411,6 @@ contexts:
 ###[ SCSS @ Rules ]############################################################
 
   scss-at-rules:
-    - match: '(@)(at-root){{break}}'
-      captures:
-        0: keyword.control.directive.at-root.scss
-        1: punctuation.definition.keyword.scss
     - include: scss-at-content
     - include: scss-at-control
     - include: scss-at-extend
@@ -424,6 +420,7 @@ contexts:
     - include: scss-at-mixins
     - include: scss-at-include
     - include: scss-at-return
+    - include: scss-at-root
     - include: scss-at-use
 
 ###[ SCSS CONTENT AT-RULE ]####################################################
@@ -846,6 +843,34 @@ contexts:
       scope: keyword.operator.variadic.scss
     - include: comma-delimiters
     - include: scss-parameters
+
+###[ SCSS ROOT AT-RULE ]#######################################################
+
+  scss-at-root:
+    - match: (@)at-root{{break}}
+      scope: keyword.control.directive.root.scss
+      captures:
+        1: punctuation.definition.keyword.scss
+      push: scss-at-root-body
+
+  scss-at-root-body:
+    - meta_scope: meta.at-rule.root.scss
+    - meta_content_scope: meta.selector.css
+    - match: \(
+      scope: punctuation.section.group.begin.scss
+      push: scss-at-root-group-body
+    - include: selector-body
+
+  scss-at-root-group-body:
+    - meta_scope: meta.group.scss
+    - match: \)
+      scope: punctuation.section.group.end.scss
+      pop: 1
+    - match: (with|without)\s*(:)
+      captures:
+        1: keyword.control.scss
+        2: punctuation.separator.key-value.css
+    - include: values
 
 ###[ SCSS ARGUMENTS ]##########################################################
 
