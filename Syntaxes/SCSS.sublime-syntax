@@ -65,6 +65,17 @@ contexts:
     - include: at-rules
     - include: rule-terminators
 
+###[ CSS COMMENTS ]############################################################
+
+  comments:
+    - meta_append: true
+    - include: sassdoc-comments
+    - include: scss-line-comments
+
+  block-comment-body:
+    - meta_append: true
+    - include: scss-string-interpolations
+
 ###[ CSS AT-RULES ]############################################################
 
   at-other:
@@ -80,47 +91,6 @@ contexts:
     - include: scss-at-return
     - include: scss-at-root
     - include: scss-at-use
-
-###[ CSS COMMENTS ]############################################################
-
-  comments:
-    - meta_append: true
-    - include: sassdoc-comments
-    - include: scss-line-comments
-
-  block-comment-body:
-    - meta_append: true
-    - include: scss-string-interpolations
-
-###[ SassDoc COMMENTS ]###########################################################
-
-  sassdoc-comments:
-    - match: /{3}
-      scope: punctuation.definition.comment.sassdoc.scss
-      push: sassdoc-comments-body
-
-  sassdoc-comments-body:
-    - meta_scope: comment.line.double-slash.scss comment.line.documentation.sassdoc.scss
-    - include: Packages/Markdown/Markdown.sublime-syntax#bold
-    - include: Packages/Markdown/Markdown.sublime-syntax#italic
-    - include: Packages/Markdown/Markdown.sublime-syntax#code-spans
-    # @TODO maybe consider markdown inline links, images
-    - match: \@\w+(?=\s|$)
-      scope: entity.name.tag.documentation.sassdoc.scss
-    - match: \n
-      pop: 1
-
-###[ SCSS COMMENTS ]###########################################################
-
-  scss-line-comments:
-    - match: /{2}
-      scope: punctuation.definition.comment.scss
-      push: scss-line-comments-body
-
-  scss-line-comments-body:
-    - meta_scope: comment.line.double-slash.scss
-    - match: \n
-      pop: 1
 
 ###[ CSS PROPERTIES OR SELECTORS ]#############################################
 
@@ -233,6 +203,36 @@ contexts:
   unquoted-urls:
     - meta_prepend: true
     - include: scss-string-interpolations
+
+###[ SassDoc COMMENTS ]########################################################
+
+  sassdoc-comments:
+    - match: /{3}
+      scope: punctuation.definition.comment.sassdoc.scss
+      push: sassdoc-comments-body
+
+  sassdoc-comments-body:
+    - meta_scope: comment.line.double-slash.scss comment.line.documentation.sassdoc.scss
+    - include: Packages/Markdown/Markdown.sublime-syntax#bold
+    - include: Packages/Markdown/Markdown.sublime-syntax#italic
+    - include: Packages/Markdown/Markdown.sublime-syntax#code-spans
+    # @TODO maybe consider markdown inline links, images
+    - match: \@\w+(?=\s|$)
+      scope: entity.name.tag.documentation.sassdoc.scss
+    - match: \n
+      pop: 1
+
+###[ SCSS COMMENTS ]###########################################################
+
+  scss-line-comments:
+    - match: /{2}
+      scope: punctuation.definition.comment.scss
+      push: scss-line-comments-body
+
+  scss-line-comments-body:
+    - meta_scope: comment.line.double-slash.scss
+    - match: \n
+      pop: 1
 
 ###[ SCSS SELECTORS ]##########################################################
 
