@@ -208,10 +208,6 @@ contexts:
     - include: scss-default-operators
     - include: scss-global-operators
 
-  at-keyframe-identifier:
-    - meta_prepend: true
-    - include: scss-interpolations
-
   font-family-value-content:
     - meta_prepend: true
     - include: scss-expressions-basic
