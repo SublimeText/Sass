@@ -277,90 +277,6 @@ contexts:
     - match: \n
       pop: 1
 
-###[ SCSS SELECTORS ]##########################################################
-
-  scss-placeholder-selector:
-    - match: \%
-      scope: entity.other.attribute-name.class.css punctuation.definition.entity.placeholder.scss
-      # has same basic properties as a classname
-      push: selector-class-identifier
-
-  scss-bem-selector:
-    - match: (\&)([-_]+({{ident}}|(?=#{)))
-      # &--bem_ish selectors
-      captures:
-        1: variable.language.parent.css
-        2: entity.other.attribute-name.css
-
-###[ SCSS EXPRESSIONS ]########################################################
-
-  scss-expressions-basic:
-    # for use in CSS contexts
-    - include: comments
-    - include: important-operators
-    - include: scss-declarations
-    - include: scss-constants
-    - include: scss-interpolations
-    - include: scss-variables
-    - include: scss-operators
-    - include: scss-variadics
-    - include: sass-namespaced-functions
-    - include: scss-expressions-or-map
-
-  scss-expressions:
-    # for use in SCSS contexts where we try to "guess" more types of values
-    - include: scss-expressions-basic
-
-    # and most normal css values
-    # - include: comma-delimiters
-    # - include: arithmetic-operators
-    # - include: vendor-prefixes
-    - include: builtin-functions
-    - include: color-values
-    # - include: line-name-lists
-    - include: unicode-ranges
-    - include: numeric-constants
-    - include: quoted-strings
-    # - include: none-constants
-    # - include: constants-or-functions
-    # - include: illegal-groups
-
-    # other values only mean something after compiling to css,
-    # we can't always predict what just based on what it looks like
-    - match: '{{ident}}'
-      scope: meta.generic-name.scss
-
-###[ SCSS INTERPOLATION ]######################################################
-
-  scss-interpolations:
-    - match: (#)({)
-      captures:
-        1: punctuation.definition.variable.scss
-        2: punctuation.section.interpolation.begin.scss
-      push: scss-interpolation-body
-
-  scss-interpolation-body:
-    - meta_scope: meta.interpolation.scss
-    - match: \}
-      scope: punctuation.section.interpolation.end.scss
-      pop: 1
-    - include: scss-expressions
-
-  scss-string-interpolations:
-    - match: (#)({)
-      captures:
-        1: punctuation.definition.variable.scss
-        2: punctuation.section.interpolation.begin.scss
-      push: scss-string-interpolation-body
-
-  scss-string-interpolation-body:
-    - clear_scopes: 1
-    - meta_scope: meta.interpolation.scss
-    - match: \}
-      scope: punctuation.section.interpolation.end.scss
-      pop: 1
-    - include: scss-expressions
-
 ###[ SCSS CONTENT AT-RULE ]####################################################
 
   scss-at-content:
@@ -801,6 +717,90 @@ contexts:
         1: keyword.control.scss
         2: punctuation.separator.key-value.css
     - include: values
+
+###[ SCSS SELECTORS ]##########################################################
+
+  scss-placeholder-selector:
+    - match: \%
+      scope: entity.other.attribute-name.class.css punctuation.definition.entity.placeholder.scss
+      # has same basic properties as a classname
+      push: selector-class-identifier
+
+  scss-bem-selector:
+    - match: (\&)([-_]+({{ident}}|(?=#{)))
+      # &--bem_ish selectors
+      captures:
+        1: variable.language.parent.css
+        2: entity.other.attribute-name.css
+
+###[ SCSS EXPRESSIONS ]########################################################
+
+  scss-expressions-basic:
+    # for use in CSS contexts
+    - include: comments
+    - include: important-operators
+    - include: scss-declarations
+    - include: scss-constants
+    - include: scss-interpolations
+    - include: scss-variables
+    - include: scss-operators
+    - include: scss-variadics
+    - include: sass-namespaced-functions
+    - include: scss-expressions-or-map
+
+  scss-expressions:
+    # for use in SCSS contexts where we try to "guess" more types of values
+    - include: scss-expressions-basic
+
+    # and most normal css values
+    # - include: comma-delimiters
+    # - include: arithmetic-operators
+    # - include: vendor-prefixes
+    - include: builtin-functions
+    - include: color-values
+    # - include: line-name-lists
+    - include: unicode-ranges
+    - include: numeric-constants
+    - include: quoted-strings
+    # - include: none-constants
+    # - include: constants-or-functions
+    # - include: illegal-groups
+
+    # other values only mean something after compiling to css,
+    # we can't always predict what just based on what it looks like
+    - match: '{{ident}}'
+      scope: meta.generic-name.scss
+
+###[ SCSS INTERPOLATION ]######################################################
+
+  scss-interpolations:
+    - match: (#)({)
+      captures:
+        1: punctuation.definition.variable.scss
+        2: punctuation.section.interpolation.begin.scss
+      push: scss-interpolation-body
+
+  scss-interpolation-body:
+    - meta_scope: meta.interpolation.scss
+    - match: \}
+      scope: punctuation.section.interpolation.end.scss
+      pop: 1
+    - include: scss-expressions
+
+  scss-string-interpolations:
+    - match: (#)({)
+      captures:
+        1: punctuation.definition.variable.scss
+        2: punctuation.section.interpolation.begin.scss
+      push: scss-string-interpolation-body
+
+  scss-string-interpolation-body:
+    - clear_scopes: 1
+    - meta_scope: meta.interpolation.scss
+    - match: \}
+      scope: punctuation.section.interpolation.end.scss
+      pop: 1
+    - include: scss-expressions
 
 ###[ SCSS GROUPS OR MAPS ]#####################################################
 
