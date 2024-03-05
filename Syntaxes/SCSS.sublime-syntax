@@ -19,6 +19,7 @@ variables:
   ident_start: (?:{{nmstart}}|#{)
 
   property_or_selector_begin: (?={{ident_begin}}|{{selector_start}})
+  property_end: (?=[;)}])
 
   selector_start: '[[:alpha:].:#%&*\[{{combinator_char}}]'
   selector_end: (?=[;{}])
@@ -64,6 +65,7 @@ contexts:
     - include: scss-declarations
     - include: at-rules
     - include: rule-terminators
+    - include: illegal-groups
 
 ###[ CSS COMMENTS ]############################################################
 
@@ -102,6 +104,7 @@ contexts:
 ###[ CSS PROPERTIES OR SELECTORS ]#############################################
 
   properties-or-selectors:
+    # required for backward compatibility with ST4169
     - match: '{{property_or_selector_begin}}'
       branch_point: property-or-selector
       branch:
@@ -109,17 +112,17 @@ contexts:
         - selector-body
 
   maybe-property:
-    - include: comments
+    # required for backward compatibility with ST4169
+    - meta_include_prototype: false
     - include: property-end
     - include: property-identifiers
-
     # otherwise it is part of a selector
     - match: ''
       fail: property-or-selector
 
   property-end:
-    # property values are followed/terminated by one of ; ) }
-    - match: (?=[;)}])
+    # required for backward compatibility with ST4169
+    - match: '{{property_end}}'
       pop: 1
 
   selector-body:
@@ -128,9 +131,34 @@ contexts:
     - include: scss-placeholder-selector
     - include: scss-bem-selector
 
+  selector-tag-content:
+    - meta_prepend: true
+    - include: scss-interpolations
+
+###[ CSS SELECTORS / ATTRIBUTE SELECTORS ]#####################################
+
+  attribute-selector-key:
+    - meta_prepend: true
+    - include: scss-interpolations
+
+  attribute-selector-unquoted-value-content:
+    - meta_prepend: true
+    - include: scss-interpolations
+
 ###[ CSS PROPERTY LISTS ]######################################################
 
+  maybe-property-list:
+    # required for backward compatibility with ST4169
+    - meta_include_prototype: false
+    - match: \{
+      scope: punctuation.section.block.begin.css
+      set: property-list-body
+    - include: comments
+    - include: else-pop
+
   property-list-body:
+    # required for backward compatibility with ST4169
+    - meta_include_prototype: false
     - meta_scope: meta.property-list.css meta.block.css
     - include: block-end
     - include: stylesheet
