@@ -408,21 +408,6 @@ contexts:
         - include: scss-variables
         - include: quoted-strings
 
-###[ SCSS FUNCTIONS ]##########################################################
-
-  sass-namespaced-functions:
-    - match: '\b(?!var)(({{ident}})(\.))?([a-z_-]+)(?=\()'
-      scope: support.function.scss
-      captures:
-        2: entity.name.namespace.scss
-        3: punctuation.separator.namespace.scss
-      push:
-        - meta_scope: meta.function-call.identifier.css variable.function.css
-        - match: (?=\()
-          set:
-            - other-function-arguments-list-body
-            - function-arguments-list-begin
-
 ###[ SCSS CONTENT AT-RULE ]####################################################
 
   scss-at-content:
@@ -863,6 +848,26 @@ contexts:
         1: keyword.control.scss
         2: punctuation.separator.key-value.css
     - include: values
+
+###[ SCSS FUNCTION CALLS ]#####################################################
+
+  sass-namespaced-functions:
+    # qualified functions always belong to SCSS
+    - match: ({{ident}})(\.)([[:alpha:]_][[:alnum:]_]*)(?=\()
+      scope: meta.function-call.identifier.css
+      captures:
+        1: variable.namespace.scss
+        2: punctuation.accessor.dot.scss
+        3: support.function.scss
+      push:
+        - other-function-arguments-list-body
+        - function-arguments-list-begin
+    # unqualified functions may belong to SCSS or CSS
+    - match: ((?!calc|var)[[:alpha:]_][[:alnum:]_]*)(?=\()
+      scope: meta.function-call.identifier.css variable.function.css
+      push:
+        - other-function-arguments-list-body
+        - function-arguments-list-begin
 
 ###[ SCSS ARGUMENTS ]##########################################################
 
