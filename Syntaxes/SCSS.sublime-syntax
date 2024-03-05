@@ -92,6 +92,13 @@ contexts:
     - include: scss-at-root
     - include: scss-at-use
 
+###[ CSS MEDIA QUERIES ]#######################################################
+
+  media-query-conditions:
+    - meta_append: true
+    - include: scss-interpolations
+    - include: scss-variables
+
 ###[ CSS PROPERTIES OR SELECTORS ]#############################################
 
   properties-or-selectors:
@@ -127,12 +134,6 @@ contexts:
     - meta_scope: meta.property-list.css meta.block.css
     - include: block-end
     - include: stylesheet
-
-###[ CSS MEDIA QUERIES ]#######################################################
-
-  media-query-group-body:
-    - meta_append: true
-    - include: scss-expression
 
 ###[ CSS VALUE EXPRESSIONS ]###################################################
 

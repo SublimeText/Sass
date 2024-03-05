@@ -1018,7 +1018,7 @@ nav ul {
   @each $type in $types {
     @media #{$type} {
       @content($type, value);
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.mixin.scss meta.property-list.css meta.block.css meta.property-list.css meta.block.css meta.property-list.css meta.block.css
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.mixin.scss meta.property-list.css meta.block.css meta.property-list.css meta.block.css meta.at-rule.media.css meta.block.css
 //    ^^^^^^^^ meta.at-rule.content.scss meta.placeholder.scss - meta.placeholder.arguments
 //            ^^^^^^^^^^^^^^ meta.at-rule.content.scss meta.placeholder.arguments.scss
 //                          ^ - meta.at-rule.content - meta.placeholder
