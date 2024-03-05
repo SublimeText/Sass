@@ -2214,26 +2214,25 @@
 /*                         ^^^ entity.other.pseudo-class.css */
 /*                             ^^^ support.constant.property-value.css */
 
-// TODO: unsure what to to about *- etc in unquoted strings
-// .test-pseudo-class-lang:lang(en-*K\*, de-DE, *-EN, "de-*EN\*") {}
-// /*                     ^ punctuation.definition.pseudo-class.css - entity */
-// /*                      ^^^^ entity.other.pseudo-class.css */
-// /*                           ^^^^^^^ meta.string.css string.unquoted.css */
-// /*                                  ^^ - meta.string - string */
-// /*                                    ^^^^^ meta.string.css string.unquoted.css */
-// /*                                         ^^ - meta.string - string */
-// /*                                           ^^^^ meta.string.css string.unquoted.css */
-// /*                                               ^^ - meta.string - string */
-// /*                                                 ^^^^^^^^^^ meta.string.css string.quoted.double.css */
-// /*                                                           ^^^^ - meta.string - string */
-// /*                              ^ constant.other.wildcard.asterisk.css, variable.language.wildcard.asterisk.css */
-// /*                                ^^ constant.character.escape.css */
-// /*                                  ^ punctuation.separator.sequence.css */
-// /*                                         ^ punctuation.separator.sequence.css */
-// /*                                           ^ constant.other.wildcard.asterisk.css, variable.language.wildcard.asterisk.css */
-// /*                                               ^ punctuation.separator.sequence.css */
-// /*                                                     ^ - constant.other.wildcard */
-// /*                                                        ^^ constant.character.escape.css */
+.test-pseudo-class-lang:lang(en-*K\*, de-DE, *-EN, "de-*EN\*") {}
+/*                     ^ punctuation.definition.pseudo-class.css - entity */
+/*                      ^^^^ entity.other.pseudo-class.css */
+/*                           ^^^^^^^ meta.string.css string.unquoted.css */
+/*                                  ^^ - meta.string - string */
+/*                                    ^^^^^ meta.string.css string.unquoted.css */
+/*                                         ^^ - meta.string - string */
+/*                                           ^^^^ meta.string.css string.unquoted.css */
+/*                                               ^^ - meta.string - string */
+/*                                                 ^^^^^^^^^^ meta.string.css string.quoted.double.css */
+/*                                                           ^^^^ - meta.string - string */
+/*                              ^ constant.other.wildcard.asterisk.css, variable.language.wildcard.asterisk.css */
+/*                                ^^ constant.character.escape.css */
+/*                                  ^ punctuation.separator.sequence.css */
+/*                                         ^ punctuation.separator.sequence.css */
+/*                                           ^ constant.other.wildcard.asterisk.css, variable.language.wildcard.asterisk.css */
+/*                                               ^ punctuation.separator.sequence.css */
+/*                                                     ^ - constant.other.wildcard */
+/*                                                        ^^ constant.character.escape.css */
 
 .test-pseudo-class-tag:not(*) {}
 /*                    ^ punctuation.definition.pseudo-class.css - entity */
