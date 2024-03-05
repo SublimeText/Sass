@@ -247,6 +247,23 @@ contexts:
     - meta_prepend: true
     - include: scss-string-interpolations
 
+###[ CSS URL STRINGS ]#########################################################
+
+  maybe-quoted-url:
+    # does not yet exist in CSS but is not unlikely
+    - match: \"
+      scope:
+        meta.string.css string.quoted.double.css
+        punctuation.definition.string.begin.css
+      set: double-quoted-url-body
+    - match: \'
+      scope:
+        meta.string.css string.quoted.single.css
+        punctuation.definition.string.begin.css
+      set: single-quoted-url-body
+    - include: comments
+    - include: else-pop
+
 ###[ SassDoc COMMENTS ]########################################################
 
   sassdoc-comments:
@@ -932,20 +949,6 @@ contexts:
     - include: values
 
 ###[ SCSS CONSTANTS ]##########################################################
-
-  maybe-quoted-url:
-    - match: \"
-      scope:
-        meta.string.css string.quoted.double.css
-        punctuation.definition.string.begin.css
-      set: double-quoted-url-body
-    - match: \'
-      scope:
-        meta.string.css string.quoted.single.css
-        punctuation.definition.string.begin.css
-      set: single-quoted-url-body
-    - include: comments
-    - include: else-pop
 
   scss-constants:
     - match: true{{break}}
