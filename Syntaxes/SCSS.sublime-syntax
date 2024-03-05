@@ -183,25 +183,9 @@ contexts:
     - meta_prepend: true
     - include: scss-interpolations
 
-###[ CSS STRINGS WITH INTERPOLATION ]##########################################
+###[ CSS STRINGS ]#############################################################
 
-  single-quoted-string-body:
-    - meta_prepend: true
-    - include: scss-string-interpolations
-
-  double-quoted-string-body:
-    - meta_prepend: true
-    - include: scss-string-interpolations
-
-  single-quoted-url-body:
-    - meta_prepend: true
-    - include: scss-string-interpolations
-
-  double-quoted-url-body:
-    - meta_prepend: true
-    - include: scss-string-interpolations
-
-  unquoted-urls:
+  string-content:
     - meta_prepend: true
     - include: scss-string-interpolations
 
