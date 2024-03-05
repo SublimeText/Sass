@@ -148,23 +148,23 @@ contexts:
 ###[ CSS SELECTORS / PSEUDO CLASSES ]##########################################
 
   pseudo-class-anb-arguments-list-body:
-    # replace CSS context as `scss-expression` must be appended
+    # replace CSS context as `scss-expressions` must be appended
     # for `anb-notation-values` to take precedence
     - meta_content_scope: meta.function-call.arguments.css meta.group.css
     - include: css-function-arguments-prototype
     - include: anb-notation-values
     - include: scalar-integer-constants
-    - include: scss-expression
+    - include: scss-expressions
 
   pseudo-class-lang-arguments-list-body:
-    # replace CSS context as `scss-expression` must be appended
+    # replace CSS context as `scss-expressions` must be appended
     # for `language-ranges` to take precedence
     - meta_content_scope: meta.function-call.arguments.css meta.group.css
     - include: css-function-arguments-prototype
     - include: comma-delimiters
     - include: quoted-strings
     - include: language-ranges
-    - include: scss-expression
+    - include: scss-expressions
 
 ###[ CSS PROPERTY LISTS ]######################################################
 
@@ -199,7 +199,7 @@ contexts:
     - include: numeric-constants
     - include: quoted-strings
     - include: none-constants
-    - include: scss-expression-basic ## handle scss expressions before native functions etc.
+    - include: scss-expressions-basic ## handle scss expressions before native functions etc.
     - include: constants-or-functions
     - include: illegal-groups
 
@@ -214,17 +214,17 @@ contexts:
 
   font-family-value-content:
     - meta_prepend: true
-    - include: scss-expression-basic
+    - include: scss-expressions-basic
 
   font-property-value-content:
     - meta_prepend: true
-    - include: scss-expression-basic
+    - include: scss-expressions-basic
 
 ###[ CSS FUNCTION ARGUMENTS ]##################################################
 
   function-arguments-prototype:
     - meta_append: true
-    - include: scss-expression-basic
+    - include: scss-expressions-basic
 
   css-function-arguments-prototype:
     # CSS function-arguments-prototype without scss-expressions or illegal groups
@@ -294,7 +294,7 @@ contexts:
 
 ###[ SCSS EXPRESSIONS ]########################################################
 
-  scss-expression-basic:
+  scss-expressions-basic:
     # for use in CSS contexts
     - include: comments
     - include: important-operators
@@ -305,11 +305,11 @@ contexts:
     - include: scss-operators
     - include: scss-variadics
     - include: sass-namespaced-functions
-    - include: scss-expression-or-map
+    - include: scss-expressions-or-map
 
-  scss-expression:
+  scss-expressions:
     # for use in SCSS contexts where we try to "guess" more types of values
-    - include: scss-expression-basic
+    - include: scss-expressions-basic
 
     # and most normal css values
     # - include: comma-delimiters
@@ -344,7 +344,7 @@ contexts:
     - match: \}
       scope: punctuation.section.interpolation.end.scss
       pop: 1
-    - include: scss-expression
+    - include: scss-expressions
 
   scss-string-interpolations:
     - match: (#)({)
@@ -359,18 +359,18 @@ contexts:
     - match: \}
       scope: punctuation.section.interpolation.end.scss
       pop: 1
-    - include: scss-expression
+    - include: scss-expressions
 
 ###[ SCSS MAPS OR GROUPS ]#####################################################
 
-  scss-expression-or-map:
+  scss-expressions-or-map:
     - match: '(?=\()'
       branch_point: expression-or-map
       branch:
-        - scss-expression-group
+        - scss-expressions-group
         - scss-map
 
-  scss-expression-group:
+  scss-expressions-group:
     - match: '\('
       captures:
         0: punctuation.section.group.begin.scss
@@ -381,7 +381,7 @@ contexts:
           pop: 2
         - match: (?=:)
           fail: expression-or-map
-        - include: scss-expression
+        - include: scss-expressions
 
   scss-map:
     - match: '\('
@@ -511,7 +511,7 @@ contexts:
     - include: comments
     - include: comma-delimiters
     - include: var-function
-    - include: scss-expression
+    - include: scss-expressions
 
   scss-at-for-body:
     - meta_scope: meta.at-rule.for.scss
@@ -521,7 +521,7 @@ contexts:
 
   scss-at-while-body:
     - meta_scope: meta.at-rule.while.scss
-    - include: scss-expression
+    - include: scss-expressions
     - include: terminator-pop
 
   scss-at-return:
@@ -648,7 +648,7 @@ contexts:
     - match: (?=(?:hide|show|with){{break}})
       pop: 1
     - include: comma-delimiters
-    - include: scss-expression
+    - include: scss-expressions
     - match: '{{ident}}'
       scope: meta.generic-name.scss
     - include: else-pop
