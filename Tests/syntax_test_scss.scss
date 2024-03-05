@@ -427,6 +427,7 @@ $variable: first global value;
 // ^^^^^^^^^           keyword.control.directive.css
 //           ^^^^^^^^  meta.interpolation.scss
     @content;
+//  ^^^^^^^^ meta.at-rule.content.scss meta.placeholder.scss keyword.control.directive.content.scss
   }
 
   animation-name: $name;

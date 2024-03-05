@@ -80,6 +80,21 @@ contexts:
 
 ###[ CSS AT-RULES ]############################################################
 
+  at-keyframe-block-body:
+    - meta_append: true
+    - include: scss-at-content
+    - include: scss-at-control
+    - include: scss-at-extend
+    - include: scss-at-forward
+    - include: scss-at-functions
+    - include: scss-at-include
+    - include: scss-at-messages
+    - include: scss-at-mixins
+    - include: scss-at-return
+    - include: scss-at-root
+    - include: scss-at-use
+    - include: scss-declarations
+
   at-other:
     - meta_prepend: true
     - include: scss-at-content
