@@ -1369,7 +1369,7 @@ $accent: #e1d7d2;
 //=============================================================================
 @mixin inset-divider-offset($offset, $padding) {
   $divider-offset: (2 * $padding) + $offset;
-//                 ^^^^^^^^^^^^^^ meta.declaration.value.scss meta.group.expression.scss
+//                 ^^^^^^^^^^^^^^ meta.declaration.value.scss meta.group.scss
 //                 ^              punctuation
 //                              ^ punctuation
 //                    ^           keyword.operator.arithmetic.scss
@@ -1566,18 +1566,24 @@ $sizes: 40px, 50px, 80px;
 
 // https://sass-lang.com/documentation/at-rules/control/each/#with-maps
 $icons: ("eye": "\f112", "start": "\f12e", "stop": "\f12f");
-// ^^^                                                      meta.declaration.identifier.scss variable.other.scss
-//    ^                                                     punctuation.separator.key-value.css
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.scss meta.map.arguments.scss
-//      ^                                                   punctuation.section.group.begin.scss
-//       ^^^^^                                              meta.string
-//            ^                                             punctuation.separator.key-value.css
-//              ^^^^^^^                                     meta.string
-//                     ^                                    punctuation.separator.sequence.css
-//                              ^                           punctuation.separator.key-value.css
-//                                       ^                  punctuation.separator.sequence.css
-//                                               ^          punctuation.separator.key-value.css
-//                                                        ^ punctuation.section.group.end.scss
+// ^^^ meta.declaration.identifier.scss variable.other.scss
+//    ^ meta.declaration.scss punctuation.separator.key-value.css
+//     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.declaration.value.scss
+//      ^ meta.mapping.scss punctuation.section.mapping.begin.scss
+//       ^^^^^ meta.mapping.key.scss meta.string.css string.quoted.double.css
+//            ^ meta.mapping.scss punctuation.separator.key-value.css
+//              ^^^^^^^ meta.mapping.value.scss meta.string.css string.quoted.double.css
+//                     ^^ meta.mapping.scss
+//                     ^ punctuation.separator.sequence.css
+//                       ^^^^^^^ meta.mapping.key.scss meta.string.css string.quoted.double.css
+//                              ^ meta.mapping.scss punctuation.separator.key-value.css
+//                                ^^^^^^^ meta.mapping.value.scss meta.string.css string.quoted.double.css
+//                                       ^^ meta.mapping.scss
+//                                       ^  punctuation.separator.sequence.css
+//                                         ^^^^^^ meta.mapping.key.scss meta.string.css string.quoted.double.css
+//                                               ^ meta.mapping.scss punctuation.separator.key-value.css
+//                                                 ^^^^^^^ meta.mapping.value.scss meta.string.css string.quoted.double.css
+//                                                        ^ punctuation.section.mapping.end.scss
 //                                                         ^ punctuation.terminator.rule.css
 @each $name, $glyph in $icons {
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.each.scss
@@ -1714,7 +1720,7 @@ $transition-speed: math.div(1s, 50px);
   position: absolute;
   left: $left-start;
   transition: left ($left-stop - $left-start) * $transition-speed;
-//                 ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.expression.scss
+//                 ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.scss
 //                 ^                          punctuation.section.group.begin.scss
 //                  ^^^^^^^^^^                variable.other.scss
 //                             ^              keyword.operator.arithmetic.scss
@@ -1734,7 +1740,7 @@ $transition-speed: math.div(1s, 50px);
 // https://sass-lang.com/documentation/operators/
 //=============================================================================
 @debug 1 + 2 * 3 == 1 + (2 * 3); // true
-//                      ^^^^^^^ meta.group.expression.scss
+//                      ^^^^^^^ meta.group.scss
 //                       ^      constant.numeric
 //                         ^    keyword.operator
 //                           ^  constant.numeric
@@ -1743,7 +1749,7 @@ $transition-speed: math.div(1s, 50px);
 //          ^^                                             keyword.operator.logical.scss
 //             ^^^^^                                       constant.language.boolean.false.scss
 //                    ^^                                   keyword.operator.logical.scss
-//                                        ^^^^^^^^^^^^^^^^ meta.group.expression.scss
+//                                        ^^^^^^^^^^^^^^^^ meta.group.scss
 //                                         ^^^^            constant.language.boolean.false.scss
 //                                               ^^^       keyword.operator.logical.scss
 //                                                   ^^^^^ constant.language.boolean.false.scss
@@ -1770,7 +1776,7 @@ h2 {
 //                                               ^ punctuation.separator.sequence.css
 //                                                                ^ punctuation.section.group.end.css
  font-weight: 20px + ($large * 2);
-//                   ^^^^^^^^^^^^ meta.group.expression.scss
+//                   ^^^^^^^^^^^^ meta.group.scss
 //                    ^^^^^^      variable.other.scss
 //                           ^    keyword.operator
 }

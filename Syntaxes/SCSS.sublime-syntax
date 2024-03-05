@@ -361,53 +361,6 @@ contexts:
       pop: 1
     - include: scss-expressions
 
-###[ SCSS MAPS OR GROUPS ]#####################################################
-
-  scss-expressions-or-map:
-    - match: '(?=\()'
-      branch_point: expression-or-map
-      branch:
-        - scss-expressions-group
-        - scss-map
-
-  scss-expressions-group:
-    - match: '\('
-      captures:
-        0: punctuation.section.group.begin.scss
-      push:
-        - meta_scope: meta.group.expression.scss
-        - match: '\)'
-          scope: punctuation.section.group.end.scss
-          pop: 2
-        - match: (?=:)
-          fail: expression-or-map
-        - include: scss-expressions
-
-  scss-map:
-    - match: '\('
-      captures:
-        0: punctuation.section.group.begin.scss
-      push:
-        - meta_scope: meta.group.scss meta.map.arguments.scss
-        - match: '\)'
-          scope: punctuation.section.group.end.scss
-          pop: 2
-        - match: '({{ident}})'
-          captures:
-            1: variable.parameter.scss
-        - match: ':'
-          scope: punctuation.separator.key-value.css
-          push:
-            - match: ','
-              scope: punctuation.separator.sequence.css
-              pop: 1
-            - include: comments
-            - include: terminator-pop
-            - include: values
-        - include: scss-interpolations
-        - include: scss-variables
-        - include: quoted-strings
-
 ###[ SCSS CONTENT AT-RULE ]####################################################
 
   scss-at-content:
@@ -847,6 +800,62 @@ contexts:
       captures:
         1: keyword.control.scss
         2: punctuation.separator.key-value.css
+    - include: values
+
+###[ SCSS GROUPS OR MAPS ]#####################################################
+
+  scss-expressions-or-map:
+    - match: (?=\()
+      branch_point: expression-or-map
+      branch:
+        - scss-group
+        - scss-mapping
+
+  scss-group:
+    - match: \(
+      scope: punctuation.section.group.begin.scss
+      set: scss-group-body
+
+  scss-group-body:
+    - meta_scope: meta.group.scss
+    - match: \)
+      scope: punctuation.section.group.end.scss
+      pop: 1
+    - match: ':'
+      fail: expression-or-map
+    - include: scss-expressions
+
+  scss-mapping:
+    - match: \(
+      scope: punctuation.section.mapping.begin.scss
+      set:  scss-mapping-body
+
+  scss-mapping-body:
+    - meta_scope: meta.mapping.scss
+    - match: \)
+      scope: punctuation.section.mapping.end.scss
+      pop: 1
+    - include: comments
+    - include: comma-delimiters
+    - match: ':'
+      scope: meta.mapping.scss punctuation.separator.key-value.css
+      push: scss-mapping-value
+    - match: (?=\S)
+      push: scss-mapping-key
+
+  scss-mapping-key:
+    - clear_scopes: 1
+    - meta_content_scope: meta.mapping.key.scss
+    - include: scss-interpolations
+    - include: scss-variables
+    - include: quoted-strings
+    - include: immediately-pop
+
+  scss-mapping-value:
+    - clear_scopes: 1
+    - meta_content_scope: meta.mapping.value.scss
+    - match: (?=,)
+      pop: 1
     - include: values
 
 ###[ SCSS FUNCTION CALLS ]#####################################################
