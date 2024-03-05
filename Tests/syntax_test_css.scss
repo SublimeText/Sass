@@ -2158,7 +2158,7 @@
 /*                       ^^^^ comment.block.css */
 
 .test:nth-child(+2n + 3) {}
-/*              ^ keyword.operator.arithmetic */
+/*              ^ meta.number.integer.decimal.css keyword.operator.arithmetic */
 /*               ^ meta.number.integer.decimal.css constant.numeric.value.css */
 /*                ^ meta.number.integer.decimal.css constant.numeric.suffix.css */
 /*                 ^ - constant */
@@ -2166,20 +2166,20 @@
 /*                   ^^ meta.number.integer.decimal.css constant.numeric.value.css */
 
 .test:nth-child(-n+ 3) {}
-/*              ^ keyword.operator.arithmetic */
+/*              ^ meta.number.integer.decimal.css keyword.operator.arithmetic */
 /*               ^ meta.number.integer.decimal.css constant.numeric.suffix.css */
 /*                ^ keyword.operator.arithmetic */
 /*                 ^^ meta.number.integer.decimal.css constant.numeric.value.css */
 
 .test:nth-child(-n +3) {}
-/*              ^ keyword.operator.arithmetic */
+/*              ^ meta.number.integer.decimal.css keyword.operator.arithmetic */
 /*               ^ meta.number.integer.decimal.css constant.numeric.suffix.css */
 /*                ^ - constant */
 /*                 ^ keyword.operator.arithmetic */
 /*                  ^ meta.number.integer.decimal.css constant.numeric.value.css */
 
 .test:nth-child(+3) {}
-/*              ^ keyword.operator.arithmetic */
+/*              ^ meta.number.integer.decimal.css keyword.operator.arithmetic */
 /*               ^ meta.number.integer.decimal.css constant.numeric.value.css */
 
 .test-pseudo-classes:nth-child(2):hover {}
