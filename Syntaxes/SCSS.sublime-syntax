@@ -784,7 +784,7 @@ contexts:
     - include: scss-variables
     - include: scss-operators
     - include: scss-variadics
-    - include: sass-namespaced-functions
+    - include: scss-functions
     - include: scss-expressions-or-map
 
   scss-expressions:
@@ -899,7 +899,7 @@ contexts:
 
 ###[ SCSS FUNCTION CALLS ]#####################################################
 
-  sass-namespaced-functions:
+  scss-functions:
     # qualified functions always belong to SCSS
     - match: ({{ident}})(\.)([[:alpha:]_][[:alnum:]_]*)(?=\()
       scope: meta.function-call.identifier.css
