@@ -470,8 +470,8 @@ contexts:
         1: punctuation.definition.keyword.scss
       push:
         - scss-at-forward-meta
-        - scss-moulde-with
-        - scss-moulde-visibility
+        - scss-module-with
+        - scss-module-visibility
         - scss-module-as
         - maybe-quoted-url
 
@@ -489,7 +489,7 @@ contexts:
         1: punctuation.definition.keyword.scss
       push:
         - scss-at-use-meta
-        - scss-moulde-with
+        - scss-module-with
         - scss-module-as
         - maybe-quoted-url
 
@@ -520,7 +520,7 @@ contexts:
     - include: comments
     - include: else-pop
 
-  scss-moulde-visibility:
+  scss-module-visibility:
     - match: hide{{break}}
       scope: keyword.control.visibility.hide.scss
       push: scss-module-visibility-value
@@ -541,7 +541,7 @@ contexts:
       scope: meta.generic-name.scss
     - include: else-pop
 
-  scss-moulde-with:
+  scss-module-with:
     - match: with{{break}}
       scope: keyword.control.with.scss
       set: scss-module-arguments-list
