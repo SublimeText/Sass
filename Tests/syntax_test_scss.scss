@@ -281,7 +281,6 @@ $warn: #dfa612;
   [dir=rtl] & {
 //          ^ variable.language.parent.css
     margin-left: 0;
-    margin-right: 10px;
   }
 
   // You can even use it as an argument to pseudo-class selectors.
@@ -293,19 +292,10 @@ $warn: #dfa612;
 
 .accordion {
   max-width: 600px;
-  margin: 4rem auto;
-  width: 90%;
-  font-family: "Raleway", sans-serif;
-  background: #f4f4f4;
 
   &__copy {
 //^ variable.language.parent.css
-    display: none;
     padding: 1rem 1.5rem 2rem 1.5rem;
-    color: gray;
-    line-height: 1.6;
-    font-size: 14px;
-    font-weight: 500;
 
     &--open {
       display: block;
@@ -313,39 +303,206 @@ $warn: #dfa612;
   }
 }
 
+.test & {}
+// <- meta.selector.css entity.other.attribute-name.class.css punctuation.definition.entity.css
+//^^^^^^ meta.selector.css
+//    ^ variable.language.parent.css
+.test:not() & {}
+// <- meta.selector.css entity.other.attribute-name.class.css punctuation.definition.entity.css
+//^^^^^^^^^^^^ meta.selector.css
+//          ^ variable.language.parent.css
+
+//=============================================================================
+// Bem-ish selectors with interpolation
+// https://sass-lang.com/documentation/style-rules/parent-selector/#adding-suffixes
+//=============================================================================
+  &--test {}
+//^^^^^^^^ meta.selector.css
+//^ variable.language.parent.css
+// ^^^^^^ entity.other.attribute-name.css
+
+  &__test {}
+//^^^^^^^^ meta.selector.css
+//^ variable.language.parent.css
+// ^^^^^^ entity.other.attribute-name.css
+
+  &--#{$test} {}
+//^^^^^^^^^^^^ meta.selector.css
+//^ variable.language.parent.css
+// ^^^^^^^^^^ entity.other.attribute-name.css
+//   ^^^^^^^^ meta.interpolation.scss
+//   ^ punctuation.definition.variable.scss
+//    ^ punctuation.section.interpolation.begin.scss
+//     ^^^^^ variable.other.scss
+//          ^ punctuation.section.interpolation.end.scss
+
+  &__#{$test} {}
+//^^^^^^^^^^^^ meta.selector.css
+//^ variable.language.parent.css
+// ^^^^^^^^^^ entity.other.attribute-name.css
+//   ^^^^^^^^ meta.interpolation.scss
+//   ^ punctuation.definition.variable.scss
+//    ^ punctuation.section.interpolation.begin.scss
+//     ^^^^^ variable.other.scss
+//          ^ punctuation.section.interpolation.end.scss
+
+  &__foo#{$bar} {}
+//^^^^^^^^^^^^^^ meta.selector.css
+//^ variable.language.parent.css
+// ^^^^^^^^^^^^ entity.other.attribute-name.css
+//      ^^^^^^^ meta.interpolation.scss
+//      ^ punctuation.definition.variable.scss
+//       ^ punctuation.section.interpolation.begin.scss
+//        ^^^^ variable.other.scss
+//            ^ punctuation.section.interpolation.end.scss
+
+  &-#{$foobar} {}
+//^^^^^^^^^^^^^ meta.selector.css
+//^ variable.language.parent.css
+// ^^^^^^^^^^^ entity.other.attribute-name.css
+//  ^^^^^^^^^^ meta.interpolation.scss
+//  ^ punctuation.definition.variable.scss
+//   ^ punctuation.section.interpolation.begin.scss
+//    ^^^^^^^ variable.other.scss
+//           ^ punctuation.section.interpolation.end.scss
+
+  &_#{$foobar} {}
+//^^^^^^^^^^^^^ meta.selector.css
+//^ variable.language.parent.css
+// ^^^^^^^^^^^ entity.other.attribute-name.css
+//  ^^^^^^^^^^ meta.interpolation.scss
+//  ^ punctuation.definition.variable.scss
+//   ^ punctuation.section.interpolation.begin.scss
+//    ^^^^^^^ variable.other.scss
+//           ^ punctuation.section.interpolation.end.scss
+
+  &-#{$foo}bar {}
+//^^^^^^^^^^^^^ meta.selector.css
+//^ variable.language.parent.css
+// ^^^^^^^^^^^ entity.other.attribute-name.css
+//  ^^^^^^^ meta.interpolation.scss
+//  ^ punctuation.definition.variable.scss
+//   ^ punctuation.section.interpolation.begin.scss
+//    ^^^^ variable.other.scss
+//        ^ punctuation.section.interpolation.end.scss
+
+  &_#{$foo}bar {}
+//^^^^^^^^^^^^^ meta.selector.css
+//^ variable.language.parent.css
+// ^^^^^^^^^^^ entity.other.attribute-name.css
+//  ^^^^^^^ meta.interpolation.scss
+//  ^ punctuation.definition.variable.scss
+//   ^ punctuation.section.interpolation.begin.scss
+//    ^^^^ variable.other.scss
+//        ^ punctuation.section.interpolation.end.scss
+
+  #{$test}--test {}
+//^^^^^^^^ meta.selector.css entity.name.tag.other.css meta.interpolation.scss
+//        ^^^^^^ meta.selector.css entity.name.tag.other.css
+//              ^ meta.selector.css - entity.name
+
+  .#{$test}--test {}
+//^ meta.selector.css entity.other.attribute-name.class.css punctuation.definition.entity.css - meta.interpolation
+// ^^^^^^^^ meta.selector.css entity.other.attribute-name.class.css meta.interpolation.scss
+//         ^^^^^^ meta.selector.css entity.other.attribute-name.class.css - meta.interpolation
+//               ^ meta.selector.css - entity.name
+
+  #{$test}--#{$test} {}
+//^^^^^^^^ meta.selector.css entity.name.tag.other.css meta.interpolation.scss
+//        ^^ meta.selector.css entity.name.tag.other.css
+//          ^^^^^^^^ meta.selector.css entity.name.tag.other.css meta.interpolation.scss
+//                  ^ meta.selector.css - entity.name
+
+  .#{$test}--#{$test} {}
+//^ meta.selector.css entity.other.attribute-name.class.css punctuation.definition.entity.css - meta.interpolation
+// ^^^^^^^^ meta.selector.css entity.other.attribute-name.class.css meta.interpolation.scss
+//         ^^ meta.selector.css entity.other.attribute-name.class.css - meta.interpolation
+//           ^^^^^^^^ meta.selector.css entity.other.attribute-name.class.css meta.interpolation.scss
+//                   ^ meta.selector.css - entity.name
+
+  #{$test}__test {}
+//^^^^^^^^ meta.selector.css entity.name.tag.other.css meta.interpolation.scss
+//        ^^^^^^ meta.selector.css entity.name.tag.other.css
+//              ^ meta.selector.css - entity.name
+
+  .#{$test}__test {}
+//^ meta.selector.css entity.other.attribute-name.class.css punctuation.definition.entity.css - meta.interpolation
+// ^^^^^^^^ meta.selector.css entity.other.attribute-name.class.css meta.interpolation.scss
+//         ^^^^^^ meta.selector.css entity.other.attribute-name.class.css - meta.interpolation
+//               ^ meta.selector.css - entity.name
+
+  #{$test}__#{$test} {}
+//^^^^^^^^ meta.selector.css entity.name.tag.other.css meta.interpolation.scss
+//        ^^ meta.selector.css entity.name.tag.other.css
+//          ^^^^^^^^ meta.selector.css entity.name.tag.other.css meta.interpolation.scss
+//                  ^ meta.selector.css - entity.name
+
+  .#{$test}__#{$test} {}
+//^ meta.selector.css entity.other.attribute-name.class.css punctuation.definition.entity.css - meta.interpolation
+// ^^^^^^^^ meta.selector.css entity.other.attribute-name.class.css meta.interpolation.scss
+//         ^^ meta.selector.css entity.other.attribute-name.class.css - meta.interpolation
+//           ^^^^^^^^ meta.selector.css entity.other.attribute-name.class.css meta.interpolation.scss
+//                   ^ meta.selector.css - entity.name
+
 //=============================================================================
 // Placeholder Selectors
 // https://sass-lang.com/documentation/style-rules/placeholder-selectors/
 //=============================================================================
 .alert:hover, %strong-alert {
 //            ^^^^^^^^^^^^^ entity.other.attribute-name.class.css
-//            ^             punctuation.definition.entity.placeholder.scss
+//            ^ punctuation.definition.entity.placeholder.scss
   font-weight: bold;
 }
 
 %strong-alert:hover {
 //^^^^^^^^^^^ entity.other.attribute-name.class.css
-//<-          punctuation.definition.entity.placeholder.scss
+// <- punctuation.definition.entity.placeholder.scss
   color: red;
 }
 
 %toolbelt {
 //^^^^^^^ entity.other.attribute-name.class.css
-//<-      punctuation.definition.entity.placeholder.scss
-  box-sizing: border-box;
-  border-top: 1px rgba(#000, .12) solid;
-  padding: 16px 0;
-  width: 100%;
-
+// <- punctuation.definition.entity.placeholder.scss
   &:hover { border: 2px rgba(#000, .5) solid; }
 }
 
 .action-buttons {
   @extend %toolbelt;
 //        ^^^^^^^^^ entity.other.attribute-name.class.css
-//        ^         punctuation.definition.entity.placeholder.scss
+//        ^ punctuation.definition.entity.placeholder.scss
   color: #4285f4;
 }
+
+  %foo#{$bar} {}
+//^^^^^^^^^^^^ meta.selector.css
+//^^^^ entity.other.attribute-name.class.css - meta.interpolation
+//^ punctuation.definition.entity.placeholder.scss
+//    ^^^^^^^ entity.other.attribute-name.class.css meta.interpolation.scss
+//    ^ punctuation.definition.variable.scss
+//     ^ punctuation.section.interpolation.begin.scss
+//      ^^^^ entity.other.attribute-name.class.css meta.interpolation.scss variable.other.scss
+//          ^ punctuation.section.interpolation.end.scss
+
+  %foo#{$bar}baz {}
+//^^^^^^^^^^^^^^^ meta.selector.css
+//^^^^ entity.other.attribute-name.class.css - meta.interpolation
+//^ punctuation.definition.entity.placeholder.scss
+//    ^^^^^^^ entity.other.attribute-name.class.css meta.interpolation.scss
+//    ^ punctuation.definition.variable.scss
+//     ^ punctuation.section.interpolation.begin.scss
+//      ^^^^ entity.other.attribute-name.class.css meta.interpolation.scss variable.other.scss
+//          ^ punctuation.section.interpolation.end.scss
+//           ^^^ entity.other.attribute-name.class.css - meta.interpolation
+
+  %#{$bar}baz {}
+//^^^^^^^^^^^^ meta.selector.css
+//^ entity.other.attribute-name.class.css punctuation.definition.entity.placeholder.scss
+// ^^^^^^^ entity.other.attribute-name.class.css meta.interpolation.scss
+// ^ punctuation.definition.variable.scss
+//  ^ punctuation.section.interpolation.begin.scss
+//   ^^^^ entity.other.attribute-name.class.css meta.interpolation.scss variable.other.scss
+//       ^ punctuation.section.interpolation.end.scss
+//        ^^^ entity.other.attribute-name.class.css - meta.interpolation
 
 //=============================================================================
 // Variables
@@ -1792,16 +1949,3 @@ $color2 : #f00;
 // ^^^^ meta.declaration.identifier.scss
 $color3     : #f00;
 // ^^^^ meta.declaration.identifier.scss
-
-//=============================================================================
-// Bem-ish selectors with interpolation
-// https://github.com/braver/Sass/issues/45
-//=============================================================================
-&--test {}
-//^^^^^ meta.selector.css entity.other.attribute-name.css
-&--#{$test} {}
-//^ meta.selector.css entity.other.attribute-name.css
-.test & {}
-//    ^ meta.selector.css variable.language.parent.css
-.test:not() & {}
-//          ^ meta.selector.css variable.language.parent.css

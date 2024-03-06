@@ -142,9 +142,15 @@ contexts:
 
   selector-body:
     - meta_prepend: true
-    - include: scss-interpolations
-    - include: scss-placeholder-selector
-    - include: scss-bem-selector
+    - include: scss-placeholder-selectors
+    - include: scss-bem-selectors
+
+  selector-ids:
+    # replaces CSS context
+    # distinguish id's and html tags beginning with interpolation
+    - match: \#(?!{)
+      scope: entity.other.attribute-name.id.css punctuation.definition.entity.css
+      push: selector-id-identifier
 
   selector-tag-content:
     - meta_prepend: true
@@ -748,18 +754,23 @@ contexts:
 
 ###[ SCSS SELECTORS ]##########################################################
 
-  scss-placeholder-selector:
-    - match: \%
-      scope: entity.other.attribute-name.class.css punctuation.definition.entity.placeholder.scss
-      # has same basic properties as a classname
-      push: selector-class-identifier
+  scss-bem-selectors:
+    # &--bem_ish selectors
+    # https://sass-lang.com/documentation/style-rules/parent-selector/#adding-suffixes
+    - match: \&(?=[-_])
+      scope: variable.language.parent.css
+      push: scss-bem-selector-content
 
-  scss-bem-selector:
-    - match: (\&)([-_]+({{ident}}|(?=#{)))
-      # &--bem_ish selectors
-      captures:
-        1: variable.language.parent.css
-        2: entity.other.attribute-name.css
+  scss-bem-selector-content:
+    - meta_content_scope: entity.other.attribute-name.css
+    - include: identifier-content
+
+  scss-placeholder-selectors:
+    # https://sass-lang.com/documentation/style-rules/placeholder-selectors/
+    - match: \%
+      scope: punctuation.definition.entity.placeholder.scss
+      # has same basic properties as a classname
+      push: selector-class-identifier-content
 
 ###[ SCSS EXPRESSIONS ]########################################################
 
