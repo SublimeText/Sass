@@ -876,7 +876,9 @@ contexts:
   scss-group:
     - match: \(
       scope: punctuation.section.group.begin.scss
-      set: scss-group-body
+      set:
+        - scss-group-body
+        - scss-maybe-operator
 
   scss-group-body:
     - meta_scope: meta.group.scss
@@ -960,10 +962,19 @@ contexts:
     - match: \!\s*(?i:global){{break}}
       scope: keyword.other.global.scss
 
-  scss-operators:
-    - match: /|\*|\-\-|\-|\+\+|\+|~
+  scss-maybe-operator:
+    - meta_include_prototype: false
+    # maybe unary operator
+    - match: '[-+]'
       scope: keyword.operator.arithmetic.scss
-    - match: \$|%|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|%=|\+=|\-=|&=
+      pop: 1
+    - include: comments
+    - include: else-pop
+
+  scss-operators:
+    - match: '[-+*/%](?=[\s$(])'
+      scope: keyword.operator.arithmetic.scss
+    - match: (?:[=!<>]=|<|>)
       scope: keyword.operator.comparison.scss
     - match: (?:and|not|or|when){{break}}
       scope: keyword.operator.logical.scss

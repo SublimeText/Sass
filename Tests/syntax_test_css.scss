@@ -2940,9 +2940,9 @@
 
     top: alpha(-1.5%);
 /*       ^^^^^ support.function.color.css */
+/*             ^ invalid.illegal.operator.css */
 /*              ^^^ meta.number.float.decimal.css constant.numeric.value.css */
 /*                 ^ meta.number.float.decimal.css constant.numeric.suffix.css */
-// /*             ^ invalid.illegal.operator.css */
 
     top: h(+ 1.5deg);
 /*       ^ support.function.color.css */

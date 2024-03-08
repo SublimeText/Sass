@@ -111,6 +111,11 @@
 
     // This is parsed as a normal function call that takes an arithmetic expression.
     src: url($roboto-font-path + "/Roboto-Light.woff2") format("woff2");
+//       ^^^ meta.function-call.identifier.css
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.css meta.group.css
+//           ^^^^^^^^^^^^^^^^^ variable.other.scss
+//                             ^ keyword.operator.arithmetic.scss
+//                               ^^^^^^^^^^^^^^^^^^^^^ meta.string.css string.quoted.double.css
 
     // This is parsed as an interpolated special function.
     src: url(#{$roboto-font-path}/Roboto-Regular.woff2) format("woff2");
@@ -120,6 +125,7 @@
 //                               ^^^^^^^^^^^^^^^^^^^^^ meta.string.css string.unquoted.css - meta.interpolation.scss
 //             ^^^^^^^^^^^^^^^^^ variable.other.scss
 //             ^ punctuation.definition.variable.scss
+//                               ^ punctuation.separator.path.css
 }
 
 //=============================================================================
@@ -1921,23 +1927,108 @@ $transition-speed: math.div(1s, 50px);
 // Operators
 // https://sass-lang.com/documentation/operators/
 //=============================================================================
-@debug 1 + 2 * 3 == 1 + (2 * 3); // true
-//                      ^^^^^^^ meta.group.scss
-//                       ^      constant.numeric
-//                         ^    keyword.operator
-//                           ^  constant.numeric
-@debug true or false and false == true or (false and false); // true
-//     ^^^^                                                constant.language.boolean.true.scss
-//          ^^                                             keyword.operator.logical.scss
-//             ^^^^^                                       constant.language.boolean.false.scss
-//                    ^^                                   keyword.operator.logical.scss
-//                                        ^^^^^^^^^^^^^^^^ meta.group.scss
-//                                         ^^^^            constant.language.boolean.false.scss
-//                                               ^^^       keyword.operator.logical.scss
-//                                                   ^^^^^ constant.language.boolean.false.scss
-@debug (1 + 2) * 3; // 9
-@debug ((1 + 2) * 3 + 4) * 5; // 65
+@debug 1 + 2 * 3 == 1 % (2 / 3); // true
+//       ^ keyword.operator.arithmetic.scss
+//           ^ keyword.operator.arithmetic.scss
+//               ^^ keyword.operator.comparison.scss
+//                    ^ keyword.operator.arithmetic.scss
+//                         ^ keyword.operator.arithmetic.scss
 
+@debug true or false and false != true or not (false and false); // true
+//     ^^^^ constant.language.boolean.true.scss
+//          ^^ keyword.operator.logical.scss
+//             ^^^^^ constant.language.boolean.false.scss
+//                   ^^^ keyword.operator.logical.scss
+//                       ^^^^^ constant.language.boolean.false.scss
+//                             ^^ keyword.operator.comparison.scss
+//                                ^^^^ constant.language.boolean.true.scss
+//                                     ^^ keyword.operator.logical.scss
+//                                        ^^^ keyword.operator.logical.scss
+//                                             ^^^^^ constant.language.boolean.false.scss
+//                                                   ^^^ keyword.operator.logical.scss
+//                                                       ^^^^^ constant.language.boolean.false.scss
+
+@debug (1 + 2) * 3; // 9
+//     ^^^^^^^ meta.group.scss
+//            ^^^^ - meta.group
+//     ^ punctuation.section.group.begin.scss
+//        ^ keyword.operator.arithmetic.scss
+//           ^ punctuation.section.group.end.scss
+
+@debug ((1 + 2) * 3 + 4) * 5; // 65
+//     ^ meta.group.scss
+//      ^^^^^^^ meta.group.scss meta.group.scss
+//             ^^^^^^^^^ meta.group.scss
+//                      ^^^^ - meta.group
+//     ^^ punctuation.section.group.begin.scss
+//         ^ keyword.operator.arithmetic.scss
+//            ^ punctuation.section.group.end.scss
+//              ^ keyword.operator.arithmetic.scss
+//                  ^ keyword.operator.arithmetic.scss
+//                     ^ punctuation.section.group.end.scss
+//                       ^ keyword.operator.arithmetic.scss
+
+// https://sass-lang.com/documentation/operators/numeric/#unary-operators
+
+@debug +(5s + 7s); // 12s
+//     ^ keyword.operator.arithmetic.scss
+//          ^ keyword.operator.arithmetic.scss
+
+@debug -(50px + 30px); // -80px
+//     ^ keyword.operator.arithmetic.scss
+//            ^ keyword.operator.arithmetic.scss
+
+@debug -(10px - 15px); // 5px
+//     ^ keyword.operator.arithmetic.scss
+//            ^ keyword.operator.arithmetic.scss
+
+@debug a-1; // a-1
+//     ^^^ - keyword.operator
+
+// scss operators shall be surrounded by spaces
+@debug 5px-3px; // 2px
+//        ^ keyword.operator.arithmetic.css
+
+// scss operators shall be surrounded by spaces
+@debug 5-3; // 2
+//      ^ keyword.operator.arithmetic.css
+
+@debug 1 -2 3; // 1 -2 3
+//       ^^ meta.number.integer.decimal.css
+//       ^ keyword.operator.arithmetic.css
+//        ^ constant.numeric.value.css
+
+$number: 2;
+@debug 1 -$number 3; // -1 3
+//       ^ keyword.operator.arithmetic.scss
+//        ^^^^^^^ variable.other.scss
+
+@debug 1 (-$number) 3; // 1 -2 3
+//        ^ keyword.operator.arithmetic.scss
+//         ^^^^^^^ variable.other.scss
+
+// https://sass-lang.com/documentation/operators/string/
+
+@debug "Helvetica" + " Neue"; // "Helvetica Neue"
+//                 ^ keyword.operator.arithmetic.scss
+
+@debug sans- + serif; // sans-serif
+//     ^^^^^ support.constant.property-value.css
+//           ^ keyword.operator.arithmetic.scss
+//             ^^^^^ support.constant.property-value.css
+
+@debug sans - serif; // sans-serif
+//     ^^^^ support.constant.property-value.css
+//          ^ keyword.operator.arithmetic.scss
+//            ^^^^^ support.constant.property-value.css
+
+// https://sass-lang.com/documentation/operators/string/#unary-operators
+
+@debug / 15px; // /15px
+//     ^ keyword.operator.arithmetic.css
+
+@debug - moz; // -moz
+//     ^ keyword.operator.arithmetic.scss
 
 //===========================================================================//
 //                          Various other tests                              //
