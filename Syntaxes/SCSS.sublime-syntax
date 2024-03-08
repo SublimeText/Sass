@@ -25,6 +25,7 @@ variables:
   selector_end: (?=[;{}])
 
   tag_name_begin: (?=[[:alpha:]]|#{)
+  unquoted_url_begin: (?=[[:alnum:]/]|#{)
 
   # SCSS variables
 
@@ -260,6 +261,20 @@ contexts:
 
 ###[ CSS STRINGS ]#############################################################
 
+  font-family-names:
+    # replace CSS context to add interpolation support
+    - match: '{{ident_begin}}'
+      push: font-family-name-body
+
+  font-family-name-body:
+    - meta_include_prototype: false
+    - meta_scope: meta.string.css string.unquoted.css
+    - include: scss-string-interpolations
+    - match: '{{break}}(?!\s+{{ident_start}})'
+      pop: 1
+    # consume unicode escapes and possibly following whitespace
+    - match: '{{unicode}}'
+
   string-content:
     - meta_prepend: true
     - include: scss-string-interpolations
@@ -280,6 +295,15 @@ contexts:
       set: single-quoted-url-body
     - include: comments
     - include: else-pop
+
+  unquoted-urls:
+    # replace CSS context to add interpolation support
+    - match: '{{unquoted_url_begin}}'
+      push: unquoted-url-body
+
+  unquoted-url-body:
+    - meta_prepend: true
+    - include: scss-string-interpolations
 
 ###[ SassDoc COMMENTS ]########################################################
 
@@ -780,7 +804,6 @@ contexts:
     - include: important-operators
     - include: scss-declarations
     - include: scss-constants
-    - include: scss-interpolations
     - include: scss-variables
     - include: scss-operators
     - include: scss-variadics

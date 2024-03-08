@@ -113,10 +113,11 @@
     src: url($roboto-font-path + "/Roboto-Light.woff2") format("woff2");
 
     // This is parsed as an interpolated special function.
-/* TODO: unsure how this should be handled, */
     src: url(#{$roboto-font-path}/Roboto-Regular.woff2) format("woff2");
-//           ^^^^^^^^^^^^^^^^^^^^ meta.interpolation.scss
-//                               ^ -meta.interpolation.scss
+//       ^^^ meta.function-call.identifier.css
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.css meta.group.css
+//           ^^^^^^^^^^^^^^^^^^^^ meta.string.css meta.interpolation.scss
+//                               ^^^^^^^^^^^^^^^^^^^^^ meta.string.css string.unquoted.css - meta.interpolation.scss
 //             ^^^^^^^^^^^^^^^^^ variable.other.scss
 //             ^ punctuation.definition.variable.scss
 }
@@ -188,6 +189,29 @@
 // ^ punctuation.section.interpolation.begin.scss
 //  ^^^^^^^^^ variable.other.scss
 //           ^ punctuation.section.interpolation.end.scss
+
+  $color: "red";
+
+  color: #{$color};
+//^^^^^ meta.property-name.css support.type.property-name.css
+//     ^ punctuation.separator.key-value.css
+//      ^ meta.property-value.css - meta.interpolation
+//       ^^^^^^^^^ meta.property-value.css support.constant.property-value.css meta.interpolation.scss
+
+  $font_name: "Roboto";
+
+  font-family: #{$font_name + "Mono"};
+//^^^^^^^^^^^ meta.property-name.css support.type.property-name.css
+//           ^ punctuation.separator.key-value.css
+//            ^ meta.property-value.css - meta.interpolation
+//             ^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css meta.string.css meta.interpolation.scss
+
+  font-family: My#{$font_name};
+//^^^^^^^^^^^ meta.property-name.css support.type.property-name.css
+//           ^ punctuation.separator.key-value.css
+//            ^ meta.property-value.css - meta.string - meta.interpolation
+//             ^^ meta.property-value.css meta.string.css string.unquoted.css
+//               ^^^^^^^^^^^^^ meta.property-value.css meta.string.css meta.interpolation.scss
 }
 
 .gray {
