@@ -808,7 +808,7 @@ contexts:
     - include: scss-operators
     - include: scss-variadics
     - include: scss-functions
-    - include: scss-expressions-or-map
+    - include: scss-groups-or-maps
 
   scss-expressions:
     # for use in SCSS contexts where we try to "guess" more types of values
@@ -866,9 +866,9 @@ contexts:
 
 ###[ SCSS GROUPS OR MAPS ]#####################################################
 
-  scss-expressions-or-map:
+  scss-groups-or-maps:
     - match: (?=\()
-      branch_point: expression-or-map
+      branch_point: group-or-map
       branch:
         - scss-group
         - scss-mapping
@@ -884,13 +884,13 @@ contexts:
       scope: punctuation.section.group.end.scss
       pop: 1
     - match: ':'
-      fail: expression-or-map
+      fail: group-or-map
     - include: scss-expressions
 
   scss-mapping:
     - match: \(
       scope: punctuation.section.mapping.begin.scss
-      set:  scss-mapping-body
+      set: scss-mapping-body
 
   scss-mapping-body:
     - meta_scope: meta.mapping.scss
