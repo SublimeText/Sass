@@ -31,8 +31,6 @@ variables:
 
   # SCSS variables
 
-  scss_ident: '[[:alnum:]_-][\w-]*'
-
 ###############################################################################
 
 contexts:
@@ -618,7 +616,7 @@ contexts:
 
   scss-at-function-name:
     - meta_content_scope: meta.function.scss
-    - match: '{{scss_ident}}'
+    - match: '{{ident}}'
       scope: meta.function.identifier.scss entity.name.function.scss
       set: scss-at-function-parameter-list
     - include: comments
@@ -661,7 +659,7 @@ contexts:
 
   scss-at-mixin-name:
     - meta_content_scope: meta.mixin.scss
-    - match: '{{scss_ident}}'
+    - match: '{{ident}}'
       scope: meta.mixin.identifier.scss entity.name.mixin.scss
       set: scss-at-mixin-parameter-list
     - include: comments
@@ -705,12 +703,12 @@ contexts:
     - include: immediately-pop
 
   scss-at-include-mixin:
-    - match: ({{scss_ident}})(\.)
+    - match: ({{ident}})(\.)
       scope: meta.mixin.scss
       captures:
         1: variable.namespace.scss
         2: punctuation.accessor.dot.scss
-    - match: '{{scss_ident}}'
+    - match: '{{ident}}'
       scope: meta.mixin.scss variable.other.mixin.scss
       set: scss-mixin-argument-list
     - include: comments
@@ -932,7 +930,7 @@ contexts:
 
   scss-qualified-functions:
     # qualified functions always belong to SCSS
-    - match: ({{ident}})(\.)({{scss_ident}})(?=\()
+    - match: ({{ident}})(\.)({{ident}})(?=\()
       scope: meta.function-call.identifier.css
       captures:
         1: variable.namespace.scss
@@ -944,7 +942,7 @@ contexts:
 
   scss-unqualified-functions:
     # unqualified functions may belong to SCSS or CSS
-    - match: (?={{scss_ident}}\()
+    - match: (?={{ident}}\()
       push: other-function
 
   scss-identifiers-or-functions:
@@ -1005,7 +1003,7 @@ contexts:
 
   scss-arguments:
     # mixin argument assignments
-    - match: (((\$){{scss_ident}})\s*)(:)
+    - match: (((\$){{ident}})\s*)(:)
       captures:
         1: meta.argument.identifier.scss
         2: variable.parameter.scss
@@ -1023,7 +1021,7 @@ contexts:
 ###[ SCSS DECLARATIONS ]#######################################################
 
   scss-declarations:
-    - match: (((\$){{scss_ident}})\s*)(:)
+    - match: (((\$){{ident}})\s*)(:)
       captures:
         1: meta.declaration.identifier.scss
         2: variable.other.scss
@@ -1039,7 +1037,7 @@ contexts:
 
   scss-parameters:
     # mixin parameter declarations
-    - match: (\$){{scss_ident}}
+    - match: (\$){{ident}}
       scope: meta.parameter.identifier.scss variable.parameter.scss
       captures:
         1: punctuation.definition.variable.scss
@@ -1057,7 +1055,7 @@ contexts:
 ###[ SCSS VARIABLES ]##########################################################
 
   scss-variables:
-    - match: (?:({{ident}})(\.))?((\$){{scss_ident}})
+    - match: (?:({{ident}})(\.))?((\$){{ident}})
       captures:
         1: variable.namespace.scss
         2: punctuation.accessor.dot.scss
