@@ -127,6 +127,7 @@ contexts:
       branch_point: property-or-selector
       branch:
         - maybe-property
+        - maybe-nested-property
         - selector-body
 
   maybe-property:
@@ -142,6 +143,24 @@ contexts:
     # required for backward compatibility with ST4169
     - match: '{{property_end}}'
       pop: 1
+
+  maybe-nested-property:
+    # https://sass-lang.com/documentation/style-rules/declarations/#nesting
+    - match: (?:{{vendor_prefix}}|{{generic_ident_begin}})
+      scope: support.type.vendor-prefix.css
+      set:
+        - nested-property-value
+        - other-property-content
+    - match: ''
+      fail: property-or-selector
+
+  nested-property-value:
+    - meta_include_prototype: false
+    - match: :(?=\s)
+      scope: punctuation.separator.key-value.css
+      set: property-value-content
+    - match: (?=\S)
+      fail: property-or-selector
 
   selector-body:
     - meta_prepend: true

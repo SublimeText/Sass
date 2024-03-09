@@ -226,23 +226,77 @@
 
 //=============================================================================
 // Nesting
-// TODO: this is currently unimplemented,
-// as it would explode the complexity of the selector/property branching.
 // https://sass-lang.com/documentation/style-rules/declarations/#nesting
 //=============================================================================
-.enlarge {
-  font-size: 14px;
+.test-nested-properties {
   transition: blue {
+//^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css - meta.property-list meta.property-list
+//                 ^^ meta.property-list.css meta.block.css meta.property-list.css meta.block.css
+//^^^^^^^^^^ meta.property-name.css support.type.property-name.css
+//          ^ punctuation.separator.key-value.css
+//           ^^^^^^ meta.property-value.css
+//                 ^ punctuation.section.block.begin.css
     property: font-size;
     duration: 4s;
     delay: 2s;
   }
+//^ meta.property-list.css meta.block.css meta.property-list.css meta.block.css punctuation.section.block.end.css
+// ^ meta.property-list.css meta.block.css - meta.property-list meta.property-list
+
+  foo#{$bar + "baz"}: blue {
+//^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css - meta.property-list meta.property-list
+//                         ^^ meta.property-list.css meta.block.css meta.property-list.css meta.block.css
+//^^^ meta.property-name.css support.type.property-name.css - meta.interpolation
+//   ^^^^^^^^^^^^^^^ meta.property-name.css support.type.property-name.css meta.interpolation.scss
+//                  ^ punctuation.separator.key-value.css
+//                   ^^^^^^ meta.property-value.css
+//                         ^ punctuation.section.block.begin.css
+  }
+//^ meta.property-list.css meta.block.css meta.property-list.css meta.block.css punctuation.section.block.end.css
+// ^ meta.property-list.css meta.block.css - meta.property-list meta.property-list
+
+  #{$foo + "bar"}bar: blue {
+//^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css - meta.property-list meta.property-list
+//                         ^^ meta.property-list.css meta.block.css meta.property-list.css meta.block.css
+//^^^^^^^^^^^^^^^ meta.property-name.css support.type.property-name.css meta.interpolation.scss
+//               ^^^ meta.property-name.css support.type.property-name.css - meta.interpolation
+//                  ^ punctuation.separator.key-value.css
+//                   ^^^^^^ meta.property-value.css
+//                         ^ punctuation.section.block.begin.css
+  }
+//^ meta.property-list.css meta.block.css meta.property-list.css meta.block.css punctuation.section.block.end.css
+// ^ meta.property-list.css meta.block.css - meta.property-list meta.property-list
+
+  foo:bar blue {
+//^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.selector.css
+//             ^^ meta.property-list.css meta.block.css meta.property-list.css meta.block.css
+//^^^ entity.name.tag.other.css
+//   ^ punctuation.definition.pseudo-class.css
+//    ^^^ entity.other.pseudo-class.css
+//        ^^^^ entity.name.tag.other.css
+//             ^ punctuation.section.block.begin.css
+  }
+//^ meta.property-list.css meta.block.css meta.property-list.css meta.block.css punctuation.section.block.end.css
+// ^ meta.property-list.css meta.block.css - meta.property-list meta.property-list
 
   &:hover { font-size: 36px; }
+//^^^^^^^^ meta.property-list.css meta.block.css meta.selector.css
+//        ^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.property-list.css meta.block.css
+//^ variable.language.parent.css
+// ^ punctuation.definition.pseudo-class.css
+//  ^^^^^ entity.other.pseudo-class.css
+//        ^ punctuation.section.block.begin.css
+//          ^^^^^^^^^meta.property-name.css support.type.property-name.css
 }
 
 .info-page {
   margin: auto {
+//^^^^^^^^^^^^^ meta.property-list.css meta.block.css - meta.property-list meta.property-list
+//             ^^ meta.property-list.css meta.block.css meta.property-list.css meta.block.css
+//^^^^^^ meta.property-name.css support.type.property-name.css
+//      ^ punctuation.separator.key-value.css
+//       ^^^^^^ meta.property-value.css
+//             ^ punctuation.section.block.begin.css
     bottom: 10px;
     top: 2px;
   }
