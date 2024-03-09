@@ -479,25 +479,30 @@ $warn: #dfa612;
 // https://sass-lang.com/documentation/style-rules/placeholder-selectors/
 //=============================================================================
 .alert:hover, %strong-alert {
+//^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css
 //            ^^^^^^^^^^^^^ entity.other.attribute-name.class.css
 //            ^ punctuation.definition.entity.placeholder.scss
   font-weight: bold;
 }
 
 %strong-alert:hover {
+// <- meta.selector.css entity.other.attribute-name.class.css punctuation.definition.entity.placeholder.scss
+//^^^^^^^^^^^^^^^^^^ meta.selector.css
 //^^^^^^^^^^^ entity.other.attribute-name.class.css
-// <- punctuation.definition.entity.placeholder.scss
   color: red;
 }
 
 %toolbelt {
+// <- meta.selector.css entity.other.attribute-name.class.css punctuation.definition.entity.placeholder.scss
+//^^^^^^^^ meta.selector.css
 //^^^^^^^ entity.other.attribute-name.class.css
-// <- punctuation.definition.entity.placeholder.scss
   &:hover { border: 2px rgba(#000, .5) solid; }
 }
 
 .action-buttons {
   @extend %toolbelt;
+//^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.at-rule.extend.scss
+//^^^^^^^ keyword.control.directive.extend.scss
 //        ^^^^^^^^^ entity.other.attribute-name.class.css
 //        ^ punctuation.definition.entity.placeholder.scss
   color: #4285f4;
@@ -591,28 +596,53 @@ $variable: first global value;
 //=============================================================================
 @mixin corner-icon($name, $top-or-bottom, $left-or-right) {
   .icon-#{$name} {
-//^^^^^^         entity.other.attribute-name.class.css
-//       ^^^^^^^ meta.interpolation.scss
-//        ^^^^^  variable.other.scss
+//^^^^^^ meta.selector.css entity.other.attribute-name.class.css - meta.interpolation
+//      ^^^^^^^^ meta.selector.css entity.other.attribute-name.class.css meta.interpolation.scss
+//              ^ meta.selector.css - meta.interpolation
+//      ^ punctuation.definition.variable.scss
+//       ^ punctuation.section.interpolation.begin.scss
+//        ^^^^^ variable.other.scss
+//             ^ punctuation.section.interpolation.end.scss
+
     background-image: url("/icons/#{$name}.svg");
-//                                ^^^^^^^^ meta.interpolation.scss
+//                        ^^^^^^^^ meta.string.css string.quoted.double.css - meta.interpolation
+//                                ^^^^^^^^ meta.string.css meta.interpolation.scss - string
+//                                        ^^^^^ meta.string.css string.quoted.double.css - meta.interpolation
     position: absolute;
+
     #{$top-or-bottom}: 0;
-//  ^^^^^^^^^^^^^^^^^ meta.interpolation.scss
+//  ^^^^^^^^^^^^^^^^^ meta.property-name.css support.type.property-name.css meta.interpolation.scss
+//                   ^ punctuation.separator.key-value.css
+//                    ^^ meta.property-value.css
+
     #{$left-or-right}: 0;
-//  ^^^^^^^^^^^^^^^^^ meta.interpolation.scss
+//  ^^^^^^^^^^^^^^^^^ meta.property-name.css support.type.property-name.css meta.interpolation.scss
+//                   ^ punctuation.separator.key-value.css
+//                    ^^ meta.property-value.css
   }
 }
 
 @mixin inline-animation($duration) {
   $name: inline-#{unique-id()};
-//              ^^^^^^^^^^^^^^ meta.interpolation.scss
+//       ^^^^^^^ meta.declaration.value.scss support.constant.property-value.css
+//              ^^^^^^^^^^^^^^ meta.declaration.value.scss support.constant.property-value.css meta.interpolation.scss
+//              ^ punctuation.definition.variable.scss
+//               ^ punctuation.section.interpolation.begin.scss
+//                ^^^^^^^^^ meta.function-call.identifier.css variable.function.css
+//                         ^^ meta.function-call.arguments.css meta.group.css
+//                           ^ punctuation.section.interpolation.end.scss
+//                            ^ punctuation.terminator.rule.css
 
-// FYI: meta.at-rule.keyframe.css does not apply to the interpolated bit due to clear_scopes
   @keyframes #{$name} {
-// ^^^^^^^^^^          meta.at-rule.keyframe.css
-// ^^^^^^^^^           keyword.control.directive.css
-//           ^^^^^^^^  meta.interpolation.scss
+//^^^^^^^^^^^^^^^^^^^^ meta.at-rule.keyframe.css - meta.at-rule.keyframe.css meta.block
+//                    ^^ meta.at-rule.keyframe.css meta.block.css
+//^^^^^^^^^^ keyword.control.directive.css
+//           ^^^^^^^^ entity.other.animation-name.css meta.interpolation.scss
+//           ^ punctuation.definition.variable.scss
+//            ^ punctuation.section.interpolation.begin.scss
+//             ^^^^^ variable.other.scss
+//                  ^ punctuation.section.interpolation.end.scss
+//                    ^ punctuation.section.block.begin.css
     @content;
 //  ^^^^^^^^ meta.at-rule.content.scss meta.placeholder.scss keyword.control.directive.content.scss
   }
@@ -620,6 +650,62 @@ $variable: first global value;
   animation-name: $name;
   animation-duration: $duration;
   animation-iteration-count: infinite;
+}
+
+@mixin test-interpolated-pseudo-classes {
+  div:nth-child(var(--#{$name}) + #{$dir}) {}
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css
+//    ^^^^^^^^^ meta.function-call.identifier.css
+//             ^ meta.function-call.arguments.css - meta.function-call meta.function-call
+//              ^^^ meta.function-call.arguments.css meta.function-call.identifier.css
+//                 ^^^^^^^^^^^^ meta.function-call.arguments.css meta.function-call.arguments.css
+//                             ^^^^^^^^^^^ meta.function-call.arguments.css - meta.function-call meta.function-call
+//    ^^^^^^^^^ entity.other.pseudo-class.css
+//             ^ punctuation.section.group.begin.css
+//              ^^^ support.function.var.css
+//                 ^ punctuation.section.group.begin.css
+//                  ^^ variable.other.custom-property.css - meta.interpolation
+//                    ^^^^^^^^ variable.other.custom-property.css meta.interpolation.scss
+//                            ^ punctuation.section.group.end.css
+//                              ^ keyword.operator.arithmetic.scss
+//                                ^^^^^^^ meta.interpolation.scss
+//                                       ^ punctuation.section.group.end.css
+
+  div:dir(var(--#{$name}) + #{$dir}) {}
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css
+//    ^^^ meta.function-call.identifier.css
+//       ^ meta.function-call.arguments.css - meta.function-call meta.function-call
+//        ^^^ meta.function-call.arguments.css meta.function-call.identifier.css
+//           ^^^^^^^^^^^^ meta.function-call.arguments.css meta.function-call.arguments.css
+//                       ^^^^^^^^^^^ meta.function-call.arguments.css - meta.function-call meta.function-call
+//    ^^^ entity.other.pseudo-class.css
+//       ^ punctuation.section.group.begin.css
+//        ^^^ support.function.var.css
+//           ^ punctuation.section.group.begin.css
+//            ^^ variable.other.custom-property.css - meta.interpolation
+//              ^^^^^^^^ variable.other.custom-property.css meta.interpolation.scss
+//                      ^ punctuation.section.group.end.css
+//                        ^ keyword.operator.arithmetic.scss
+//                          ^^^^^^^ meta.interpolation.scss
+//                                 ^ punctuation.section.group.end.css
+
+  div:lang(var(--#{$name}) + #{$lang}) {}
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css
+//    ^^^^ meta.function-call.identifier.css
+//        ^ meta.function-call.arguments.css - meta.function-call meta.function-call
+//         ^^^ meta.function-call.arguments.css meta.function-call.identifier.css
+//            ^^^^^^^^^^^^ meta.function-call.arguments.css meta.function-call.arguments.css
+//                        ^^^^^^^^^^^^ meta.function-call.arguments.css - meta.function-call meta.function-call
+//    ^^^^ entity.other.pseudo-class.css
+//        ^ punctuation.section.group.begin.css
+//         ^^^ support.function.var.css
+//            ^ punctuation.section.group.begin.css
+//             ^^ variable.other.custom-property.css - meta.interpolation
+//               ^^^^^^^^ variable.other.custom-property.css meta.interpolation.scss
+//                       ^ punctuation.section.group.end.css
+//                         ^ keyword.operator.arithmetic.scss
+//                           ^^^^^^^^ meta.string.css meta.interpolation.scss
+//                                   ^ punctuation.section.group.end.css
 }
 
 //=============================================================================
@@ -2025,7 +2111,7 @@ $number: 2;
 // https://sass-lang.com/documentation/operators/string/#unary-operators
 
 @debug / 15px; // /15px
-//     ^ keyword.operator.arithmetic.css
+//     ^ keyword.operator.arithmetic.scss
 
 @debug - moz; // -moz
 //     ^ keyword.operator.arithmetic.scss

@@ -25,6 +25,8 @@ variables:
   selector_end: (?=[;{}])
 
   tag_name_begin: (?=[[:alpha:]]|#{)
+
+  lang_range_begin: (?={{nmstart}}|\*|#{)
   unquoted_url_begin: (?=[[:alnum:]/]|#{)
 
   # SCSS variables
@@ -115,7 +117,7 @@ contexts:
   media-query-conditions:
     - meta_append: true
     - include: scss-interpolations
-    - include: scss-variables
+    - include: scss-value-expressions
 
 ###[ CSS PROPERTIES OR SELECTORS ]#############################################
 
@@ -170,23 +172,12 @@ contexts:
 ###[ CSS SELECTORS / PSEUDO CLASSES ]##########################################
 
   pseudo-class-anb-arguments-list-body:
-    # replace CSS context as `scss-expressions` must be appended
-    # for `anb-notation-values` to take precedence
-    - meta_content_scope: meta.function-call.arguments.css meta.group.css
-    - include: css-function-arguments-prototype
-    - include: anb-notation-values
-    - include: scalar-integer-constants
-    - include: scss-expressions
+    - meta_append: true
+    - include: scss-interpolations
 
-  pseudo-class-lang-arguments-list-body:
-    # replace CSS context as `scss-expressions` must be appended
-    # for `language-ranges` to take precedence
-    - meta_content_scope: meta.function-call.arguments.css meta.group.css
-    - include: css-function-arguments-prototype
-    - include: comma-delimiters
-    - include: quoted-strings
-    - include: language-ranges
-    - include: scss-expressions
+  pseudo-class-dir-arguments-list-body:
+    - meta_append: true
+    - include: scss-interpolations
 
 ###[ CSS PROPERTY LISTS ]######################################################
 
@@ -208,50 +199,51 @@ contexts:
 
 ###[ CSS VALUE EXPRESSIONS ]###################################################
 
-  values:
+  value-prototype:
+    - meta_append: true
+    - include: scss-default-operators
+    - include: scss-global-operators
+    - include: scss-value-expressions
+
+  font-family-value-content:
+    - meta_content_scope: meta.property-value.css
+    - include: value-prototype
+    - include: comma-delimiters
+    - include: important-operators
+    - include: scss-unqualified-functions
+    - include: quoted-strings
+    - include: global-constants
+    - include: generic-font-names
+    - include: font-family-names
+
+  font-property-value-content:
+    - meta_content_scope: meta.property-value.css
     - include: value-prototype
     - include: comma-delimiters
     - include: arithmetic-operators
     - include: important-operators
     - include: vendor-prefixes
-    - include: builtin-functions
+    - include: calc-functions
     - include: color-values
-    - include: line-name-lists
-    - include: unicode-ranges
+    - include: scss-unqualified-functions
     - include: numeric-constants
     - include: quoted-strings
-    - include: none-constants
-    - include: scss-expressions-basic ## handle scss expressions before native functions etc.
-    - include: constants-or-functions
-    - include: illegal-groups
-
-  value-prototype:
-    - meta_append: true
-    - include: scss-default-operators
-    - include: scss-global-operators
-
-  font-family-value-content:
-    - meta_prepend: true
-    - include: scss-expressions-basic
-
-  font-property-value-content:
-    - meta_prepend: true
-    - include: scss-expressions-basic
+    - include: global-constants
+    - include: generic-font-names
+    - include: font-display-constants
+    - include: font-prop-constants
+    - include: font-size-constants
+    - include: font-stretch-constants
+    - include: font-style-constants
+    - include: font-variant-constants
+    - include: font-weight-constants
+    - include: font-family-names
 
 ###[ CSS FUNCTION ARGUMENTS ]##################################################
 
   function-arguments-prototype:
     - meta_append: true
-    - include: scss-expressions-basic
-
-  css-function-arguments-prototype:
-    # CSS function-arguments-prototype without scss-expressions or illegal groups
-    - include: function-arguments-list-end
-    - match: (?=[;{}])
-      pop: 1
-    - include: comments
-    - include: calc-functions
-    - include: var-functions
+    - include: scss-value-expressions
 
 ###[ CSS IDENTIFIERS ]#########################################################
 
@@ -274,6 +266,11 @@ contexts:
       pop: 1
     # consume unicode escapes and possibly following whitespace
     - match: '{{unicode}}'
+
+  language-ranges:
+    # replace CSS context to add interpolation support
+    - match: '{{lang_range_begin}}'
+      push: language-range-content
 
   string-content:
     - meta_prepend: true
@@ -419,11 +416,8 @@ contexts:
     - include: terminator-pop
 
   scss-at-each-in-body:
-    - include: terminator-pop
-    - include: comments
-    - include: comma-delimiters
-    - include: var-function
     - include: scss-expressions
+    - include: terminator-pop
 
   scss-at-for-body:
     - meta_scope: meta.at-rule.for.scss
@@ -559,10 +553,7 @@ contexts:
     - meta_scope: meta.module.visibility.scss
     - match: (?=(?:hide|show|with){{break}})
       pop: 1
-    - include: comma-delimiters
     - include: scss-expressions
-    - match: '{{ident}}'
-      scope: meta.generic-name.scss
     - include: else-pop
 
   scss-module-with:
@@ -798,40 +789,33 @@ contexts:
 
 ###[ SCSS EXPRESSIONS ]########################################################
 
-  scss-expressions-basic:
+  scss-value-expressions:
     # for use in CSS contexts
-    - include: comments
-    - include: important-operators
     - include: scss-declarations
     - include: scss-constants
     - include: scss-variables
     - include: scss-operators
     - include: scss-variadics
-    - include: scss-functions
     - include: scss-groups-or-maps
+    - include: scss-qualified-functions
 
   scss-expressions:
     # for use in SCSS contexts where we try to "guess" more types of values
-    - include: scss-expressions-basic
-
-    # and most normal css values
-    # - include: comma-delimiters
-    # - include: arithmetic-operators
-    # - include: vendor-prefixes
+    - include: comments
+    - include: comma-delimiters
     - include: builtin-functions
     - include: color-values
-    # - include: line-name-lists
     - include: unicode-ranges
+    - include: none-constants
     - include: numeric-constants
     - include: quoted-strings
-    # - include: none-constants
-    # - include: constants-or-functions
-    # - include: illegal-groups
-
-    # other values only mean something after compiling to css,
-    # we can't always predict what just based on what it looks like
-    - match: '{{ident}}'
-      scope: meta.generic-name.scss
+    - include: scss-constants
+    - include: scss-variables
+    - include: scss-operators
+    - include: scss-variadics
+    - include: scss-groups-or-maps
+    - include: scss-qualified-functions
+    - include: scss-identifiers-or-functions
 
 ###[ SCSS INTERPOLATION ]######################################################
 
@@ -874,6 +858,7 @@ contexts:
         - scss-mapping
 
   scss-group:
+    - meta_include_prototype: false
     - match: \(
       scope: punctuation.section.group.begin.scss
       set:
@@ -890,11 +875,13 @@ contexts:
     - include: scss-expressions
 
   scss-mapping:
+    - meta_include_prototype: false
     - match: \(
       scope: punctuation.section.mapping.begin.scss
       set: scss-mapping-body
 
   scss-mapping-body:
+    - meta_include_prototype: false
     - meta_scope: meta.mapping.scss
     - match: \)
       scope: punctuation.section.mapping.end.scss
@@ -924,9 +911,9 @@ contexts:
 
 ###[ SCSS FUNCTION CALLS ]#####################################################
 
-  scss-functions:
+  scss-qualified-functions:
     # qualified functions always belong to SCSS
-    - match: ({{ident}})(\.)([[:alpha:]_][[:alnum:]_]*)(?=\()
+    - match: ({{ident}})(\.)({{scss_ident}})(?=\()
       scope: meta.function-call.identifier.css
       captures:
         1: variable.namespace.scss
@@ -935,12 +922,24 @@ contexts:
       push:
         - other-function-arguments-list-body
         - function-arguments-list-begin
+
+  scss-unqualified-functions:
     # unqualified functions may belong to SCSS or CSS
-    - match: ((?!calc|var)[[:alpha:]_][[:alnum:]_]*)(?=\()
-      scope: meta.function-call.identifier.css variable.function.css
-      push:
-        - other-function-arguments-list-body
-        - function-arguments-list-begin
+    - match: (?={{scss_ident}}\()
+      push: other-function
+
+  scss-identifiers-or-functions:
+    - match: '{{ident_begin}}'
+      branch_point: scss-identifier-or-function
+      branch:
+        - scss-identifier
+        - other-function
+
+  scss-identifier:
+    - meta_content_scope: meta.generic-name.scss
+    - match: (?=\()
+      fail: scss-identifier-or-function
+    - include: identifier-content
 
 ###[ SCSS CONSTANTS ]##########################################################
 

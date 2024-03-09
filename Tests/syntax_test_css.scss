@@ -2926,11 +2926,9 @@
 /*                            ^^ punctuation.section.group.end.css */
 /*                               ^^ invalid.illegal.unexpected-token.css */
 /*                                  ^ punctuation.section.group.end.css */
-// TODO: can't tell the difference between CSS functions and SCSS functions here
-// /*             ^ support.function.color.css */
-// /*                      ^ support.function.color.css */
-// TODO: not counting braces to catch illegals
-// /*                                   ^ invalid.illegal.unexpected-token.css */
+/*             ^ support.function.color.css */
+/*                      ^ support.function.color.css */
+/*                                   ^ invalid.illegal.unexpected-token.css */
 
     top: alpha(- 1.5%);
 /*       ^^^^^ support.function.color.css */
@@ -2976,8 +2974,7 @@
 /*                               ^^ meta.number.integer.decimal.css constant.numeric.value.css */
 /*                                 ^ meta.number.integer.decimal.css constant.numeric.suffix.css */
 /*                                  ^ punctuation.section.group.end.css */
-// TODO: inside functions can't tell difference between SCSS and CSS functions
-// /*             ^^^ support.function.color.css */
+/*             ^^^ support.function.color.css */
 
     top: blenda(red 50% hsl);
 /*       ^^^^^^ support.function.color.css */
@@ -3004,8 +3001,7 @@
 /*                                                                      ^ meta.number.integer.decimal.css constant.numeric.suffix.css */
 /*                                                                       ^^ punctuation.section.group.end.css */
 /*                                                                         ^ punctuation.terminator.rule.css */
-// TODO: inside functions can't tell difference between SCSS and CSS functions
-// /*                                            ^^^^^ support.function.color.css */
+/*                                            ^^^^^ support.function.color.css */
 }
 
 .test-transform-functions {
@@ -3208,8 +3204,7 @@
 
     top: calc(attr(start, 1) - 1);
 /*       ^^^^ support.function.calc.css */
-// TODO: inside functions can't tell difference between SCSS and CSS functions
-// /*            ^^^^ support.function.attr.css */
+/*            ^^^^ support.function.attr.css */
 
     top: calc(calc() * calc());
 /*       ^^^^ support.function.calc.css */
@@ -3505,26 +3500,24 @@
 /*             ^^^ support.constant.property-value.css */
 /*                 ^^^^^^^^^^^^^^^^^^^ string.quoted.double.css */
 /*                                    ^ punctuation.separator.sequence.css */
-// TODO: inside functions can't tell difference between SCSS and CSS functions
-// /*                                      ^^^ support.function.color.css */
+/*                                      ^^^ support.function.color.css */
 
-// // TODO: can't match the detail in unquoted strings
-//     top: image(ltr url(/images/image.png), rgb(0, 0, 0));
-// /*       ^^^^^ meta.function-call.identifier.css - meta.function-call meta.function-call */
-// /*            ^^^^^ meta.function-call.arguments.css - meta.function-call meta.function-call */
-// /*                 ^^^ meta.function-call.arguments.css meta.function-call.identifier.css */
-// /*                    ^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.css meta.function-call.arguments.css */
-// /*                     ^^^^^^^^^^^^^^^^^ meta.path.url.css meta.string.css */
-// /*                                       ^^ meta.function-call.arguments.css - meta.function-call meta.function-call */
-// /*                                         ^^^ meta.function-call.arguments.css meta.function-call.identifier.css */
-// /*                                            ^^^^^^^^^ meta.function-call.arguments.css meta.function-call.arguments.css */
-// /*                                                     ^ meta.function-call.arguments.css - meta.function-call meta.function-call */
-// /*                                                      ^ - meta.function-call */
-// /*       ^^^^^ support.function.image.css */
-// /*             ^^^ support.constant.property-value.css */
-// /*                     ^^^^^^^^^^^^^^^^^ string.unquoted.css */
-// /*                                       ^ punctuation.separator.sequence.css */
-// /*                                         ^^^ support.function.color.css */
+    top: image(ltr url(/images/image.png), rgb(0, 0, 0));
+/*       ^^^^^ meta.function-call.identifier.css - meta.function-call meta.function-call */
+/*            ^^^^^ meta.function-call.arguments.css - meta.function-call meta.function-call */
+/*                 ^^^ meta.function-call.arguments.css meta.function-call.identifier.css */
+/*                    ^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.css meta.function-call.arguments.css */
+/*                     ^^^^^^^^^^^^^^^^^ meta.path.url.css meta.string.css */
+/*                                       ^^ meta.function-call.arguments.css - meta.function-call meta.function-call */
+/*                                         ^^^ meta.function-call.arguments.css meta.function-call.identifier.css */
+/*                                            ^^^^^^^^^ meta.function-call.arguments.css meta.function-call.arguments.css */
+/*                                                     ^ meta.function-call.arguments.css - meta.function-call meta.function-call */
+/*                                                      ^ - meta.function-call */
+/*       ^^^^^ support.function.image.css */
+/*             ^^^ support.constant.property-value.css */
+/*                     ^^^^^^^^^^^^^^^^^ string.unquoted.css */
+/*                                       ^ punctuation.separator.sequence.css */
+/*                                         ^^^ support.function.color.css */
 
     top: image-set("a" 1x, a 4dpi);
 /*       ^^^^^^^^^ support.function.image.css */
@@ -3552,10 +3545,8 @@
 /*                                         ^ punctuation.separator.sequence.css */
 /*                                                                ^ meta.number.integer.decimal.css constant.numeric.value.css */
 /*                                                                 ^^^ meta.number.integer.decimal.css constant.numeric.suffix.css */
-// TODO: inside functions can't tell difference between SCSS and CSS functions
-// /*                                           ^^^ support.function.url.css */
-// TODO: can't match the detail in unquoted strings, can't tell one from an expression
-// /*                                               ^^^^^^^^^^^^^^^ meta.path.url.css meta.string.css string.unquoted.css */
+/*                                           ^^^ support.function.url.css */
+/*                                               ^^^^^^^^^^^^^^^ meta.path.url.css meta.string.css string.unquoted.css */
 
     top: cross-fade(50% "a", b);
 /*       ^^^^^^^^^^ support.function.image.css */
@@ -3571,9 +3562,8 @@
 /*                    ^ meta.number.integer.decimal.css constant.numeric.suffix.css */
 /*                      ^^^ meta.string.css string.quoted.double.css */
 /*                         ^ punctuation.separator.sequence.css */
-// TODO: inside functions can't tell difference between SCSS and CSS functions
-// /*                           ^^^ support.function.url.css */
-// /*                               ^ meta.path.url.css meta.string.css string.unquoted.css */
+/*                           ^^^ support.function.url.css */
+/*                               ^ meta.path.url.css meta.string.css string.unquoted.css */
 }
 
 .test-gradient-functions {
@@ -3743,8 +3733,7 @@
 /*       ^^^^^^^ support.function.counter.css */
 /*               ^^^^^ support.constant.symbol-type.css */
 /*                     ^^^^^^^ meta.string.css string.quoted.double.css */
-// TODO: inside functions can't tell difference between SCSS and CSS functions
-// /*                             ^^^ support.function.url.css */
+/*                             ^^^ support.function.url.css */
 }
 
 .test-grid-functions {
@@ -3780,8 +3769,7 @@
 /*                                   ^^^^ support.constant.property-value.css */
 /*                                         ^ meta.number.integer.decimal.css constant.numeric.value.css */
 /*                                          ^ meta.number.integer.decimal.css constant.numeric.suffix.css */
-// TODO: inside functions can't tell difference between SCSS and CSS functions
-// /*                            ^^^^^^ support.function.grid.css */
+/*                            ^^^^^^ support.function.grid.css */
 
     top: minmax(min-content, 1fr, 10%);
 /*       ^^^^^^ support.function.grid.css */
@@ -3820,9 +3808,8 @@
 .test-filter-functions {
     top: filter(url(), blur());
 /*       ^^^^^^ support.function.filter.css */
-// TODO: inside functions can't tell difference between SCSS and CSS functions
-// /*              ^^^ support.function.url.css */
-// /*                     ^^^^ support.function.filter.css */
+/*              ^^^ support.function.url.css */
+/*                     ^^^^ support.function.filter.css */
 
     top: blur(1px);
 /*       ^^^^ support.function.filter.css */
@@ -3839,8 +3826,7 @@
 /*       ^^^^^^^^^^^ support.function.filter.css */
 /*                   ^ meta.number.integer.decimal.css constant.numeric.value.css */
 /*                    ^^ meta.number.integer.decimal.css constant.numeric.suffix.css */
-// TODO: inside functions can't tell difference between SCSS and CSS functions
-// /*                       ^^^ support.function.color.css */
+/*                       ^^^ support.function.color.css */
 
     top: hue-rotate(1turn);
 /*       ^^^^^^^^^^ support.function.filter.css */
