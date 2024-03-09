@@ -1061,13 +1061,13 @@ nav ul {
 // At-Rules: mixin arguments
 // https://sass-lang.com/documentation/at-rules/mixin/#arguments
 //=============================================================================
-@mixin rtl($property, $ltr-value, $rtl-value) {
+@mixin rtl($property, $ltr-value, /**/ $rtl-value) {
 // <- meta.at-rule.mixin.scss meta.mixin.scss keyword.control.directive.mixin.scss punctuation.definition.keyword.scss
 //^^^^^ meta.at-rule.mixin.scss meta.mixin.scss
 //     ^^^ meta.at-rule.mixin.scss meta.mixin.identifier.scss
-//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.mixin.scss meta.mixin.parameters.scss meta.group.scss
-//                                           ^ meta.at-rule.mixin.scss - meta.block
-//                                            ^^ meta.at-rule.mixin.scss meta.property-list.css meta.block.css
+//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.mixin.scss meta.mixin.parameters.scss meta.group.scss
+//                                                ^ meta.at-rule.mixin.scss - meta.block
+//                                                 ^^ meta.at-rule.mixin.scss meta.property-list.css meta.block.css
 //^^^^ keyword.control.directive.mixin.scss
 //     ^^^ entity.name.mixin.scss
 //        ^ punctuation.section.group.begin.scss
@@ -1075,9 +1075,10 @@ nav ul {
 //                  ^ punctuation.separator.sequence.css
 //                    ^^^^^^^^^^ variable.parameter.scss
 //                              ^ punctuation.separator.sequence.css
-//                                ^^^^^^^^^^ variable.parameter.scss
-//                                          ^ punctuation.section.group.end.scss
-//                                            ^ punctuation.section.block.begin.css
+//                                ^^^^ comment.block.css
+//                                     ^^^^^^^^^^ variable.parameter.scss
+//                                               ^ punctuation.section.group.end.scss
+//                                                 ^ punctuation.section.block.begin.css
   #{$property}: $ltr-value;
 // <- meta.at-rule.mixin.scss meta.property-list.css meta.block.css
 //^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.mixin.scss meta.property-list.css meta.block.css
@@ -1114,11 +1115,11 @@ nav ul {
 }
 
 .sidebar {
-  @include rtl(float, left, right);
+  @include rtl(float, left, /* in */ right);
 //^^^^^^^^^ meta.at-rule.include.scss - meta.mixin
 //         ^^^ meta.at-rule.include.scss meta.mixin.scss
-//            ^^^^^^^^^^^^^^^^^^^^ meta.at-rule.include.scss meta.mixin.arguments.scss meta.group.scss
-//                                ^ - meta.at-rule - meta.mixin - meta.group
+//            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.include.scss meta.mixin.arguments.scss meta.group.scss
+//                                         ^ - meta.at-rule - meta.mixin - meta.group
 //^ punctuation.definition.keyword.scss
 //^^^^^^^^ keyword.control.directive.include.scss
 //         ^^^ variable.other.mixin.scss
@@ -1127,7 +1128,9 @@ nav ul {
 //                  ^ punctuation.separator.sequence.css
 //                    ^^^^ support.constant.property-value.css
 //                        ^ punctuation.separator.sequence.css
-//                               ^ punctuation.section.group.end.scss
+//                          ^^^^^^^^ comment.block.css
+//                                   ^^^^^ support.constant.property-value.css
+//                                        ^ punctuation.section.group.end.scss
 }
 
 //=============================================================================

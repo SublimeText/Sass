@@ -636,6 +636,7 @@ contexts:
     - match: \)
       scope: punctuation.section.group.end.scss
       pop: 1
+    - include: comments
     - include: comma-delimiters
     - include: scss-variadics
     - include: scss-parameters
@@ -679,6 +680,7 @@ contexts:
     - match: \)
       scope: punctuation.section.group.end.scss
       pop: 1
+    - include: comments
     - include: comma-delimiters
     - include: scss-variadics
     - include: scss-parameters
@@ -752,6 +754,7 @@ contexts:
     - match: \)
       scope: punctuation.section.group.end.scss
       pop: 1
+    - include: comments
     - include: comma-delimiters
     - include: scss-variadics
     - include: scss-parameters
