@@ -110,6 +110,13 @@ contexts:
     - include: scss-at-root
     - include: scss-at-use
 
+###[ CONTAINER QUERIES ]#######################################################
+
+  container-style-queries:
+    - meta_append: true
+    - include: scss-interpolations
+    - include: scss-value-expressions
+
 ###[ CSS MEDIA QUERIES ]#######################################################
 
   media-query-conditions:
@@ -261,6 +268,195 @@ contexts:
   function-arguments-prototype:
     - meta_append: true
     - include: scss-value-expressions
+
+  counter-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  font-format-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  format-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  layer-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  local-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  supports-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  symbols-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  color-color-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  hsl-color-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  rgb-color-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  blend-adjust-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  hue-adjust-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  rgba-adjust-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  saturation-adjust-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  tint-adjust-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  filter-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  blur-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  brightness-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  drop-shadow-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  hue-rotate-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  minmax-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  repeat-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  cross-fade-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  image-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  image-set-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  conic-gradient-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  radial-gradient-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  circle-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  inset-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  polygon-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  rect-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  cubic-bezier-timing-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  step-timing-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  transform-function-angles-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  transform-function-angles-scalars-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  transform-function-lengths-percentage-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  transform-function-scalars-percentage-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  transform-function-scalars-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  transform-function-angle-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  transform-function-length-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  transform-function-length-percentage-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  transform-function-scalar-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  url-function-arguments-list-body:
+    - meta_content_scope: meta.function-call.arguments.css meta.group.css
+    - include: function-arguments-prototype
+    - include: scss-unqualified-functions
+    - include: quoted-urls
+    - include: unquoted-urls
+
+  url-regexp-function-arguments-list-body:
+    - meta_content_scope: meta.function-call.arguments.css meta.group.css
+    - include: function-arguments-prototype
+    - include: scss-unqualified-functions
+    - include: quoted-strings
+
+  calc-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
+
+  toggle-function-arguments-list-body:
+    - meta_append: true
+    - include: scss-identifiers-or-functions
 
 ###[ CSS IDENTIFIERS ]#########################################################
 

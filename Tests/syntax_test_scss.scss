@@ -2206,3 +2206,60 @@ $color2 : #f00;
 // ^^^^ meta.declaration.identifier.scss
 $color3     : #f00;
 // ^^^^ meta.declaration.identifier.scss
+
+//=============================================================================
+// Nested SCSS function calls
+//   Handling nexted functions is a bit tricky due to many unique function
+//   argument contexts in CSS.
+//=============================================================================
+
+@document regexp(scss_func($arg)) {}
+//        ^^^^^^ meta.function-call.identifier.css support.function.regexp.css
+//              ^ meta.function-call.arguments.css - meta.function-call meta.function-call
+//               ^^^^^^^^^ meta.function-call.arguments.css meta.function-call.identifier.css variable.function.css
+//                        ^^^^^^ meta.function-call.arguments.css meta.function-call.arguments.css
+//                              ^ meta.function-call.arguments.css - meta.function-call meta.function-call
+//                               ^ - meta.function-call
+
+.test-nested-function-calls {
+
+  prop: blend(scss_func($arg));
+//      ^^^^^ meta.function-call.identifier.css support.function.color.css
+//           ^ meta.function-call.arguments.css - meta.function-call meta.function-call
+//            ^^^^^^^^^ meta.function-call.arguments.css meta.function-call.identifier.css variable.function.css
+//                     ^^^^^^ meta.function-call.arguments.css meta.function-call.arguments.css
+//                           ^ meta.function-call.arguments.css - meta.function-call meta.function-call
+//                            ^ - meta.function-call
+
+  prop: calc(scss_func($arg));
+//      ^^^^ meta.function-call.identifier.css support.function.calc.css
+//          ^ meta.function-call.arguments.css - meta.function-call meta.function-call
+//           ^^^^^^^^^ meta.function-call.arguments.css meta.function-call.identifier.css variable.function.css
+//                    ^^^^^^ meta.function-call.arguments.css meta.function-call.arguments.css
+//                          ^ meta.function-call.arguments.css - meta.function-call meta.function-call
+//                           ^ - meta.function-call
+
+  prop: color(scss_func($arg));
+//      ^^^^^ meta.function-call.identifier.css support.function.color.css
+//           ^ meta.function-call.arguments.css - meta.function-call meta.function-call
+//            ^^^^^^^^^ meta.function-call.arguments.css meta.function-call.identifier.css variable.function.css
+//                     ^^^^^^ meta.function-call.arguments.css meta.function-call.arguments.css
+//                           ^ meta.function-call.arguments.css - meta.function-call meta.function-call
+//                            ^ - meta.function-call
+
+  prop: hsla(scss_func($arg));
+//      ^^^^ meta.function-call.identifier.css support.function.color.css
+//          ^ meta.function-call.arguments.css - meta.function-call meta.function-call
+//           ^^^^^^^^^ meta.function-call.arguments.css meta.function-call.identifier.css variable.function.css
+//                    ^^^^^^ meta.function-call.arguments.css meta.function-call.arguments.css
+//                          ^ meta.function-call.arguments.css - meta.function-call meta.function-call
+//                           ^ - meta.function-call
+
+  prop: url(scss_func($arg));
+//      ^^^ meta.function-call.identifier.css support.function.url.css
+//         ^ meta.function-call.arguments.css - meta.function-call meta.function-call
+//          ^^^^^^^^^ meta.function-call.arguments.css meta.function-call.identifier.css variable.function.css
+//                   ^^^^^^ meta.function-call.arguments.css meta.function-call.arguments.css
+//                         ^ meta.function-call.arguments.css - meta.function-call meta.function-call
+//                          ^ - meta.function-call
+}
