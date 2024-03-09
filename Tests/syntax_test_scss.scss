@@ -600,16 +600,16 @@ $warn: #dfa612;
 $base-color: #c6538c;
 // ^^^^^^^^ meta.declaration.identifier.scss variable.other.scss
 //         ^ - variable.other.scss
-//<-        punctuation.definition.variable.scss
+// <- punctuation.definition.variable.scss
 $border-dark: rgba($base-color, 0.88);
 // ^^^^^^^^^ meta.declaration.identifier.scss variable.other.scss
 //            ^^^^^^^^^^^^^^^^^^^^^^^ meta.declaration.value.scss
 //                                   ^ - meta.declaration.value.scss
 //          ^ - variable.other.scss
-//<-         punctuation.definition.variable.scss
+// <- punctuation.definition.variable.scss
+//                 ^ punctuation.definition.variable.scss
 //                 ^^^^^^^^^^^ variable.other.scss
 //                            ^ - variable.other.scss
-//                 ^           punctuation.definition.variable.scss
 
 .alert {
   border: 1px solid $border-dark;
@@ -1283,7 +1283,7 @@ nav ul {
 @use "sass:meta";
 
 @mixin syntax-colors($args...) {
-//                        ^^^  keyword.operator.variadic.scss
+//                        ^^^ keyword.operator.variadic.scss
 
 @include syntax-colors(
   $string: #080,
@@ -1311,7 +1311,7 @@ nav ul {
 
 // https://sass-lang.com/documentation/at-rules/mixin/#passing-arbitrary-arguments
 @include order(150px, $form-selectors...);
-//                                   ^^^  keyword.operator.variadic.scss
+//                                   ^^^ keyword.operator.variadic.scss
 }
 
 //=============================================================================
@@ -1335,8 +1335,8 @@ nav ul {
   @include hover {
     border-width: 2px;
 // ^^^^^^^^^^^^^^^^^^^ meta.property-list
-//  ^^^^^^^^^^^^       support.type.property-name.css
-//                ^^^  constant.numeric
+//  ^^^^^^^^^^^^ support.type.property-name.css
+//                ^^^ constant.numeric
 //                   ^ punctuation.terminator.rule.css
   }
 }
@@ -1450,10 +1450,10 @@ nav ul {
   float: left;
   margin-left: fibonacci(4) * 1px;
 //             ^^^^^^^^^^^^ meta.property-value.css
-//             ^^^^^^^^^    meta.function-call.identifier.css variable.function.css
+//             ^^^^^^^^^ meta.function-call.identifier.css variable.function.css
 //                      ^^^ meta.function-call.arguments
-//                      ^   punctuation.section.group.begin
-//                       ^  constant.numeric
+//                      ^ punctuation.section.group.begin
+//                       ^ constant.numeric
 //                        ^ punctuation.section.group.end
 }
 
@@ -1490,20 +1490,20 @@ $primary-color: #036;
   background-color: $primary-color;
   color: scale-color($primary-color, $lightness: +40%);
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css
-//       ^^^^^^^^^^^                                   meta.function-call.identifier.css variable.function.css
+//       ^^^^^^^^^^^ meta.function-call.identifier.css variable.function.css
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments
-//                                                    ^ punctuation.terminator.rule.css
-//                  ^   punctuation.section.group.begin
+//                  ^ punctuation.section.group.begin
+//                   ^ punctuation.definition.variable.scss
+//                   ^^^^^^^^^^^^^ variable.other.scss
+//                                 ^ punctuation.separator.sequence
+//                                   ^ punctuation.definition.variable.scss
+//                                   ^^^^^^^^^^ variable.other.scss
+//                                             ^ punctuation.separator.key-value.css
+//                                               ^^^^ meta.number
+//                                               ^ keyword.operator
+//                                                ^^^ constant.numeric
 //                                                   ^ punctuation.section.group.end
-//                    ^^^^^^^^^^^^                     variable.other.scss
-//                   ^                                 punctuation.definition.variable.scss
-//                                 ^                   punctuation.separator.sequence
-//                                    ^^^^^^^^^        variable.other.scss
-//                                   ^                 punctuation.definition.variable.scss
-//                                             ^       punctuation.separator.key-value.css
-//                                               ^^^^  meta.number
-//                                               ^     keyword.operator
-//                                                ^^^  constant.numeric
+//                                                    ^ punctuation.terminator.rule.css
 }
 
 // https://sass-lang.com/documentation/at-rules/function/#taking-arbitrary-arguments
@@ -1618,13 +1618,13 @@ $accent: #e1d7d2;
 
   &--serious {
 //^^^^^^^^^^ meta.selector.css
-//^          variable.language.parent.css
+//^ variable.language.parent.css
 // ^^^^^^^^^ entity.other.attribute-name.css
     @extend .error;
 //  ^^^^^^^^^^^^^^ meta.at-rule.extend.scss
-//  ^^^^^^^        keyword.control.directive.extend.scss
+//  ^ punctuation.definition.keyword.scss
+//  ^^^^^^^ keyword.control.directive.extend.scss
 //          ^^^^^^ meta.selector.css
-//  ^              punctuation.definition.keyword.scss
 //                ^ punctuation.terminator.rule.css
     border-width: 3px;
   }
@@ -1633,16 +1633,16 @@ $accent: #e1d7d2;
 // https://sass-lang.com/documentation/at-rules/extend/#placeholder-selectors
 .alert:hover, %strong-alert {
 //            ^^^^^^^^^^^^^ entity.other.attribute-name.class.css
-//            ^             punctuation.definition.entity.placeholder.scss
+//            ^ punctuation.definition.entity.placeholder.scss
   font-weight: bold;
 }
 
 %strong-alert:hover {
+// <- meta.selector.css entity.other.attribute-name.class.css punctuation.definition.entity.placeholder.scss
 //^^^^^^^^^^^^^^^^^ meta.selector.css
-//^^^^^^^^^^^       entity.other.attribute-name.class.css
-//           ^      punctuation.definition.pseudo-class.css
+//^^^^^^^^^^^ entity.other.attribute-name.class.css
+//           ^ punctuation.definition.pseudo-class.css
 //            ^^^^^ entity.other.pseudo-class.css
-//<-                punctuation.definition.entity.placeholder.scss
   color: red;
 }
 
@@ -1651,11 +1651,10 @@ $accent: #e1d7d2;
   .error--serious {
     @extend .error;
 //  ^^^^^^^^^^^^^^ meta.at-rule.extend.scss
-//  ^^^^^^^        keyword.control.directive.extend.scss
+//  ^ punctuation.definition.keyword.scss
+//  ^^^^^^^ keyword.control.directive.extend.scss
 //          ^^^^^^ meta.selector.css
-//  ^              punctuation.definition.keyword.scss
 //                ^ punctuation.terminator.rule.css
-
   }
 }
 
@@ -1698,10 +1697,10 @@ $accent: #e1d7d2;
 @mixin inset-divider-offset($offset, $padding) {
   $divider-offset: (2 * $padding) + $offset;
 //                 ^^^^^^^^^^^^^^ meta.declaration.value.scss meta.group.scss
-//                 ^              punctuation
+//                 ^ punctuation
 //                              ^ punctuation
-//                    ^           keyword.operator.arithmetic.scss
-//                      ^^^^^^^^  variable.other
+//                    ^ keyword.operator.arithmetic.scss
+//                      ^^^^^^^^ variable.other
 
   @debug "divider offset: #{$divider-offset}";
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.message.scss
@@ -1745,7 +1744,7 @@ $accent: #e1d7d2;
     width: 8in;
 
     @at-root (without: media) {
-//  ^^^^^^^^  meta.at-rule.root.scss - meta.selector
+//  ^^^^^^^^ meta.at-rule.root.scss - meta.selector
 //          ^ meta.at-rule.media.css meta.selector.css - meta.group
 //           ^^^^^^^^^^^^^^^^ meta.at-rule.root.scss meta.selector.css meta.group.scss
 //                           ^ meta.at-rule.media.css meta.selector.css - meta.group
@@ -1760,7 +1759,7 @@ $accent: #e1d7d2;
     }
 
     @at-root (with: rule) {
-//  ^^^^^^^^  meta.at-rule.root.scss - meta.selector
+//  ^^^^^^^^ meta.at-rule.root.scss - meta.selector
 //          ^ meta.at-rule.media.css meta.selector.css - meta.group
 //           ^^^^^^^^^^^^ meta.at-rule.root.scss meta.selector.css meta.group.scss
 //                       ^ meta.at-rule.media.css meta.selector.css - meta.group
@@ -1907,7 +1906,7 @@ $icons: ("eye": "\f112", "start": "\f12e", "stop": "\f12f");
 //                              ^ meta.mapping.scss punctuation.separator.key-value.css
 //                                ^^^^^^^ meta.mapping.value.scss meta.string.css string.quoted.double.css
 //                                       ^^ meta.mapping.scss
-//                                       ^  punctuation.separator.sequence.css
+//                                       ^ punctuation.separator.sequence.css
 //                                         ^^^^^^ meta.mapping.key.scss meta.string.css string.quoted.double.css
 //                                               ^ meta.mapping.scss punctuation.separator.key-value.css
 //                                                 ^^^^^^^ meta.mapping.value.scss meta.string.css string.quoted.double.css
@@ -2015,7 +2014,7 @@ $layout-breakpoint-small: 960px;
 
 @media (min-width: $layout-breakpoint-small) {
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.media.css
-//                 ^^^^^^^^^^^^^^^^^^^^^^^^   variable.other.scss
+//                 ^^^^^^^^^^^^^^^^^^^^^^^^ variable.other.scss
   .hide-extra-small {
     display: none;
   }
@@ -2027,7 +2026,7 @@ $position: sticky;
   position: fixed;
   @supports (position: $position) {
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.supports.css
-//                     ^^^^^^^^^   variable.other.scss
+//                     ^^^^^^^^^ variable.other.scss
     position: sticky;
   }
 }
@@ -2049,10 +2048,10 @@ $transition-speed: math.div(1s, 50px);
   left: $left-start;
   transition: left ($left-stop - $left-start) * $transition-speed;
 //                 ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.scss
-//                 ^                          punctuation.section.group.begin.scss
-//                  ^^^^^^^^^^                variable.other.scss
-//                             ^              keyword.operator.arithmetic.scss
-//                               ^^^^^^^^^^   variable.other.scss
+//                 ^ punctuation.section.group.begin.scss
+//                  ^^^^^^^^^^ variable.other.scss
+//                             ^ keyword.operator.arithmetic.scss
+//                               ^^^^^^^^^^ variable.other.scss
 //                                          ^ punctuation.section.group.end.scss
   &:hover {
     left: $left-stop;
@@ -2190,8 +2189,8 @@ h2 {
 //                                                                ^ punctuation.section.group.end.css
  font-weight: 20px + ($large * 2);
 //                   ^^^^^^^^^^^^ meta.group.scss
-//                    ^^^^^^      variable.other.scss
-//                           ^    keyword.operator
+//                    ^^^^^^ variable.other.scss
+//                           ^ keyword.operator
 }
 
 //=============================================================================
