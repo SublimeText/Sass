@@ -4,7 +4,7 @@
 	<key>scope</key>
 	<string>
 		source.scss meta.at-rule.import meta.function-call.arguments entity.other.layer,
-		source.scss variable.other - source.scss variable.other punctuation.definition.variable - meta.declaration.identifier
+		source.scss variable.other - source.scss variable punctuation.definition.variable - meta.declaration.identifier
 	</string>
 	<key>settings</key>
 	<dict>

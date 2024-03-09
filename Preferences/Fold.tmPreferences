@@ -2,7 +2,7 @@
 <plist version="1.0">
 <dict>
     <key>scope</key>
-    <string>source.less</string>
+    <string>source.scss</string>
     <key>settings</key>
     <dict>
         <key>foldScopes</key>
@@ -36,6 +36,14 @@
                 <string>punctuation.section.group.begin</string>
                 <key>end</key>
                 <string>punctuation.section.group.end</string>
+                <key>excludeTrailingNewlines</key>
+                <false/>
+            </dict>
+            <dict>
+                <key>begin</key>
+                <string>punctuation.section.interpolation.begin</string>
+                <key>end</key>
+                <string>punctuation.section.interpolation.end</string>
                 <key>excludeTrailingNewlines</key>
                 <false/>
             </dict>

@@ -3,8 +3,9 @@
 <dict>
 	<key>scope</key>
 	<string>
-		source.scss meta.declaration.identifier variable.other - source.scss variable.other punctuation.definition.variable,
-		source.scss meta.function.parameters.scss variable.parameter - source.scss variable.parameter punctuation.definition.variable,
+		source.scss meta.declaration.identifier variable.other - source.scss variable punctuation.definition.variable,
+		source.scss meta.function.parameters variable.parameter - source.scss variable punctuation.definition.variable,
+		source.scss entity.name.mixin,
 		source.scss entity.other.custom-property
 	</string>
 	<key>settings</key>
