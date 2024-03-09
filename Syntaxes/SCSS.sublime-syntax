@@ -229,39 +229,11 @@ contexts:
     - include: scss-global-operators
     - include: scss-value-expressions
 
-  font-family-value-content:
-    - meta_content_scope: meta.property-value.css
-    - include: value-prototype
-    - include: comma-delimiters
-    - include: important-operators
+  generic-font-names:
+    # inject scss function calls to font property related contexts
+    # without rewriting them all.
+    - meta_prepend: true
     - include: scss-unqualified-functions
-    - include: quoted-strings
-    - include: global-constants
-    - include: generic-font-names
-    - include: font-family-names
-
-  font-property-value-content:
-    - meta_content_scope: meta.property-value.css
-    - include: value-prototype
-    - include: comma-delimiters
-    - include: arithmetic-operators
-    - include: important-operators
-    - include: vendor-prefixes
-    - include: calc-functions
-    - include: color-values
-    - include: scss-unqualified-functions
-    - include: numeric-constants
-    - include: quoted-strings
-    - include: global-constants
-    - include: generic-font-names
-    - include: font-display-constants
-    - include: font-prop-constants
-    - include: font-size-constants
-    - include: font-stretch-constants
-    - include: font-style-constants
-    - include: font-variant-constants
-    - include: font-weight-constants
-    - include: font-family-names
 
 ###[ CSS FUNCTION ARGUMENTS ]##################################################
 
@@ -282,10 +254,6 @@ contexts:
     - include: scss-identifiers-or-functions
 
   layer-function-arguments-list-body:
-    - meta_append: true
-    - include: scss-identifiers-or-functions
-
-  local-function-arguments-list-body:
     - meta_append: true
     - include: scss-identifiers-or-functions
 
