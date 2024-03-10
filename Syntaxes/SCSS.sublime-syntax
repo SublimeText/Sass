@@ -26,8 +26,8 @@ variables:
 
   tag_name_begin: (?=[[:alpha:]]|#{)
 
-  lang_range_begin: (?={{nmstart}}|\*|#{)
-  unquoted_url_begin: (?=[[:alnum:]/]|#{)
+  lang_range_begin: (?={{ident_start}}|\*)
+  unquoted_url_begin: (?={{ident_start}}|/)
 
   # SCSS variables
 
@@ -443,9 +443,12 @@ contexts:
     - meta_include_prototype: false
     - meta_scope: meta.string.css string.unquoted.css
     - include: scss-string-interpolations
-    - match: '{{break}}(?!\s+{{ident_start}})'
+    # allow unquoted space separated font names
+    - match: (?!\s+{{ident_start}}){{break}}
       pop: 1
-    # consume unicode escapes and possibly following whitespace
+    # function call ahead, skip font name
+    - match: (?=\s+{{ident}}\()
+      pop: 1
     - match: '{{unicode}}'
 
   language-ranges:
