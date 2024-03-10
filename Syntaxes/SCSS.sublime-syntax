@@ -270,12 +270,14 @@ contexts:
     - include: scss-identifiers-or-functions
 
   hsl-color-function-arguments-list-body:
-    - meta_append: true
-    - include: scss-identifiers-or-functions
+    - meta_content_scope: meta.function-call.arguments.css meta.group.css
+    - include: alpha-delimiters
+    - include: other-function-arguments-list-body
 
   rgb-color-function-arguments-list-body:
-    - meta_append: true
-    - include: scss-identifiers-or-functions
+    - meta_content_scope: meta.function-call.arguments.css meta.group.css
+    - include: alpha-delimiters
+    - include: other-function-arguments-list-body
 
   blend-adjust-function-arguments-list-body:
     - meta_append: true
