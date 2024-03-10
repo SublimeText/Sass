@@ -1,33 +1,17 @@
 import re
 import sublime
 import sublime_plugin
-import timeit
 
-from functools import cached_property, wraps
+from functools import cached_property
 
 from .function_args import get_func_args
 from .properties import get_properties
 
-__all__ = ['ScssCompletions']
+__all__ = ['SassCompletions', 'ScssCompletions']
 
 KIND_CSS_PROPERTY = (sublime.KIND_ID_KEYWORD, "p", "property")
 KIND_CSS_FUNCTION = (sublime.KIND_ID_FUNCTION, "f", "function")
 KIND_CSS_CONSTANT = (sublime.KIND_ID_VARIABLE, "c", "constant")
-
-ENABLE_TIMING = False
-
-
-def timing(func):
-    @wraps(func)
-    def wrap(*args, **kw):
-        if ENABLE_TIMING:
-            ts = timeit.default_timer()
-        result = func(*args, **kw)
-        if ENABLE_TIMING:
-            te = timeit.default_timer()
-            print(f"{func.__name__}({args}, {kw}) took: {1000.0 * (te - ts):2.3f} ms")
-        return result
-    return wrap
 
 
 def match_selector(view, pt, scope):
@@ -44,7 +28,7 @@ def next_none_whitespace(view, pt):
             return ch
 
 
-class ScssCompletions(sublime_plugin.EventListener):
+class BaseCompletionsProvider:
 
     @cached_property
     def func_args(self):
@@ -62,39 +46,7 @@ class ScssCompletions(sublime_plugin.EventListener):
     def re_value(self):
         return re.compile(r"^(?:\s*(:)|([ \t]*))([^:]*)([;}])")
 
-    @timing
-    def on_query_completions(self, view, prefix, locations):
-
-        settings = sublime.load_settings('SCSS.sublime-settings')
-        if settings.get('disable_default_completions'):
-            return None
-
-        selector = settings.get('default_completions_selector')
-        if not selector:
-            return None
-
-        if isinstance(selector, list):
-            selector = ''.join(selector)
-
-        pt = locations[0]
-        if not match_selector(view, pt, selector):
-            return None
-
-        if match_selector(view, pt, "meta.property-value.css meta.function-call.arguments"):
-            items = self.complete_function_argument(view, prefix, pt)
-        elif view.match_selector(pt - 1, "meta.property-value.css, punctuation.separator.key-value"):
-            items = self.complete_property_value(view, prefix, pt)
-        elif view.match_selector(pt - 1, "meta.property-name.css, meta.property-list.css - meta.selector"):
-            items = self.complete_property_name(view, prefix, pt)
-        else:
-            # TODO: provide selectors, at-rules
-            items = None
-
-        if items:
-            return sublime.CompletionList(items)
-        return None
-
-    def complete_property_name(self, view, prefix, pt):
+    def complete_property_name(self, view, prefix, pt, semicolon):
         text = view.substr(sublime.Region(pt, view.line(pt).end()))
         matches = self.re_value.search(text)
         if matches:
@@ -115,7 +67,7 @@ class ScssCompletions(sublime_plugin.EventListener):
                 suffix = ":$0"
 
             # terminate empty value if not within parentheses
-            if not value and not term and not match_selector(view, pt, "meta.group"):
+            if semicolon and not value and not term and not match_selector(view, pt, "meta.group"):
                 suffix += ";"
 
         return (
@@ -127,7 +79,7 @@ class ScssCompletions(sublime_plugin.EventListener):
             ) for prop in self.props
         )
 
-    def complete_property_value(self, view, prefix, pt):
+    def complete_property_value(self, view, prefix, pt, semicolon):
         completions = [
             sublime.CompletionItem(
                 trigger="!important",
@@ -144,10 +96,10 @@ class ScssCompletions(sublime_plugin.EventListener):
             if values:
                 details = f"<code>{prop}</code> property-value"
 
-                if match_selector(view, pt, "meta.group") or next_none_whitespace(view, pt) == ";":
-                    suffix = ""
-                else:
+                if semicolon and not match_selector(view, pt, "meta.group") and next_none_whitespace(view, pt) != ";":
                     suffix = "$0;"
+                else:
+                    suffix = ""
 
                 for value in values:
                     if isinstance(value, list):
@@ -228,3 +180,65 @@ class ScssCompletions(sublime_plugin.EventListener):
                 ))
 
         return completions
+
+
+class SassCompletions(BaseCompletionsProvider, sublime_plugin.EventListener):
+
+    def on_query_completions(self, view, prefix, locations):
+        settings = sublime.load_settings('Sass.sublime-settings')
+        if settings.get('disable_default_completions'):
+            return None
+
+        selector = settings.get('default_completions_selector')
+        if not selector:
+            return None
+
+        if isinstance(selector, list):
+            selector = ''.join(selector)
+
+        pt = locations[0]
+        if not match_selector(view, pt, selector):
+            return None
+
+        if match_selector(view, pt, "meta.function-call.arguments"):
+            items = self.complete_function_argument(view, prefix, pt)
+        elif match_selector(view, pt - 1, "meta.property-value, punctuation.separator.key-value"):
+            items = self.complete_property_value(view, prefix, pt, False)
+        else:
+            items = self.complete_property_name(view, prefix, pt, False)
+
+        if items:
+            return sublime.CompletionList(items, sublime.INHIBIT_WORD_COMPLETIONS)
+        return None
+
+
+class ScssCompletions(BaseCompletionsProvider, sublime_plugin.EventListener):
+
+    def on_query_completions(self, view, prefix, locations):
+        settings = sublime.load_settings('SCSS.sublime-settings')
+        if settings.get('disable_default_completions'):
+            return None
+
+        selector = settings.get('default_completions_selector')
+        if not selector:
+            return None
+
+        if isinstance(selector, list):
+            selector = ''.join(selector)
+
+        pt = locations[0]
+        if not match_selector(view, pt, selector):
+            return None
+
+        if match_selector(view, pt, "meta.function-call.arguments"):
+            items = self.complete_function_argument(view, prefix, pt)
+        elif view.match_selector(pt - 1, "meta.property-value, punctuation.separator.key-value"):
+            items = self.complete_property_value(view, prefix, pt, True)
+        elif view.match_selector(pt - 1, "meta.property-name, meta.property-list - meta.selector"):
+            items = self.complete_property_name(view, prefix, pt, True)
+        else:
+            items = None
+
+        if items:
+            return sublime.CompletionList(items)
+        return None

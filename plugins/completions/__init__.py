@@ -1,1 +1,1 @@
-from .provider import ScssCompletions
+from .provider import *
