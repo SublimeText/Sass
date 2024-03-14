@@ -120,7 +120,7 @@ class BaseCompletionsProvider:
 
         return completions
 
-    def complete_function_argument(self, view: sublime.View, prefix, pt):
+    def complete_function_argument(self, view, prefix, pt):
         func_name = ""
         nest_level = 1
         # Look for the beginning of the current function call's arguments list,
@@ -208,7 +208,7 @@ class SassCompletions(BaseCompletionsProvider, sublime_plugin.EventListener):
             items = self.complete_property_name(view, prefix, pt, False)
 
         if items:
-            return sublime.CompletionList(items, sublime.INHIBIT_WORD_COMPLETIONS)
+            return sublime.CompletionList(items)
         return None
 
 
