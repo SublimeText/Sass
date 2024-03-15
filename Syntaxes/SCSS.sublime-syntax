@@ -545,9 +545,7 @@ contexts:
 
   scss-at-content-argument-list-body:
     - meta_scope: meta.placeholder.arguments.scss meta.group.scss
-    - match: \)
-      scope: punctuation.section.group.end.scss
-      pop: 1
+    - include: scss-group-end
     - include: scss-arguments
     - include: values
 
@@ -760,9 +758,7 @@ contexts:
   scss-module-arguments-list-body:
     - clear_scopes: 1
     - meta_scope: meta.module.arguments.scss meta.group.scss
-    - match: \)
-      scope: punctuation.section.group.end.scss
-      pop: 1
+    - include: scss-group-end
     - include: scss-arguments
     - include: values
 
@@ -802,9 +798,7 @@ contexts:
 
   scss-at-function-parameter-list-body:
     - meta_scope: meta.function.parameters.scss meta.group.scss
-    - match: \)
-      scope: punctuation.section.group.end.scss
-      pop: 1
+    - include: scss-group-end
     - include: comments
     - include: comma-delimiters
     - include: scss-variadics
@@ -846,9 +840,7 @@ contexts:
 
   scss-at-mixin-parameter-list-body:
     - meta_scope: meta.mixin.parameters.scss meta.group.scss
-    - match: \)
-      scope: punctuation.section.group.end.scss
-      pop: 1
+    - include: scss-group-end
     - include: comments
     - include: comma-delimiters
     - include: scss-variadics
@@ -895,9 +887,7 @@ contexts:
 
   scss-mixin-argument-list-body:
     - meta_scope: meta.mixin.arguments.scss meta.group.scss
-    - match: \)
-      scope: punctuation.section.group.end.scss
-      pop: 1
+    - include: scss-group-end
     - include: scss-arguments
     - include: values
 
@@ -920,9 +910,7 @@ contexts:
 
   scss-at-include-using-parameter-list-body:
     - meta_scope: meta.using.parameters.scss meta.group.scss
-    - match: \)
-      scope: punctuation.section.group.end.scss
-      pop: 1
+    - include: scss-group-end
     - include: comments
     - include: comma-delimiters
     - include: scss-variadics
@@ -947,9 +935,7 @@ contexts:
 
   scss-at-root-group-body:
     - meta_scope: meta.group.scss
-    - match: \)
-      scope: punctuation.section.group.end.scss
-      pop: 1
+    - include: scss-group-end
     - match: (with|without)\s*(:)
       captures:
         1: keyword.control.scss
@@ -1056,12 +1042,15 @@ contexts:
 
   scss-group-body:
     - meta_scope: meta.group.scss
-    - match: \)
-      scope: punctuation.section.group.end.scss
-      pop: 1
+    - include: scss-group-end
     - match: ':'
       fail: group-or-map
     - include: scss-expressions
+
+  scss-group-end:
+    - match: \)
+      scope: punctuation.section.group.end.scss
+      pop: 1
 
   scss-mapping:
     - meta_include_prototype: false
