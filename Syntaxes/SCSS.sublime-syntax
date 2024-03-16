@@ -458,6 +458,10 @@ contexts:
     - match: '{{lang_range_begin}}'
       push: language-range-content
 
+  line-name-content:
+    - meta_prepend: true
+    - include: scss-string-interpolations
+
   string-content:
     - meta_prepend: true
     - include: scss-string-interpolations

@@ -218,6 +218,16 @@
 //            ^ meta.property-value.css - meta.string - meta.interpolation
 //             ^^ meta.property-value.css meta.string.css string.unquoted.css
 //               ^^^^^^^^^^^^^ meta.property-value.css meta.string.css meta.interpolation.scss
+
+  grid: [#{$line}name, line#{$name}, li#{$ne}name];
+//       ^^^^^^^^ meta.string.css meta.interpolation.scss - string
+//               ^^^^ meta.string.css string.unquoted.line-name.css
+//                     ^^^^ meta.string.css string.unquoted.line-name.css
+//                         ^^^^^^^^ meta.string.css meta.interpolation.scss - string
+//                                   ^^ meta.string.css string.unquoted.line-name.css
+//                                     ^^^^^^ meta.string.css meta.interpolation.scss - string
+//                                           ^^^^ meta.string.css string.unquoted.line-name.css
+
 }
 
 .pseudo-class-lang:lang(#{$lng}-*K\*, de-#{$country}, *-#{$lng}-EN, "de-*#{"DE"}\*") {}
