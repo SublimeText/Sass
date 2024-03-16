@@ -501,7 +501,7 @@ contexts:
     - meta_scope: comment.line.double-slash.scss comment.line.documentation.sassdoc.scss
     - include: Packages/Markdown/Markdown.sublime-syntax#bold
     - include: Packages/Markdown/Markdown.sublime-syntax#italic
-    - include: Packages/Markdown/Markdown.sublime-syntax#code-spans
+    - include: Packages/Markdown/Markdown.sublime-syntax#code-span
     # @TODO maybe consider markdown inline links, images
     - match: \@\w+(?=\s|$)
       scope: entity.name.tag.documentation.sassdoc.scss
