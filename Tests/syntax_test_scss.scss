@@ -220,9 +220,53 @@
 //               ^^^^^^^^^^^^^ meta.property-value.css meta.string.css meta.interpolation.scss
 }
 
-.gray {
-  @include prefix(filter, grayscale(50%), moz webkit);
-}
+.pseudo-class-lang:lang(#{$lng}-*K\*, de-#{$country}, *-#{$lng}-EN, "de-*#{"DE"}\*") {}
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css
+//                 ^^^^ meta.function-call.identifier.css
+//                     ^ meta.function-call.arguments.css meta.group.css - meta.string - meta.interpolation
+//                      ^^^^^^^ meta.function-call.arguments.css meta.group.css meta.string.css meta.interpolation.scss
+//                             ^^^^^ meta.function-call.arguments.css meta.group.css meta.string.css string.unquoted.css
+//                                  ^^ meta.function-call.arguments.css meta.group.css - meta.string - meta.interpolation
+//                                    ^^^ meta.function-call.arguments.css meta.group.css meta.string.css string.unquoted.css
+//                                       ^^^^^^^^^^^ meta.function-call.arguments.css meta.group.css meta.string.css meta.interpolation.scss
+//                                                  ^^ meta.function-call.arguments.css meta.group.css - meta.string - meta.interpolation
+//                                                    ^^ meta.function-call.arguments.css meta.group.css meta.string.css string.unquoted.css
+//                                                      ^^^^^^^ meta.function-call.arguments.css meta.group.css meta.string.css meta.interpolation.scss
+//                                                             ^^^ meta.function-call.arguments.css meta.group.css meta.string.css string.unquoted.css
+//                                                                ^^ meta.function-call.arguments.css meta.group.css - meta.string - meta.interpolation
+//                                                                  ^^^^^ meta.function-call.arguments.css meta.group.css meta.string.css - meta.interpolation
+//                                                                       ^^^^^^^ meta.function-call.arguments.css meta.group.css meta.string.css meta.interpolation.scss
+//                                                                              ^^^ meta.function-call.arguments.css meta.group.css meta.string.css - meta.interpolation
+//                                                                                 ^ meta.function-call.arguments.css meta.group.css - meta.string - meta.interpolation
+//                 ^^^^ entity.other.pseudo-class.css
+//                     ^ punctuation.section.group.begin.css
+//                      ^ punctuation.definition.variable.scss
+//                       ^ punctuation.section.interpolation.begin.scss
+//                        ^^^^ variable.other.scss
+//                            ^ punctuation.section.interpolation.end.scss
+//                              ^ constant.other.wildcard.asterisk.css
+//                                ^^ constant.character.escape.css
+//                                  ^ punctuation.separator.sequence.css
+//                                    ^^^ string.unquoted.css
+//                                       ^ punctuation.definition.variable.scss
+//                                        ^ punctuation.section.interpolation.begin.scss
+//                                         ^^^^^^^^ variable.other.scss
+//                                                 ^ punctuation.section.interpolation.end.scss
+//                                                  ^ punctuation.separator.sequence.css
+//                                                    ^ constant.other.wildcard.asterisk.css
+//                                                      ^ punctuation.definition.variable.scss
+//                                                       ^ punctuation.section.interpolation.begin.scss
+//                                                        ^^^^ variable.other.scss
+//                                                            ^ punctuation.section.interpolation.end.scss
+//                                                                ^ punctuation.separator.sequence.css
+//                                                                  ^ punctuation.definition.string.begin.css
+//                                                                       ^ punctuation.definition.variable.scss
+//                                                                        ^ punctuation.section.interpolation.begin.scss
+//                                                                         ^^^^ meta.interpolation string.quoted.double.css - string string
+//                                                                             ^ punctuation.section.interpolation.end.scss
+//                                                                              ^^ constant.character.escape.css
+//                                                                                ^ punctuation.definition.string.end.css
+//                                                                                 ^ punctuation.section.group.end.css
 
 //=============================================================================
 // Nesting
