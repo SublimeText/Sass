@@ -5,7 +5,7 @@ name: SCSS
 scope: source.scss
 version: 2
 
-extends: Packages/CSS/CSS.sublime-syntax
+extends: CSS (for Sass).sublime-syntax
 
 file_extensions:
   - scss
