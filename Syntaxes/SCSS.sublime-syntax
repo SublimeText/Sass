@@ -700,11 +700,13 @@ contexts:
     - include: immediately-pop
 
   scss-module-url:
+    - meta_include_prototype: false
     - include: quoted-url
     - include: comments
     - include: else-pop
 
   scss-module-as:
+    - meta_include_prototype: false
     - match: as{{break}}
       scope: keyword.operator.assignment.as.scss
       set: scss-module-as-value
@@ -726,6 +728,7 @@ contexts:
     - include: else-pop
 
   scss-module-visibility:
+    - meta_include_prototype: false
     - match: hide{{break}}
       scope: keyword.control.visibility.hide.scss
       push: scss-module-visibility-value
@@ -744,6 +747,7 @@ contexts:
     - include: else-pop
 
   scss-module-with:
+    - meta_include_prototype: false
     - match: with{{break}}
       scope: keyword.control.with.scss
       set: scss-module-arguments-list
