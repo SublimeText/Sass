@@ -1,0 +1,9 @@
+Sass for Sublime Text 4.0
+-------------------------
+
+4.0 brings an almost complete rewrite of the SCSS syntax for Sublime.
+This includes:
+- improved support for various CSS features
+- improved completions
+- improved goto definition and symbol lists
+- various bugfixes
