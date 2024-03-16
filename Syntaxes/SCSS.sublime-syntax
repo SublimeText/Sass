@@ -464,7 +464,7 @@ contexts:
 
 ###[ CSS URL STRINGS ]#########################################################
 
-  maybe-quoted-url:
+  quoted-url:
     # does not yet exist in CSS but is not unlikely
     - match: \"
       scope:
@@ -476,8 +476,6 @@ contexts:
         meta.string.css string.quoted.single.css
         punctuation.definition.string.begin.css
       set: single-quoted-url-body
-    - include: comments
-    - include: else-pop
 
   unquoted-urls:
     # replace CSS context to add interpolation support
@@ -675,7 +673,7 @@ contexts:
         - scss-module-with
         - scss-module-visibility
         - scss-module-as
-        - maybe-quoted-url
+        - scss-module-url
 
   scss-at-forward-meta:
     - meta_include_prototype: false
@@ -693,13 +691,18 @@ contexts:
         - scss-at-use-meta
         - scss-module-with
         - scss-module-as
-        - maybe-quoted-url
+        - scss-module-url
 
   scss-at-use-meta:
     - meta_include_prototype: false
     - meta_scope: meta.at-rule.use.scss
     - meta_content_scope: meta.module.scss
     - include: immediately-pop
+
+  scss-module-url:
+    - include: quoted-url
+    - include: comments
+    - include: else-pop
 
   scss-module-as:
     - match: as{{break}}
