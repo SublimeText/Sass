@@ -30,12 +30,6 @@ Steps:
 2. Look for _CSS_ folder
 3. Remove it or at least delete any _CSS.sublime-syntax_ in it
 
-## Buy me a coffee
-
-☕️👌🏻
-
-If you enjoy this package, feel free to make a little [donation via PayPal](https://paypal.me/koenlageveen) towards the coffee that keeps this project running. It's much appreciated!
-
 ## Notes
 
 Development on the Sass syntax is currently frozen. It's too high maintenance since it's so different from CSS. Furthermore, the Sass language doesn't support various features that SCSS does: it's not left behind by the Sass team per se, but SCSS is the primary language right now. 
