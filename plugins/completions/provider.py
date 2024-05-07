@@ -234,10 +234,8 @@ class ScssCompletions(BaseCompletionsProvider, sublime_plugin.EventListener):
             items = self.complete_function_argument(view, prefix, pt)
         elif view.match_selector(pt - 1, "meta.property-value, punctuation.separator.key-value"):
             items = self.complete_property_value(view, prefix, pt, True)
-        elif view.match_selector(pt - 1, "meta.property-name, meta.property-list - meta.selector"):
-            items = self.complete_property_name(view, prefix, pt, True)
         else:
-            items = None
+            items = self.complete_property_name(view, prefix, pt, True)
 
         if items:
             return sublime.CompletionList(items)
