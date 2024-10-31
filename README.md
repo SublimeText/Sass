@@ -24,7 +24,7 @@ SCSS extends Sublime Text's CSS syntax definition as of ST4149.
 
 If SCSS syntax highlighting doesn't work and console displays syntax errors, 
 
-1. check if CSS package enabled.
+1. check if CSS package is enabled.
 2. remove any out-dated syntax override.
    
 ### Enable CSS package
