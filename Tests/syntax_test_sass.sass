@@ -276,17 +276,23 @@ input:not([type="radio"]):not(h1):not(custom-element):not(%placeholder), select,
      Global vs. local scope: https://github.com/css-modules/css-modules#exceptions
   */
   .localA :global .global-b .global-c :local(.localD.localE::before) .global-d
-  //      ^^^^^^^ entity.other.pseudo-class.css-modules
-  //                                  ^^^^^^ entity.other.pseudo-class.css-modules
-  //                                        ^ meta.function-call.css meta.group.css punctuation.section.group.begin.css
-  //                                         ^^^^^^^^^^^^^^^^^^^^^^ meta.selector
+  // <- meta.selector.css - meta.selector meta.selector
+  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css - meta.selector meta.selector
+  //                                         ^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css meta.selector.css
+  //                                                               ^^^^^^^^^^^ meta.selector.css - meta.selector meta.selector
+  //      ^^^^^^^ entity.other.pseudo-class
+  //                                  ^^^^^^ entity.other.pseudo-class
+  //                                        ^ punctuation.section.group.begin.css
+  //                                         ^^^^^^^^^^^^^^ entity.other.attribute-name.class.css
+  //                                                       ^^ punctuation.definition.pseudo-element.css
+  //                                                         ^^^^^^ entity.other.pseudo-element.css
   //                                                               ^ punctuation.section.group.end.css
   :global  // global blocks
-  // ^^^^ entity.other.pseudo-class.css-modules
+  // ^^^^ entity.other.pseudo-class
     .global-class-name
       color: green
   :local  // local blocks
-  // ^^^ entity.other.pseudo-class.css-modules
+  // ^^^ entity.other.pseudo-class
     .global-class-name
       color: green
 
