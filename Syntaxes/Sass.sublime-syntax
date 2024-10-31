@@ -1363,27 +1363,29 @@ contexts:
     - match: '{{combinators}}{2,}|\|{3,}'
       scope: invalid.illegal.combinator.css
 
-    # CSS modules
-    - match: '\s*(:)(local|global)(?=\()'
-      scope: meta.selector.css entity.other.pseudo-class.css-modules.css
+    # CSS modules: global, local
+    # also used by various other frameworks
+    - match: '\s*((:)(?i:global|local))(?=\()'
       captures:
-        1: punctuation.definition.entity.css
+        1: entity.other.pseudo-class.css
+        2: punctuation.definition.entity.css
       push:
-        - meta_scope: meta.selector.css meta.function-call.css
+        - meta_scope: meta.function-call.css
         - match: '\('
           scope: punctuation.section.group.begin.css
           push:
             - meta_scope: meta.group.css
+            - meta_content_scope: meta.selector.css
             - match: '\)'
               scope: punctuation.section.group.end.css
               pop: 1
-            - include: quoted-strings
+            - include: selector-content
         - match: ''
           pop: 1
-    - match: '\s*(:)(local|global)'
-      scope: meta.selector.css entity.other.pseudo-class.css-modules.css
+    - match: '\s*((:)(?i:global|local))\b'
       captures:
-        1: punctuation.definition.entity.css
+        1: entity.other.pseudo-class.css
+        2: punctuation.definition.entity.css
 
   selector-end:
     - match: (?=\s*[;@(){}]|$)
