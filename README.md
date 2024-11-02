@@ -1,6 +1,6 @@
 # Sass and SCSS
 
-[Sass](https://sass-lang.com) syntax definitions for [Sublime Text](https://www.sublimetext.com) based on its CSS syntax.
+[Sass](https://sass-lang.com) and [SCSS](https://sasscss.org) syntax definitions for [Sublime Text](https://www.sublimetext.com) based on its CSS syntax.
 
 Highlights `.sass` or `.scss` files, and provides
 
